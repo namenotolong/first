@@ -1,0 +1,17 @@
+@import "./reset.scss";
+
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+/* 清除浮动 */
+.clearfix:after {
+    content:""; 
+    display:block;
+    visibility:hidden; 
+    height:0;
+    line-height:0; 
+    clear:both;
+}

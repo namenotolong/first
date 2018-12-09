@@ -1,0 +1,39 @@
+// 将换肤时需要改变的颜色样式提取到这个文件中
+$custom-white: #fff;
+$custom-primary:#409eff;
+
+$custom-primary-white__2:mix($custom-white, $custom-primary, 20%);
+$custom-primary-white__8:mix($custom-white, $custom-primary, 80%);
+$custom-primary-white__9:mix($custom-white, $custom-primary, 90%);
+
+
+.custom-theme-special-mark {
+    content: "277040a3-ee24-9156-6686-56eaad8218a9"
+}
+
+
+.header {
+    background-color: $custom-primary;
+
+    .header__logo:hover {
+        color: $custom-primary;
+    }
+}
+
+.tags {
+    .tag-list {
+        background-color: $custom-primary-white__9;
+    }
+
+    .tag-list a {
+        color: $custom-primary;
+    }
+
+    .tag-list i {
+        color: $custom-primary;
+    }
+
+    .tag-list.active {
+        background-color: $custom-primary;
+    }
+}
