@@ -1,7 +1,7 @@
 <template>
     <el-row :gutter="30">
-        <el-col :lg="6" :sm="12" v-for="grid in grids">
-            <div class="grid clearfix" :class="grid.gridBackground">
+        <el-col :lg="6" :sm="12" v-for="grid in grids" :key="grid.name">
+            <div class="grid clearfix" :class="grid.gridBackground" @click="handleChart(grid.name)">
                 <i class="iconfont grid-icon" :class="grid.icon"></i>
                 <div class=" grid-right fr">
                     <p class="grid-name" v-text="grid.name"></p>
@@ -10,7 +10,7 @@
             </div>
         </el-col>
     </el-row>
-</template> 
+</template>
 <script>
     export default {
         data() {
@@ -39,7 +39,9 @@
             }
         },
         methods: {
-
+            handleChart(name) {
+                this.$_bus.$emit("changeData", name);
+            }
         }
     }
 </script>
@@ -50,6 +52,22 @@
         color: #fff;
         box-shadow: 0px 0px 10px rgba(100, 100, 100, .5);
         cursor: pointer;
+
+        &--green {
+            background-color: #06d6a0;
+        }
+
+        &--yellow {
+            background-color: #ffd166;
+        }
+
+        &--blue {
+            background-color: #06aed5;
+        }
+
+        &--red {
+            background-color: #ef476f;
+        }
 
         &::before {
             content: "";
@@ -77,6 +95,9 @@
 
         .grid-right {
             padding: 16px;
+            p{
+                color: #fff!important;
+            }
             .grid-name {
                 font-size: 20px;
                 margin-bottom: 10px;
@@ -87,21 +108,5 @@
             }
         }
 
-    }
-
-    .grid--green {
-        background-color: #06d6a0;
-    }
-
-    .grid--yellow {
-        background-color: #ffd166;
-    }
-
-    .grid--blue {
-        background-color: #06aed5;
-    }
-
-    .grid--red {
-        background-color: #ef476f;
     }
 </style>

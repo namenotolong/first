@@ -48,7 +48,7 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .container {
         box-sizing: border-box;
         position: absolute;
@@ -56,28 +56,36 @@
         bottom: 0px;
         left: 220px;
         right: 0px;
-        transition: left .3s ease-in-out; /* 查看element的menu.css源码可知transition的参数 */
+        /* 查看element的menu.css源码可知transition的参数 */
+        transition: left .3s ease-in-out;
         background-color: #f0f2f5;
-    }
 
-    .container.collapse {
-        left: 65px;
-    }
+        &.collapse {
+            left: 65px;
+        }
 
-    .page {
-        box-sizing: border-box;
-        height: calc(100% - 45px);
-        padding: 20px;
-        overflow-y: auto;
-    }
+        .page {
+            box-sizing: border-box;
+            height: calc(100% - 45px);
+            padding: 20px;
+            overflow-y: auto;
 
-    .page-enter,
-    .page-leave {
-        opacity: 0;
-    }
+            &-enter,
+            &-leave {
+                opacity: 0;
+            }
 
-    .page-enter-active,
-    .page-leave-active {
-        transition: opacity .5s ease;
+            &-enter-active,
+            &-leave-active {
+                transition: opacity .5s ease;
+            }
+
+            /deep/ p {
+                color: #5e6d82;
+            }
+
+        }
+
+
     }
 </style>

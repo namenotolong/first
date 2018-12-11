@@ -7,14 +7,19 @@
             <span slot="title">首页</span>
         </el-menu-item>
 
-        <el-menu-item index="/users">
+        <el-menu-item index="/table">
             <i class="iconfont icon-home"></i>
-            <span slot="title">用户管理</span>
+            <span slot="title">表格</span>
         </el-menu-item>
 
-        <el-menu-item index="/articles">
+        <el-menu-item index="/chart">
             <i class="el-icon-document"></i>
-            <span slot="title">文章管理</span>
+            <span slot="title">图表</span>
+        </el-menu-item>
+
+        <el-menu-item index="/richTextEditor">
+            <i class="el-icon-document"></i>
+            <span slot="title">富文本编辑器</span>
         </el-menu-item>
 
         <el-submenu index="1">
@@ -37,14 +42,18 @@
                     title: "首页",
                     icon: "iconfont icon-home"
                 }, {
-                    index: "/users",
-                    title: "用户管理",
+                    index: "/table",
+                    title: "表格",
                     icon: "iconfont icon-home"
                 }, {
-                    index: "/articles",
-                    title: "文章管理",
+                    index: "/chart",
+                    title: "图表",
                     icon: "el-icon-document"
                 }, {
+                    index: "/richTextEditor",
+                    title: "富文本编辑器",
+                    icon: "el-icon-document"
+                },{
                     index: "1",
                     title: "错误处理",
                     icon: "el-icon-warning",

@@ -2,6 +2,7 @@ import "babel-polyfill";
 import Vue from 'vue';
 import axios from 'axios';
 import ElementUI from 'element-ui';
+import G2 from "@antv/g2";
 
 
 import App from './App.vue';

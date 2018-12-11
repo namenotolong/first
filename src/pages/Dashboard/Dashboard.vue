@@ -1,18 +1,17 @@
 <template>
     <div>
         <grid-group></grid-group>
-
-
-        <el-button type="success">成功</el-button>
-        <el-button type="primary">成功</el-button>
+        <line-chart></line-chart>
     </div>
 </template>
 <script>
-    import GridGroup from "./GridGroup.vue"
+    import GridGroup from "./GridGroup.vue";
+    import LineChart from "./LineChart.vue";
     export default {
         name: "dashboard",
         components: {
-            GridGroup
+            GridGroup,
+            LineChart
         },
         data() {
             return {

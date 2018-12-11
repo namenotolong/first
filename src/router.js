@@ -15,17 +15,20 @@ export default new VueRouter({
             component: () => import("./components/Home/Home.vue"),
             children: [{
                 path: "/dashboard",
-                name:"s",
                 component: () => import("./pages/Dashboard/Dashboard.vue"),
                 meta: { title: "首页" }
             },{
-                path: "/users",
-                component: () => import("./pages/Users/Users.vue"),
-                meta: { title: "用户管理" }
+                path: "/table",
+                component: () => import("./pages/Table/Table.vue"),
+                meta: { title: "表格" }
             },{
-                path: "/articles",
-                component: () => import("./pages/Articles/Articles.vue"),
-                meta: { title: "文章管理" }
+                path: "/chart",
+                component: () => import("./pages/Chart/Chart.vue"),
+                meta: { title: "图表" }
+            },{
+                path: "/richTextEditor",
+                component: () => import("./pages/RichTextEditor/RichTextEditor.vue"),
+                meta: { title: "富文本编辑器" }
             },{
                 path: "/403",
                 component: () => import("./pages/403/403.vue"),
