@@ -105,7 +105,7 @@
                     // 有些背景需要设置透明度，用到了rgba颜色值。
                     if (tint === 0) {
                         return [red, green, blue].join(',') 
-                        //如果是未经压缩的css文件，或scss编译后的css文件，注意gba中逗号后会有一个空格。
+                        //如果是未经压缩的css文件，或scss编译后的css文件，注意rgba中逗号后会有一个空格。
                     } else {
                         red = Math.round(red * (1 - tint) + 255 * tint);
                         green = Math.round(green * (1 - tint) + 255 * tint);
