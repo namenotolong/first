@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p class="chart-title">{{chartName}}周增长趋势图</p>
+        <p class="chart-title">周{{chartName}}趋势图</p>
         <div id="lineChart"></div>
     </div>
 
@@ -13,91 +13,91 @@
                 chart: null,
                 chartName: "访问量",
                 visiteData: [{
-                    week: "星期一",
+                    day: 6,
                     value: 54
                 }, {
-                    week: "星期二",
+                    day: 5,
                     value: 48
                 }, {
-                    week: "星期三",
+                    day: 4,
                     value: 33
                 }, {
-                    week: "星期四",
+                    day: 3,
                     value: 67
                 }, {
-                    week: "星期五",
+                    day: 2,
                     value: 59
                 }, {
-                    week: "星期六",
+                    day: 1,
                     value: 97
                 }, {
-                    week: "星期天",
+                    day: 0,
                     value: 75
                 }],
                 userData: [{
-                    week: "星期一",
+                    day: 6,
                     value: 54
                 }, {
-                    week: "星期二",
+                    day: 5,
                     value: 58
                 }, {
-                    week: "星期三",
+                    day: 4,
                     value: 33
                 }, {
-                    week: "星期四",
+                    day: 3,
                     value: 93
                 }, {
-                    week: "星期五",
+                    day: 2,
                     value: 59
                 }, {
-                    week: "星期六",
+                    day: 1,
                     value: 37
                 }, {
-                    week: "星期天",
+                    day: 0,
                     value: 64
                 }],
                 goodsData: [{
-                    week: "星期一",
+                    day: 6,
                     value: 22
                 }, {
-                    week: "星期二",
+                    day: 5,
                     value: 12
                 }, {
-                    week: "星期三",
+                    day: 4,
                     value: 32
                 }, {
-                    week: "星期四",
+                    day: 3,
                     value: 15
                 }, {
-                    week: "星期五",
+                    day: 2,
                     value: 43
                 }, {
-                    week: "星期六",
+                    day: 1,
                     value: 26
                 }, {
-                    week: "星期天",
+                    day: 0,
                     value: 18
                 }],
                 commentData: [{
-                    week: "星期一",
+                    day: 6,
                     value: 11
                 }, {
-                    week: "星期二",
+                    day: 5,
                     value: 15
                 }, {
-                    week: "星期三",
+                    day: 4,
                     value: 21
                 }, {
-                    week: "星期四",
+                    day: 3,
                     value: 43
                 }, {
-                    week: "星期五",
+                    day: 2,
                     value: 38
                 }, {
-                    week: "星期六",
+                    day: 1,
                     value: 27
                 }, {
-                    week: "星期天",
+                    day: 0,
                     value: 31
                 }],
 
@@ -125,15 +125,22 @@
                     container: "lineChart",
                     forceFit: true,
                     height: 300,
-                    padding: [30, 30, 40, 50],
+                    padding: [30, 40, 40, 50],
                     background: {
                         fill: "#fff"
                     }
                 });
                 this.chart.source(this.visiteData);
                 this.chart.scale({
-                    week: {
-                        range: [0, 1]
+                    day: {
+                        range: [0, 1],
+                        formatter: val => {
+                            console.log(val);
+                            
+                            let currentDate = Date.now();
+                            const ONE_DAY = 24 * 60 * 60 * 1000;
+                            return this.$_util.formatDate(new Date((currentDate - ONE_DAY*val)), 'yyyy/MM/dd')
+                        }
                     },
                     value: {
                         alias: "数量",
@@ -141,8 +148,8 @@
                     }
                 })
 
-                this.chart.line().position("week*value").shape('smooth');
-                this.chart.point().position('week*value').size(4).shape('circle').style({
+                this.chart.line().position("day*value").shape('smooth');
+                this.chart.point().position('day*value').size(4).shape('circle').style({
                     stroke: '#fff',
                     lineWidth: 1
                 });

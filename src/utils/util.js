@@ -2,7 +2,9 @@
 const util = {
     // 时间处理
     formatDate(date, format) {
-        var date = new Date(date)
+        if (date == "") {
+            return "";
+        }
         var o = {
             'M+': date.getMonth() + 1,
             'd+': date.getDate(),
