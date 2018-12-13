@@ -5,7 +5,7 @@
         </div>
         <el-table :data="newGoodsData" height="400">
             <el-table-column prop="name" label="名称"></el-table-column>
-            <el-table-column prop="address" label="产地" width="100"></el-table-column>
+            <el-table-column prop="address" label="产地" width="160"></el-table-column>
             <el-table-column prop="price" label="价格(元)" width="100"></el-table-column>
         </el-table>
 
@@ -18,12 +18,12 @@
             return {
                 newGoodsData: [{
                     name: "商品一",
-                    address: "产地一",
+                    address: "产地一产地一产地一产地一产地一",
                     price: "500"
                 },{
                     name: "商品二",
                     address: "产地一",
-                    price: "500"
+                    price: "50000"
                 },{
                     name: "商品三",
                     address: "产地一",
