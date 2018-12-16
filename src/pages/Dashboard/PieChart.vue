@@ -3,10 +3,11 @@
 
 </template>
 <script>
+    import G2 from "@antv/g2";
     export default {
         data() {
             return {
-                chartData:{
+                chartData: {
 
                 }
             }

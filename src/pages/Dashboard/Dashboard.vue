@@ -2,6 +2,7 @@
     <div>
         <grid-group></grid-group>
         <line-chart></line-chart>
+
         <el-row :gutter="20">
             <el-col :span="8">
                 <todo-list></todo-list>
@@ -46,7 +47,7 @@
     }
 </script>
 <style scoped>
-    .el-row{
-        margin-top: 20px;
+    .el-row {
+        margin-bottom: 20px;
     }
 </style>

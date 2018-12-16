@@ -2,7 +2,6 @@ import "babel-polyfill";
 import Vue from 'vue';
 import axios from 'axios';
 import ElementUI from 'element-ui';
-import G2 from "@antv/g2";
 
 
 import App from './App.vue';
@@ -18,7 +17,9 @@ import "./styles/custom-theme.scss";
 
 
 
-Vue.use(ElementUI);
+Vue.use(ElementUI, {
+    size: "medium"
+});
 Object.defineProperty(Vue.prototype, "$axios", {
     value: axios
 })

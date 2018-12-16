@@ -48,7 +48,6 @@
 <style lang="scss" scoped>
     .grid {
         position: relative;
-        margin-bottom: 24px;
         color: #fff;
         box-shadow: 0px 0px 10px rgba(100, 100, 100, .5);
         cursor: pointer;

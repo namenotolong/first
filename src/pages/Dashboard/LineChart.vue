@@ -1,342 +1,29 @@
 <template>
-    <el-row :gutter="20">
+    <el-row :gutter="30">
         <el-col :span="12">
-            <p class="chart-title">周{{chartName}}增长趋势图</p>
+            <p class="chart-title" style="backgroundColor:red">周{{chartName}}增长趋势图</p>
             <div id="weekLineChart"></div>
         </el-col>
 
         <el-col :span="12">
-            <p class="chart-title">月{{chartName}}增长趋势图</p>
+            <p class="chart-title" style="backgroundColor:red">月{{chartName}}增长趋势图</p>
             <div id="monthLineChart"></div>
         </el-col>
-
     </el-row>
 
 </template>
 
 <script>
+    import G2 from "@antv/g2";
+    import chartData from "../../mock/dashboard.js"
     export default {
         data() {
             return {
                 weekChart: null,
+                monthChart: null,
                 chartName: "访问量",
-                weekData: {
-                    visiteData: [{
-                        value: 54
-                    }, {
-                        value: 48
-                    }, {
-                        value: 33
-                    }, {
-                        value: 67
-                    }, {
-                        value: 59
-                    }, {
-                        day: 1,
-                        value: 97
-                    }, {
-                        value: 75
-                    }],
-                    userData: [{
-                        value: 54
-                    }, {
-                        value: 58
-                    }, {
-                        value: 33
-                    }, {
-                        value: 93
-                    }, {
-                        value: 59
-                    }, {
-                        value: 37
-                    }, {
-                        value: 64
-                    }],
-                    goodsData: [{
-                        value: 22
-                    }, {
-                        value: 12
-                    }, {
-                        value: 32
-                    }, {
-                        value: 15
-                    }, {
-                        value: 43
-                    }, {
-                        value: 26
-                    }, {
-                        value: 18
-                    }],
-                    commentData: [{
-                        value: 11
-                    }, {
-                        value: 15
-                    }, {
-                        value: 21
-                    }, {
-                        value: 43
-                    }, {
-                        value: 38
-                    }, {
-                        value: 27
-                    }, {
-                        value: 31
-                    }]
-                },
-                monthData: {
-                    visiteData: [{
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }],
-                     userData: [{
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }],
-                     goodsData: [{
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 32
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 43
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }],
-                     commentData: [{
-                        value: 12
-                    }, {
-                        value: 21
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 12
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }, {
-                        value: 21
-                    }]
-                }
+                weekData: chartData.weekData,
+                monthData: chartData.monthData
             };
         },
         created() {
@@ -353,7 +40,10 @@
                 this.monthChart.changeData(this.monthData[DATA_MAP[name]]);
             });
             this.$_bus.$on("collapse", () => {
+                console.log(444);
+                
                 this.weekChart.render();
+                this.monthChart.render();
             })
         },
         mounted() {
@@ -399,7 +89,6 @@
                 chart
                     .line()
                     .position("date*value")
-                    .shape("smooth");
                 chart
                     .point()
                     .position("date*value")
