@@ -62,13 +62,15 @@
             getDefaultElementStyle(callback) {
                 const version = require('element-ui/package.json').version;
                 const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`;
-                this.$axios({
-                    url: url,
-                    method: "get"
-                }).then(res => {
-                    this.defaultElementStyle = res.data.replace(/@font-face{[^}]+}/, ''); //字体文件还是用element的theme-chalk中的
-                    callback();
-                })
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        this.defaultElementStyle = xhr.responseText.replace(/@font-face{[^}]+}/, ''); //字体文件还是用element的theme-chalk中的
+                        callback();
+                    }
+                }
+                xhr.open("GET", url, true);
+                xhr.send();
             },
             // 获取custom-theme的默认样式
             /* 获取custom-theme样式的三种方法 */
@@ -85,7 +87,7 @@
                 Array.from(styles).some(style => {
                     const styleText = style.innerText;
                     if (styleText.includes("277040a3-ee24-9156-6686-56eaad8218a9")) {
-                        this.defaultCustomStyle = styleText.replace("277040a3-ee24-9156-6686-56eaad8218a9","");
+                        this.defaultCustomStyle = styleText.replace("277040a3-ee24-9156-6686-56eaad8218a9", "");
                         return true;
                     }
                 })
@@ -104,7 +106,7 @@
                     let blue = parseInt(color.slice(4, 6), 16);
                     // 有些背景需要设置透明度，用到了rgba颜色值。
                     if (tint === 0) {
-                        return [red, green, blue].join(',') 
+                        return [red, green, blue].join(',')
                         //如果是未经压缩的css文件，或scss编译后的css文件，注意rgba中逗号后会有一个空格。
                     } else {
                         red = Math.round(red * (1 - tint) + 255 * tint);

@@ -1,15 +1,19 @@
 <template>
-    <el-row :gutter="30">
-        <el-col :lg="6" :sm="12" v-for="grid in grids" :key="grid.name">
-            <div class="grid clearfix" :class="grid.gridBackground" @click="handleChart(grid.name)">
-                <i class="iconfont grid-icon" :class="grid.icon"></i>
-                <div class=" grid-right fr">
-                    <p class="grid-name" v-text="grid.name"></p>
-                    <p class="grid-value" v-text="grid.value"></p>
+    <div class="grid-wrap">
+        <el-row :gutter="30">
+            <el-col :lg="6" :sm="12" v-for="grid in grids" :key="grid.name">
+                <div class="grid clearfix" :class="grid.gridBackground" @click="handleChart(grid.name)">
+                    <i class="iconfont grid-icon" :class="grid.icon"></i>
+                    <div class=" grid-right fr">
+                        <p class="grid-name" v-text="grid.name"></p>
+                        <p class="grid-value" v-text="grid.value"></p>
+                    </div>
                 </div>
-            </div>
-        </el-col>
-    </el-row>
+            </el-col>
+        </el-row>
+    </div>
+
+
 </template>
 <script>
     export default {
@@ -94,9 +98,11 @@
 
         .grid-right {
             padding: 16px;
-            p{
-                color: #fff!important;
+
+            p {
+                color: #fff !important;
             }
+
             .grid-name {
                 font-size: 20px;
                 margin-bottom: 10px;
@@ -107,5 +113,13 @@
             }
         }
 
+
+    }
+</style>
+<style lang="scss">
+    .grid-wrap {
+        .el-col {
+            margin-bottom: 20px;
+        }
     }
 </style>
