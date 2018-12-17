@@ -9,7 +9,7 @@ const PROD_URL = "";
 const service = axios.create({
     baseURL: DEV_URL,
     timeout: 8000,
-    
+
 })
 
 // 请求拦截器
@@ -21,7 +21,6 @@ service.interceptors.request.use(config => {
     return Promise.reject(error);
 })
 
-
 // 响应拦截器
 service.interceptors.response.use(res => {
     if (res.data.code == 200) {
@@ -29,7 +28,8 @@ service.interceptors.response.use(res => {
     } else {
         Message({
             type: "error",
-            message: res.message,
+            message: res.data.message,
+            showClose: true,
         })
         return Promise.reject(res);
     }
