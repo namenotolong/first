@@ -37,34 +37,34 @@
         data() {
             return {
                 isCollapse: false,
-                menuItem: [{
-                    index: "/dashboard",
-                    title: "首页",
-                    icon: "iconfont icon-home"
-                }, {
-                    index: "/table",
-                    title: "表格",
-                    icon: "iconfont icon-home"
-                }, {
-                    index: "/chart",
-                    title: "图表",
-                    icon: "el-icon-document"
-                }, {
-                    index: "/richTextEditor",
-                    title: "富文本编辑器",
-                    icon: "el-icon-document"
-                },{
-                    index: "1",
-                    title: "错误处理",
-                    icon: "el-icon-warning",
-                    subs: [{
-                        index: "/403",
-                        title: "403"
-                    }, {
-                        index: "/404",
-                        title: "404"
-                    }]
-                }]
+                // menuItem: [{
+                //     index: "/dashboard",
+                //     title: "首页",
+                //     icon: "iconfont icon-home"
+                // }, {
+                //     index: "/table",
+                //     title: "表格",
+                //     icon: "iconfont icon-home"
+                // }, {
+                //     index: "/chart",
+                //     title: "图表",
+                //     icon: "el-icon-document"
+                // }, {
+                //     index: "/richTextEditor",
+                //     title: "富文本编辑器",
+                //     icon: "el-icon-document"
+                // },{
+                //     index: "1",
+                //     title: "错误处理",
+                //     icon: "el-icon-warning",
+                //     subs: [{
+                //         index: "/403",
+                //         title: "403"
+                //     }, {
+                //         index: "/404",
+                //         title: "404"
+                //     }]
+                // }]
             }
         },
         computed: {

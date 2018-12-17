@@ -71,8 +71,8 @@
                 }
                 this.$axios.all([getWeekData(), getMonthData()])
                     .then(this.$axios.spread((weekData, monthData) => {
-                        this.weekData = weekData.data.data;
-                        this.monthData = monthData.data.data;
+                        this.weekData = weekData.data;
+                        this.monthData = monthData.data;
                         this.setDate();
                         this.createChart("weekLineChart", this.weekData.visiteData, "weekChart");
                         this.createChart("monthLineChart", this.monthData.visiteData, "monthChart");

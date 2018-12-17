@@ -31,40 +31,24 @@
     </el-card>
 </template>
 <script>
+    import {
+        getTodoListData
+    } from "../../api/dashboard.js";
     export default {
         data() {
             return {
-                taskData: [{
-                    isCompleted: false,
-                    content: "待办事项1"
-                }, {
-                    isCompleted: true,
-                    content: "待办事项待办事项.待办事项,待办事项待办事项待办事项待办事项待办事项待办事项"
-                }, {
-                    isCompleted: false,
-                    content: "待办事项3"
-                }, {
-                    isCompleted: false,
-                    content: "待办事项4"
-                }, {
-                    isCompleted: false,
-                    content: "待办事项5"
-                }, {
-                    isCompleted: true,
-                    content: "待办事项6"
-                }, {
-                    isCompleted: true,
-                    content: "待办事项7"
-                }, {
-                    isCompleted: false,
-                    content: "待办事项8"
-                }, {
-                    isCompleted: false,
-                    content: "待办事项9"
-                }]
+                taskData: []
             }
         },
+        created() {
+            this.getTaskData();
+        },
         methods: {
+            getTaskData() {
+                getTodoListData().then(res => {
+                    this.taskData = res.data;
+                })
+            },
             addTask() {
                 this.$prompt("添加新的待办事项:", "").then(res => {
                     this.taskData.unshift({
@@ -86,9 +70,10 @@
 </script>
 <style lang="scss" scoped>
     .task-card {
-        .task-card__header{
+        .task-card__header {
             font-size: 16px;
         }
+
         .button--add {
             float: right;
             padding: 3px 0;
@@ -102,9 +87,10 @@
 </style>
 <style lang="scss">
     .task-card {
-        .el-card__body{
-            padding-top:0px;
+        .el-card__body {
+            padding-top: 0px;
         }
+
         .el-table__header-wrapper {
             display: none;
         }

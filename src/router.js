@@ -31,11 +31,11 @@ export default new VueRouter({
                 meta: { title: "富文本编辑器" }
             },{
                 path: "/403",
-                component: () => import("./pages/403/403.vue"),
+                component: () => import("./pages/Error/403.vue"),
                 meta: { title: "403" }
             },{
                 path: "/404",
-                component: () => import("./pages/404/404.vue"),
+                component: () => import("./pages/Error/404.vue"),
                 meta: { title: "404" }
             }]
         }

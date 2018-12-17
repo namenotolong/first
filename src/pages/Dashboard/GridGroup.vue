@@ -16,6 +16,7 @@
 
 </template>
 <script>
+import {getGridData} from "../../api/dashboard.js";
     export default {
         data() {
             return {
@@ -23,26 +24,38 @@
                     gridBackground: "grid--red",
                     icon: "icon-visite",
                     name: "访问量",
-                    value: 23230,
+                    value: "",
                 }, {
                     gridBackground: "grid--blue",
                     icon: "icon-user",
                     name: "用户数量",
-                    value: 1092,
+                    value: "",
                 }, {
                     gridBackground: "grid--green",
                     icon: "icon-goods",
                     name: "商品数量",
-                    value: 2714,
+                    value: "",
                 }, {
                     gridBackground: "grid--yellow",
                     icon: "icon-comment",
                     name: "评论数量",
-                    value: 261,
+                    value: "",
                 }]
             }
         },
+        created(){
+            this.getGridData();
+        },
         methods: {
+            getGridData(){
+                getGridData().then(res => {
+                    const data = res.data;
+                    this.grids.forEach((item,index) => {
+                        item.value = Object.values(res.data)[index]
+                    })
+                    
+                })
+            },
             handleChart(name) {
                 this.$_bus.$emit("changeData", name);
             }
