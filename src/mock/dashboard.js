@@ -7,7 +7,6 @@ const gridData = Mock.mock({
     goodsNum: "@natural(800,1200)",
     commentNum: "@natural(1600,3000)"
 })
-
 const weekData = Mock.mock({
     "visiteData|7": [{
         value: "@natural(0,200)"
