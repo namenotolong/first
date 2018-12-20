@@ -1,6 +1,10 @@
 <template>
     <div class="reject">
         <p>403</p>
+        <p>403</p>
+        <p>403</p>
+        <p>403</p>
+        <p>403</p>
     </div>
 </template>
 
