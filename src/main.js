@@ -17,7 +17,6 @@ import "./assets/fonts/iconfont.css";
 import "./styles/custom-theme.scss";
 
 
-
 Vue.use(ElementUI, {
     size: "medium"
 });

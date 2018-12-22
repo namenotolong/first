@@ -1,16 +1,19 @@
 <template>
-    <div>
-        富文本
-    </div>
-
+    <tinymce></tinymce>
 </template>
 <script>
-    export default {
-        name: "richTextEditor",
-        data() {
-            return {
+import Tinymce from "../../components/Tinymce/Tinymce.vue";
+export default {
+    components:{
+        Tinymce
+    },
+    data(){
+        return{
 
-            }
         }
+    },
+    methods:{
+
     }
+}
 </script>
