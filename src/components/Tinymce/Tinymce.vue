@@ -17,7 +17,9 @@
         methods: {
             initTinymce() {
                 tinymce.init({
-                    selector: "#editor"
+                    selector: "#editor",
+                    language:"zh_CN",
+                    plugins:"fullscreen autosave"
                 })
             }
         }
