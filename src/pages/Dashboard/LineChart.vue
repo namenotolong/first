@@ -1,11 +1,11 @@
 <template>
     <el-row :gutter="30">
-        <el-col :span="12">
+        <el-col :lg="12" :sm="24">
             <p class="chart-title">周{{chartName}}增长趋势图</p>
             <div id="weekLineChart"></div>
         </el-col>
 
-        <el-col :span="12">
+        <el-col :lg="12" :sm="24">
             <p class="chart-title">月{{chartName}}增长趋势图</p>
             <div id="monthLineChart"></div>
         </el-col>
