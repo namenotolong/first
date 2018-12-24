@@ -25,8 +25,8 @@
 
 
 <script>
-    import FullScreen from "./FullScreen.vue";
-    import ThemePicker from "./ThemePicker.vue";
+    import FullScreen from "../FullScreen/FullScreen.vue";
+    import ThemePicker from "../ThemePicker/ThemePicker.vue";
     export default {
         components: {
             FullScreen,

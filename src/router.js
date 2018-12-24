@@ -26,9 +26,9 @@ export default new VueRouter({
                 component: () => import("./pages/Chart/Chart.vue"),
                 meta: { title: "图表" }
             },{
-                path: "/richTextEditor",
-                component: () => import("./pages/RichTextEditor/RichTextEditor.vue"),
-                meta: { title: "富文本编辑器" }
+                path: "/articleList",
+                component: () => import("./pages/article/ArticleList.vue"),
+                meta: { title: "文章管理" }
             },{
                 path: "/403",
                 component: () => import("./pages/Error/403.vue"),

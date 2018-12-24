@@ -17,12 +17,13 @@
             <span slot="title">图表</span>
         </el-menu-item>
 
-        <el-menu-item index="/richTextEditor">
+
+        <el-menu-item index="/articleList">
             <i class="el-icon-document"></i>
-            <span slot="title">富文本编辑器</span>
+            <span slot="title">文章管理</span>
         </el-menu-item>
 
-        <el-submenu index="1">
+        <el-submenu index="2">
             <template slot="title">
                 <i class="el-icon-warning"></i>
                 <span>错误处理</span>
@@ -68,7 +69,7 @@
             }
         },
         computed: {
-          
+
         },
         created() {
             // 折叠侧边栏菜单
@@ -77,7 +78,7 @@
             })
         },
         methods: {
-         
+
         }
     }
 </script>

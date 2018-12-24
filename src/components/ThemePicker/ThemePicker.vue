@@ -159,7 +159,6 @@
 </script>
 <style lang="scss">
     .theme-picker {
-
         .el-color-dropdown__value,
         .el-color-dropdown__link-btn {
             display: none;
