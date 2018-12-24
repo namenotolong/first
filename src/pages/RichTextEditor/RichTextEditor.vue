@@ -4,6 +4,7 @@
 <script>
 import Tinymce from "../../components/Tinymce/Tinymce.vue";
 export default {
+    name:"richTextEditor",
     components:{
         Tinymce
     },
