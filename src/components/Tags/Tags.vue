@@ -25,6 +25,7 @@
             tagList() {
                 // 缓存页面
                 const tagListNames = this.tagList.map(item => {
+                    // keep-alive会匹配组件的name属性进行缓存
                     if (item.name) {
                         return item.name;
                     }
@@ -80,6 +81,9 @@
         background-color: #fff;
         padding-left: 10px;
         box-sizing: border-box;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.1),
+            0 2px 1px -1px rgba(0, 0, 0, 0.1);
+        z-index: 100;
     }
 
     .tag-list {
