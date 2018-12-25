@@ -101,6 +101,14 @@
                 currentPage: 1,
             }
         },
+        watch:{
+            pageSize(newVal){
+
+            },
+            currentPage(newVal){
+    this.currentPageData = this.articleData.slice((this.currentPage - 1).pageSize,)
+            }
+        },
         created() {
             this.getArticleList();
         },
@@ -110,6 +118,7 @@
                 getArticleList().then(res => {
                     this.articleData = res.data;
                     this.articleNum = res.data.length;
+                    this.handleSizeChange(20); 
                     this.articleTableLoading = false;
                 })
             },
@@ -137,9 +146,10 @@
 
             },
             handleSizeChange(pageSize) {
-                this.currentPageData = this.articleData.splice()
+                this.pageSize = pageSize;
             },
-            handleCurrentChange(val) {
+            handleCurrentChange(currentPage) {
+                this.currentPage = currentPage;
                 console.log(`当前页: ${val}`);
             }
         }
