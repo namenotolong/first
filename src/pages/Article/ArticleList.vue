@@ -35,7 +35,7 @@
         </el-table>
 
         <el-pagination class="pagination" :total="articleNum" :current-page="currentPage" :page-sizes="[10, 20, 30, 40, 50, 100]"
-            :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" @size-change="handleSizeChange"
+            :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" background @size-change="handleSizeChange"
             @current-change="handleCurrentChange"></el-pagination>
     </div>
 
@@ -46,7 +46,7 @@
         getArticleList
     } from "../../api/article.js";
     export default {
-        name:"articleList",
+        name: "articleList",
         data() {
             return {
                 articleList: [],
@@ -125,8 +125,10 @@
                 this.pageSize = pageSize;
             },
             handleCurrentChange(currentPage) {
-                document.getElementsByClassName("page")[0].scrollTop = 0;
                 this.currentPage = currentPage;
+                const scrollElement = document.querySelector(".page");
+                scroll(scrollElement, 0, 300);
+                
             }
         }
     }

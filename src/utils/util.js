@@ -43,6 +43,26 @@ const util = {
             return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
         }
         return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
+    },
+    /**
+     * 滚动
+     * @param {HTMLDOM} element  要滚动的元素
+     * @param {Number} target    目标位置
+     * @param {Number} duration  持续时间
+     */
+    scroll(element, target, duration) {
+        clearInterval(element.timer);
+        element.timer = setInterval(() => {
+            const currentPosition = scrollElement.scrollTop;
+            const distance = target - currentPosition;
+            const step = distance / 10;
+            if (Math.abs(distance) > 1) {
+                scrollElement.scrollTop = currentPosition + step;
+            } else {
+                clearInterval(element.timer);
+                scrollElement.scrollTop = target;
+            }
+        }, duration / 20);
     }
 }
 
