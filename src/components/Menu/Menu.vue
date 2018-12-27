@@ -34,6 +34,7 @@
     </el-menu>
 </template>
 <script>
+    import bus from "../../utils/bus.js"
     export default {
         data() {
             return {
@@ -73,7 +74,7 @@
         },
         created() {
             // 折叠侧边栏菜单
-            this.$_bus.$on("collapse", (data) => {
+            bus.$on("collapse", (data) => {
                 this.isCollapse = data;
             })
         },

@@ -5,6 +5,7 @@
 </template>
 
 <script>
+    import bus from "../../utils/bus.js"
     export default {
         name: "not-found",
         data() {
@@ -13,7 +14,7 @@
             }
         },
         created() {
-            this.$_bus.$on("myevent", data => {})
+            $on("myevent", data => {})
         },
     }
 </script>

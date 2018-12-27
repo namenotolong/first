@@ -25,6 +25,7 @@
 
 
 <script>
+    import bus from "../../utils/bus.js"
     import FullScreen from "../FullScreen/FullScreen.vue";
     import ThemePicker from "../ThemePicker/ThemePicker.vue";
     export default {
@@ -46,7 +47,7 @@
             },
             changeCollapse() {
                 this.isCollapse = !this.isCollapse
-                this.$_bus.$emit('collapse', this.isCollapse)
+                bus.$emit('collapse', this.isCollapse)
             },
             handleCommand(command) {
                 if (command === 'logout') {
@@ -74,6 +75,7 @@
             color: #fff;
             text-align: center;
             cursor: pointer;
+
             &:hover {
                 background-color: #434a50;
             }

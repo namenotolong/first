@@ -14,6 +14,7 @@
 </template>
 
 <script>
+    import bus from "../../utils/bus.js"
     import G2 from "@antv/g2";
     import {
         getLineChartData
@@ -31,7 +32,7 @@
         created() {
             this.getLineChartData();
             // 变更图表数据
-            this.$_bus.$on("changeData", name => {
+            bus.$on("changeData", name => {
                 const DATA_MAP = {
                     "访问量": "visiteData",
                     "用户数量": "userData",
@@ -44,7 +45,7 @@
             });
             // 折叠或展开菜单栏的时候，图表宽度不会跟着变，需要重建。
             // 这里监听menu的transitionend事件无效，用定时器解决。
-            this.$_bus.$on("collapse", () => {
+            bus.$on("collapse", () => {
                 setTimeout(() => {
                     this.weekChart.destroy();
                     this.monthChart.destroy();

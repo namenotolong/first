@@ -16,7 +16,10 @@
 
 </template>
 <script>
-import {getGridData} from "../../api/dashboard.js";
+    import bus from "../../utils/bus.js"
+    import {
+        getGridData
+    } from "../../api/dashboard.js";
     export default {
         data() {
             return {
@@ -43,21 +46,21 @@ import {getGridData} from "../../api/dashboard.js";
                 }]
             }
         },
-        created(){
+        created() {
             this.getGridData();
         },
         methods: {
-            getGridData(){
+            getGridData() {
                 getGridData().then(res => {
                     const data = res.data;
-                    this.grids.forEach((item,index) => {
+                    this.grids.forEach((item, index) => {
                         item.value = Object.values(res.data)[index]
                     })
-                    
+
                 })
             },
             handleChart(name) {
-                this.$_bus.$emit("changeData", name);
+                bus.$emit("changeData", name);
             }
         }
     }

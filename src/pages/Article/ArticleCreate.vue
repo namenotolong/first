@@ -1,12 +1,12 @@
 <template>
-    <tinymce></tinymce>
+    <articleDetail></articleDetail>
 </template>
 <script>
-import Tinymce from "../../components/Tinymce/Tinymce.vue";
+import ArticleDetail from "./components/ArticleDetail.vue";
 export default {
-    name:"richTextEditor",
+    name:"articleCreate",
     components:{
-        Tinymce
+        ArticleDetail
     },
     data(){
         return{

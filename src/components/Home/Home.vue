@@ -19,6 +19,7 @@
 
 </template>
 <script>
+    import bus from "../../utils/bus.js"
     import VHeader from "../Header/Header.vue";
     import VMenu from "../Menu/Menu.vue";
     import VTags from "../Tags/Tags.vue";
@@ -35,10 +36,10 @@
             }
         },
         created() {
-            this.$_bus.$on("collapse", msg => {
+            bus.$on("collapse", msg => {
                 this.isCollapse = msg;
             })
-            this.$_bus.$on("cachePage", msg => {
+            bus.$on("cachePage", msg => {
                 this.cachePages = msg;
             })
         },

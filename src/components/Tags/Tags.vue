@@ -12,6 +12,7 @@
 </template>
 
 <script>
+    import bus from "../../utils/bus.js"
     export default {
         data() {
             return {
@@ -30,7 +31,7 @@
                         return item.name;
                     }
                 })
-                this.$_bus.$emit("cachePage", tagListNames);
+                bus.$emit("cachePage", tagListNames);
             }
         },
         created() {

@@ -2,19 +2,23 @@
     <div>
         <div class="handle">
             <div class="fr">
-                <el-button class="handle-item" type="primary" round @click="createArticle">创建文章</el-button>
+                <router-link to="/articleCreate">
+                    <el-button class="handle-item" type="primary" round>创建文章</el-button>
+                </router-link>
                 <el-button class="handle-item" type="primary" round :loading="exportLoading" @click="exportArticle">导出文章</el-button>
+                <router-link to="/articleCreate">
+                    <el-button class="handle-item" type="primary" round>草稿箱</el-button>
+                </router-link>
             </div>
-            <el-input class="handle-item" v-model="searchCondition.title" placeholder="请输入文章标题" clearable style="width: 200px;"></el-input>
-            <el-select class="handle-item" v-model="searchCondition.author" filterable placeholder="请选择作者(可搜索)"
+            <el-input class="handle-item" v-model="queryCondition.title" placeholder="请输入文章标题" clearable style="width: 200px;"></el-input>
+            <el-select class="handle-item" v-model="queryCondition.author" filterable placeholder="请选择作者(可搜索)"
                 clearable>
                 <el-option v-for="item in authorList" :key="item.value" :label="item.value" :value="item.value"></el-option>
             </el-select>
-            <el-select class="handle-item" v-model="searchCondition.type" filterable placeholder="请选择文章类型(可搜索)"
-                clearable>
-                <el-option v-for="item in typeList" :key="item.value" :label="item.value" :value="item.value"></el-option>
+            <el-select class="handle-item" v-model="queryCondition.type" placeholder="请选择文章类型" clearable>
+                <el-option v-for="item in articleTypeList" :key="item.value" :label="item.value" :value="item.value"></el-option>
             </el-select>
-            <el-button class="handle-item" type="primary" round @click="searchArticle">搜索文章</el-button>
+            <el-button class="handle-item" type="primary" round @click="getArticleList">搜索文章</el-button>
         </div>
 
         <el-table :data="currentPageList" border highlight-current-row v-loading="articleTableLoading">
@@ -23,19 +27,21 @@
                 filter-placement="bottom"></el-table-column>
             <el-table-column prop="createDate" label="创建时间" sortable width="180px"></el-table-column>
             <el-table-column prop="title" label="标题"></el-table-column>
-            <el-table-column prop="type" label="类型" width="120px" :filters="typeList" :filter-method="filterType"
+            <el-table-column prop="type" label="类型" width="120px" :filters="articleTypeList" :filter-method="filterType"
                 filter-placement="bottom"></el-table-column>
             <el-table-column prop="browseNum" label="阅读数" sortable width="100px"></el-table-column>
             <el-table-column label="操作" width="200px">
                 <template slot-scope="scope">
-                    <el-button type="primary" size="mini" plain @click="editArticle(scope.$index, scope.row)">编辑</el-button>
+                    <router-link :to="'/articleEdit/' + scope.row.id">
+                        <el-button type="primary" size="mini" plain>编辑</el-button>
+                    </router-link>
                     <el-button type="danger" size="mini" plain @click="deleteArticle(scope.$index, scope.row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
 
-        <el-pagination class="pagination" :total="articleNum" :current-page="currentPage" :page-sizes="[10, 20, 30, 40, 50, 100]"
-            :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" background @size-change="handleSizeChange"
+        <el-pagination class="pagination" :total="articleAmount" :current-page="queryCondition.currentPage" :page-sizes="[10, 20, 30, 40, 50, 100]"
+            :page-size="queryCondition.pageSize" layout="total, sizes, prev, pager, next, jumper" background @size-change="handleSizeChange"
             @current-change="handleCurrentChange"></el-pagination>
     </div>
 
@@ -43,7 +49,11 @@
 
 <script>
     import {
-        getArticleList
+        scroll
+    } from "../../utils/util.js";
+    import {
+        getArticleList,
+        getAuthorList
     } from "../../api/article.js";
     export default {
         name: "articleList",
@@ -51,17 +61,35 @@
             return {
                 articleList: [],
                 authorList: [],
-                typeList: [],
+                articleTypeList: [{
+                    text: "新闻",
+                    value: "新闻"
+                }, {
+                    text: "财经",
+                    value: "财经"
+                }, {
+                    text: "娱乐",
+                    value: "娱乐"
+                }, {
+                    text: "体育",
+                    value: "体育"
+                }, {
+                    text: "科技",
+                    value: "科技"
+                }, {
+                    text: "游戏",
+                    value: "游戏"
+                }],
                 articleTableLoading: false,
                 exportLoading: false,
-                searchCondition: {
-                    tltle: "",
+                queryCondition: {
+                    title: "",
                     author: "",
-                    type: ""
+                    type: "",
+                    currentPage: 1,
+                    pageSize: 20
                 },
-                articleNum: 0,
-                currentPage: 1,
-                pageSize: 20
+                articleAmount: 0,
             }
         },
         computed: {
@@ -72,27 +100,36 @@
             },
         },
         created() {
-            this.getArticleList();
+            this.getArticleList(this.queryCondition);
+            this.getAuthorList();
         },
         methods: {
-            getArticleList() {
+            getArticleList(params) {
                 this.articleTableLoading = true;
-                getArticleList().then(res => {
-                    this.articleList = res.articleList;
-                    this.articleNum = res.articleList.length;
+                getArticleList(params).then(res => {
+                    this.articleList = res.articleList.map((item, index) => {
+                        return {
+                            id: item.id,
+                            index: index + 1,
+                            author: item.author,
+                            createDate: item.createDate,
+                            title: item.title,
+                            type: item.type,
+                            browseNum: item.browseNum,
+                        }
+                    });
+                    this.articleAmount = res.articleList.length;
+                    this.articleTableLoading = false;
+                })
+            },
+            getAuthorList() {
+                getAuthorList().then(res => {
                     this.authorList = res.authorList.map(item => {
                         return {
                             text: item,
                             value: item
                         }
                     })
-                    this.typeList = res.typeList.map(item => {
-                        return {
-                            text: item,
-                            value: item
-                        }
-                    })
-                    this.articleTableLoading = false;
                 })
             },
             filterAuthor(value, row, column) {
@@ -103,32 +140,20 @@
                 const property = column['property'];
                 return row[property] === value;
             },
-            searchArticle() {
-
-            },
-            createArticle() {
-
-            },
             exportArticle() {
 
             },
-            editArticle() {
-
-            },
-            deleteArticle() {
-
-            },
-            currentPageListChange() {
+            deleteArticle(a, b) {
 
             },
             handleSizeChange(pageSize) {
-                this.pageSize = pageSize;
+                this.queryCondition.pageSize = pageSize;
             },
             handleCurrentChange(currentPage) {
-                this.currentPage = currentPage;
+                this.queryCondition.currentPage = currentPage;
                 const scrollElement = document.querySelector(".page");
                 scroll(scrollElement, 0, 300);
-                
+
             }
         }
     }
