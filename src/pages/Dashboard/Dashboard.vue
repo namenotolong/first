@@ -23,7 +23,7 @@
     import ProgressBar from "./ProgressBar.vue";
     import NewGoods from "./NewGoods.vue";
     export default {
-        name: "dashboard",
+        name: "Dashboard",
         components: {
             GridGroup,
             LineChart,

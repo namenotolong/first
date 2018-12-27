@@ -26,7 +26,7 @@
             tagList() {
                 // 缓存页面
                 const tagListNames = this.tagList.map(item => {
-                    // keep-alive会匹配组件的name属性进行缓存
+                    // keep-alive会匹配组件的name属性进行缓存,组件设置的name选项，就会对这个页面就行缓存。
                     if (item.name) {
                         return item.name;
                     }

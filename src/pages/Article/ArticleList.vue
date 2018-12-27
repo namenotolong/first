@@ -5,12 +5,15 @@
                 <router-link to="/articleCreate">
                     <el-button class="handle-item" type="primary" round>创建文章</el-button>
                 </router-link>
-                <el-button class="handle-item" type="primary" round :loading="exportLoading" @click="exportArticle">导出文章</el-button>
+                <el-button class="handle-item" type="primary" round :loading="exportLoading" @click="exportArticle">导出表格</el-button>
                 <router-link to="/articleCreate">
                     <el-button class="handle-item" type="primary" round>草稿箱</el-button>
                 </router-link>
+                <router-link to="/articleCreate">
+                    <el-button class="handle-item" type="primary" round>垃圾箱</el-button>
+                </router-link>
             </div>
-            <el-input class="handle-item" v-model="queryCondition.title" placeholder="请输入文章标题" clearable style="width: 200px;"></el-input>
+            <el-input class="handle-item" v-model="queryCondition.title" placeholder="请输入文章标题关键字" clearable style="width: 200px;"></el-input>
             <el-select class="handle-item" v-model="queryCondition.author" filterable placeholder="请选择作者(可搜索)"
                 clearable>
                 <el-option v-for="item in authorList" :key="item.value" :label="item.value" :value="item.value"></el-option>
@@ -21,7 +24,7 @@
             <el-button class="handle-item" type="primary" round @click="getArticleList">搜索文章</el-button>
         </div>
 
-        <el-table :data="currentPageList" border highlight-current-row v-loading="articleTableLoading">
+        <el-table :data="articleList" border highlight-current-row v-loading="articleTableLoading">
             <el-table-column prop="index" label="序号" width="80px"></el-table-column>
             <el-table-column prop="author" label="作者" width="120px" :filters="authorList" :filter-method="filterAuthor"
                 filter-placement="bottom"></el-table-column>
@@ -40,9 +43,9 @@
             </el-table-column>
         </el-table>
 
-        <el-pagination class="pagination" :total="articleAmount" :current-page="queryCondition.currentPage" :page-sizes="[10, 20, 30, 40, 50, 100]"
-            :page-size="queryCondition.pageSize" layout="total, sizes, prev, pager, next, jumper" background @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"></el-pagination>
+        <el-pagination class="pagination" :total="articleAmount" :current-page="queryCondition.currentPageNum"
+            :page-sizes="[10, 20, 30, 40, 50, 100]" :page-size="queryCondition.pageSize" layout="total, sizes, prev, pager, next, jumper"
+            background @size-change="handleSizeChange" @current-change="handleCurrentChange"></el-pagination>
     </div>
 
 </template>
@@ -56,7 +59,7 @@
         getAuthorList
     } from "../../api/article.js";
     export default {
-        name: "articleList",
+        name: "ArticleList",
         data() {
             return {
                 articleList: [],
@@ -86,31 +89,25 @@
                     title: "",
                     author: "",
                     type: "",
-                    currentPage: 1,
+                    currentPageNum: 1,
                     pageSize: 20
                 },
                 articleAmount: 0,
             }
         },
-        computed: {
-            currentPageList() {
-                const startIndex = (this.currentPage - 1) * this.pageSize;
-                const endIndex = startIndex + this.pageSize;
-                return this.articleList.slice(startIndex, endIndex);
-            },
-        },
         created() {
-            this.getArticleList(this.queryCondition);
+            this.getArticleList();
             this.getAuthorList();
         },
         methods: {
-            getArticleList(params) {
+            getArticleList() {
                 this.articleTableLoading = true;
-                getArticleList(params).then(res => {
-                    this.articleList = res.articleList.map((item, index) => {
+                getArticleList(this.queryCondition).then(res => {
+                    this.articleList = res.data.articleList.map((item, index) => {
                         return {
                             id: item.id,
-                            index: index + 1,
+                            index: (this.queryCondition.currentPageNum - 1) * this.queryCondition.pageSize +
+                                index + 1,
                             author: item.author,
                             createDate: item.createDate,
                             title: item.title,
@@ -118,8 +115,10 @@
                             browseNum: item.browseNum,
                         }
                     });
-                    this.articleAmount = res.articleList.length;
+                    this.articleAmount = res.data.articleAmount;
                     this.articleTableLoading = false;
+                    const scrollElement = document.querySelector(".page");
+                    scroll(scrollElement, 0, 300);
                 })
             },
             getAuthorList() {
@@ -143,17 +142,22 @@
             exportArticle() {
 
             },
-            deleteArticle(a, b) {
+            deleteArticle(index, row) {
+                this.$confirm(`确认删除文章“${row.title}”？`, "提示", {
+                    type: 'warning',
+                }).then(() => {
+                    this.$message.success("删除成功！");
+                }).catch(() => {
 
+                })
             },
             handleSizeChange(pageSize) {
                 this.queryCondition.pageSize = pageSize;
+                this.getArticleList();
             },
-            handleCurrentChange(currentPage) {
-                this.queryCondition.currentPage = currentPage;
-                const scrollElement = document.querySelector(".page");
-                scroll(scrollElement, 0, 300);
-
+            handleCurrentChange(currentPageNum) {
+                this.queryCondition.currentPageNum = currentPageNum;
+                this.getArticleList();
             }
         }
     }
