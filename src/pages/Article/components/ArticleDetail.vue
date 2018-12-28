@@ -11,7 +11,6 @@
             </el-select>
         </div>
 
-
         <tinymce></tinymce>
     </div>
 

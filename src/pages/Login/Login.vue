@@ -2,25 +2,25 @@
     <div class="login">
         <h1 class="login__header">后台管理系统</h1>
 
-        <el-form ref="loginForm" :model="login" :rules="loginRule" auto-complete="on">
+        <el-form ref="loginForm" :model="loginForm" :rules="loginRule" auto-complete="on">
             <el-form-item label="账号" prop="username">
                 <i class="iconfont icon-account"></i>
-                <el-input type="text" auto-complete="on" autofocus v-model="login.username" placeholder="请输入账号"></el-input>
+                <el-input type="text" auto-complete="on" autofocus v-model="loginForm.username" placeholder="请输入账号"></el-input>
             </el-form-item>
 
             <el-form-item label="密码" prop="password">
                 <i class="iconfont icon-password"></i>
-                <el-input :type="passwordType" auto-complete="on" v-model="login.password" @keyup.enter.native="submitLogin"
+                <el-input :type="passwordType" auto-complete="on" v-model="loginForm.password" @keyup.enter.native="submitLogin"
                     placeholder="请输入密码"></el-input>
                 <i class="iconfont icon-eye" @click="showPwd"></i>
             </el-form-item>
 
             <el-form-item>
-                <el-checkbox v-model="login.rememberPwd">记住密码</el-checkbox>
+                <el-checkbox v-model="loginForm.rememberPwd">记住密码</el-checkbox>
             </el-form-item>
 
             <el-form-item>
-                <el-button type="primary" :loading="isLogining" round @click="submitLogin">登录</el-button>
+                <el-button type="primary" :loading="loginLoading" round @click="submitLogin">登录</el-button>
             </el-form-item>
         </el-form>
 
@@ -29,10 +29,11 @@
 </template>
 
 <script>
+import {login} from "../../api/login.js"
     export default {
         data() {
             return {
-                login: {
+                loginForm: {
                     username: "admin",
                     password: "123456",
                     rememberPwd: false
@@ -53,8 +54,8 @@
                         trigger: "blur"
                     }]
                 },
-                passwordType:"password",
-                isLogining: false
+                passwordType: "password",
+                loginLoading: false
             };
         },
         created() {
@@ -64,27 +65,33 @@
             document.body.className = "body-background";
         },
         methods: {
-            showPwd(){
-               this.passwordType =  this.passwordType == "password" ? "text" : "password";
+            showPwd() {
+                this.passwordType = this.passwordType == "password" ? "text" : "password";
             },
             submitLogin() {
-                this.isLogining = true;
+                this.loginLoading = true;
                 this.$refs.loginForm.validate((valid) => {
                     if (valid) {
-                        // 先去后台验证
-                        if (this.login.rememberPwd == true) {
+                        if (this.loginForm.rememberPwd == true) {
 
                         }
-                        sessionStorage.setItem("ms_username", this.login.username);
-                        this.isLogining = false;
-                        this.$router.push("/dashboard");
-                        document.body.className = "";
+                        // this.$store.dispatch("login", this.loginForm).then(()=> {
+                        //     this.loginLoading = false;
+                        //     this.$router.push("/dashboard");
+                        //     document.body.className = "";
+                        // })
+                        login(this.loginForm).then(res => {
+                            this.loginLoading = false;
+                            this.$router.push("/dashboard");
+                            document.body.className = "";
+                        })
+                        
                     } else {
                         this.$message({
-                            type:"error",
-                            message:"登录失败"
+                            type: "error",
+                            message: "登录失败"
                         })
-                        this.isLogining = false;
+                        this.loginLoading = false;
                     }
                 })
             }
@@ -116,11 +123,13 @@
             top: 40px;
             z-index: 10;
         }
+
         .icon-account,
-        .icon-password{
+        .icon-password {
             left: 10px;
         }
-        .iconfont.icon-eye{
+
+        .iconfont.icon-eye {
             right: 10px;
             cursor: pointer;
         }

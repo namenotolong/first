@@ -6,6 +6,7 @@ import ElementUI from 'element-ui';
 
 import App from './App.vue';
 import router from "./router.js";
+import store from "./store";
 
 
 import 'element-ui/lib/theme-chalk/index.css';
@@ -35,5 +36,6 @@ router.beforeEach((to, from, next) => {
 new Vue({
     el: '#app',
     router: router,
+    store: store,
     render: h => h(App),
 })

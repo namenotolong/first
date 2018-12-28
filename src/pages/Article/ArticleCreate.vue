@@ -4,7 +4,7 @@
 <script>
 import ArticleDetail from "./components/ArticleDetail.vue";
 export default {
-    name:"articleCreate",
+    name:"ArticleCreate",
     components:{
         ArticleDetail
     },
@@ -18,4 +18,3 @@ export default {
     }
 }
 </script>
-

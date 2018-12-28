@@ -27,16 +27,20 @@ export default new VueRouter({
                 meta: { title: "图表" }
             },{
                 path: "/articleList",
-                component: () => import("./pages/article/ArticleList.vue"),
+                component: () => import("./pages/Article/ArticleList.vue"),
                 meta: { title: "文章管理" }
             },{
                 path: "/articleCreate",
-                component: () => import("./pages/article/ArticleCreate.vue"),
+                component: () => import("./pages/Article/ArticleCreate.vue"),
                 meta: { title: "创建文章" }
             },{
                 path: "/articleEdit/:articleId",
-                component: () => import("./pages/article/ArticleEdit.vue"),
+                component: () => import("./pages/Article/ArticleEdit.vue"),
                 meta: { title: "编辑文章" }
+            },{
+                path: "/mine",
+                component: () => import("./pages/Mine/Mine.vue"),
+                meta: { title: "个人中心" }
             },{
                 path: "/403",
                 component: () => import("./pages/Error/403.vue"),

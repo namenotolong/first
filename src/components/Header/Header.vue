@@ -13,7 +13,9 @@
             <el-dropdown @command="handleCommand">
                 <img class="header__menu__portrait" src="../../assets/img/portrait.jpg" alt="">
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>个人中心</el-dropdown-item>
+                    <router-link to="/mine">
+                         <el-dropdown-item>个人中心</el-dropdown-item>
+                    </router-link>
                     <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>

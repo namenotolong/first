@@ -25,7 +25,8 @@
                     toolbar: "restoredraft | undo redo | styleselect | bold italic underline forecolor backcolor removeformat | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table link image media emoticons | searchreplace fullscreen preview code print",
                     contextmenu: "copy paste | link image inserttable",
                 })
-            }
+            },
+            
         }
     }
 </script>
