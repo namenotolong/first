@@ -12,9 +12,10 @@
             <theme-picker></theme-picker>
             <el-dropdown @command="handleCommand">
                 <img class="header__menu__portrait" src="../../assets/img/portrait.jpg" alt="">
+                <!-- <img class="header__menu__portrait" :src="avatar" alt=""> -->
                 <el-dropdown-menu slot="dropdown">
                     <router-link to="/mine">
-                         <el-dropdown-item>个人中心</el-dropdown-item>
+                        <el-dropdown-item>个人中心</el-dropdown-item>
                     </router-link>
                     <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
@@ -30,6 +31,9 @@
     import bus from "../../utils/bus.js"
     import FullScreen from "../FullScreen/FullScreen.vue";
     import ThemePicker from "../ThemePicker/ThemePicker.vue";
+    import {
+        getUserInfo
+    } from "../../api/sysUser.js";
     export default {
         components: {
             FullScreen,
@@ -38,10 +42,11 @@
         data() {
             return {
                 isCollapse: false,
+                avatar: ""
             }
         },
         created() {
-
+            this.getAvatar();
         },
         methods: {
             toHome() {
@@ -56,6 +61,13 @@
                     sessionStorage.removeItem('ms_username')
                     this.$router.push('/login')
                 }
+            },
+            getAvatar() {
+                getUserInfo({
+                    username: sessionStorage.getItem("ms_username")
+                }).then(res => {
+                    this.avatar = res.userInfo.avatar;
+                })
             }
         }
     }

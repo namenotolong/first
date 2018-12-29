@@ -29,7 +29,9 @@
 </template>
 
 <script>
-import {login} from "../../api/login.js"
+    import {
+        login
+    } from "../../api/sysUser.js";
     export default {
         data() {
             return {
@@ -72,20 +74,12 @@ import {login} from "../../api/login.js"
                 this.loginLoading = true;
                 this.$refs.loginForm.validate((valid) => {
                     if (valid) {
-                        if (this.loginForm.rememberPwd == true) {
-
-                        }
-                        // this.$store.dispatch("login", this.loginForm).then(()=> {
-                        //     this.loginLoading = false;
-                        //     this.$router.push("/dashboard");
-                        //     document.body.className = "";
-                        // })
-                        login(this.loginForm).then(res => {
+                        login(this.loginForm).then(() => {
+                            sessionStorage.setItem("ms_username", this.loginForm.username);
                             this.loginLoading = false;
                             this.$router.push("/dashboard");
                             document.body.className = "";
                         })
-                        
                     } else {
                         this.$message({
                             type: "error",

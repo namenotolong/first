@@ -13,7 +13,7 @@
             }
         },
         created() {
-            $on("myevent", data => {})
+            bus.$on("myevent", data => {})
         },
     }
 </script>

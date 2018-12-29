@@ -11,7 +11,7 @@
             </el-select>
         </div>
 
-        <tinymce></tinymce>
+        <tinymce v-model="articleDetail.content"></tinymce>
     </div>
 
 </template>
@@ -28,11 +28,11 @@
         data() {
             return {
                 articleDetail: {
-                    author: "",
+                    author:this.$store.state.sysUser.name,
                     createDate: formatDate(new Date(), "yyyy-MM-dd HH:mm:ss"),
                     title: "",
                     type: "",
-                    content: ""
+                    content: "",
                 },
                 articleTypeList: [{
                     text: "新闻",
@@ -56,6 +56,9 @@
                 publishLoading: false,
                 draftLoading: false,
             }
+        },
+        created() {
+            
         },
         methods: {
             publish() {
