@@ -1,9 +1,9 @@
 <template>
     <ul class="tags clearfix">
-        <li class="tag-list" :class="{active:isTagActive(tag.path)}" v-for="(tag,index) in tagList" :key="tag.text">
+        <li class="tag-list" :class="{active:isTagActive(tag.path)}" v-for="(tag,index) in tagList" :key="tag.path">
             <!-- 关闭标签需要自定义，不能使用el-tag，点击它的关闭按钮，close事件会冒泡而触发超链接的点击 -->
             <router-link :to="tag.path">
-                <div v-text="tag.text"></div>
+                <span v-text="tag.title"></span>
             </router-link>
             <i class="el-icon-circle-close-outline" @click="closeTag(index)"></i>
         </li>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-    import bus from "../../utils/bus.js"
+    import bus from "../../../utils/bus.js";
     export default {
         data() {
             return {
@@ -26,7 +26,7 @@
             tagList() {
                 // 缓存页面
                 const tagListNames = this.tagList.map(item => {
-                    // keep-alive会匹配组件的name属性进行缓存,组件设置的name选项，就会对这个页面就行缓存。
+                    // keep-alive会匹配组件的name属性进行缓存,组件设置了name选项，就会对这个页面就行缓存。
                     if (item.name) {
                         return item.name;
                     }
@@ -51,9 +51,9 @@
                         this.tagList.shift();
                     }
                     this.tagList.push({
-                        text: route.meta.title,
+                        title: route.meta.title,
                         path: route.path,
-                        name: route.matched[1].components.default.name
+                        name: route.matched[1].components.default.name  //组件的name，如果组件设置了这个name就对组件进行缓存
                     });
                 }
             },

@@ -11,8 +11,8 @@ export default new VueRouter({
             path: "/login",
             component: () => import("./pages/Login/Login.vue")
         }, {
-            path: "/home",
-            component: () => import("./components/Home/Home.vue"),
+            path: "/layout",
+            component: () => import("./pages/Layout/Layout.vue"),
             children: [{
                 path: "/dashboard",
                 component: () => import("./pages/Dashboard/Dashboard.vue"),
@@ -36,7 +36,8 @@ export default new VueRouter({
             },{
                 path: "/articleEdit/:articleId",
                 component: () => import("./pages/Article/ArticleEdit.vue"),
-                meta: { title: "编辑文章" }
+                meta: { title: "编辑文章" },
+                props: true
             },{
                 path: "/mine",
                 component: () => import("./pages/Mine/Mine.vue"),

@@ -19,10 +19,10 @@
 
 </template>
 <script>
-    import bus from "../../utils/bus.js"
-    import VHeader from "../Header/Header.vue";
-    import VMenu from "../Menu/Menu.vue";
-    import VTags from "../Tags/Tags.vue";
+    import bus from "../../utils/bus.js";
+    import VHeader from "./components/Header.vue";
+    import VMenu from "./components/Menu.vue";
+    import VTags from "./components/Tags.vue";
     export default {
         components: {
             VHeader,

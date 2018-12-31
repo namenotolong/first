@@ -12,6 +12,7 @@
         </div>
 
         <tinymce v-model="articleDetail.content"></tinymce>
+        <!-- 一个组件上的v-model默认会利用名为value的prop和名为input的事件。 -->
     </div>
 
 </template>
@@ -21,15 +22,14 @@
     } from "../../../utils/util.js"
     import Tinymce from "../../../components/Tinymce/Tinymce.vue";
     export default {
-        props: ["articleId"],
         components: {
             Tinymce
         },
         data() {
             return {
                 articleDetail: {
-                    author:this.$store.state.sysUser.name,
-                    createDate: formatDate(new Date(), "yyyy-MM-dd HH:mm:ss"),
+                    author: "",
+                    createDate: "",
                     title: "",
                     type: "",
                     content: "",
@@ -58,11 +58,25 @@
             }
         },
         created() {
+            console.log(this.$route);
             
+            console.log(this.articleId);
+            
+            if(this.articleId){
+                console.log('====================================');
+                console.log();
+                console.log('====================================');
+            }
         },
         methods: {
+            getArticleDetail(){
+                
+            },
             publish() {
-
+                console.log(this.articleDetail.content);
+                this.articleDetail.title = ""
+                this.articleDetail.type = ""
+                this.articleDetail.content = ""
             },
             draft() {
 

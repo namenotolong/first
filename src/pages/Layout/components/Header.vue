@@ -11,7 +11,7 @@
             <full-screen></full-screen>
             <theme-picker></theme-picker>
             <el-dropdown @command="handleCommand">
-                <img class="header__menu__portrait" src="../../assets/img/portrait.jpg" alt="">
+                <img class="header__menu__portrait" src="../../../assets/img/portrait.jpg" alt="">
                 <!-- <img class="header__menu__portrait" :src="avatar" alt=""> -->
                 <el-dropdown-menu slot="dropdown">
                     <router-link to="/mine">
@@ -28,12 +28,12 @@
 
 
 <script>
-    import bus from "../../utils/bus.js"
-    import FullScreen from "../FullScreen/FullScreen.vue";
-    import ThemePicker from "../ThemePicker/ThemePicker.vue";
+    import bus from "../../../utils/bus.js";
+    import FullScreen from "../../../components/FullScreen/FullScreen.vue";
+    import ThemePicker from "../../../components/ThemePicker/ThemePicker.vue";
     import {
         getUserInfo
-    } from "../../api/sysUser.js";
+    } from "../../../api/sysUser.js";
     export default {
         components: {
             FullScreen,
