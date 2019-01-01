@@ -1,10 +1,10 @@
 import service from "../utils/service.js";
 
-function getArticleList(params) {
+function getArticleList(data) {
     return service({
         url: "/article/articleList",
-        method: "get",
-        params: params
+        method: "post",
+        data
     })
 }
 
@@ -15,18 +15,32 @@ function getAuthorList() {
     })
 }
 
-function getArticleDetail(articleId) {
+function getArticleDetail(params) {
     return service({
-        url: "/article/authorList",
+        url: "/article/articleDetail",
         method: "get",
-        params: {
-            articleId
-        }
+        params: params
+    })
+}
+
+function getDraftList(params) {
+    return service({
+        url: "/article/draftList",
+        method: "get",
+    })
+}
+
+function getRubbishList(params) {
+    return service({
+        url: "/article/rubbishList",
+        method: "get",
     })
 }
 
 export {
     getArticleList,
     getAuthorList,
-    getArticleDetail
+    getArticleDetail,
+    getDraftList,
+    getRubbishList
 }

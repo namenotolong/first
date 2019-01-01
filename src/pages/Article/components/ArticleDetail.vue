@@ -62,11 +62,7 @@
             
             console.log(this.articleId);
             
-            if(this.articleId){
-                console.log('====================================');
-                console.log();
-                console.log('====================================');
-            }
+        
         },
         methods: {
             getArticleDetail(){

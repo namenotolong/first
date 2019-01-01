@@ -32,7 +32,7 @@
                     createDate: "",
                     title: "",
                     type: "",
-                    content:"请输入文章内容创建",
+                    content:"",
                 },
                 articleTypeList: [{
                     text: "新闻",
@@ -56,6 +56,9 @@
                 publishLoading: false,
                 draftLoading: false,
             }
+        },
+        created(){
+            
         },
         methods: {
             publish() {

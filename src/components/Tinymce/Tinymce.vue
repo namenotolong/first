@@ -20,30 +20,23 @@
         },
         watch: {
             value(newVal) {
-                // 提交时清空编辑器的内容
-                if (newVal == "") {
-                    tinymce.get(this.editorId).setContent("");
-                }
+                tinymce.get(this.editorId).setContent(newVal);
             }
         },
-        created() {},
         mounted() {
             this.editorLoading = true;
             this.initTinymce();
         },
         destroyed() {
-            // this.destoryTinymce();
+            this.destoryTinymce();
         },
         //tiny无法被keep-alive缓存，在缓存的页面间切换时必须先销毁编辑器实例再重新初始化。编辑器的内容通过双向绑定被保存在父组件中，初始化后父组件又会把之前的内容通过过value传过来。
         // 创建文章页面可以使用组件的name进行缓存，而编辑文章页面不能使用。同时打开多个编辑页面如articleEdit/1,articleEdit/2，它们的组件name都是一样的，所以不能被缓存。在编辑页面使用localStorage来存储。
         activated() {
-            // this.editorLoading = true;
-            console.log("jinru");
-            
+            this.editorLoading = true;
             this.initTinymce();
         },
         deactivated() {
-             console.log("likai");
             this.destoryTinymce();
         },
         methods: {
@@ -75,7 +68,6 @@
                     tinymce.get(this.editorId).destroy();
                 }
             }
-
         }
     }
 </script>

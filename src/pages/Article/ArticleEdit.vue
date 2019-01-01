@@ -17,11 +17,14 @@
 </template>
 <script>
     import {
+        getArticleDetail
+    } from "../../api/article.js";
+    import {
         formatDate
     } from "../../utils/util.js"
     import Tinymce from "../../components/Tinymce/Tinymce.vue";
     export default {
-        props: ["articleId"],
+        props: ["articleIndex","articleId"],
         components: {
             Tinymce
         },
@@ -32,7 +35,7 @@
                     createDate: "",
                     title: "",
                     type: "",
-                    content: this.articleId,
+                    content: "",
                 },
                 articleTypeList: [{
                     text: "新闻",
@@ -59,18 +62,19 @@
         },
         watch: {
             $route() {
-             
-
+                this.getArticleDetail();
             }
         },
         created() {
-              console.log(this.articleId);
-            console.log(this.$route);
-        
+            this.getArticleDetail();
         },
         methods: {
             getArticleDetail() {
-
+                getArticleDetail({
+                    id: this.articleId
+                }).then(res => {
+                    this.articleDetail = res.detail;
+                })
             },
             publish() {
                 this.articleDetail.title = ""

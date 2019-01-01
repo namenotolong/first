@@ -21,7 +21,7 @@
             </el-form-item>
         </el-form>
       
-            <el-button type="primary" round @click="submit">提交更新</el-button>
+            <el-button type="primary" round :loading="submitLoading" @click="submit">提交更新</el-button>
        
 
     </div>
@@ -41,6 +41,7 @@
                 },
                 roleList: ["总经理", "管理员", "编辑"],
                 value5: [],
+                submitLoading:false
             }
         },
         created() {
@@ -57,7 +58,9 @@
                 })
             },
             submit(){
-                
+                this.submitLoading = true;
+                this.$message.success("更新成功");
+                 this.submitLoading = false;
             }
         }
     }

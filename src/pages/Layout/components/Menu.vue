@@ -17,11 +17,21 @@
             <span slot="title">图表</span>
         </el-menu-item>
 
-
-        <el-menu-item index="/articleList">
+        <el-menu-item index="/user">
             <i class="el-icon-document"></i>
-            <span slot="title">文章管理</span>
+            <span slot="title">用户管理</span>
         </el-menu-item>
+
+        <el-submenu index="1">
+            <template slot="title">
+                <i class="el-icon-document"></i>
+                <span>文章管理</span>
+            </template>
+            <el-menu-item index="/articleCreate">创建文章</el-menu-item>
+            <el-menu-item index="/articleList">文章列表</el-menu-item>
+            <el-menu-item index="/articleDraft">草稿箱</el-menu-item>
+            <el-menu-item index="/articleRubbish">垃圾箱</el-menu-item>
+        </el-submenu>
 
         <el-submenu index="2">
             <template slot="title">
