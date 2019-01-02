@@ -4,26 +4,19 @@
             <div class="fr">
                 <el-button class="handle-item" type="primary" round :loading="exportLoading" @click="exportArticle">导出表格</el-button>
             </div>
-            <el-input class="handle-item" v-model="queryCondition.title" placeholder="请输入文章标题关键字" clearable style="width: 200px;"></el-input>
-            <el-select class="handle-item" v-model="queryCondition.author" filterable placeholder="请选择作者(可搜索)"
+            <el-select class="handle-item" v-model="queryCondition.name" filterable placeholder="请输入用户姓名(可搜索)"
                 clearable>
                 <el-option v-for="item in authorList" :key="item.value" :label="item.value" :value="item.value"></el-option>
             </el-select>
-            <el-select class="handle-item" v-model="queryCondition.type" placeholder="请选择文章类型" clearable>
-                <el-option v-for="item in articleTypeList" :key="item.value" :label="item.value" :value="item.value"></el-option>
-            </el-select>
-            <el-button class="handle-item" type="primary" round @click="getArticleList">搜索文章</el-button>
+            <el-button class="handle-item" type="primary" round @click="getArticleList">搜索用户</el-button>
         </div>
 
         <el-table :data="articleList" border highlight-current-row v-loading="articleTableLoading">
             <el-table-column prop="index" label="序号" width="80px"></el-table-column>
-            <el-table-column prop="author" label="作者" width="120px" :filters="authorList" :filter-method="filterAuthor"
+            <el-table-column prop="author" label="姓名" width="120px" :filters="authorList" :filter-method="filterAuthor"
                 filter-placement="bottom"></el-table-column>
-            <el-table-column prop="createDate" label="创建时间" sortable width="180px"></el-table-column>
-            <el-table-column prop="title" label="标题"></el-table-column>
-            <el-table-column prop="type" label="类型" width="120px" :filters="articleTypeList" :filter-method="filterType"
+            <el-table-column prop="type" label="角色" width="120px" :filters="articleTypeList" :filter-method="filterType"
                 filter-placement="bottom"></el-table-column>
-            <el-table-column prop="browseNum" label="阅读数" sortable width="100px"></el-table-column>
             <el-table-column label="操作" width="200px">
                 <template slot-scope="scope">
                     <router-link :to="'/articleEdit/' + scope.row.id + '/' + scope.row.index">
@@ -53,27 +46,7 @@
         name: "ArticleList",
         data() {
             return {
-                articleList: [],
-                authorList: [],
-                articleTypeList: [{
-                    text: "新闻",
-                    value: "新闻"
-                }, {
-                    text: "财经",
-                    value: "财经"
-                }, {
-                    text: "娱乐",
-                    value: "娱乐"
-                }, {
-                    text: "体育",
-                    value: "体育"
-                }, {
-                    text: "科技",
-                    value: "科技"
-                }, {
-                    text: "游戏",
-                    value: "游戏"
-                }],
+                userList: [],
                 articleTableLoading: false,
                 exportLoading: false,
                 queryCondition: {
@@ -123,10 +96,6 @@
                 })
             },
             filterAuthor(value, row, column) {
-                const property = column['property'];
-                return row[property] === value;
-            },
-            filterType(value, row, column) {
                 const property = column['property'];
                 return row[property] === value;
             },
