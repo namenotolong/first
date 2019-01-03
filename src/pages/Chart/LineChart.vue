@@ -1,12 +1,12 @@
 <template>
     <div class="users">
-        <p>饼状图</p>
+        <p>折线图</p>
     </div>
 </template>
 
 <script>
     export default{
-        name:"PieChart",
+        name:"LineChart",
         data(){
             return{
 

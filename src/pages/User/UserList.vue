@@ -2,34 +2,35 @@
     <div>
         <div class="handle">
             <div class="fr">
-                <el-button class="handle-item" type="primary" round :loading="exportLoading" @click="exportArticle">导出表格</el-button>
+                <el-button class="handle-item" type="primary" round :loading="exportLoading" @click="exportTable">导出表格</el-button>
             </div>
-            <el-select class="handle-item" v-model="queryCondition.name" filterable placeholder="请输入用户姓名(可搜索)"
-                clearable>
-                <el-option v-for="item in authorList" :key="item.value" :label="item.value" :value="item.value"></el-option>
-            </el-select>
-            <el-button class="handle-item" type="primary" round @click="getArticleList">搜索用户</el-button>
+            <el-input class="handle-item" v-model="queryCondition.name" placeholder="请输入用户姓名" clearable style="width: 200px;"></el-input>
+            <el-button class="handle-item" type="primary" round @click="getUserList">搜索用户</el-button>
         </div>
 
-        <el-table :data="articleList" border highlight-current-row v-loading="articleTableLoading">
+        <el-table :data="userList" border highlight-current-row v-loading="userTableLoading">
             <el-table-column prop="index" label="序号" width="80px"></el-table-column>
-            <el-table-column prop="author" label="姓名" width="120px" :filters="authorList" :filter-method="filterAuthor"
+            <el-table-column prop="name" label="姓名" width="120px"></el-table-column>
+            <el-table-column prop="age" label="年龄" width="120px" sortable></el-table-column>
+            <el-table-column prop="gender" label="性别" width="120px" :filters="genderList" :filter-method="filter"
                 filter-placement="bottom"></el-table-column>
-            <el-table-column prop="type" label="角色" width="120px" :filters="articleTypeList" :filter-method="filterType"
+            <el-table-column prop="role" label="角色" width="120px" :filters="roleList" :filter-method="filter"
                 filter-placement="bottom"></el-table-column>
-            <el-table-column label="操作" width="200px">
+            <el-table-column prop="registerDate" label="注册时间" width="120px" sortable></el-table-column>
+            <el-table-column prop="purchaseAmount" label="累计购买商品数量" width="160px" sortable></el-table-column>
+            <el-table-column label="操作">
                 <template slot-scope="scope">
                     <router-link :to="'/articleEdit/' + scope.row.id + '/' + scope.row.index">
                         <el-button type="primary" size="mini" plain>编辑</el-button>
                     </router-link>
-                    <el-button type="danger" size="mini" plain @click="deleteArticle(scope.$index, scope.row)">删除</el-button>
+                    <el-button type="danger" size="mini" plain @click="deleteUser(scope.$index, scope.row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
 
-        <el-pagination class="pagination" :total="articleAmount" :current-page="queryCondition.currentPageNum"
-            :page-sizes="[10, 20, 30, 40, 50, 100]" :page-size="queryCondition.pageSize" layout="total, sizes, prev, pager, next, jumper"
-            background @size-change="handleSizeChange" @current-change="handleCurrentChange"></el-pagination>
+        <el-pagination class="pagination" :total="userAmount" :current-page="queryCondition.currentPageNum" :page-sizes="[10, 20, 30, 40, 50, 100]"
+            :page-size="queryCondition.pageSize" layout="total, sizes, prev, pager, next, jumper" background
+            @size-change="handleSizeChange" @current-change="handleCurrentChange"></el-pagination>
     </div>
 
 </template>
@@ -39,71 +40,82 @@
         scroll
     } from "../../utils/util.js";
     import {
-        getArticleList,
-        getAuthorList
-    } from "../../api/article.js";
+        getUserList,
+        getUserDetail
+    } from "../../api/user.js";
     export default {
         name: "ArticleList",
         data() {
             return {
                 userList: [],
-                articleTableLoading: false,
+                genderList: [{
+                    text: "男",
+                    value: "男"
+                }, {
+                    text: "女",
+                    value: "女"
+                }],
+                roleList:[{
+                    text: "管理员",
+                    value: "管理员"
+                },{
+                    text: "编辑",
+                    value: "编辑"
+                },{
+                    text: "普通会员",
+                    value: "普通会员"
+                },{
+                    text: "高级会员",
+                    value: "高级会员"
+                },{
+                    text: "普通用户",
+                    value: "普通用户"
+                }],
+                userTableLoading: false,
                 exportLoading: false,
                 queryCondition: {
-                    title: "",
-                    author: "",
-                    type: "",
+                    name: "",
                     currentPageNum: 1,
                     pageSize: 20
                 },
-                articleAmount: 0,
+                userAmount: 0,
             }
         },
         created() {
-            this.getArticleList();
-            this.getAuthorList();
+            this.getUserList();
         },
         methods: {
-            getArticleList() {
-                this.articleTableLoading = true;
-                getArticleList(this.queryCondition).then(res => {
-                    this.articleList = res.data.articleList.map((item, index) => {
+            getUserList() {
+                this.userTableLoading = true;
+                getUserList(this.queryCondition).then(res => {
+                    this.userList = res.data.userList.map((item, index) => {
                         return {
                             id: item.id,
                             index: (this.queryCondition.currentPageNum - 1) * this.queryCondition.pageSize +
                                 index + 1,
-                            author: item.author,
-                            createDate: item.createDate,
-                            title: item.title,
-                            type: item.type,
-                            browseNum: item.browseNum,
+                            name: item.name,
+                            age: item.age,
+                            gender: item.gender,
+                            role: item.role,
+                            registerDate: item.registerDate,
+                            purchaseAmount: item.purchaseAmount
                         }
                     });
-                    this.articleAmount = res.data.articleAmount;
-                    this.articleTableLoading = false;
+                    this.userAmount = res.data.userAmount;
+                    this.userTableLoading = false;
                     const scrollElement = document.querySelector(".page");
                     scroll(scrollElement, 0, 300);
                 })
             },
-            getAuthorList() {
-                getAuthorList().then(res => {
-                    this.authorList = res.authorList.map(item => {
-                        return {
-                            text: item,
-                            value: item
-                        }
-                    })
-                })
-            },
-            filterAuthor(value, row, column) {
+            filter(value, row, column) {
                 const property = column['property'];
                 return row[property] === value;
             },
-            exportArticle() {
+            exportTable() {
 
             },
-            deleteArticle(index, row) {
-                this.$confirm(`确认删除文章“${row.title}”？`, "提示", {
+            deleteUser(index, row) {
+                this.$confirm(`确认删除用户“${row.name}”？`, "提示", {
                     type: 'warning',
                 }).then(() => {
                     this.$message.success("删除成功！");
@@ -113,11 +125,11 @@
             },
             handleSizeChange(pageSize) {
                 this.queryCondition.pageSize = pageSize;
-                this.getArticleList();
+                this.getUserList();
             },
             handleCurrentChange(currentPageNum) {
                 this.queryCondition.currentPageNum = currentPageNum;
-                this.getArticleList();
+                this.getUserList();
             }
         }
     }

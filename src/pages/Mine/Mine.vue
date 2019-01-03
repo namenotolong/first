@@ -53,7 +53,7 @@
                     username: sessionStorage.getItem("ms_username")
                 }).then(res => {
                     this.userInfo = Object.assign(res.userInfo, {
-                        roles: res.userInfo.roles.join(",")
+                        roles: res.userInfo.role
                     })
                 })
             },

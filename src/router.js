@@ -26,10 +26,22 @@ export default new VueRouter({
                 title: "表格"
             }
         }, {
-            path: "/chart",
-            component: () => import("./pages/Chart/Chart.vue"),
+            path: "/lineChart",
+            component: () => import("./pages/Chart/LineChart.vue"),
             meta: {
-                title: "图表"
+                title: "折线图"
+            }
+        }, {
+            path: "/histogram",
+            component: () => import("./pages/Chart/Histogram.vue"),
+            meta: {
+                title: "柱状图"
+            }
+        }, {
+            path: "/pieChart",
+            component: () => import("./pages/Chart/PieChart.vue"),
+            meta: {
+                title: "饼状图"
             }
         }, {
             path: "/user",

@@ -12,17 +12,22 @@
             <span slot="title">表格</span>
         </el-menu-item>
 
-        <el-menu-item index="/chart">
-            <i class="el-icon-document"></i>
-            <span slot="title">图表</span>
-        </el-menu-item>
+        <el-submenu index="1">
+            <template slot="title">
+                <i class="el-icon-document"></i>
+                <span>图表</span>
+            </template>
+            <el-menu-item index="/lineChart">折线图</el-menu-item>
+            <el-menu-item index="/histogram">柱状图</el-menu-item>
+            <el-menu-item index="/pieChart">饼状图</el-menu-item>
+        </el-submenu>
 
         <el-menu-item index="/user">
             <i class="el-icon-document"></i>
             <span slot="title">用户管理</span>
         </el-menu-item>
 
-        <el-submenu index="1">
+        <el-submenu index="2">
             <template slot="title">
                 <i class="el-icon-document"></i>
                 <span>文章管理</span>
@@ -33,7 +38,7 @@
             <el-menu-item index="/articleRubbish">垃圾箱</el-menu-item>
         </el-submenu>
 
-        <el-submenu index="2">
+        <el-submenu index="3">
             <template slot="title">
                 <i class="el-icon-warning"></i>
                 <span>错误处理</span>

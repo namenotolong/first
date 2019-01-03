@@ -2,7 +2,7 @@
     <div>
         <div class="handle">
             <div class="fr">
-                <el-button class="handle-item" type="primary" round :loading="exportLoading" @click="exportArticle">导出表格</el-button>
+                <el-button class="handle-item" type="primary" round :loading="exportLoading" @click="exportTable">导出表格</el-button>
             </div>
             <el-input class="handle-item" v-model="queryCondition.title" placeholder="请输入文章标题关键字" clearable style="width: 200px;"></el-input>
             <el-select class="handle-item" v-model="queryCondition.author" filterable multiple clearable placeholder="请选择作者(可搜索)">
@@ -16,11 +16,11 @@
 
         <el-table :data="articleList" border highlight-current-row v-loading="articleTableLoading">
             <el-table-column prop="index" label="序号" width="80px"></el-table-column>
-            <el-table-column prop="author" label="作者" width="120px" :filters="authorList" :filter-method="filterAuthor"
+            <el-table-column prop="author" label="作者" width="120px" :filters="authorList" :filter-method="filter"
                 filter-placement="bottom"></el-table-column>
             <el-table-column prop="createDate" label="创建时间" sortable width="180px"></el-table-column>
             <el-table-column prop="title" label="标题"></el-table-column>
-            <el-table-column prop="type" label="类型" width="120px" :filters="articleTypeList" :filter-method="filterType"
+            <el-table-column prop="type" label="类型" width="120px" :filters="articleTypeList" :filter-method="filter"
                 filter-placement="bottom"></el-table-column>
             <el-table-column prop="browseNum" label="阅读数" sortable width="100px"></el-table-column>
             <el-table-column label="操作" width="200px">
@@ -123,15 +123,11 @@
                     })
                 })
             },
-            filterAuthor(value, row, column) {
+            filter(value, row, column) {
                 const property = column['property'];
                 return row[property] === value;
             },
-            filterType(value, row, column) {
-                const property = column['property'];
-                return row[property] === value;
-            },
-            exportArticle() {
+            exportTable() {
 
             },
             deleteArticle(index, row) {
