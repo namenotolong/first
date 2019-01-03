@@ -1,31 +1,33 @@
 <template>
-    <div class="login">
-        <h1 class="login__header">后台管理系统</h1>
+    <div class="login-wrap">
 
-        <el-form ref="loginForm" :model="loginForm" :rules="loginRule" auto-complete="on">
-            <el-form-item label="账号" prop="username">
-                <i class="iconfont icon-account"></i>
-                <el-input type="text" auto-complete="on" autofocus v-model="loginForm.username" placeholder="请输入账号"></el-input>
-            </el-form-item>
+        <div class="login">
+            <h1 class="login__header">后台管理系统</h1>
 
-            <el-form-item label="密码" prop="password">
-                <i class="iconfont icon-password"></i>
-                <el-input :type="passwordType" auto-complete="on" v-model="loginForm.password" @keyup.enter.native="submitLogin"
-                    placeholder="请输入密码"></el-input>
-                <i class="iconfont icon-eye" @click="showPwd"></i>
-            </el-form-item>
+            <el-form ref="loginForm" :model="loginForm" :rules="loginRule" auto-complete="on">
+                <el-form-item label="账号" prop="username">
+                    <i class="iconfont icon-account"></i>
+                    <el-input type="text" auto-complete="on" autofocus v-model="loginForm.username" placeholder="请输入账号"></el-input>
+                </el-form-item>
 
-            <el-form-item>
-                <el-checkbox v-model="loginForm.rememberPwd">记住密码</el-checkbox>
-            </el-form-item>
+                <el-form-item label="密码" prop="password">
+                    <i class="iconfont icon-password"></i>
+                    <el-input :type="passwordType" auto-complete="on" v-model="loginForm.password" @keyup.enter.native="submitLogin"
+                        placeholder="请输入密码"></el-input>
+                    <i class="iconfont icon-eye" @click="showPwd"></i>
+                </el-form-item>
 
-            <el-form-item>
-                <el-button type="primary" :loading="loginLoading" round @click="submitLogin">登录</el-button>
-            </el-form-item>
-        </el-form>
+                <el-form-item>
+                    <el-checkbox v-model="loginForm.rememberPwd">记住密码</el-checkbox>
+                </el-form-item>
 
+                <el-form-item>
+                    <el-button type="primary" :loading="loginLoading" round @click="submitLogin">登录</el-button>
+                </el-form-item>
+            </el-form>
+
+        </div>
     </div>
-
 </template>
 
 <script>
@@ -63,9 +65,6 @@
         created() {
 
         },
-        mounted() {
-            document.body.className = "body-background";
-        },
         methods: {
             showPwd() {
                 this.passwordType = this.passwordType == "password" ? "text" : "password";
@@ -78,7 +77,6 @@
                             sessionStorage.setItem("ms_username", this.loginForm.username);
                             this.loginLoading = false;
                             this.$router.push("/dashboard");
-                            document.body.className = "";
                         })
                     } else {
                         this.$message({
@@ -93,6 +91,17 @@
     };
 </script>
 <style lang="scss" scoped>
+    .login-wrap {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: url(../../assets/img/login-bg.jpg) no-repeat fixed center;
+        background-size: cover;
+        min-height: 400px;
+    }
+
     .login {
         position: absolute;
         left: 50%;
@@ -131,16 +140,6 @@
 </style>
 
 <style lang="scss">
-    .body-background {
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        background: url(../../assets/img/login-bg.jpg) no-repeat fixed center;
-        background-size: cover;
-    }
-
     .login {
         .el-input__inner {
             border-radius: 20px;

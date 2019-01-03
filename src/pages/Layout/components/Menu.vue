@@ -18,7 +18,7 @@
                 <span>图表</span>
             </template>
             <el-menu-item index="/lineChart">折线图</el-menu-item>
-            <el-menu-item index="/histogram">柱状图</el-menu-item>
+            <el-menu-item index="/pillarChart">柱状图</el-menu-item>
             <el-menu-item index="/pieChart">饼状图</el-menu-item>
         </el-submenu>
 

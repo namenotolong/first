@@ -27,19 +27,19 @@ export default new VueRouter({
             }
         }, {
             path: "/lineChart",
-            component: () => import("./pages/Chart/LineChart.vue"),
+            component: () => import("./pages/Chart/LineChart/LineChart.vue"),
             meta: {
                 title: "折线图"
             }
         }, {
-            path: "/histogram",
-            component: () => import("./pages/Chart/Histogram.vue"),
+            path: "/pillarChart",
+            component: () => import("./pages/Chart/PillarChart/PillarChart.vue"),
             meta: {
                 title: "柱状图"
             }
         }, {
             path: "/pieChart",
-            component: () => import("./pages/Chart/PieChart.vue"),
+            component: () => import("./pages/Chart/PieChart/PieChart.vue"),
             meta: {
                 title: "饼状图"
             }

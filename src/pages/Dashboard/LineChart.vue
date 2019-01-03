@@ -46,7 +46,7 @@
             // 折叠或展开菜单栏的时候，图表宽度不会跟着变，需要重建。
             // 这里监听menu的transitionend事件无效，用定时器解决。
             bus.$on("collapse", () => {
-                setTimeout(() => {
+                let timer = setTimeout(() => {
                     this.weekChart.destroy();
                     this.monthChart.destroy();
                     this.createChart("weekLineChart", this.weekData.visiteData, "weekChart");
