@@ -50,27 +50,24 @@
                     }
                 });
                 chart.source(data);
-                // chart.scale({
-                //     vote: {
-                //         min: 0,
-                //         alias:"选票" 
-                //     }
-                // })
-                chart.scale('vote', {
-                    min: 0,
-                    alias: "数量"
+                chart.scale({
+                    "name": {
+                        alias: "姓名",
+                    },
+                    "vote": {
+                        min: 0,
+                        alias: "票数",
+                        formatter(val) {
+                            return val / 1000 + "k";
+                        }
+                    }
+                });
+                chart.tooltip({
+                    showTitle: false
                 });
 
-                // chart.axis('vote', {
-                //     labels: null,
-                //     title: null,
-                //     line: null,
-                //     tickLine: null
-                // });
-
-           
-
-                chart.interval().position('name*vote').color('name', ['#7f8da9', '#fec514', '#db4c3c', '#daf0fd']);
+                chart.interval().position('name*vote').color('name', ['#7f8da9', '#fec514', '#db4c3c', '#daf0fd']).tooltip(
+                    'name*vote');
                 chart.point().position('name*vote').size(60).shape('name', function (name) {
                     return ['image', imageMap[name]];
                 });

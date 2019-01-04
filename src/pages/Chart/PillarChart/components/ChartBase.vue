@@ -15,22 +15,22 @@
             return {
                 chartId: "chart" + +new Date() + ((Math.random() * 1000).toFixed(0) + ""),
                 chartData: [{
-                    year: "类型1",
+                    type: "类型1",
                     value: 45
                 }, {
-                    year: "类型2",
+                    type: "类型2",
                     value: 52
                 }, {
-                    year: "类型3",
+                    type: "类型3",
                     value: 89
                 }, {
-                    year: "类型4",
+                    type: "类型4",
                     value: 145
                 }, {
-                    year: "类型5",
+                    type: "类型5",
                     value: 29
                 }, {
-                    year: "类型6",
+                    type: "类型6",
                     value: 102
                 }],
             }
@@ -44,17 +44,33 @@
                     container: container,
                     forceFit: true,
                     height: this.height,
-                    padding: [50, 50, 50, 50],
+                    padding: [50, 50, 50, 80],
                     background: {
                         fill: "#fff"
                     }
                 })
                 chart.source(data);
-                chart.scale('value', {
+                chart.scale("value", {
                     min: 0,
-                    alias: "数量"
+                    alias: "数量",
                 });
-                chart.interval().position('year*value').color("value").label("value");
+                chart.axis("type", {
+                    tickLine: {
+                        length: 0
+                    }
+                });
+                chart.axis("value", {
+                    line: {
+                        lineWidth: 1,
+                        stroke: 'rgb(202,202,202)', 
+                    },
+                    title: {
+                        textStyle: {
+                            fill: "#4a4a4a"
+                        }
+                    }
+                });
+                chart.interval().position('type*value').color("value").label("value");
                 chart.render();
             },
         }

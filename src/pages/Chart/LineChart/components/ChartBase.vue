@@ -47,18 +47,31 @@
                     container: container,
                     forceFit: true,
                     height: this.height,
-                    padding: [30, 60, 50, 50],
+                    padding: [30, 60, 50, 65],
                     background: {
                         fill: "#fff"
                     }
                 })
                 chart.source(data);
-                chart.scale('value', {
-                    min: 0,
+                chart.scale({
+                    "week":{
+                        range: [0, 1]
+                    },
+                    "value":{
+                        min: 0,
                     alias: "数量"
-                });
-                chart.scale('week', {
-                    range: [0, 1]
+                    }
+                })
+                chart.axis("value", {
+                    line: {
+                        lineWidth: 1,
+                        stroke: "rgb(202,202,202)",
+                    },
+                    title: {
+                        textStyle: {
+                            fill: "#4a4a4a"
+                        }
+                    }
                 });
                 chart.tooltip({
                     crosshairs: {
