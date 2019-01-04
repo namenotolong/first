@@ -18,8 +18,10 @@
                 <span>图表</span>
             </template>
             <el-menu-item index="/lineChart">折线图</el-menu-item>
+            <el-menu-item index="/areaChart">面积图</el-menu-item>
             <el-menu-item index="/pillarChart">柱状图</el-menu-item>
             <el-menu-item index="/pieChart">饼状图</el-menu-item>
+            
         </el-submenu>
 
         <el-menu-item index="/user">

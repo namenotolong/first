@@ -31,6 +31,12 @@ export default new VueRouter({
             meta: {
                 title: "折线图"
             }
+        },{
+            path: "/areaChart",
+            component: () => import("./pages/Chart/AreaChart/AreaChart.vue"),
+            meta: {
+                title: "面积图"
+            }
         }, {
             path: "/pillarChart",
             component: () => import("./pages/Chart/PillarChart/PillarChart.vue"),

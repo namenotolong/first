@@ -1,38 +1,55 @@
 <template>
     <div class="chart-wrap">
-        <section class="chart">
-            <p class="title">基础柱状图</p>
-            <chart-base></chart-base>
-        </section>
+        <el-row :gutter="20">
+            <el-col :lg="12" :sm="24">
+                <p class="title">基础柱状图</p>
+                <chart-base></chart-base>
+            </el-col>
 
-        <section class="chart">
-            <p class="title">自定义顶部图片</p>
-            <chart-custom></chart-custom>
-        </section>
+            <el-col :lg="12" :sm="24">
+                <p class="title">自定义顶部图片</p>
+                <chart-custom></chart-custom>
+            </el-col>
+        </el-row>
 
-        <section class="chart">
-            <p class="title">分组柱状图1</p>
-            <chart-group1></chart-group1>
-        </section>
-        <section class="chart">
-            <p class="title">分组柱状图2</p>
-            <chart-group2></chart-group2>
-        </section>
-       
-        <section class="chart">
-            <p class="title">辅助元素</p>
-            <chart-guide></chart-guide>
-        </section>
+        <el-row :gutter="20">
+            <el-col :lg="12" :sm="24">
+                <p class="title">分组柱状图1</p>
+                <chart-group1></chart-group1>
+            </el-col>
 
-        <section class="chart">
-            <p class="title">瀑布图</p>
-            <chart-waterfall></chart-waterfall>
-        </section>
+            <el-col :lg="12" :sm="24">
+                <p class="title">分组柱状图2</p>
+                <chart-group2></chart-group2>
+            </el-col>
+        </el-row>
 
-        <section class="chart">
-            <p class="title">堆叠柱状图</p>
-            <chart-overlay></chart-overlay>
-        </section>
+
+        <el-row :gutter="20">
+            <el-col :lg="12" :sm="24">
+                <p class="title">辅助元素</p>
+                <chart-guide></chart-guide>
+            </el-col>
+
+            <el-col :lg="12" :sm="24">
+                <p class="title">瀑布图</p>
+                <chart-waterfall></chart-waterfall>
+            </el-col>
+        </el-row>
+
+
+        <el-row :gutter="20">
+            <el-col :lg="12" :sm="24">
+                <p class="title">堆叠柱状图</p>
+                <chart-overlay></chart-overlay>
+            </el-col>
+
+            <el-col :lg="12" :sm="24">
+
+            </el-col>
+        </el-row>
+
+
     </div>
 </template>
 
@@ -44,7 +61,7 @@
     import ChartGuide from "./components/ChartGuide.vue";
     import ChartWaterfall from "./components/ChartWaterfall.vue";
     import ChartOverlay from "./components/ChartOverlay.vue";
- 
+
     export default {
         name: "PillarChart",
         components: {
@@ -58,15 +75,15 @@
         },
         data() {
             return {
-               
+
             }
         },
         mounted() {
-          
+
         },
         methods: {
-          
-           
+
+
         }
     }
 </script>

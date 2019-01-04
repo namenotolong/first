@@ -1,34 +1,43 @@
 <template>
     <div class="chart-wrap">
-        <section class="chart">
-            <p class="title">基础折线图</p>
-            <chart-base></chart-base>
-        </section>
+        <el-row :gutter="20">
+            <el-col :lg="12" :sm="24">
+                <p class="title">基础折线图</p>
+                <chart-base></chart-base>
+            </el-col>
 
-        <section class="chart">
-            <p class="title">渐变色曲线图</p>
-            <chart-gradual></chart-gradual>
-        </section>
+            <el-col :lg="12" :sm="24">
+                <p class="title">渐变色曲线图</p>
+                <chart-gradual></chart-gradual>
+            </el-col>
+        </el-row>
 
-        <section class="chart">
-            <p class="title">阶梯图</p>
+        <el-row :gutter="20">
+            <el-col :lg="12" :sm="24">
+                 <p class="title">阶梯图</p>
             <chart-ladder></chart-ladder>
-        </section>
+            </el-col>
 
-        <section class="chart">
-            <p class="title">双折线图</p>
+            <el-col :lg="12" :sm="24">
+                 <p class="title">双折线图</p>
             <chart-double></chart-double>
-        </section>
+            </el-col>
+        </el-row>
 
-        <section class="chart">
-            <p class="title">趋势线</p>
+        <el-row :gutter="20">
+            <el-col :lg="12" :sm="24">
+                   <p class="title">趋势线</p>
             <chart-trend></chart-trend>
-        </section>
+           
+            </el-col>
 
-        <section class="chart">
-            <p class="title">均值线</p>
-            <chart-average></chart-average>
-        </section>
+            <el-col :lg="12" :sm="24">
+                 <p class="title">均值线</p>
+             <chart-average></chart-average>
+            </el-col>
+        </el-row>
+
+      
     </div>
 </template>
 
@@ -51,15 +60,15 @@
         },
         data() {
             return {
-               
+
             }
         },
         mounted() {
-          
+
         },
         methods: {
-          
-           
+
+
         }
     }
 </script>
