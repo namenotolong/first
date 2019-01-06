@@ -20,7 +20,9 @@
             <el-menu-item index="/lineChart">折线图</el-menu-item>
             <el-menu-item index="/areaChart">面积图</el-menu-item>
             <el-menu-item index="/pillarChart">柱状图</el-menu-item>
+            <el-menu-item index="/barChart">条形图</el-menu-item>
             <el-menu-item index="/pieChart">饼状图</el-menu-item>
+            <el-menu-item index="/pointChart">散点图</el-menu-item>
             
         </el-submenu>
 

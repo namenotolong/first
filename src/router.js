@@ -44,12 +44,24 @@ export default new VueRouter({
                 title: "柱状图"
             }
         }, {
+            path: "/barChart",
+            component: () => import("./pages/Chart/BarChart/BarChart.vue"),
+            meta: {
+                title: "柱状图"
+            }
+        },{
             path: "/pieChart",
             component: () => import("./pages/Chart/PieChart/PieChart.vue"),
             meta: {
                 title: "饼状图"
             }
         }, {
+            path: "/pointChart",
+            component: () => import("./pages/Chart/PointChart/PointChart.vue"),
+            meta: {
+                title: "散点图"
+            }
+        },{
             path: "/user",
             component: () => import("./pages/User/UserList.vue"),
             meta: {
