@@ -76,7 +76,7 @@
                         function (gender, height, weight) {
                             return {
                                 name: gender,
-                                value: height + '(cm), ' + weight + '(kg)'
+                                value: height + 'cm, ' + weight + 'kg'
                             };
                         });
                 chart.render();

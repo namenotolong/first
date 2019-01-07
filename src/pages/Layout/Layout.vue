@@ -66,8 +66,9 @@
         }
 
         .page {
+            position: relative;
             box-sizing: border-box;
-            height: calc(100% - 45px);
+            height: calc(100% - 42px);
             padding: 20px;
             overflow-y: auto;
 

@@ -1,12 +1,12 @@
 <template>
     <div class="chart-wrap">
         <el-row :gutter="20">
-            <el-col :lg="12" :sm="24">
+            <el-col :lg="24" :sm="24">
                 <p class="title">散点图</p>
                 <chart-base></chart-base>
             </el-col>
 
-            <el-col :lg="12" :sm="24">
+            <el-col :lg="24" :sm="24">
                 <p class="title">气泡图</p>
                 <chart-bubble></chart-bubble>
             </el-col>
