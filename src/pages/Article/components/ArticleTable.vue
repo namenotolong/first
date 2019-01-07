@@ -91,8 +91,6 @@
         },
         methods: {
             getArticleList() {
-                console.log(this.queryCondition);
-                
                 this.articleTableLoading = true;
                 getArticleList(this.queryCondition).then(res => {
                     this.articleList = res.data.articleList.map((item, index) => {

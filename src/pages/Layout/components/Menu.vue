@@ -7,6 +7,11 @@
             <span slot="title">首页</span>
         </el-menu-item>
 
+        <el-menu-item index="/icon">
+            <i class="iconfont icon-home"></i>
+            <span slot="title">图标</span>
+        </el-menu-item>
+
         <el-menu-item index="/table">
             <i class="iconfont icon-home"></i>
             <span slot="title">表格</span>
@@ -23,7 +28,7 @@
             <el-menu-item index="/barChart">条形图</el-menu-item>
             <el-menu-item index="/pieChart">饼状图</el-menu-item>
             <el-menu-item index="/pointChart">散点图</el-menu-item>
-            
+
         </el-submenu>
 
         <el-menu-item index="/user">

@@ -24,7 +24,7 @@
     } from "../../utils/util.js"
     import Tinymce from "../../components/Tinymce/Tinymce.vue";
     export default {
-        props: ["articleIndex","articleId"],
+        props: ["articleIndex", "articleId"],
         components: {
             Tinymce
         },
@@ -77,9 +77,6 @@
                 })
             },
             publish() {
-                this.articleDetail.title = ""
-                this.articleDetail.type = ""
-                this.articleDetail.content = ""
                 this.$message.success("发布成功");
             },
             draft() {

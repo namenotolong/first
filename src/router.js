@@ -20,6 +20,12 @@ export default new VueRouter({
                 title: "首页"
             }
         }, {
+            path: "/icon",
+            component: () => import("./pages/Icon/Icon.vue"),
+            meta: {
+                title: "图标"
+            }
+        }, {
             path: "/table",
             component: () => import("./pages/Table/Table.vue"),
             meta: {

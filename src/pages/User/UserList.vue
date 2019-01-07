@@ -2,7 +2,9 @@
     <div>
         <div class="handle">
             <div class="fr">
+                <el-button class="handle-item" type="primary" round @click="editUser">创建用户</el-button>
                 <el-button class="handle-item" type="primary" round :loading="exportLoading" @click="exportTable">导出表格</el-button>
+
             </div>
             <el-input class="handle-item" v-model="queryCondition.name" placeholder="请输入用户姓名" clearable style="width: 200px;"></el-input>
             <el-button class="handle-item" type="primary" round @click="getUserList">搜索用户</el-button>
@@ -20,9 +22,7 @@
             <el-table-column prop="purchaseAmount" label="累计购买商品数量" width="160px" sortable></el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
-                    <router-link :to="'/articleEdit/' + scope.row.id + '/' + scope.row.index">
-                        <el-button type="primary" size="mini" plain>编辑</el-button>
-                    </router-link>
+                    <el-button type="primary" size="mini" plain @click="editUser(scope.$index, scope.row)">编辑</el-button>
                     <el-button type="danger" size="mini" plain @click="deleteUser(scope.$index, scope.row)">删除</el-button>
                 </template>
             </el-table-column>
@@ -31,6 +31,9 @@
         <el-pagination class="pagination" :total="userAmount" :current-page="queryCondition.currentPageNum" :page-sizes="[10, 20, 30, 40, 50, 100]"
             :page-size="queryCondition.pageSize" layout="total, sizes, prev, pager, next, jumper" background
             @size-change="handleSizeChange" @current-change="handleCurrentChange"></el-pagination>
+
+        <user-detail></user-detail>
+
     </div>
 
 </template>
@@ -43,8 +46,13 @@
         getUserList,
         getUserDetail
     } from "../../api/user.js";
+    import bus from "../../utils/bus.js";
+    import UserDetail from "./components/UserDetail.vue";
     export default {
-        name: "ArticleList",
+        name: "UserList",
+        components: {
+            UserDetail
+        },
         data() {
             return {
                 userList: [],
@@ -55,19 +63,19 @@
                     text: "女",
                     value: "女"
                 }],
-                roleList:[{
+                roleList: [{
                     text: "管理员",
                     value: "管理员"
-                },{
+                }, {
                     text: "编辑",
                     value: "编辑"
-                },{
+                }, {
                     text: "普通会员",
                     value: "普通会员"
-                },{
+                }, {
                     text: "高级会员",
                     value: "高级会员"
-                },{
+                }, {
                     text: "普通用户",
                     value: "普通用户"
                 }],
@@ -114,6 +122,12 @@
             exportTable() {
 
             },
+            editUser(index, row) {
+                if(!row){
+                    row = {};
+                }
+                bus.$emit("userDetail",row.id)
+            },
             deleteUser(index, row) {
                 this.$confirm(`确认删除用户“${row.name}”？`, "提示", {
                     type: 'warning',
@@ -130,7 +144,8 @@
             handleCurrentChange(currentPageNum) {
                 this.queryCondition.currentPageNum = currentPageNum;
                 this.getUserList();
-            }
+            },
+
         }
     }
 </script>

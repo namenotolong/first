@@ -15,12 +15,23 @@
         data() {
             return {
                 editorId: 'vue-tinymce-' + +new Date() + ((Math.random() * 1000).toFixed(0) + ''),
-                editorLoading: false
+                editorLoading: false,
+                hasInput: false,
             }
         },
         watch: {
+            //tinymce作为子组件会在父组件的生命周期钩子之前渲染完毕，此时父组件还未从后台拿到文章详情数据，内容还是空的,传过来的value就是空字符串。
+            //当父组件拿到数据后，才会传入文章内容，所以需要监听value的改变，而不能直接将value作为文章的内容，因为最开始是空的。
+            //而在用户输入内容的时候，this.$emit('input', editor.getContent())，触发父组件数据的改变，进而又将新的value传递进来，这样又会监听到value的改变。但是在这种情况下不需要再对这种改变做出响应。
+            //如果用户一边输入，而又对value的改变进行setContent的话，光标会由于setContent的作用跑到文章最前面。
             value(newVal) {
-                tinymce.get(this.editorId).setContent(newVal);
+                if (!this.hasInput) {
+                    tinymce.get(this.editorId).setContent(newVal);
+                }
+                // 创建文章中，发布成功之后将内容清空。
+                if (newVal == "") {
+                    tinymce.get(this.editorId).setContent(newVal);
+                }
             }
         },
         mounted() {
@@ -57,6 +68,10 @@
                         this.editorLoading = false;
                         // 用户输入的时候触发，插入内容的时候触发(比如插入了表格，使用ctrl+v粘贴了内容)，节点改变的时候触发(比如上传了图片)
                         editor.on('setContent keyup nodeChange', () => {
+                            //编辑器初始化完毕之后就可以点击编辑器输入框，如果这个时候文章的温柔还未来得及从后台就设置this.hasInput = true;那么当拿到数据之后就不会再设置内容。
+                            if (this.value != "") {
+                                this.hasInput = true;
+                            }
                             this.$emit('input', editor.getContent())
                         })
                     }
