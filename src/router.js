@@ -20,12 +20,30 @@ export default new VueRouter({
                 title: "首页"
             }
         }, {
-            path: "/icon",
-            component: () => import("./pages/Icon/Icon.vue"),
+            path: "/svg",
+            component: () => import("./pages/Icon/Svg.vue"),
             meta: {
-                title: "图标"
+                title: "svg图标"
             }
         }, {
+            path: "/fontClass",
+            component: () => import("./pages/Icon/FontClass.vue"),
+            meta: {
+                title: "fontClass图标"
+            }
+        }, {
+            path: "/baseForm",
+            component: () => import("./pages/Form/BaseForm.vue"),
+            meta: {
+                title: "基础表单"
+            }
+        }, {
+            path: "/validForm",
+            component: () => import("./pages/Form/ValidForm.vue"),
+            meta: {
+                title: "自定义校验规则"
+            }
+        },{
             path: "/table",
             component: () => import("./pages/Table/Table.vue"),
             meta: {

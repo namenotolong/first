@@ -9,7 +9,7 @@
             </el-form-item>
 
             <el-form-item label="角色：" prop="role">
-                <el-select v-model="userInfo.role" placeholder="请选择用户角色" clearable>
+                <el-select v-model="userInfo.role" placeholder="请选择用户角色">
                     <el-option v-for="item in roleList" :key="item.value" :label="item.label" :value="item.value"></el-option>
                 </el-select>
             </el-form-item>

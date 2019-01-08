@@ -7,19 +7,34 @@
             <span slot="title">首页</span>
         </el-menu-item>
 
-        <el-menu-item index="/icon">
-            <i class="iconfont icon-home"></i>
-            <span slot="title">图标</span>
-        </el-menu-item>
+        <el-submenu index="4">
+            <template slot="title">
+                <i class="iconfont icon-icon"></i>
+                <span>图标</span>
+            </template>
+            <el-menu-item index="/svg">svg图标</el-menu-item>
+            <el-menu-item index="/fontClass">fontClass图标</el-menu-item>
+        </el-submenu>
+
+        <el-submenu index="7">
+            <template slot="title">
+                <i class="el-icon-document"></i>
+                <span>表单</span>
+            </template>
+            <el-menu-item index="/baseForm">基础表单</el-menu-item>
+            <el-menu-item index="/validForm">自定义校验规则</el-menu-item>
+        </el-submenu>
 
         <el-menu-item index="/table">
-            <i class="iconfont icon-home"></i>
+            <i class="iconfont icon-table"></i>
             <span slot="title">表格</span>
         </el-menu-item>
 
+
+
         <el-submenu index="1">
             <template slot="title">
-                <i class="el-icon-document"></i>
+                <i class="iconfont icon-chart"></i>
                 <span>图表</span>
             </template>
             <el-menu-item index="/lineChart">折线图</el-menu-item>
@@ -28,11 +43,10 @@
             <el-menu-item index="/barChart">条形图</el-menu-item>
             <el-menu-item index="/pieChart">饼状图</el-menu-item>
             <el-menu-item index="/pointChart">散点图</el-menu-item>
-
         </el-submenu>
 
         <el-menu-item index="/user">
-            <i class="el-icon-document"></i>
+            <i class="iconfont icon-user"></i>
             <span slot="title">用户管理</span>
         </el-menu-item>
 
@@ -51,6 +65,15 @@
             <template slot="title">
                 <i class="el-icon-warning"></i>
                 <span>错误处理</span>
+            </template>
+            <el-menu-item index="/403">403</el-menu-item>
+            <el-menu-item index="/404">404</el-menu-item>
+        </el-submenu>
+
+        <el-submenu index="5">
+            <template slot="title">
+                <i class="el-icon-warning"></i>
+                <span>组件</span>
             </template>
             <el-menu-item index="/403">403</el-menu-item>
             <el-menu-item index="/404">404</el-menu-item>

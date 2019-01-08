@@ -3,14 +3,15 @@
         <div class="handle">
             <div class="fr">
                 <el-button class="handle-item" type="primary" round @click="editUser">创建用户</el-button>
+                <el-button class="handle-item" type="primary" round @click="deleteUserBatch">批量删除</el-button>
                 <el-button class="handle-item" type="primary" round :loading="exportLoading" @click="exportTable">导出表格</el-button>
-
             </div>
             <el-input class="handle-item" v-model="queryCondition.name" placeholder="请输入用户姓名" clearable style="width: 200px;"></el-input>
             <el-button class="handle-item" type="primary" round @click="getUserList">搜索用户</el-button>
         </div>
 
-        <el-table :data="userList" border highlight-current-row v-loading="userTableLoading">
+        <el-table :data="userList" border highlight-current-row v-loading="userTableLoading" @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column prop="index" label="序号" width="80px"></el-table-column>
             <el-table-column prop="name" label="姓名" width="120px"></el-table-column>
             <el-table-column prop="age" label="年龄" width="120px" sortable></el-table-column>
@@ -87,6 +88,7 @@
                     pageSize: 20
                 },
                 userAmount: 0,
+                multipleSelection: []
             }
         },
         created() {
@@ -122,20 +124,41 @@
             exportTable() {
 
             },
+            deleteUserBatch() {
+                if (this.multipleSelection.length === 0) {
+                    this.$message.warning("请勾选要删除的用户！");
+                } else {
+                    const names = this.multipleSelection.map(row => {
+                        return row.name;
+                    })
+                    this.$confirm(`确认删除用户“${names.join("，")}”？`, "提示", {
+                        type: 'warning',
+                    }).then(() => {
+                         this.getUserList();
+                        this.$message.success("删除成功！");
+                    }).catch(() => {
+
+                    })
+                }
+            },
             editUser(index, row) {
-                if(!row){
+                if (!row) {
                     row = {};
                 }
-                bus.$emit("userDetail",row.id)
+                bus.$emit("userDetail", row.id)
             },
             deleteUser(index, row) {
                 this.$confirm(`确认删除用户“${row.name}”？`, "提示", {
                     type: 'warning',
                 }).then(() => {
+                     this.getUserList();
                     this.$message.success("删除成功！");
                 }).catch(() => {
 
                 })
+            },
+            handleSelectionChange(val) {
+                this.multipleSelection = val;
             },
             handleSizeChange(pageSize) {
                 this.queryCondition.pageSize = pageSize;
@@ -144,8 +167,7 @@
             handleCurrentChange(currentPageNum) {
                 this.queryCondition.currentPageNum = currentPageNum;
                 this.getUserList();
-            },
-
+            }
         }
     }
 </script>

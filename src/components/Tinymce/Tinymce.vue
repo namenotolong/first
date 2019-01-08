@@ -1,7 +1,6 @@
 <template>
     <div>
         <el-input type="textarea" :id="editorId" v-loading="editorLoading"></el-input>
-        <!-- <textarea id="editor"></textarea> -->
     </div>
 </template>
 <script>

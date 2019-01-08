@@ -6,10 +6,10 @@
             </div>
             <el-input class="handle-item" v-model="queryCondition.title" placeholder="请输入文章标题关键字" clearable style="width: 200px;"></el-input>
             <el-select class="handle-item" v-model="queryCondition.author" filterable multiple clearable placeholder="请选择作者(可搜索)">
-                <el-option v-for="item in authorList" :key="item.value" :label="item.value" :value="item.value"></el-option>
+                <el-option v-for="item in authorList" :key="item.value" :label="item.label" :value="item.value"></el-option>
             </el-select>
             <el-select class="handle-item" v-model="queryCondition.type" multiple clearable placeholder="请选择文章类型">
-                <el-option v-for="item in articleTypeList" :key="item.value" :label="item.value" :value="item.value"></el-option>
+                <el-option v-for="item in articleTypeList" :key="item.value" :label="item.label" :value="item.value"></el-option>
             </el-select>
             <el-button class="handle-item" type="primary" round @click="getArticleList">搜索文章</el-button>
         </div>
@@ -55,22 +55,22 @@
                 articleList: [],
                 authorList: [],
                 articleTypeList: [{
-                    text: "新闻",
+                    label: "新闻",
                     value: "新闻"
                 }, {
-                    text: "财经",
+                    label: "财经",
                     value: "财经"
                 }, {
-                    text: "娱乐",
+                    label: "娱乐",
                     value: "娱乐"
                 }, {
-                    text: "体育",
+                    label: "体育",
                     value: "体育"
                 }, {
-                    text: "科技",
+                    label: "科技",
                     value: "科技"
                 }, {
-                    text: "游戏",
+                    label: "游戏",
                     value: "游戏"
                 }],
                 articleTableLoading: false,
@@ -115,7 +115,7 @@
                 getAuthorList().then(res => {
                     this.authorList = res.authorList.map(item => {
                         return {
-                            text: item,
+                            label: item,
                             value: item
                         }
                     })
