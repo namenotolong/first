@@ -33,7 +33,8 @@ module.exports = {
             //当图片大小在15000字节以内时，才将图片的路径转化为base64
         }, {
             test: /\.ttf|eot|svg|woff|woff2$/,
-            use: 'url-loader'
+            use: 'url-loader',
+            // exclude:path.resolve(__dirname,"./src/components/BaseIcon/svg")
         }, {
             test: /\.js$/,
             use: 'babel-loader',
@@ -41,7 +42,13 @@ module.exports = {
         }, {
             test: /\.vue$/,
             use: 'vue-loader'
-        }]
+        },
+        // {
+        //     test: /\.svg$/,
+        //     use: 'svg-sprite-loader',
+        //     include:path.resolve(__dirname,"./src/components/BaseIcon/svg"),
+        // }
+        ]
     },
     performance: {
         hints: "warning", //展示警告
