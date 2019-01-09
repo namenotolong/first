@@ -86,6 +86,12 @@ export default new VueRouter({
                 title: "散点图"
             }
         },{
+            path: "/uploadExcel",
+            component: () => import("./pages/Excel/UploadExcel.vue"),
+            meta: {
+                title: "上传Excel"
+            }
+        },{
             path: "/user",
             component: () => import("./pages/User/UserList.vue"),
             meta: {

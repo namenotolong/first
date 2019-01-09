@@ -30,8 +30,6 @@
             <span slot="title">表格</span>
         </el-menu-item>
 
-
-
         <el-submenu index="1">
             <template slot="title">
                 <i class="iconfont icon-chart"></i>
@@ -45,6 +43,14 @@
             <el-menu-item index="/pointChart">散点图</el-menu-item>
         </el-submenu>
 
+        <el-submenu index="8">
+            <template slot="title">
+                <i class="el-icon-document"></i>
+                <span>Excel</span>
+            </template>
+            <el-menu-item index="/articleCreate">导出Excel</el-menu-item>
+            <el-menu-item index="/uploadExcel">上传Excel</el-menu-item>
+        </el-submenu>
         <el-menu-item index="/user">
             <i class="iconfont icon-user"></i>
             <span slot="title">用户管理</span>

@@ -50,7 +50,15 @@
                 })
             },
             addTask() {
-                this.$prompt("添加新的待办事项:", "").then(res => {
+                this.$prompt("添加新的待办事项:", "", {
+                    inputPlaceholder: "请输入待办事项",
+                    inputValidator(value) {
+                        if (!value) {
+                            return "内容不能为空！"
+                        }
+                    },
+
+                }).then(res => {
                     this.taskData.unshift({
                         isCompleted: false,
                         content: res.value
@@ -58,7 +66,14 @@
                 })
             },
             editTask(index) {
-                this.$prompt("重新填写待办事项", "").then(res => {
+                this.$prompt("修改待办事项", "", {
+                    inputPlaceholder: "请输入待办事项",
+                    inputValidator(value) {
+                        if (!value) {
+                            return "内容不能为空！"
+                        }
+                    },
+                }).then(res => {
                     this.taskData[index].content = res.value;
                 })
             },
