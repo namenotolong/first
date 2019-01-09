@@ -2,7 +2,7 @@
     <div>
         <div class="handle">
             <div class="fr">
-                <el-button class="handle-item" type="primary" round :loading="exportLoading" @click="exportTable">导出表格</el-button>
+                <export-excel file-name="文章列表" :data="articleList">导出表格</export-excel>
             </div>
             <el-input class="handle-item" v-model="queryCondition.title" placeholder="请输入文章标题关键字" clearable style="width: 200px;"></el-input>
             <el-select class="handle-item" v-model="queryCondition.author" filterable multiple clearable placeholder="请选择作者(可搜索)">
@@ -48,8 +48,12 @@
         getArticleList,
         getAuthorList
     } from "../../../api/article.js";
+    import ExportExcel from "../../../components/ExportExcel/ExportExcel.vue";
     export default {
         name: "ArticleList",
+        components: {
+            ExportExcel
+        },
         data() {
             return {
                 articleList: [],
@@ -74,7 +78,6 @@
                     value: "游戏"
                 }],
                 articleTableLoading: false,
-                exportLoading: false,
                 queryCondition: {
                     title: "",
                     author: [],
@@ -124,9 +127,6 @@
             filter(value, row, column) {
                 const property = column['property'];
                 return row[property] === value;
-            },
-            exportTable() {
-
             },
             deleteArticle(index, row) {
                 this.$confirm(`确认删除文章“${row.title}”？`, "提示", {

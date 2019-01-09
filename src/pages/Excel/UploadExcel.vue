@@ -1,8 +1,8 @@
 <template>
     <div>
-        <upload-excel :before-upload="beforeUpload" :on-success="onSuccess"></upload-excel>
-        <el-table :data="tableData" border highlight-current-row style="width: 100%;margin-top:20px;">
-            <el-table-column v-for="item of tableHeader" :prop="item" :label="item" :key="item" />
+        <upload-excel :before-upload="beforeUpload" :on-success="handleSuccess"></upload-excel>
+        <el-table :data="tableData" border highlight-current-row>
+            <el-table-column v-for="item of tableHeader" :key="item" :prop="item" :label="item" />
         </el-table>
     </div>
 </template>
@@ -14,23 +14,28 @@
         },
         data() {
             return {
-                tableData:[],
-                tableHeader:[]
+                tableData: [],
+                tableHeader: []
             }
         },
         methods: {
-            beforeUpload() {
-
+            beforeUpload(file) {
+                const isLt2M = file.size / 1024 / 1024 < 2;
+                if (!isLt2M) {
+                    this.$message.error('上传的文件大小不能超过 2MB!');
+                }
+                return isLt2M;
             },
-            onSuccess(header,result) {
+            handleSuccess(header, result) {
+                this.$message.success('上传成功！');
                 this.tableHeader = header;
                 this.tableData = result;
-
             }
         }
     }
 </script>
 <style scoped>
-
-
+    .el-table {
+        margin-top: 20px;
+    }
 </style>

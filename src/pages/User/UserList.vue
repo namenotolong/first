@@ -4,7 +4,7 @@
             <div class="fr">
                 <el-button class="handle-item" type="primary" round @click="editUser">创建用户</el-button>
                 <el-button class="handle-item" type="primary" round @click="deleteUserBatch">批量删除</el-button>
-                <el-button class="handle-item" type="primary" round :loading="exportLoading" @click="exportTable">导出表格</el-button>
+                <export-excel file-name="用户列表" :data="userList">导出表格</export-excel>
             </div>
             <el-input class="handle-item" v-model="queryCondition.name" placeholder="请输入用户姓名" clearable style="width: 200px;"></el-input>
             <el-button class="handle-item" type="primary" round @click="getUserList">搜索用户</el-button>
@@ -49,10 +49,12 @@
     } from "../../api/user.js";
     import bus from "../../utils/bus.js";
     import UserDetail from "./components/UserDetail.vue";
+    import ExportExcel from "../../components/ExportExcel/ExportExcel.vue";
     export default {
         name: "UserList",
         components: {
-            UserDetail
+            UserDetail,
+            ExportExcel
         },
         data() {
             return {
@@ -81,7 +83,6 @@
                     value: "普通用户"
                 }],
                 userTableLoading: false,
-                exportLoading: false,
                 queryCondition: {
                     name: "",
                     currentPageNum: 1,
@@ -121,9 +122,6 @@
                 const property = column['property'];
                 return row[property] === value;
             },
-            exportTable() {
-
-            },
             deleteUserBatch() {
                 if (this.multipleSelection.length === 0) {
                     this.$message.warning("请勾选要删除的用户！");
@@ -134,7 +132,7 @@
                     this.$confirm(`确认删除用户“${names.join("，")}”？`, "提示", {
                         type: 'warning',
                     }).then(() => {
-                         this.getUserList();
+                        this.getUserList();
                         this.$message.success("删除成功！");
                     }).catch(() => {
 
@@ -151,7 +149,7 @@
                 this.$confirm(`确认删除用户“${row.name}”？`, "提示", {
                     type: 'warning',
                 }).then(() => {
-                     this.getUserList();
+                    this.getUserList();
                     this.$message.success("删除成功！");
                 }).catch(() => {
 

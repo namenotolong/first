@@ -86,6 +86,12 @@ export default new VueRouter({
                 title: "散点图"
             }
         },{
+            path: "/exportExcel",
+            component: () => import("./pages/Excel/ExportExcel.vue"),
+            meta: {
+                title: "导出Excel"
+            }
+        },{
             path: "/uploadExcel",
             component: () => import("./pages/Excel/UploadExcel.vue"),
             meta: {

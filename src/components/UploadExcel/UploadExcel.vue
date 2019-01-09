@@ -1,8 +1,11 @@
 <template>
-    <div>
-        <input style="display:none" type="file" ref="fileInput" @change="selectFile">
-        <el-button type="primary" round :loading="uploadLoading" @click="fileInputClick">点击浏览文件</el-button>
-
+    <div class="upload-excel">
+        <input style="display:none" type="file" ref="fileInput" accept=".xlsx,.xls" @change="selectFile">
+        <el-button type="primary" round :loading="uploadLoading" @click="fileInputClick">点击选择文件</el-button>
+        <span class="file-name" v-show="fileName">
+            <i class="el-icon-document"></i>
+            {{fileName}}
+        </span>
     </div>
 </template>
 <script>
@@ -14,6 +17,7 @@
         },
         data() {
             return {
+                fileName: "",
                 uploadLoading: false,
             }
         },
@@ -21,14 +25,29 @@
             fileInputClick() {
                 this.$refs.fileInput.click();
             },
-            selectFile() {
-
+            selectFile(event) {
+                const files = event.target.files;
+                const firstFile = files[0];
+                if (!this.isExcel(firstFile)) {
+                    this.$message.error('上传的文件只能是xls或xlsx格式!');
+                    return false;
+                }
+                this.fileName = firstFile.name;
+                if (!this.beforeUpload) {
+                    this.readData(firstFile);
+                } else {
+                    const before = this.beforeUpload(firstFile);
+                    if (before) {
+                        this.readData(firstFile);
+                    }
+                }
+                this.$refs.fileInput.value = null; //将文件清掉，不然再次选择这个文件，change事件不会被触发。
             },
-            renderData(e) {
+            readData(file) {
                 this.uploadLoading = true;
                 const fileReader = new FileReader();
-                fileReader.onload = ev => {
-                    const data = ev.target.result;
+                fileReader.onload = event => {
+                    const data = event.target.result;
                     // 以二进制流方式读取得到整份excel表格对象
                     const workbook = XLSX.read(data, {
                         type: 'binary'
@@ -42,8 +61,7 @@
                     this.uploadLoading = false;
                 };
                 // 以二进制方式打开文件
-                const files = e.target.files;
-                fileReader.readAsBinaryString(files[0]);
+                fileReader.readAsBinaryString(file);
             },
             // 获取表头
             getHeaderRow(sheet) {
@@ -63,10 +81,19 @@
                 }
                 return header;
             },
+            isExcel(file) {
+                return /\.(xls|xlsx)$/.test(file.name);
+            }
         }
     }
 </script>
 <style scoped>
+    .upload-excel {
+        display: inline-block;
+    }
 
-
+    .file-name {
+        margin: 0 20px;
+        color: #4a4a4a;
+    }
 </style>

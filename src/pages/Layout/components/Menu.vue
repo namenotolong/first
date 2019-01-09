@@ -48,7 +48,7 @@
                 <i class="el-icon-document"></i>
                 <span>Excel</span>
             </template>
-            <el-menu-item index="/articleCreate">导出Excel</el-menu-item>
+            <el-menu-item index="/exportExcel">导出Excel</el-menu-item>
             <el-menu-item index="/uploadExcel">上传Excel</el-menu-item>
         </el-submenu>
         <el-menu-item index="/user">
