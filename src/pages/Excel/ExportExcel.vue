@@ -1,13 +1,16 @@
 <template>
     <div>
-        <export-excel :file-name="fileName" :auto-width="true" :transmit-data="transmitData">导出excel</export-excel>
+        <export-excel :file-name="fileName" :header="excelHeader" :filter-filed="filterFiled" :data="tableData"
+            :auto-width="true">导出excel</export-excel>
         <el-input style="width: 320px;" v-model="fileName" placeholder="请输入要导出的文件的名称，默认为“数据”。"></el-input>
         <el-table border highlight-current-row :data="tableData">
             <el-table-column prop="name" label="姓名"> </el-table-column>
             <el-table-column prop="age" label="年龄"> </el-table-column>
             <el-table-column prop="gender" label="性别"> </el-table-column>
             <el-table-column prop="mobilePhone" label="手机号"> </el-table-column>
-            <el-table-column prop="email" label=电子邮箱> </el-table-column>
+            <el-table-column prop="email" label="电子邮箱"> </el-table-column>
+            <el-table-column prop="graduationDate" label="毕业时间"> </el-table-column>
+            <el-table-column prop="isMarry" label="婚否"> </el-table-column>
         </el-table>
     </div>
 </template>
@@ -25,43 +28,38 @@
                     age: 21,
                     gender: "男",
                     mobilePhone: "15999999991",
-                    email: "1234@qq.com"
+                    email: "",
+                    graduationDate: "2005/07/01",
+                    isMarry: "否"
                 }, {
                     name: "赵六",
                     age: 20,
                     gender: "男",
-                    mobilePhone: "15999999992",
-                    email: "1235@qq.com"
+                    mobilePhone: "",
+                    email: "1235@qq.com",
+                    graduationDate: "2011/08/10",
+                    isMarry: "是"
                 }, {
                     name: "李四",
                     age: 30,
-                    gender: "女",
+                    gender: "",
                     mobilePhone: "15999999939",
-                    email: "1236@qq.com"
+                    email: "1236@qq.com",
+                    graduationDate: "1997/06/05",
+                    isMarry: "否"
                 }, {
                     name: "王五",
                     age: 28,
                     gender: "男",
-                    mobilePhone: "159999977777777777777777777779996",
-                    email: "1238@qq.com"
+                    mobilePhone: "15999999996",
+                    email: "12387777777777777777777777@qq.com",
+                    graduationDate: "1998/06/05",
+                    isMarry: "是"
                 }],
-                tableHeader: ["姓名", "年龄", "性别", "手机号码", "电子邮箱"]
+                excelHeader: ["姓名", "年龄", "性别", "电话", "电子邮箱", "毕业时间", "婚否"],
+                filterFiled: ["name", "age", "gender", "mobilePhone", "email", "graduationDate", "isMarry"]
             }
         },
-        methods: {
-            transmitData() {
-                return this.tableData;
-                // const header = this.tableHeader;
-                // return this.tableData.map(item => {
-                //     const values = Object.values(item);
-                //     let newItem = {};
-                //     header.forEach((item, index) => {
-                //         newItem[header[index]] = values[index];
-                //     })
-                //     return newItem;
-                // })
-            }
-        }
     }
 </script>
 <style scoped>

@@ -55,9 +55,12 @@
                     selector: `#${this.editorId}`,
                     language: "zh_CN",
                     height: 400,
-                    plugins: "advlist autosave autolink charmap code colorpicker contextmenu emoticons fullscreen help hr image insertdatetime link lists media pagebreak paste preview print searchreplace table textcolor textpattern visualblocks visualchars wordcount",
+                    plugins: "advlist autosave autolink charmap code colorpicker contextmenu emoticons fullscreen help hr image  insertdatetime link lists media pagebreak paste preview print searchreplace table textcolor textpattern visualblocks visualchars wordcount",
                     toolbar: "restoredraft | undo redo | styleselect | bold italic underline forecolor backcolor removeformat | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table link image media emoticons | searchreplace fullscreen preview code print",
                     contextmenu: "copy paste | link image inserttable",
+                    default_link_target: "_blank",
+                    link_context_toolbar: true,
+                    link_assume_external_targets: true,
                     setup: editor => {
 
                     },
@@ -73,7 +76,26 @@
                             }
                             this.$emit('input', editor.getContent())
                         })
-                    }
+                    },
+                  
+                    // we override default upload handler to simulate successful upload
+images_upload_handler: function (blobInfo, success, failure) {
+    console.log(blobInfo);
+    console.log(blobInfo.base64());
+    console.log(blobInfo.blob());
+    console.log(blobInfo.blobUri());
+    console.log(blobInfo.filename());
+    console.log(blobInfo.id());
+    console.log(blobInfo.name());
+    console.log(blobInfo.uri());
+    
+    
+    
+    setTimeout(function () {
+        // no matter what you upload, we will turn it into TinyMCE logo :)
+        success('http://moxiecode.cachefly.net/tinymce/v9/images/logo.png');
+    }, 2000);
+},
                 })
             },
             destoryTinymce() {

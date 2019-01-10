@@ -4,7 +4,7 @@
             <div class="fr">
                 <el-button class="handle-item" type="primary" round @click="editUser">创建用户</el-button>
                 <el-button class="handle-item" type="primary" round @click="deleteUserBatch">批量删除</el-button>
-                <export-excel file-name="用户列表" :transmit-data="transmitData">导出表格</export-excel>
+                <export-excel file-name="用户列表" :header="excelHeader" :filter-filed="filterFiled" :data="userList">导出表格</export-excel>
             </div>
             <el-input class="handle-item" v-model="queryCondition.name" placeholder="请输入用户姓名" clearable style="width: 200px;"></el-input>
             <el-button class="handle-item" type="primary" round @click="getUserList">搜索用户</el-button>
@@ -29,7 +29,7 @@
             </el-table-column>
         </el-table>
 
-        <el-pagination class="pagination" :total="userAmount" :current-page="queryCondition.currentPageNum" :page-sizes="[10, 20, 30, 40, 50, 100]"
+        <el-pagination class="pagination" :total="userAmount" :current-page="queryCondition.currentPageNum" :page-sizes="[20, 50, 100,1000]"
             :page-size="queryCondition.pageSize" layout="total, sizes, prev, pager, next, jumper" background
             @size-change="handleSizeChange" @current-change="handleCurrentChange"></el-pagination>
         <user-detail></user-detail>
@@ -58,7 +58,8 @@
         data() {
             return {
                 userList: [],
-                tableHeader: ["序号", "姓名", "年龄", "性别", "角色", "注册时间", "累计消费额(元)"],
+                excelHeader: ["序号", "姓名", "年龄", "性别", "角色", "注册时间", "累计消费额(元)"],
+                filterFiled: ["index", "name", "age", "gender", "role", "registerDate", "consume"],
                 genderList: [{
                     text: "男",
                     value: "男"

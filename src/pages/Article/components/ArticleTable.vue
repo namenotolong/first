@@ -2,7 +2,7 @@
     <div>
         <div class="handle">
             <div class="fr">
-                <export-excel file-name="文章列表" :data="articleList">导出表格</export-excel>
+                <export-excel file-name="文章列表" :header="excelHeader" :filter-filed="filterFiled" :data="articleList">导出表格</export-excel>
             </div>
             <el-input class="handle-item" v-model="queryCondition.title" placeholder="请输入文章标题关键字" clearable style="width: 200px;"></el-input>
             <el-select class="handle-item" v-model="queryCondition.author" filterable multiple clearable placeholder="请选择作者(可搜索)">
@@ -57,6 +57,8 @@
         data() {
             return {
                 articleList: [],
+                excelHeader: ["序号", "作者", "创建时间", "标题", "类型", "阅读数"],
+                filterFiled: ["index", "author", "createDate", "title", "type", "browseNum"],
                 authorList: [],
                 articleTypeList: [{
                     label: "新闻",
