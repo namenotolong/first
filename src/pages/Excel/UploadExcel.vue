@@ -27,9 +27,9 @@
                 return isLt2M;
             },
             handleSuccess(header, result) {
-                this.$message.success('上传成功！');
                 this.tableHeader = header;
                 this.tableData = result;
+                this.$message.success('上传成功！');
             }
         }
     }

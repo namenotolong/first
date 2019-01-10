@@ -1,6 +1,6 @@
 <template>
     <div>
-        <export-excel :before-export="beforeExport" :file-name="fileName" :data="tableData">导出excel</export-excel>
+        <export-excel :file-name="fileName" :auto-width="true" :transmit-data="transmitData">导出excel</export-excel>
         <el-input style="width: 320px;" v-model="fileName" placeholder="请输入要导出的文件的名称，默认为“数据”。"></el-input>
         <el-table border highlight-current-row :data="tableData">
             <el-table-column prop="name" label="姓名"> </el-table-column>
@@ -42,16 +42,24 @@
                     name: "王五",
                     age: 28,
                     gender: "男",
-                    mobilePhone: "15999999996",
+                    mobilePhone: "159999977777777777777777777779996",
                     email: "1238@qq.com"
                 }],
-                //如有必要，需要将key转换成中文
-                // tableHeader: ["姓名", "年龄", "性别", "手机号码", "电子邮箱" ]
+                tableHeader: ["姓名", "年龄", "性别", "手机号码", "电子邮箱"]
             }
         },
         methods: {
-            beforeExport(){
-                
+            transmitData() {
+                return this.tableData;
+                // const header = this.tableHeader;
+                // return this.tableData.map(item => {
+                //     const values = Object.values(item);
+                //     let newItem = {};
+                //     header.forEach((item, index) => {
+                //         newItem[header[index]] = values[index];
+                //     })
+                //     return newItem;
+                // })
             }
         }
     }
