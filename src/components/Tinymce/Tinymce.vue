@@ -13,10 +13,10 @@
         },
         data() {
             return {
-                editorId: 'vue-tinymce-' + +new Date() + ((Math.random() * 1000).toFixed(0) + ''),
+                editorId: "vue-tinymce-" + +new Date() + ((Math.random() * 1000).toFixed(0) + ""),
                 editorLoading: false,
-                hasInput: false,
-            }
+                hasInput: false
+            };
         },
         watch: {
             //tinymce作为子组件会在父组件的生命周期钩子之前渲染完毕，此时父组件还未从后台拿到文章详情数据，内容还是空的,传过来的value就是空字符串。
@@ -61,42 +61,48 @@
                     default_link_target: "_blank",
                     link_context_toolbar: true,
                     link_assume_external_targets: true,
-                    setup: editor => {
-
-                    },
+                    setup: editor => {},
                     // init_instance_callback钩子如果不使用箭头函数，内部的this指向的是当前editor实例。
                     init_instance_callback: editor => {
                         editor.setContent(this.value);
                         this.editorLoading = false;
                         // 用户输入的时候触发，插入内容的时候触发(比如插入了表格，使用ctrl+v粘贴了内容)，节点改变的时候触发(比如上传了图片)
-                        editor.on('setContent keyup nodeChange', () => {
+                        editor.on("setContent keyup nodeChange", () => {
                             //编辑器初始化完毕之后就可以点击编辑器输入框，如果这个时候文章的温柔还未来得及从后台就设置this.hasInput = true;那么当拿到数据之后就不会再设置内容。
                             if (this.value != "") {
                                 this.hasInput = true;
                             }
-                            this.$emit('input', editor.getContent())
-                        })
+                            this.$emit("input", editor.getContent());
+                        });
                     },
-                  
-                    // we override default upload handler to simulate successful upload
-images_upload_handler: function (blobInfo, success, failure) {
-    console.log(blobInfo);
-    console.log(blobInfo.base64());
-    console.log(blobInfo.blob());
-    console.log(blobInfo.blobUri());
-    console.log(blobInfo.filename());
-    console.log(blobInfo.id());
-    console.log(blobInfo.name());
-    console.log(blobInfo.uri());
-    
-    
-    
-    setTimeout(function () {
-        // no matter what you upload, we will turn it into TinyMCE logo :)
-        success('http://moxiecode.cachefly.net/tinymce/v9/images/logo.png');
-    }, 2000);
-},
-                })
+
+                    images_upload_handler: (blobInfo, success, failure) => {
+                        //这个就是图片，直接将它传给后端。
+                        const file = blobInfo.blob();
+                        let formData = new FormData();
+                        formData.append("image", file);
+                        // this.$axios({
+                        //     url: "",
+                        //     method: "post",
+                        //     data: formData
+                        // }).then(res => {
+                        //     const imgURL = res.url;
+                        //     success(imgURL);
+                        // })
+
+                        let base64 = blobInfo.base64();
+                        const fileType = file.type;
+                        if (fileType == "image/jpeg") {
+                            base64 = "data:image/jpeg;base64," + base64;
+                        } else if (fileType == "image/png") {
+                            base64 = "data:image/png;base64," + base64;
+                        } else if (fileType == "image/gif") {
+                            base64 = "data:image/gif;base64," + base64;
+                        }
+                        // success()需要传服务器上的图片地址，传本地的图片进去如果需要对图片进行编辑，比如拖拉进行缩放会报错图片不存在，因为使用的是blobUri()方法得到的地址。这里只是展示插入图片后的效果
+                        success(base64);
+                    }
+                });
             },
             destoryTinymce() {
                 // 关闭当前页面时，deactivated钩子会在destroyed之前执行，此时editor实例已经被销毁了。如果不判断在destroyed钩子中就会报错。
@@ -105,5 +111,5 @@ images_upload_handler: function (blobInfo, success, failure) {
                 }
             }
         }
-    }
+    };
 </script>

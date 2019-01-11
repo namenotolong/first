@@ -29,8 +29,8 @@ module.exports = {
             use: ['style-loader', 'css-loader','sass-loader']
         }, {
             test: /\.jpg|png|gif|jpeg|bmp$/,
-            use: 'url-loader?limit=15000&name=[hash:8]-[name].[ext]'
-            //当图片大小在15000字节以内时，才将图片的路径转化为base64
+            use: 'url-loader?limit=10000&name=[hash:8]-[name].[ext]'
+            //当图片大小在10000字节以内时，将图片的路径转化为base64
         }, {
             test: /\.ttf|eot|svg|woff|woff2$/,
             use: 'url-loader',

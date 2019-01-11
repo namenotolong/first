@@ -1,8 +1,9 @@
 <template>
     <div>
+        <el-input style="width: 320px;" v-model="fileName" placeholder="请输入要导出的文件的名称，默认为“数据”。"></el-input>
         <export-excel :file-name="fileName" :header="excelHeader" :filter-filed="filterFiled" :data="tableData"
             :auto-width="true">导出excel</export-excel>
-        <el-input style="width: 320px;" v-model="fileName" placeholder="请输入要导出的文件的名称，默认为“数据”。"></el-input>
+
         <el-table border highlight-current-row :data="tableData">
             <el-table-column prop="name" label="姓名"> </el-table-column>
             <el-table-column prop="age" label="年龄"> </el-table-column>
