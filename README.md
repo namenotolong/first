@@ -2,6 +2,14 @@
 
     基于Vue+ElementUI的通用后台管理系统
 
+## 技术依赖
+- 主体：Vue、ElementUI、webpack
+- 图表：Antv/G2
+- Excel：js-xlsx
+- 富文本编辑器：Tinymce
+- 数据：axios、Easy-Mock
+
+
 ## 功能
 
 - 登录/退出
@@ -10,6 +18,7 @@
 - 个人中心
 - 侧边菜单
 - 标签快捷导航
+- 图标
 - 表格
 - 表单
 - 用户管理
