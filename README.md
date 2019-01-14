@@ -2,6 +2,7 @@
 
     基于Vue+ElementUI的通用后台管理系统
 
+<<<<<<< HEAD
 ## 技术依赖
 - 主体：Vue、ElementUI、webpack
 - 图表：Antv/G2
@@ -9,6 +10,9 @@
 - 富文本编辑器：Tinymce
 - 数据：axios、Easy-Mock
 
+=======
+[线上地址](https://wluyao.github.io/admin/dist/index.html)  
+>>>>>>> b2a8f17eda4e21cf6bc1a151aa2871cc0c5f9ddc
 
 ## 功能
 
