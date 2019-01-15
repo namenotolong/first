@@ -15,11 +15,11 @@
                 <el-date-picker v-model="form.time" type="datetime" placeholder="请选择日期时间"></el-date-picker>
             </el-form-item>
 
-            <el-form-item label="手机：" prop="mobilePhone">
+            <el-form-item label="手机" prop="mobilePhone">
                 <el-input v-model="form.mobilePhone" clearable placeholder="请输入主办方联系电话"></el-input>
             </el-form-item>
 
-            <el-form-item label="邮箱：" prop="email">
+            <el-form-item label="邮箱" prop="email">
                 <el-input v-model="form.email" clearable placeholder="请输入主办方联系邮箱"></el-input>
             </el-form-item>
 
@@ -56,9 +56,6 @@
 </template>
 <script>
     import TextareaLimit from "../../components/TextareaLimit/TextareaLimit.vue";
-    import {
-        logout
-    } from '../../api/sysUser';
     export default {
         name:"BaseForm",
         components: {
@@ -155,7 +152,7 @@
         min-width: 500px;
         padding: 20px;
         margin: 0 auto;
-        border-radius: 20px;
+        border-radius: 10px;
         background-color: #fff;
     }
 </style>

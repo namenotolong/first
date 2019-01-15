@@ -22,7 +22,10 @@
                 <span>表单</span>
             </template>
             <el-menu-item index="/baseForm">基础表单</el-menu-item>
+             <el-menu-item index="/stepForm">步骤表单</el-menu-item>
+             <el-menu-item index="/dynamicForm">动态表单</el-menu-item>
             <el-menu-item index="/validForm">自定义校验规则</el-menu-item>
+           
         </el-submenu>
 
         <el-menu-item index="/table">

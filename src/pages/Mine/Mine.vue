@@ -142,7 +142,7 @@
         margin: 0 auto;
         padding: 20px;
         background-color: #fff;
-        border-radius: 20px;
+        border-radius: 10px;
 
         .avatar-uploader .el-upload {
             border: 1px dashed #d9d9d9;

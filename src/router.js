@@ -38,14 +38,26 @@ export default new VueRouter({
                 title: "基础表单"
             }
         }, {
+            path: "/stepForm",
+            component: () => import("./pages/Form/StepForm.vue"),
+            meta: {
+                title: "步骤表单"
+            }
+        }, {
+            path: "/dynamicForm",
+            component: () => import("./pages/Form/DynamicForm.vue"),
+            meta: {
+                title: "动态表单"
+            }
+        }, {
             path: "/validForm",
             component: () => import("./pages/Form/ValidForm.vue"),
             meta: {
                 title: "自定义校验规则"
             }
-        },{
-            path: "/table",
-            component: () => import("./pages/Table/Table.vue"),
+        }, {
+            path: "/singleTable",
+            component: () => import("./pages/Table/SingleTable.vue"),
             meta: {
                 title: "表格"
             }
@@ -55,7 +67,7 @@ export default new VueRouter({
             meta: {
                 title: "折线图"
             }
-        },{
+        }, {
             path: "/areaChart",
             component: () => import("./pages/Chart/AreaChart/AreaChart.vue"),
             meta: {
@@ -73,7 +85,7 @@ export default new VueRouter({
             meta: {
                 title: "柱状图"
             }
-        },{
+        }, {
             path: "/pieChart",
             component: () => import("./pages/Chart/PieChart/PieChart.vue"),
             meta: {
@@ -85,19 +97,19 @@ export default new VueRouter({
             meta: {
                 title: "散点图"
             }
-        },{
+        }, {
             path: "/exportExcel",
             component: () => import("./pages/Excel/ExportExcel.vue"),
             meta: {
                 title: "导出Excel"
             }
-        },{
+        }, {
             path: "/uploadExcel",
             component: () => import("./pages/Excel/UploadExcel.vue"),
             meta: {
                 title: "上传Excel"
             }
-        },{
+        }, {
             path: "/user",
             component: () => import("./pages/User/UserList.vue"),
             meta: {
