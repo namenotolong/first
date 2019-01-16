@@ -1,5 +1,5 @@
 <template>
-    <div class="base-form">
+    <div class="form">
         <el-steps :active="pageIndex" align-center>
             <el-step v-for="step in steps" :key="step.title" :title="step.title" :status="step.status"></el-step>
         </el-steps>
@@ -197,7 +197,7 @@
     }
 </script>
 <style lang="scss" scoped>
-    .base-form {
+    .form {
         width: 50%;
         min-width: 500px;
         padding: 20px;
@@ -208,7 +208,8 @@
         .el-steps {
             margin-bottom: 20px;
         }
-        .el-button{
+
+        .el-button {
             width: 80px;
         }
     }

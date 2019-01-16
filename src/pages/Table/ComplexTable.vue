@@ -1,26 +1,14 @@
 <template>
     <div>
-        <div class="handle">
-            <div class="fr">
-                <el-button class="handle-item" type="primary" round @click="editUser">创建用户</el-button>
-                <el-button class="handle-item" type="primary" round @click="deleteUserBatch">批量删除</el-button>
-                <export-excel file-name="用户列表" :header="excelHeader" :filter-filed="filterFiled" :data="userList">导出表格</export-excel>
-            </div>
-            <el-input class="handle-item" v-model="queryCondition.name" placeholder="请输入用户姓名" clearable style="width: 200px;"></el-input>
-            <el-button class="handle-item" type="primary" round @click="getUserList">搜索用户</el-button>
-        </div>
-
         <el-table :data="userList" border highlight-current-row v-loading="userTableLoading" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column prop="index" label="序号" width="80px"></el-table-column>
-            <el-table-column prop="name" label="姓名" width="120px"></el-table-column>
-            <el-table-column prop="age" label="年龄" width="120px" sortable></el-table-column>
-            <el-table-column prop="gender" label="性别" width="120px" :filters="genderList" :filter-method="filter"
-                filter-placement="bottom"></el-table-column>
-            <el-table-column prop="role" label="角色" width="120px" :filters="roleList" :filter-method="filter"
-                filter-placement="bottom"></el-table-column>
-            <el-table-column prop="registerDate" label="注册时间" width="120px" sortable></el-table-column>
-            <el-table-column prop="consume" label="累计消费额(元)" width="160px" sortable></el-table-column>
+            <el-table-column prop="index" label="序号"></el-table-column>
+            <el-table-column prop="name" label="姓名"></el-table-column>
+            <el-table-column prop="age" label="年龄" sortable></el-table-column>
+            <el-table-column prop="gender" label="性别" :filters="genderList" :filter-method="filter" filter-placement="bottom"></el-table-column>
+            <el-table-column prop="role" label="角色" :filters="roleList" :filter-method="filter" filter-placement="bottom"></el-table-column>
+            <el-table-column prop="registerDate" label="注册时间" sortable></el-table-column>
+            <el-table-column prop="consume" label="累计消费额(元)" sortable></el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
                     <el-button type="primary" size="mini" plain @click="editUser(scope.$index, scope.row)">编辑</el-button>
@@ -32,10 +20,7 @@
         <el-pagination class="pagination" :total="userAmount" :current-page="queryCondition.currentPageNum" :page-sizes="[20, 50, 100,1000]"
             :page-size="queryCondition.pageSize" layout="total, sizes, prev, pager, next, jumper" background
             @size-change="handleSizeChange" @current-change="handleCurrentChange"></el-pagination>
-        <user-detail></user-detail>
-
     </div>
-
 </template>
 
 <script>
@@ -46,20 +31,10 @@
         getUserList,
         getUserDetail
     } from "../../api/user.js";
-    import bus from "../../utils/bus.js";
-    import UserDetail from "./components/UserDetail.vue";
-    import ExportExcel from "../../components/ExportExcel/ExportExcel.vue";
     export default {
-        name: "UserList",
-        components: {
-            UserDetail,
-            ExportExcel
-        },
         data() {
             return {
                 userList: [],
-                excelHeader: ["序号", "姓名", "年龄", "性别", "角色", "注册时间", "累计消费额(元)"],
-                filterFiled: ["index", "name", "age", "gender", "role", "registerDate", "consume"],
                 genderList: [{
                     text: "男",
                     value: "男"
@@ -123,29 +98,6 @@
                 const property = column['property'];
                 return row[property] === value;
             },
-            deleteUserBatch() {
-                if (this.multipleSelection.length === 0) {
-                    this.$message.warning("请勾选要删除的用户！");
-                } else {
-                    const names = this.multipleSelection.map(row => {
-                        return row.name;
-                    })
-                    this.$confirm(`确认删除用户“${names.join("，")}”？`, "提示", {
-                        type: 'warning',
-                    }).then(() => {
-                        this.getUserList();
-                        this.$message.success("删除成功！");
-                    }).catch(() => {
-
-                    })
-                }
-            },
-            editUser(index, row) {
-                if (!row) {
-                    row = {};
-                }
-                bus.$emit("userDetail", row.id)
-            },
             deleteUser(index, row) {
                 this.$confirm(`确认删除用户“${row.name}”？`, "提示", {
                     type: 'warning',
@@ -167,28 +119,10 @@
                 this.queryCondition.currentPageNum = currentPageNum;
                 this.getUserList();
             },
-            transmitData() {
-                const header = this.tableHeader;
-                return this.userList.map(item => {
-                    delete item.id;
-                    const values = Object.values(item);
-                    let newItem = {};
-                    header.forEach((item, index) => {
-                        newItem[header[index]] = values[index];
-                    })
-                    return newItem;
-                })
-            }
         }
     }
 </script>
 <style lang="scss" scoped>
-    .handle {
-        .handle-item {
-            margin-bottom: 10px;
-        }
-    }
-
     .pagination {
         margin-top: 10px;
     }

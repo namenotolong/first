@@ -29,7 +29,7 @@
                 }
             })
         },
-        destroyed() {
+        destroyed(){
 
         },
         methods: {
@@ -40,7 +40,7 @@
                 this.changePosition(rocket, "-204px -15px");
                 scroll(page, 0, 500);
 
-
+        
                 rocket.animate({
                     "bottom": "1200px"
                 }, 700, () => {

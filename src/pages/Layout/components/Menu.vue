@@ -7,7 +7,7 @@
             <span slot="title">首页</span>
         </el-menu-item>
 
-        <el-submenu index="4">
+        <el-submenu index="1">
             <template slot="title">
                 <i class="iconfont icon-icon"></i>
                 <span>图标</span>
@@ -16,24 +16,27 @@
             <el-menu-item index="/fontClass">fontClass图标</el-menu-item>
         </el-submenu>
 
-        <el-submenu index="7">
+        <el-submenu index="2">
             <template slot="title">
                 <i class="el-icon-document"></i>
                 <span>表单</span>
             </template>
             <el-menu-item index="/baseForm">基础表单</el-menu-item>
-             <el-menu-item index="/stepForm">步骤表单</el-menu-item>
-             <el-menu-item index="/dynamicForm">动态表单</el-menu-item>
+            <el-menu-item index="/stepForm">步骤表单</el-menu-item>
+            <el-menu-item index="/dynamicForm">动态表单</el-menu-item>
             <el-menu-item index="/validForm">自定义校验规则</el-menu-item>
-           
         </el-submenu>
 
-        <el-menu-item index="/table">
-            <i class="iconfont icon-table"></i>
-            <span slot="title">表格</span>
-        </el-menu-item>
+        <el-submenu index="3">
+            <template slot="title">
+                <i class="iconfont icon-table"></i>
+                <span>表格</span>
+            </template>
+            <el-menu-item index="/baseTable">基础表格</el-menu-item>
+            <el-menu-item index="/complexTable">复杂表格</el-menu-item>
+        </el-submenu>
 
-        <el-submenu index="1">
+        <el-submenu index="4">
             <template slot="title">
                 <i class="iconfont icon-chart"></i>
                 <span>图表</span>
@@ -46,7 +49,7 @@
             <el-menu-item index="/pointChart">散点图</el-menu-item>
         </el-submenu>
 
-        <el-submenu index="8">
+        <el-submenu index="5">
             <template slot="title">
                 <i class="el-icon-document"></i>
                 <span>Excel</span>
@@ -54,12 +57,13 @@
             <el-menu-item index="/exportExcel">导出Excel</el-menu-item>
             <el-menu-item index="/uploadExcel">上传Excel</el-menu-item>
         </el-submenu>
+
         <el-menu-item index="/user">
             <i class="iconfont icon-user"></i>
             <span slot="title">用户管理</span>
         </el-menu-item>
 
-        <el-submenu index="2">
+        <el-submenu index="6">
             <template slot="title">
                 <i class="el-icon-document"></i>
                 <span>文章管理</span>
@@ -70,7 +74,7 @@
             <el-menu-item index="/articleRubbish">垃圾箱</el-menu-item>
         </el-submenu>
 
-        <el-submenu index="3">
+        <el-submenu index="7">
             <template slot="title">
                 <i class="el-icon-warning"></i>
                 <span>错误处理</span>
@@ -79,12 +83,12 @@
             <el-menu-item index="/404">404</el-menu-item>
         </el-submenu>
 
-        <el-submenu index="5">
+        <el-submenu index="8">
             <template slot="title">
                 <i class="el-icon-warning"></i>
-                <span>组件</span>
+                <span>通用组件</span>
             </template>
-            <el-menu-item index="/403">403</el-menu-item>
+            <el-menu-item index="/backToTop">返回顶部</el-menu-item>
             <el-menu-item index="/404">404</el-menu-item>
         </el-submenu>
     </el-menu>

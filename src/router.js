@@ -56,10 +56,16 @@ export default new VueRouter({
                 title: "自定义校验规则"
             }
         }, {
-            path: "/singleTable",
-            component: () => import("./pages/Table/SingleTable.vue"),
+            path: "/baseTable",
+            component: () => import("./pages/Table/BaseTable.vue"),
             meta: {
-                title: "表格"
+                title: "基础表格"
+            }
+        }, {
+            path: "/complexTable",
+            component: () => import("./pages/Table/ComplexTable.vue"),
+            meta: {
+                title: "复杂表格"
             }
         }, {
             path: "/lineChart",
@@ -167,6 +173,12 @@ export default new VueRouter({
             component: () => import("./pages/Error/404.vue"),
             meta: {
                 title: "404"
+            }
+        }, {
+            path: "/backToTop",
+            component: () => import("./pages/Component/BackToTop.vue"),
+            meta: {
+                title: "返回顶部"
             }
         }]
     }]
