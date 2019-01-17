@@ -113,7 +113,7 @@
                     this.articleAmount = res.data.articleAmount;
                     this.articleTableLoading = false;
                     const scrollElement = document.querySelector(".page");
-                    scroll(scrollElement, 0, 300);
+                    scroll(scrollElement, 0, 15);
                 })
             },
             getAuthorList() {

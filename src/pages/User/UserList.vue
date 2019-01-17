@@ -116,7 +116,7 @@
                     this.userAmount = res.data.userAmount;
                     this.userTableLoading = false;
                     const scrollElement = document.querySelector(".page");
-                    scroll(scrollElement, 0, 300);
+                    scroll(scrollElement, 0, 15);
                 })
             },
             filter(value, row, column) {
