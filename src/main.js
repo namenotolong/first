@@ -3,20 +3,18 @@ import Vue from 'vue';
 import axios from 'axios';
 import ElementUI from 'element-ui';
 
-
 import App from './App.vue';
 import router from "./router.js";
 import store from "./store";
 
-import 'element-ui/lib/theme-chalk/index.css';
+import "element-ui/lib/theme-chalk/index.css";
 import "./styles/app.scss";
 import "./assets/fonts/iconfont.css";
 import "./styles/custom-theme.scss";
 
-import SvgIcon from './components/SvgIcon/SvgIcon.vue';
-// 全局注册图标组件
-Vue.component('svg-icon', SvgIcon);
 
+import "./components/component.js";
+import "./directive/directive.js";
 
 Vue.use(ElementUI, {
     size: "medium"
