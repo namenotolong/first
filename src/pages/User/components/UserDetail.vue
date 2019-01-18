@@ -44,8 +44,6 @@
             <el-button type="primary" @click="submit">提 交</el-button>
         </span>
     </el-dialog>
-
-
 </template>
 <script>
     import {

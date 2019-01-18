@@ -98,6 +98,9 @@
                 const property = column['property'];
                 return row[property] === value;
             },
+            editUser() {
+
+            },
             deleteUser(index, row) {
                 this.$confirm(`确认删除用户“${row.name}”？`, "提示", {
                     type: 'warning',

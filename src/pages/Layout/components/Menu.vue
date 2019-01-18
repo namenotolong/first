@@ -89,7 +89,8 @@
                 <span>通用组件</span>
             </template>
             <el-menu-item index="/backToTop">返回顶部</el-menu-item>
-            <el-menu-item index="/404">404</el-menu-item>
+            <el-menu-item index="/dragDialog">拖拽Dialog</el-menu-item>
+            <el-menu-item index="/dragList">拖拽列表</el-menu-item>
         </el-submenu>
     </el-menu>
 </template>

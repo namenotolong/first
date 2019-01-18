@@ -180,6 +180,18 @@ export default new VueRouter({
             meta: {
                 title: "返回顶部"
             }
+        },{
+            path: "/dragDialog",
+            component: () => import("./pages/Component/DragDialog.vue"),
+            meta: {
+                title: "拖拽Dialog"
+            }
+        },{
+            path: "/dragList",
+            component: () => import("./pages/Component/DragList.vue"),
+            meta: {
+                title: "拖拽列表"
+            }
         }]
     }]
 })

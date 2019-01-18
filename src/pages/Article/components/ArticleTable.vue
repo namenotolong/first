@@ -61,22 +61,22 @@
                 filterFiled: ["index", "author", "createDate", "title", "type", "browseNum"],
                 authorList: [],
                 articleTypeList: [{
-                    label: "新闻",
+                    text: "新闻",
                     value: "新闻"
                 }, {
-                    label: "财经",
+                    text: "财经",
                     value: "财经"
                 }, {
-                    label: "娱乐",
+                    text: "娱乐",
                     value: "娱乐"
                 }, {
-                    label: "体育",
+                    text: "体育",
                     value: "体育"
                 }, {
-                    label: "科技",
+                    text: "科技",
                     value: "科技"
                 }, {
-                    label: "游戏",
+                    text: "游戏",
                     value: "游戏"
                 }],
                 articleTableLoading: false,
