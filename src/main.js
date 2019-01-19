@@ -12,7 +12,7 @@ import "./styles/app.scss";
 import "./assets/fonts/iconfont.css";
 import "./styles/custom-theme.scss";
 
-
+// 全局注册的组件和指令
 import "./components/component.js";
 import "./directive/directive.js";
 

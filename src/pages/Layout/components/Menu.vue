@@ -18,7 +18,7 @@
 
         <el-submenu index="2">
             <template slot="title">
-                <i class="el-icon-document"></i>
+                <i class="iconfont icon-form"></i>
                 <span>表单</span>
             </template>
             <el-menu-item index="/baseForm">基础表单</el-menu-item>
@@ -49,17 +49,8 @@
             <el-menu-item index="/pointChart">散点图</el-menu-item>
         </el-submenu>
 
-        <el-submenu index="5">
-            <template slot="title">
-                <i class="el-icon-document"></i>
-                <span>Excel</span>
-            </template>
-            <el-menu-item index="/exportExcel">导出Excel</el-menu-item>
-            <el-menu-item index="/uploadExcel">上传Excel</el-menu-item>
-        </el-submenu>
-
         <el-menu-item index="/user">
-            <i class="iconfont icon-user"></i>
+            <i class="iconfont icon-yonghu"></i>
             <span slot="title">用户管理</span>
         </el-menu-item>
 
@@ -68,15 +59,28 @@
                 <i class="el-icon-document"></i>
                 <span>文章管理</span>
             </template>
-            <el-menu-item index="/articleCreate">创建文章</el-menu-item>
-            <el-menu-item index="/articleList">文章列表</el-menu-item>
-            <el-menu-item index="/articleDraft">草稿箱</el-menu-item>
-            <el-menu-item index="/articleRubbish">垃圾箱</el-menu-item>
+
+            <el-menu-item index="/articleCreate">
+                <i class="iconfont icon-bianji"></i>
+                <span slot="title">创建文章</span>
+            </el-menu-item>
+            <el-menu-item index="/articleList">
+                <i class="iconfont icon-liebiao"></i>
+                <span slot="title">文章列表</span>
+            </el-menu-item>
+            <el-menu-item index="/articleDraft">
+                <i class="iconfont icon-caogaoxiang"></i>
+                <span slot="title">草稿箱</span>
+            </el-menu-item>
+            <el-menu-item index="/articleRubbish">
+                <i class="iconfont icon-lajixiang"></i>
+                <span slot="title">垃圾箱</span>
+            </el-menu-item>
         </el-submenu>
 
         <el-submenu index="7">
             <template slot="title">
-                <i class="el-icon-warning"></i>
+                <i class="iconfont icon-jinggao"></i>
                 <span>错误处理</span>
             </template>
             <el-menu-item index="/403">403</el-menu-item>
@@ -85,14 +89,25 @@
 
         <el-submenu index="8">
             <template slot="title">
-                <i class="el-icon-warning"></i>
+                <i class="iconfont icon-zujian"></i>
                 <span>通用组件</span>
             </template>
+
+
+            <el-submenu index="5">
+                <template slot="title">
+                    <span>Excel</span>
+                </template>
+                <el-menu-item index="/exportExcel">导出Excel</el-menu-item>
+                <el-menu-item index="/uploadExcel">上传Excel</el-menu-item>
+            </el-submenu>
+
             <el-menu-item index="/backToTop">返回顶部</el-menu-item>
             <el-menu-item index="/dragDialog">拖拽Dialog</el-menu-item>
             <el-menu-item index="/dragList">拖拽列表</el-menu-item>
         </el-submenu>
     </el-menu>
+
 </template>
 <script>
     import bus from "../../../utils/bus.js";

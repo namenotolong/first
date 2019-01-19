@@ -14,6 +14,7 @@
 
     </div>
 </template>
+
 <script>
     export default {
         data() {
@@ -21,8 +22,5 @@
                 dialogVisible: false,
             };
         },
-        mounted() {
-
-        }
     };
 </script>
