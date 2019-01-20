@@ -27,6 +27,7 @@ function getDraftList(params) {
     return service({
         url: "/article/draftList",
         method: "get",
+        params: params
     })
 }
 

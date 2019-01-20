@@ -49,6 +49,11 @@
             <el-menu-item index="/pointChart">散点图</el-menu-item>
         </el-submenu>
 
+        <el-menu-item index="/tab">
+            <i class="iconfont icon-yonghu"></i>
+            <span slot="title">Tab选项卡</span>
+        </el-menu-item>
+
         <el-menu-item index="/user">
             <i class="iconfont icon-yonghu"></i>
             <span slot="title">用户管理</span>
@@ -90,9 +95,8 @@
         <el-submenu index="8">
             <template slot="title">
                 <i class="iconfont icon-zujian"></i>
-                <span>通用组件</span>
+                <span>通用功能</span>
             </template>
-
 
             <el-submenu index="5">
                 <template slot="title">
@@ -103,8 +107,8 @@
             </el-submenu>
 
             <el-menu-item index="/backToTop">返回顶部</el-menu-item>
-            <el-menu-item index="/dragDialog">拖拽Dialog</el-menu-item>
-            <el-menu-item index="/dragList">拖拽列表</el-menu-item>
+            <el-menu-item index="/dragDialog">可拖拽Dialog</el-menu-item>
+            <el-menu-item index="/print">打印</el-menu-item>
         </el-submenu>
     </el-menu>
 

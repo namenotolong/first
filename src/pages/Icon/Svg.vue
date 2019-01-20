@@ -2,7 +2,7 @@
     <div class="svg">
         <div class="title">单色图标</div>
         <div class="single-color">
-           
+
             <svg-icon icon-class="icon" icon-name="gengduo"></svg-icon>
             <svg-icon icon-class="icon" icon-name="guanyuwomen"></svg-icon>
             <svg-icon icon-class="icon" icon-name="mimasuo"></svg-icon>
@@ -71,6 +71,7 @@
             <svg-icon icon-class="icon" icon-name="travelholidayvacat"></svg-icon>
 
         </div>
+        <p>图标来源：<a href="https://www.iconfont.cn/" target="_blank" style="color:#4a9eff;text-decoration:underline">阿里巴巴矢量图标库</a></p>
     </div>
 </template>
 <script>
@@ -95,8 +96,9 @@
             margin-right: 20px;
             margin-bottom: 20px;
         }
+
         .single-color {
-            .icon{
+            .icon {
                 color: #4a4a4a
             }
         }
