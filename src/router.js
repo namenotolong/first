@@ -110,6 +110,24 @@ export default new VueRouter({
                 title: "Tab选项卡"
             }
         }, {
+            path: "/exportExcel",
+            component: () => import("./pages/Excel/ExportExcel.vue"),
+            meta: {
+                title: "导出Excel"
+            }
+        }, {
+            path: "/uploadExcel",
+            component: () => import("./pages/Excel/UploadExcel.vue"),
+            meta: {
+                title: "上传Excel"
+            }
+        }, {
+            path: "/print",
+            component: () => import("./pages/Print/Print.vue"),
+            meta: {
+                title: "打印"
+            }
+        }, {
             path: "/user",
             component: () => import("./pages/User/UserList.vue"),
             meta: {
@@ -169,18 +187,6 @@ export default new VueRouter({
                 title: "404"
             }
         }, {
-            path: "/exportExcel",
-            component: () => import("./pages/Component/ExportExcel.vue"),
-            meta: {
-                title: "导出Excel"
-            }
-        }, {
-            path: "/uploadExcel",
-            component: () => import("./pages/Component/UploadExcel.vue"),
-            meta: {
-                title: "上传Excel"
-            }
-        }, {
             path: "/backToTop",
             component: () => import("./pages/Component/BackToTop.vue"),
             meta: {
@@ -191,12 +197,6 @@ export default new VueRouter({
             component: () => import("./pages/Component/DragDialog.vue"),
             meta: {
                 title: "拖拽Dialog"
-            }
-        }, {
-            path: "/print",
-            component: () => import("./pages/Component/Print.vue"),
-            meta: {
-                title: "打印"
             }
         }]
     }]

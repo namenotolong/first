@@ -61,10 +61,11 @@
                 let callback = () => {
                     this.isClickRocket = false;
                     this.isVisible = false;
+                    // 尝试transitionend事件来控制
                     setTimeout(() => {
                         this.changePosition("-31px -15px");
                         rocket.style.bottom = this.customStyle.bottom;
-                    }, 200)
+                    }, 500)
                 }
                 let animate = new Animate(rocket);
                 animate.start("bottom", 1400, 700, "strongEaseIn", callback);

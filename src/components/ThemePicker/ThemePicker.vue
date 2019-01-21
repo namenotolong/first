@@ -33,8 +33,8 @@
         },
         mounted() {
             this.getDefaultCustomStyle();
-            this.createStyleTag("element_theme");
             this.createStyleTag("custom_theme");
+            this.createStyleTag("element_theme");
             const ms_theme = localStorage.getItem("ms_theme");
             if (ms_theme) {
                 this.getDefaultElementStyle(() => {
@@ -42,8 +42,8 @@
                 });
             } else {
                 this.getDefaultElementStyle(() => {
-                    document.getElementById("element_theme").innerText = this.defaultElementStyle;
                     document.getElementById("custom_theme").innerText = this.defaultCustomStyle;
+                    document.getElementById("element_theme").innerText = this.defaultElementStyle;
                 });
             }
         },
@@ -141,17 +141,17 @@
             // 更新样式
             updateStyle(newTheme) {
                 const newColors = this.getColors(newTheme.replace('#', ''));
+                let newCustomStyle = this.defaultCustomStyle;
+                this.defaultColors.forEach((color, index) => {
+                    newCustomStyle = newCustomStyle.replace(new RegExp(color, 'ig'), newColors[index]);
+                })
                 let newElementStyle = this.defaultElementStyle;
                 this.defaultColors.forEach((color, index) => {
                     newElementStyle = newElementStyle.replace(new RegExp(color, 'ig'), newColors[index]);
                 });
 
-                let newCustomStyle = this.defaultCustomStyle;
-                this.defaultColors.forEach((color, index) => {
-                    newCustomStyle = newCustomStyle.replace(new RegExp(color, 'ig'), newColors[index]);
-                })
-                document.head.querySelector("#element_theme").innerText = newElementStyle;
                 document.head.querySelector("#custom_theme").innerText = newCustomStyle;
+                document.head.querySelector("#element_theme").innerText = newElementStyle;
                 localStorage.setItem("ms_theme", newTheme);
             },
         }
@@ -159,6 +159,7 @@
 </script>
 <style lang="scss">
     .theme-picker {
+
         .el-color-dropdown__value,
         .el-color-dropdown__link-btn {
             display: none;

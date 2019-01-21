@@ -23,7 +23,7 @@ const user = {
         setAvatar(state, avatar) {
             state.avatar = avatar;
         },
-
+ 
     },
     actions: {
         login({

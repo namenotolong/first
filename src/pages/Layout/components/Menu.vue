@@ -50,8 +50,22 @@
         </el-submenu>
 
         <el-menu-item index="/tab">
-            <i class="iconfont icon-yonghu"></i>
+            <i class="iconfont icon-tab"></i>
             <span slot="title">Tab选项卡</span>
+        </el-menu-item>
+
+        <el-submenu index="5">
+            <template slot="title">
+                <i class="iconfont icon-excel"></i>
+                <span>Excel</span>
+            </template>
+            <el-menu-item index="/exportExcel">导出Excel</el-menu-item>
+            <el-menu-item index="/uploadExcel">上传Excel</el-menu-item>
+        </el-submenu>
+
+        <el-menu-item index="/print">
+            <i class="iconfont icon-dayin"></i>
+            <span slot="title">打印</span>
         </el-menu-item>
 
         <el-menu-item index="/user">
@@ -97,18 +111,8 @@
                 <i class="iconfont icon-zujian"></i>
                 <span>通用功能</span>
             </template>
-
-            <el-submenu index="5">
-                <template slot="title">
-                    <span>Excel</span>
-                </template>
-                <el-menu-item index="/exportExcel">导出Excel</el-menu-item>
-                <el-menu-item index="/uploadExcel">上传Excel</el-menu-item>
-            </el-submenu>
-
             <el-menu-item index="/backToTop">返回顶部</el-menu-item>
             <el-menu-item index="/dragDialog">可拖拽Dialog</el-menu-item>
-            <el-menu-item index="/print">打印</el-menu-item>
         </el-submenu>
     </el-menu>
 
@@ -119,34 +123,6 @@
         data() {
             return {
                 isCollapse: false,
-                // menuItem: [{
-                //     index: "/dashboard",
-                //     title: "首页",
-                //     icon: "iconfont icon-home"
-                // }, {
-                //     index: "/table",
-                //     title: "表格",
-                //     icon: "iconfont icon-home"
-                // }, {
-                //     index: "/chart",
-                //     title: "图表",
-                //     icon: "el-icon-document"
-                // }, {
-                //     index: "/richTextEditor",
-                //     title: "富文本编辑器",
-                //     icon: "el-icon-document"
-                // },{
-                //     index: "1",
-                //     title: "错误处理",
-                //     icon: "el-icon-warning",
-                //     subs: [{
-                //         index: "/403",
-                //         title: "403"
-                //     }, {
-                //         index: "/404",
-                //         title: "404"
-                //     }]
-                // }]
             }
         },
         computed: {

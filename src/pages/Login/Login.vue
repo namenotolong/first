@@ -75,6 +75,7 @@
                     if (valid) {
                         login(this.loginForm).then(() => {
                             sessionStorage.setItem("ms_username", this.loginForm.username);
+                            sessionStorage.setItem("ms_rolename", this.loginForm.username);
                             this.loginLoading = false;
                             this.$router.push("/dashboard");
                         })
