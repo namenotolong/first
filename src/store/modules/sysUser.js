@@ -14,8 +14,6 @@ const sysUser = {
             state.userId = id;
         },
         setRole(state, role) {
-            console.log(454);
-            
             state.role = role;
         },
     },
