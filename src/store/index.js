@@ -1,9 +1,10 @@
 import Vue from "vue";
 import Vuex from 'vuex';
-Vue.use(Vuex);
 
 import sysUser from './modules/sysUser.js'
 
+
+Vue.use(Vuex);
 const store = new Vuex.Store({
     modules:{
         sysUser,

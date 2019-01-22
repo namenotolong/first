@@ -26,11 +26,18 @@ Vue.config.productionTip = false;
 
 // 导航守卫，每次进行跳转时都会执行这个钩子
 router.beforeEach((to, from, next) => {
-    const role = sessionStorage.getItem("ms_username");
-    if (!role && to.path !== "/login") {
+    const userId = sessionStorage.getItem("userId"); //登录之后才会将userId存到本地
+    if (!userId && to.path !== "/login") {
         next("/login");
     } else {
-        next();
+        if (userId && !store.state.sysUser.role) {
+            // 获取用户信息
+            store.dispatch("getUserInfo").then(res => {
+                next();
+            })
+        } else {
+            next();
+        }
     }
 })
 

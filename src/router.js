@@ -128,6 +128,12 @@ export default new VueRouter({
                 title: "打印"
             }
         }, {
+            path: "/permission",
+            component: () => import("./pages/Permission/Permission.vue"),
+            meta: {
+                title: "权限控制"
+            }
+        }, {
             path: "/user",
             component: () => import("./pages/User/UserList.vue"),
             meta: {

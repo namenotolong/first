@@ -17,9 +17,9 @@
                     <i class="iconfont icon-eye" @click="showPwd"></i>
                 </el-form-item>
 
-                <el-form-item>
+                <!-- <el-form-item>
                     <el-checkbox v-model="loginForm.rememberPwd">记住密码</el-checkbox>
-                </el-form-item>
+                </el-form-item> -->
 
                 <el-form-item>
                     <el-button type="primary" :loading="loginLoading" round @click="submitLogin">登录</el-button>
@@ -31,9 +31,6 @@
 </template>
 
 <script>
-    import {
-        login
-    } from "../../api/sysUser.js";
     export default {
         data() {
             return {
@@ -62,9 +59,6 @@
                 loginLoading: false
             };
         },
-        created() {
-
-        },
         methods: {
             showPwd() {
                 this.passwordType = this.passwordType == "password" ? "text" : "password";
@@ -73,9 +67,7 @@
                 this.loginLoading = true;
                 this.$refs.loginForm.validate((valid) => {
                     if (valid) {
-                        login(this.loginForm).then(() => {
-                            sessionStorage.setItem("ms_username", this.loginForm.username);
-                            sessionStorage.setItem("ms_rolename", this.loginForm.username);
+                        this.$store.dispatch("login", this.loginForm).then(() => {
                             this.loginLoading = false;
                             this.$router.push("/dashboard");
                         })
@@ -156,6 +148,7 @@
         .el-button {
             display: block;
             width: 100%;
+            margin-top:10px;
             color: #fff;
             border: none;
             transition: 0.5s all;

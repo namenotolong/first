@@ -10,11 +10,8 @@
                         <router-view></router-view>
                     </keep-alive>
                 </transition>
-
             </div>
-
         </div>
-
     </div>
 
 </template>

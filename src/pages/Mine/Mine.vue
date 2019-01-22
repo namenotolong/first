@@ -6,7 +6,7 @@
             </el-form-item>
 
             <el-form-item label="角色：">
-                <el-input v-model="userInfo.roles" disabled></el-input>
+                <el-input v-model="userInfo.role" disabled></el-input>
             </el-form-item>
 
             <el-form-item label="性别：" prop="gender">
@@ -17,7 +17,7 @@
             </el-form-item>
 
             <el-form-item label="头像：">
-                <el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/"  :show-file-list="false"
+                <el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false"
                     :before-upload="beforeAvatarUpload" :on-success="handleAvatarSuccess">
                     <img v-if="userInfo.avatar" :src="userInfo.avatar" class="avatar">
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -49,7 +49,7 @@
             return {
                 userInfo: {
                     name: "",
-                    roles: "",
+                    role: "",
                     gender: "",
                     avatar: "",
                     mobilePhone: "",
@@ -99,11 +99,9 @@
         methods: {
             getUserInfo() {
                 getUserInfo({
-                    username: sessionStorage.getItem("ms_username")
+                    userId: sessionStorage.getItem("userId")
                 }).then(res => {
-                    this.userInfo = Object.assign(res.userInfo, {
-                        roles: res.userInfo.role
-                    })
+                    this.userInfo = res.userInfo;
                 })
             },
             beforeAvatarUpload(file) {
@@ -120,14 +118,13 @@
             },
             handleAvatarSuccess(res, file) {
                 // 实例开发中使用后端返回的图片地址。
-                this.userInfo.avatar = URL.createObjectURL(file.raw); 
+                this.userInfo.avatar = URL.createObjectURL(file.raw);
             },
             submit() {
                 this.submitLoading = true;
                 this.$refs.userInfo.validate(valid => {
                     if (valid) {
                         this.$message.success("更新成功");
-
                     } else {}
                     this.submitLoading = false;
                 });

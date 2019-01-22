@@ -11,8 +11,7 @@
             <full-screen></full-screen>
             <theme-picker></theme-picker>
             <el-dropdown @command="handleCommand">
-                <img class="header__menu__portrait" src="../../../assets/img/portrait.jpg" alt="">
-                <!-- <img class="header__menu__portrait" :src="avatar" alt=""> -->
+                <img class="header__menu__portrait" :src="avatar" alt="">
                 <el-dropdown-menu slot="dropdown">
                     <router-link to="/mine">
                         <el-dropdown-item>个人中心</el-dropdown-item>
@@ -58,13 +57,14 @@
             },
             handleCommand(command) {
                 if (command === 'logout') {
-                    sessionStorage.removeItem('ms_username')
-                    this.$router.push('/login')
+                    this.$store.dispatch("logout").then(() => {
+                        this.$router.push('/login');
+                    })
                 }
             },
             getAvatar() {
                 getUserInfo({
-                    username: sessionStorage.getItem("ms_username")
+                    username: sessionStorage.getItem("userId")
                 }).then(res => {
                     this.avatar = res.userInfo.avatar;
                 })

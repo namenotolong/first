@@ -1,29 +1,23 @@
 import {
     login,
+    logout,
     getUserInfo
 } from "../../api/sysUser.js"
 
-const user = {
+const sysUser = {
     state: {
-        userId: "",
-        name: "",
-        roles: [],
-        avatar: "",
+        userId: sessionStorage.getItem("userId"),
+        role: "",
     },
     mutations: {
         setId(state, id) {
             state.userId = id;
         },
-        setName(state, name) {
-            state.name = name;
+        setRole(state, role) {
+            console.log(454);
+            
+            state.role = role;
         },
-        setRoles(state, roles) {
-            state.roles = roles;
-        },
-        setAvatar(state, avatar) {
-            state.avatar = avatar;
-        },
- 
     },
     actions: {
         login({
@@ -36,7 +30,8 @@ const user = {
                     username,
                     password
                 }).then(res => {
-                    commit("setId", res.data.id);
+                    commit("setId", res.loginInfo.id);
+                    sessionStorage.setItem("userId", res.loginInfo.id);
                     resolve();
                 }).catch((error) => {
                     reject(error);
@@ -51,10 +46,23 @@ const user = {
                 getUserInfo({
                     id: state.userId
                 }).then(res => {
-                    const data = res.data;
-                    commit("setName", data.name);
-                    commit("setRoles", data.roles);
-                    commit("setAvatar", data.avatar);
+                    commit("setRole", res.userInfo.role);
+                    resolve();
+                }).catch((error) => {
+                    reject(error);
+                })
+            })
+        },
+        logout({
+            commit,
+            state
+        }) {
+            return new Promise((resolve, reject) => {
+                logout({
+                    id: state.userId
+                }).then(res => {
+                    commit("setRole", "");
+                    sessionStorage.clear();
                     resolve();
                 }).catch((error) => {
                     reject(error);
@@ -63,5 +71,4 @@ const user = {
         }
     }
 }
-
-export default user;
+export default sysUser;

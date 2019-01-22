@@ -23,7 +23,7 @@
 </template>
 <script>
     export default {
-        name:"ValidForm",
+        name: "ValidForm",
         data() {
             const validatePass = (rule, value, callback) => {
                 if (value === '') {
@@ -48,15 +48,15 @@
                 if (!value) {
                     return callback(new Error('年龄不能为空'));
                 }
-                    if (!Number.isInteger(value)) {
-                        callback(new Error('请输入正整数'));
+                if (!Number.isInteger(value)) {
+                    callback(new Error('请输入正整数'));
+                } else {
+                    if (value < 18) {
+                        callback(new Error('必须年满18岁'));
                     } else {
-                        if (value < 18) {
-                            callback(new Error('必须年满18岁'));
-                        } else {
-                            callback();
-                        }
+                        callback();
                     }
+                }
             };
             return {
                 ruleForm: {
