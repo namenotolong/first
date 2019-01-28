@@ -78,17 +78,18 @@
 |		|-- img									图片
 |		|-- fonts								字体
 |	|-- components                      	公共组件
+|	|-- directive                      	全局公共指令
 |	|-- mock								模拟数据
 |	|-- pages								页面级组件	
-|	|-- utils								工具函数	
+|	|-- utils								全局公用方法	
 |	|-- App.vue								根组件
 |	|-- main.js								入口文件，加载各种组件
 |	|-- router.js							路由管理	
-|	|-- store.js							状态管理
-|-- static								第三方纯静态资源，不被webpcak构建
+|	|-- store							    状态管理					
+|-- static								第三方纯静态资源，不被webpcak打包
 |-- .babelrc							babel-loader 配置
 |-- .gitignore							git提交时忽略的文件
-|-- .favicon.ico   					    favicon
+|-- .favicon.ico   					    favicon图标
 |-- index.html							html模板
 |--	package.json						项目基本信息
 |-- README.md							项目说明

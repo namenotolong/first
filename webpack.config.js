@@ -8,46 +8,47 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
     },
-    plugins: [ 
+    plugins: [
         new HtmlWebpackPlugin({
             template: path.join(__dirname, './index.html'),
             filename: 'index.html',
+            favicon: "./favicon.ico",
             minify: {
-                removeAttributeQuotes: true, 
-                removeComments: true, 
-                collapseWhitespace: true, 
+                removeAttributeQuotes: true,
+                removeComments: true,
+                collapseWhitespace: true,
             }
         }),
         new VueLoaderPlugin()
     ],
     module: {
         rules: [{
-            test: /\.css$/,
-            use: ['style-loader', 'css-loader']
-        },{
-            test: /\.scss$/,
-            use: ['style-loader', 'css-loader','sass-loader']
-        }, {
-            test: /\.jpg|png|gif|jpeg|bmp$/,
-            use: 'url-loader?limit=10000&name=[hash:8]-[name].[ext]'
-            //当图片大小在10000字节以内时，将图片的路径转化为base64
-        }, {
-            test: /\.ttf|eot|svg|woff|woff2$/,
-            use: 'url-loader',
-            // exclude:path.resolve(__dirname,"./src/components/BaseIcon/svg")
-        }, {
-            test: /\.js$/,
-            use: 'babel-loader',
-            exclude: /node_modules/, 
-        }, {
-            test: /\.vue$/,
-            use: 'vue-loader'
-        },
-        // {
-        //     test: /\.svg$/,
-        //     use: 'svg-sprite-loader',
-        //     include:path.resolve(__dirname,"./src/components/BaseIcon/svg"),
-        // }
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            }, {
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader']
+            }, {
+                test: /\.jpg|png|gif|jpeg|bmp$/,
+                use: 'url-loader?limit=10000&name=[hash:8]-[name].[ext]'
+                //当图片大小在10000字节以内时，将图片的路径转化为base64
+            }, {
+                test: /\.ttf|eot|svg|woff|woff2$/,
+                use: 'url-loader',
+                // exclude:path.resolve(__dirname,"./src/components/BaseIcon/svg")
+            }, {
+                test: /\.js$/,
+                use: 'babel-loader',
+                exclude: /node_modules/,
+            }, {
+                test: /\.vue$/,
+                use: 'vue-loader'
+            },
+            // {
+            //     test: /\.svg$/,
+            //     use: 'svg-sprite-loader',
+            //     include:path.resolve(__dirname,"./src/components/BaseIcon/svg"),
+            // }
         ]
     },
     performance: {
@@ -60,8 +61,8 @@ module.exports = {
         }
     },
     resolve: {
-        // alias:{
-        //     vue$:'vue/dist/vue.js'  //设置vue被导入时的路径，不然会默认导入vue.runtime.common.js的包。
-        // }
+        alias: {
+            '~': resolve(__dirname, 'src')
+        }
     }
 };

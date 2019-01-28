@@ -9,12 +9,10 @@ const PROD_URL = "";
 const service = axios.create({
     baseURL: DEV_URL,
     timeout: 8000,
-
 })
 
 // 请求拦截器
 service.interceptors.request.use(config => {
-
     return config;
 }, (error) => {
     console.log(error)

@@ -82,9 +82,7 @@
             /deep/ p {
                 color: #5e6d82;
             }
-
         }
-
 
     }
 </style>
