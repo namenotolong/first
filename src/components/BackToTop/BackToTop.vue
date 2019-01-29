@@ -7,8 +7,8 @@
     import {
         scroll,
         animate
-    } from "../../utils/util.js";
-    import Animate from "../../utils/animate.js";
+    } from "~/utils/util.js";
+    import Animate from "~/utils/animate.js";
     export default {
         props: {
             visibleHeight: {
