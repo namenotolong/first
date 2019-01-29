@@ -114,9 +114,11 @@
         <el-submenu index="8">
             <template slot="title">
                 <i class="iconfont icon-zujian"></i>
-                <span>通用功能</span>
+                <span>其他功能</span>
             </template>
             <el-menu-item index="/backToTop">返回顶部</el-menu-item>
+            <el-menu-item index="/print">打印</el-menu-item>
+            <el-menu-item index="/html2canvas">html2canvas</el-menu-item>
             <el-menu-item index="/dragDialog">可拖拽Dialog</el-menu-item>
         </el-submenu>
     </el-menu>
@@ -145,7 +147,7 @@
     }
 </script>
 
-<style scoped>
+<style scoped="">
     .menu {
         position: absolute;
         top: 60px;
