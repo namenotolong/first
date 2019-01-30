@@ -63,13 +63,8 @@
             <el-menu-item index="/uploadExcel">上传Excel</el-menu-item>
         </el-submenu>
 
-        <el-menu-item index="/print">
-            <i class="iconfont icon-dayin"></i>
-            <span slot="title">打印</span>
-        </el-menu-item>
-
         <el-menu-item index="/permission">
-            <i class="iconfont icon-yonghu"></i>
+            <i class="iconfont icon-quanxian"></i>
             <span slot="title">权限控制</span>
         </el-menu-item>
 
@@ -132,22 +127,16 @@
                 isCollapse: false,
             }
         },
-        computed: {
-
-        },
         created() {
             // 折叠侧边栏菜单
             bus.$on("collapse", (data) => {
                 this.isCollapse = data;
             })
         },
-        methods: {
-
-        }
     }
 </script>
 
-<style scoped="">
+<style scoped>
     .menu {
         position: absolute;
         top: 60px;

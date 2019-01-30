@@ -4,7 +4,7 @@ import axios from 'axios';
 import ElementUI from 'element-ui';
 
 import App from './App.vue';
-import router from "./router.js";
+import router from "./router";
 import store from "./store";
 
 import "element-ui/lib/theme-chalk/index.css";
@@ -27,11 +27,11 @@ Vue.config.productionTip = false;
 
 // 导航守卫，每次进行跳转时都会执行这个钩子
 router.beforeEach((to, from, next) => {
-    const userId = sessionStorage.getItem("userId"); //登录之后才会将userId存到本地
-    if (!userId && to.path !== "/login") {
+    const token = sessionStorage.getItem("token");
+    if (!token && to.path !== "/login") {
         next("/login");
     } else {
-        if (userId && !store.state.sysUser.role) {
+        if (token && !store.state.sysUser.role) {
             // 获取用户信息
             store.dispatch("getUserInfo").then(res => {
                 next();

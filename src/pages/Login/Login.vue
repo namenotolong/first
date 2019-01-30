@@ -70,11 +70,16 @@
                         this.$store.dispatch("login", this.loginForm).then(() => {
                             this.loginLoading = false;
                             this.$router.push("/dashboard");
+                        }).catch((error) => {
+                            this.$message({
+                                type: "error",
+                                message: "登录失败,请填写正确的信息！"
+                            })
                         })
                     } else {
                         this.$message({
                             type: "error",
-                            message: "登录失败"
+                            message: "登录失败,请填写正确的信息！"
                         })
                         this.loginLoading = false;
                     }

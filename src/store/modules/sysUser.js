@@ -6,12 +6,12 @@ import {
 
 const sysUser = {
     state: {
-        userId: sessionStorage.getItem("userId"),
+        token: sessionStorage.getItem("token"),
         role: "",
     },
     mutations: {
-        setId(state, id) {
-            state.userId = id;
+        setToken(state, token) {
+            state.token = token;
         },
         setRole(state, role) {
             state.role = role;
@@ -21,15 +21,15 @@ const sysUser = {
         login({
             commit
         }, loginInfo) {
-            const username = loginInfo.username;
+            const username = loginInfo.username.trim();
             const password = loginInfo.password;
             return new Promise((resolve, reject) => {
                 login({
                     username,
                     password
                 }).then(res => {
-                    commit("setId", res.loginInfo.id);
-                    sessionStorage.setItem("userId", res.loginInfo.id);
+                    commit("setToken", res.data.token);
+                    sessionStorage.setItem("token", res.data.token);
                     resolve();
                 }).catch((error) => {
                     reject(error);
@@ -42,7 +42,7 @@ const sysUser = {
         }) {
             return new Promise((resolve, reject) => {
                 getUserInfo({
-                    id: state.userId
+                    token: state.token
                 }).then(res => {
                     commit("setRole", res.userInfo.role);
                     resolve();
@@ -57,7 +57,7 @@ const sysUser = {
         }) {
             return new Promise((resolve, reject) => {
                 logout({
-                    id: state.userId
+                    token: state.token
                 }).then(res => {
                     commit("setRole", "");
                     sessionStorage.clear();

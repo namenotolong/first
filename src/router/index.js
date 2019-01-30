@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 
-export default new VueRouter({
+const router = new VueRouter({
     routes: [{
         path: "/",
         redirect: "/dashboard"
@@ -213,3 +213,5 @@ export default new VueRouter({
         }]
     }]
 })
+
+export default router;
