@@ -90,7 +90,7 @@
         top: 0;
         right: 0;
         bottom: 0;
-        background: url(../../assets/img/login-bg.jpg) no-repeat fixed center;
+        background: url(../../assets/img/login/login-bg.jpg) no-repeat fixed center;
         background-size: cover;
         min-height: 400px;
     }
@@ -148,7 +148,7 @@
         .el-button {
             display: block;
             width: 100%;
-            margin-top:10px;
+            margin-top: 10px;
             color: #fff;
             border: none;
             transition: 0.5s all;

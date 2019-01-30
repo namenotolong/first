@@ -362,7 +362,7 @@
     .bg {
         width: 100%;
         height: 100%;
-        background: url('../../assets/img/404.jpg') no-repeat center center;
+        background: url(../../assets/img/404/404.jpg) no-repeat center center;
         opacity: .6;
         -webkit-background-size: cover;
         -moz-background-size: cover;

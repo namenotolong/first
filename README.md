@@ -1,11 +1,12 @@
 ## 项目简介
 
-    基于Vue+ElementUI的通用后台管理系统
+    基于Vue+Element的通用后台管理系统。提供了一些典型的后台业务功能。
 
 ## 技术依赖
 - 主体：Vue、ElementUI、webpack
 - 图表：Antv/G2
 - Excel：js-xlsx
+- 图片生成：html2canvas
 - 富文本编辑器：Tinymce
 - 数据：axios、Easy-Mock
 
@@ -44,8 +45,6 @@
 
 - 上传/导出Excel
 
-- 打印
-
 - 用户管理
 
 - 文章管理
@@ -62,9 +61,17 @@
   - 403
   - 404
 
-- 通用功能
+- 其他功能
   - 返回顶部
+  - 打印
+  - html2canvas
   - 拖拽Dialog
+
+
+
+##  项目截图
+
+
 
 
 ## 目录结构
