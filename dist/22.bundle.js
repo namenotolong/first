@@ -56,7 +56,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getTabList\", function() { return getTabList; });\n/* harmony import */ var _utils_service_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/service.js */ \"./src/utils/service.js\");\n\n\nfunction getTabList(params) {\n    return Object(_utils_service_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n        url: \"/tab/tabList\",\n        method: \"get\",\n        params: params\n    });\n}\n\n\n\n//# sourceURL=webpack:///./src/api/tab.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getTabList\", function() { return getTabList; });\n/* harmony import */ var _utils_service_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ~/utils/service.js */ \"./src/utils/service.js\");\n\n\nfunction getTabList(params) {\n    return Object(_utils_service_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n        url: \"/tab/tabList\",\n        method: \"get\",\n        params: params\n    });\n}\n\n\n\n//# sourceURL=webpack:///./src/api/tab.js?");
 
 /***/ }),
 

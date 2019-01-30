@@ -47,6 +47,7 @@
             download() {
                 html2canvas(document.querySelector(".source"), {
                     scale: 2,
+                    logging: false
                 }).then(canvas => {
                     const dataURL = canvas.toDataURL();
                     let link = document.createElement("a");

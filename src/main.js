@@ -8,6 +8,7 @@ import router from "./router.js";
 import store from "./store";
 
 import "element-ui/lib/theme-chalk/index.css";
+
 import "./styles/app.scss";
 import "./assets/fonts/iconfont.css";
 import "./styles/custom-theme.scss";
