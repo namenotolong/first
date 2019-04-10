@@ -2,7 +2,6 @@
     <div class="svg">
         <div class="title">单色图标</div>
         <div class="single-color">
-
             <svg-icon icon-class="icon" icon-name="gengduo"></svg-icon>
             <svg-icon icon-class="icon" icon-name="guanyuwomen"></svg-icon>
             <svg-icon icon-class="icon" icon-name="mimasuo"></svg-icon>

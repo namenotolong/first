@@ -29,7 +29,7 @@
             </el-table-column>
         </el-table>
 
-        <el-pagination class="pagination" :total="userAmount" :current-page="queryCondition.currentPageNum" :page-sizes="[20, 50, 100,1000]"
+        <el-pagination class="pagination" :total="userAmount" :current-page.sync="queryCondition.currentPageNum" :page-sizes="[20, 50, 100,1000]"
             :page-size="queryCondition.pageSize" layout="total, sizes, prev, pager, next, jumper" background
             @size-change="handleSizeChange" @current-change="handleCurrentChange"></el-pagination>
         <user-detail></user-detail>
@@ -86,7 +86,7 @@
                 userTableLoading: false,
                 queryCondition: {
                     name: "",
-                    currentPageNum: 1,
+                    currentPageNum: 2,
                     pageSize: 20
                 },
                 userAmount: 0,

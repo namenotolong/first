@@ -23,7 +23,6 @@
                         </el-col>
                     </el-row>
 
-
                     <el-form-item :label="item.label3">
                         <el-input v-model="item.value3"></el-input>
                     </el-form-item>

@@ -3,19 +3,19 @@ import Vue from 'vue';
 import axios from 'axios';
 import ElementUI from 'element-ui';
 
-import App from './App.vue';
-import router from "./router";
-import store from "./store";
+import App from '~/App.vue';
+import router from "~/router";
+import store from "~/store";
 
 import "element-ui/lib/theme-chalk/index.css";
 
-import "./styles/app.scss";
-import "./assets/fonts/iconfont.css";
-import "./styles/custom-theme.scss";
+import "~/styles/app.scss";
+import "~/assets/fonts/iconfont.css";
+import "~/styles/custom-theme.scss";
 
 // 全局注册的组件和指令
-import "./components/component.js";
-import "./directive/directive.js";
+import "~/components/component.js";
+import "~/directive/directive.js";
 
 Vue.use(ElementUI, {
     size: "medium"
@@ -48,3 +48,4 @@ new Vue({
     store: store,
     render: h => h(App),
 })
+

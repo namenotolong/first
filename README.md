@@ -41,6 +41,7 @@
   - 饼图
   - 散点图
 
+- 地图
 - Tab选项卡
 
 - 上传/导出Excel
@@ -65,6 +66,7 @@
   - 返回顶部
   - 打印
   - html2canvas
+  - pdf(待完成)
   - 拖拽Dialog
 
 
@@ -91,7 +93,7 @@
 |	|-- utils								全局公用方法	
 |	|-- App.vue								根组件
 |	|-- main.js								入口文件，加载各种组件
-|	|-- router.js							路由管理	
+|	|-- router							    路由管理	
 |	|-- store							    状态管理					
 |-- static								第三方纯静态资源，不被webpcak打包
 |-- .babelrc							babel-loader 配置

@@ -6,10 +6,10 @@
             </div>
             <el-input class="handle-item" v-model="queryCondition.title" placeholder="请输入文章标题关键字" clearable style="width: 200px;"></el-input>
             <el-select class="handle-item" v-model="queryCondition.author" filterable multiple clearable placeholder="请选择作者(可搜索)">
-                <el-option v-for="item in authorList" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                <el-option v-for="item in authorList" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
             <el-select class="handle-item" v-model="queryCondition.type" multiple clearable placeholder="请选择文章类型">
-                <el-option v-for="item in articleTypeList" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                <el-option v-for="item in articleTypeList" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
             <el-button class="handle-item" type="primary" round @click="getArticleList">搜索文章</el-button>
         </div>
@@ -120,7 +120,7 @@
                 getAuthorList().then(res => {
                     this.authorList = res.authorList.map(item => {
                         return {
-                            label: item,
+                            text: item,
                             value: item
                         }
                     })

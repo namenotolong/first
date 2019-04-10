@@ -27,7 +27,6 @@ export function formatDate(date, format) {
     return format;
 }
 
-
 // 权限控制
 export function permissionCtrl(...roles) {
     const role = sessionStorage.getItem("EISroleName");
@@ -38,7 +37,6 @@ export function permissionCtrl(...roles) {
     }
 }
 
-
 //生成ID
 export function guid() {
     let S4 = function () {
@@ -46,7 +44,6 @@ export function guid() {
     }
     return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
 }
-
 
 /**
  * 滚动
@@ -74,8 +71,8 @@ export function scroll(element, target, interval) {
  * 动画，可改变多个属性
  * @param {HTMLDOM} element  要发生动画的元素
  * @param {Object} properties    要改变的元素属性
- * @param {Function} interval  每次运动的时间间隔
- * @param {Number} callback  动画完成之后的回调
+ * @param {Number} interval  每次运动的时间间隔
+ * @param {Function} callback  动画完成之后的回调
  */
 export function animate(element, properties, interval, callback) {
     clearInterval(element.timer);
@@ -93,7 +90,9 @@ export function animate(element, properties, interval, callback) {
         };
         if (flag) {
             clearInterval(element.timer);
-            callback();
+            if (callback && typeof (callback) === "function") {
+                callback();
+            }
         }
     }, interval);
 };

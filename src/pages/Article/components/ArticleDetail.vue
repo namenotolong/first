@@ -59,10 +59,7 @@
         },
         created() {
             console.log(this.$route);
-            
-            console.log(this.articleId);
-            
-        
+            console.log(this.articleId);  
         },
         methods: {
             getArticleDetail(){

@@ -3,6 +3,7 @@
         <slot></slot>
     </el-button>
 </template>
+
 <script>
     import XLSX from 'xlsx';
     export default {

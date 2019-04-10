@@ -11,10 +11,10 @@
     </div>
 </template>
 <script>
-    import tabPane from "./components/TabPane.vue";
+    import TabPane from "./components/TabPane.vue";
     export default {
         components: {
-            tabPane
+            TabPane
         },
         data() {
             return {
