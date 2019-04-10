@@ -104,6 +104,12 @@ const router = new VueRouter({
                 title: "散点图"
             }
         }, {
+            path: "/map",
+            component: () => import("~/pages/Map/Map.vue"),
+            meta: {
+                title: "地图"
+            }
+        }, {
             path: "/tab",
             component: () => import("~/pages/Tab/Tab.vue"),
             meta: {

@@ -1,6 +1,6 @@
 <template>
-    <el-menu class="menu" :default-active="$route.path" :collapse="isCollapse" unique-opened router background-color="#545c64"
-        text-color="#fff">
+    <el-menu class="menu" :default-active="$route.path" :collapse="isCollapse" unique-opened router
+        background-color="#545c64" text-color="#fff">
 
         <el-menu-item index="/dashboard">
             <i class="iconfont icon-home"></i>
@@ -48,6 +48,11 @@
             <el-menu-item index="/pieChart">饼状图</el-menu-item>
             <el-menu-item index="/pointChart">散点图</el-menu-item>
         </el-submenu>
+
+        <el-menu-item index="/map">
+            <i class="iconfont icon-tab"></i>
+            <span slot="title">地图</span>
+        </el-menu-item>
 
         <el-menu-item index="/tab">
             <i class="iconfont icon-tab"></i>
