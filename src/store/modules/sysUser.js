@@ -44,7 +44,7 @@ const sysUser = {
                 getUserInfo({
                     token: state.token
                 }).then(res => {
-                    commit("setRole", res.userInfo.role);
+                    commit("setRole", res.data.role);
                     resolve();
                 }).catch((error) => {
                     reject(error);

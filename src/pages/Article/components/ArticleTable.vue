@@ -11,7 +11,7 @@
             <el-select class="handle-item" v-model="queryCondition.type" multiple clearable placeholder="请选择文章类型">
                 <el-option v-for="item in articleTypeList" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
-            <el-button class="handle-item" type="primary" round @click="getArticleList">搜索文章</el-button>
+            <el-button class="handle-item" type="primary" round @click="getArticleList">搜索</el-button>
         </div>
 
         <el-table :data="articleList" border highlight-current-row v-loading="articleTableLoading">

@@ -1,6 +1,5 @@
 <template>
     <article-table></article-table>
-
 </template>
 
 <script>
@@ -12,7 +11,7 @@
         },
         data() {
             return {
-
+                
             }
         },
     }

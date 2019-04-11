@@ -4,11 +4,10 @@ import {
     Message
 } from "element-ui";
 
-const DEV_URL = "https://www.easy-mock.com/mock/5c1615095cc05a711845cf5d/admin";
-const PROD_URL = "";
+const BASE_URL = "https://www.easy-mock.com/mock/5c1615095cc05a711845cf5d/admin";
 
 const service = axios.create({
-    baseURL: DEV_URL,
+    baseURL: BASE_URL,
     timeout: 8000,
 })
 

@@ -66,7 +66,7 @@
                 getUserInfo({
                     username: sessionStorage.getItem("userId")
                 }).then(res => {
-                    this.avatar = res.userInfo.avatar;
+                    this.avatar = res.data.avatar;
                 })
             }
         }

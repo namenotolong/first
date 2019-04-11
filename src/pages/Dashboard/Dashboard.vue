@@ -36,14 +36,6 @@
 
             }
         },
-
-        created() {
-        
-        },
-        methods: {
-            
-        },
-
     }
 </script>
 <style scoped>

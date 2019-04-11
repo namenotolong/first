@@ -13,9 +13,14 @@ import "~/styles/app.scss";
 import "~/assets/fonts/iconfont.css";
 import "~/styles/custom-theme.scss";
 
+if (process.env.NODE_ENV === "development") {
+    require('./mock');
+}
+
 // 全局注册的组件和指令
 import "~/components/component.js";
 import "~/directive/directive.js";
+
 
 Vue.use(ElementUI, {
     size: "medium"
@@ -48,4 +53,3 @@ new Vue({
     store: store,
     render: h => h(App),
 })
-
