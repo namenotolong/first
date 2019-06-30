@@ -31,7 +31,7 @@
         },
         computed: {
             role() {
-                return this.$store.state.sysUser.role;
+                return this.$store.state.account.role;
             },
             currentRole: {
                 get() {

@@ -1,12 +1,14 @@
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var VueLoaderPlugin = require('vue-loader/lib/plugin');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+
+
 module.exports = {
     mode: 'development',
     entry: './src/main.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle[hash:5].js'
+        filename: 'bundle.js'
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -23,32 +25,32 @@ module.exports = {
     ],
     module: {
         rules: [{
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            }, {
-                test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader']
-            }, {
-                test: /\.jpg|png|gif|jpeg|bmp$/,
-                use: 'url-loader?limit=10000&name=[hash:8]-[name].[ext]'
-                //当图片大小在10000字节以内时，将图片的路径转化为base64
-            }, {
-                test: /\.ttf|eot|svg|woff|woff2$/,
-                use: 'url-loader',
-                // exclude:path.resolve(__dirname,"./src/components/BaseIcon/svg")
-            }, {
-                test: /\.js$/,
-                use: 'babel-loader',
-                exclude: /node_modules/,
-            }, {
-                test: /\.vue$/,
-                use: 'vue-loader'
-            },
-            // {
-            //     test: /\.svg$/,
-            //     use: 'svg-sprite-loader',
-            //     include:path.resolve(__dirname,"./src/components/BaseIcon/svg"),
-            // }
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader']
+        }, {
+            test: /\.scss$/,
+            use: ['style-loader', 'css-loader', 'sass-loader']
+        }, {
+            test: /\.jpg|png|gif|jpeg|bmp$/,
+            use: 'url-loader?limit=10000&name=img/[hash:6]-[name].[ext]'
+        }, {
+            test: /\.ttf|eot|svg|woff|woff2$/,
+            use: 'url-loader',
+        }, {
+            test: /\.js$/,
+            use: 'babel-loader',
+            exclude: /node_modules/,
+        }, {
+            test: /\.vue$/,
+            use: 'vue-loader'
+        }, {
+            test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+            loader: 'url-loader',
+            options: {
+                limit: 10000,
+                name: 'media/[name].[hash:6].[ext]'
+            }
+        },
         ]
     },
     performance: {

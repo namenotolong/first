@@ -1,13 +1,13 @@
 import Vue from "vue";
 import Vuex from 'vuex';
 
-import sysUser from './modules/sysUser.js'
+import account from './modules/account.js'
 
 
 Vue.use(Vuex);
 const store = new Vuex.Store({
     modules:{
-        sysUser,
+        account,
     }
 })
 

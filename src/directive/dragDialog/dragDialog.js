@@ -4,12 +4,13 @@ export default {
         const dialog = el.querySelector(".el-dialog");
         drop.style.cursor = "move";
         drop.onmousedown = (event) => {
-            //鼠标到弹框外边框的距离，这个距离是固定的
+            //鼠标按下时，鼠标到弹框外边框的距离，这个距离是固定的
             const x = event.clientX - dialog.offsetLeft;
             const y = event.clientY - dialog.offsetTop;
 
-            // 弹框的左右外边距
-            const dialogML = (document.body.clientWidth - dialog.offsetWidth) / 2;
+            // 弹框的左外边距和上外边距
+            // const dialogML = (document.body.clientWidth - dialog.offsetWidth) / 2;
+            const dialogML = parseInt(window.getComputedStyle(dialog).marginLeft);
             const dialogMT = parseInt(window.getComputedStyle(dialog).marginTop);
 
             // 当前视窗的大小
