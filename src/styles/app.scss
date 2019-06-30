@@ -1,5 +1,6 @@
 @import "./reset.scss";
 @import "./app-element.scss";
+@import "./custom-theme.scss";
 
 .fl{
     float: left;
@@ -9,10 +10,10 @@
 }
 /* 清除浮动 */
 .clearfix:after {
-    content:""; 
+    content:"";
     display:block;
-    visibility:hidden; 
+    visibility:hidden;
     height:0;
-    line-height:0; 
+    line-height:0;
     clear:both;
 }

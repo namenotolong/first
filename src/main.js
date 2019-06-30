@@ -11,8 +11,7 @@ import "element-ui/lib/theme-chalk/index.css";
 
 import "~/styles/app.scss";
 import "~/assets/fonts/iconfont.css";
-import "~/styles/custom-theme.scss";
-import mock from './mock'
+import './mock';
 
 
 // 全局注册的组件和指令
@@ -21,33 +20,33 @@ import "~/directive/directive.js";
 
 
 Vue.use(ElementUI, {
-    size: "medium"
+  size: "medium"
 });
 Object.defineProperty(Vue.prototype, "$axios", {
-    value: axios
+  value: axios
 })
 Vue.config.productionTip = false;
 
 // 导航守卫，每次进行跳转时都会执行这个钩子
 router.beforeEach((to, from, next) => {
-    const token = sessionStorage.getItem("token");
-    if (!token && to.path !== "/login") {
-        next("/login");
+  const token = sessionStorage.getItem("token");
+  if (!token && to.path !== "/login") {
+    next("/login");
+  } else {
+    if (token && !store.state.account.role) {
+      // 获取用户信息
+      store.dispatch("getUserInfo").then(res => {
+        next();
+      })
     } else {
-        if (token && !store.state.account.role) {
-            // 获取用户信息
-            store.dispatch("getUserInfo").then(res => {
-                next();
-            })
-        } else {
-            next();
-        }
+      next();
     }
+  }
 })
 
 new Vue({
-    el: '#app',
-    router: router,
-    store: store,
-    render: h => h(App),
+  el: '#app',
+  router: router,
+  store: store,
+  render: h => h(App),
 })

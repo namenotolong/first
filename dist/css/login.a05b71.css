@@ -1,0 +1,62 @@
+
+.login-wrap[data-v-0510cda3] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: url(../img/login-bg-f009f9.jpg) no-repeat fixed center;
+  background-size: cover;
+  min-height: 400px;
+}
+.login[data-v-0510cda3] {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  width: 400px;
+  padding: 15px 30px;
+  background-color: rgba(255, 255, 255, 0);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+}
+.login .login__header[data-v-0510cda3] {
+    line-height: 60px;
+    text-align: center;
+    font-weight: normal;
+    color: #fff;
+}
+.login .iconfont[data-v-0510cda3] {
+    position: absolute;
+    top: 40px;
+    z-index: 10;
+}
+.login .icon-account[data-v-0510cda3],
+  .login .icon-password[data-v-0510cda3] {
+    left: 10px;
+}
+.login .iconfont.icon-eye[data-v-0510cda3] {
+    right: 10px;
+    cursor: pointer;
+}
+
+
+.login .el-input__inner {
+  border-radius: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.login .el-form-item__label,
+.login .el-checkbox__label {
+  color: #fff;
+}
+.login .el-button {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  color: #fff;
+  border: none;
+  transition: 0.5s all;
+}
+

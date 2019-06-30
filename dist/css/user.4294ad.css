@@ -1,0 +1,34 @@
+
+.avatar-uploader-icon[data-v-8d190d7e] {
+  font-size: 28px;
+  color: #8c939d;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  text-align: center;
+}
+.avatar[data-v-8d190d7e] {
+  width: 120px;
+  display: block;
+}
+
+
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+}
+
+
+.handle .handle-item[data-v-34e6a579] {
+  margin-bottom: 10px;
+}
+.pagination[data-v-34e6a579] {
+  margin-top: 10px;
+}
+
