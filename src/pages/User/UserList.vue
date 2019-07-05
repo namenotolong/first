@@ -118,14 +118,13 @@
         if (this.multipleSelection.length === 0) {
           this.$message.warning("请勾选要删除的用户！");
         } else {
-          const names = this.multipleSelection.map(row => {
-            return row.name;
-          })
+          const names = this.multipleSelection.map(row => row.name)
           this.$confirm(`确认删除用户“${names.join("，")}”？`, "提示", {
             type: 'warning',
           }).then(() => {
-            this.getUserList();
-            this.$message.success("删除成功！");
+            this.getUserList().then(res => {
+              this.$message.success("删除成功！");
+            });
           }).catch(() => {
 
           })

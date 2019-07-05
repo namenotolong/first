@@ -22,8 +22,8 @@ export function formatDate(date, format) {
     }
     //增加星期功能
     // let weekArr = ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-    // let week = weekArr[date.getDay()]; 
-    // format = format + ' ' + week; 
+    // let week = weekArr[date.getDay()];
+    // format = format + ' ' + week;
     return format;
 }
 
@@ -49,7 +49,7 @@ export function guid() {
  * 滚动
  * @param {HTMLDOM} element  要滚动的元素
  * @param {Number} target    目标位置
- * @param {Number} duration  持续时间
+ * @param {Number} interval  间隔时间
  */
 export function scroll(element, target, interval) {
     clearInterval(element.timer);
