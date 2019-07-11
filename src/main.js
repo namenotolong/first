@@ -13,7 +13,6 @@ import "~/styles/app.scss";
 import "~/assets/fonts/iconfont.css";
 import './mock';
 
-
 // 全局注册的组件和指令
 import "~/components/component.js";
 import "~/directive/directive.js";
