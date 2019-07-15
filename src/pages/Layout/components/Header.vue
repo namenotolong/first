@@ -29,10 +29,10 @@
 
 
 <script>
-  import bus from "~/utils/bus.js";
-  import FullScreen from "~/components/FullScreen/FullScreen.vue";
-  import ThemePicker from "~/components/ThemePicker/ThemePicker.vue";
-  import { getUserInfo } from "~/api/account.js";
+  import bus from "@/utils/bus.js";
+  import FullScreen from "@/components/FullScreen/FullScreen.vue";
+  import ThemePicker from "@/components/ThemePicker/ThemePicker.vue";
+  import { getUserInfo } from "@/api/account.js";
 
   export default {
     components: {

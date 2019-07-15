@@ -1,0 +1,19 @@
+
+.fade-enter[data-v-b1fad88e],
+.fade-leave-to[data-v-b1fad88e] {
+  opacity: 0;
+}
+.fade-enter-active[data-v-b1fad88e],
+.fade-leave-active[data-v-b1fad88e] {
+  transition: opacity .5s;
+}
+.rocket[data-v-b1fad88e] {
+  position: fixed;
+  width: 31px;
+  height: 76px;
+  background: url(../img/rocket-078810.png) no-repeat -31px -15px;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+

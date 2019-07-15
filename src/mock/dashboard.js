@@ -1,5 +1,5 @@
 import Mock from 'mockjs';
-import { getURLParams } from "~/utils/util.js";
+import { getURLParams } from "@/utils/util.js";
 
 const gridData = Mock.mock({
   visiteNum: "@natural(15000,30000)",
@@ -24,7 +24,7 @@ const lineChartData = Mock.mock({
 })
 
 const todoListData = Mock.mock({
-  "data|10": [{
+  "todoListData|10": [{
     isCompleted: "@boolean(3,7,true)",
     "content|1-5": "待办事项 "
   }]

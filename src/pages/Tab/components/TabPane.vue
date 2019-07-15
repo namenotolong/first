@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import { getTabList } from "~/api/tab.js";
+  import { getTabList } from "@/api/tab.js";
 
   export default {
     props: {

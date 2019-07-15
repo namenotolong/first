@@ -35,11 +35,11 @@
 </template>
 
 <script>
-  import { scroll } from "~/utils/util.js";
-  import { getUserList, getUserDetail } from "~/api/user.js";
-  import bus from "~/utils/bus.js";
+  import { scroll } from "@/utils/util.js";
+  import { getUserList, getUserDetail } from "@/api/user.js";
+  import bus from "@/utils/bus.js";
   import UserDetail from "./components/UserDetail.vue";
-  import ExportExcel from "~/components/ExportExcel/ExportExcel.vue";
+  import ExportExcel from "@/components/ExportExcel/ExportExcel.vue";
 
   export default {
     name: "UserList",

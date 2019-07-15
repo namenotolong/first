@@ -94,7 +94,7 @@
     top: 0;
     right: 0;
     bottom: 0;
-    background: url(../../assets/img/login/login-bg.jpg) no-repeat fixed center;
+    background: url(~@/assets/img/login/login-bg.jpg) no-repeat fixed center;
     background-size: cover;
     min-height: 400px;
   }

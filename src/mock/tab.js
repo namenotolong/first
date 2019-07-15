@@ -1,5 +1,5 @@
 import Mock from 'mockjs';
-import { getURLParams } from "~/utils/util.js";
+import { getURLParams } from "@/utils/util.js";
 
 
 const firstData = Mock.mock({

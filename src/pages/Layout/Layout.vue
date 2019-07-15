@@ -16,7 +16,7 @@
 
 </template>
 <script>
-  import bus from "~/utils/bus.js";
+  import bus from "@/utils/bus.js";
   import VHeader from "./components/Header.vue";
   import VMenu from "./components/Menu.vue";
   import VTags from "./components/Tags.vue";

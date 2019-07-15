@@ -39,7 +39,7 @@
   </div>
 </template>
 <script>
-  import { getUserInfo } from "~/api/account.js";
+  import { getUserInfo } from "@/api/account.js";
 
   export default {
     name: "Mine",

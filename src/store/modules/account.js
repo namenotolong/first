@@ -1,8 +1,4 @@
-import {
-  login,
-  logout,
-  getUserInfo
-} from "~/api/account.js"
+import { login, logout, getUserInfo } from "@/api/account.js"
 
 const account = {
   state: {

@@ -45,8 +45,8 @@
   </el-dialog>
 </template>
 <script>
-  import { getUserDetail } from "~/api/user.js";
-  import bus from "~/utils/bus.js";
+  import { getUserDetail } from "@/api/user.js";
+  import bus from "@/utils/bus.js";
 
   export default {
     data() {

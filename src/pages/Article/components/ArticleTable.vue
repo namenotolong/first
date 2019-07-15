@@ -37,9 +37,9 @@
 </template>
 
 <script>
-  import { scroll } from "~/utils/util.js";
-  import { getArticleList, getAuthorList } from "~/api/article.js";
-  import ExportExcel from "~/components/ExportExcel/ExportExcel.vue";
+  import { scroll } from "@/utils/util.js";
+  import { getArticleList, getAuthorList } from "@/api/article.js";
+  import ExportExcel from "@/components/ExportExcel/ExportExcel.vue";
 
   export default {
     name: "ArticleList",
