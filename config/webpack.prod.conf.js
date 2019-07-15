@@ -27,6 +27,7 @@ module.exports = merge(baseWebpackConfig, {
       chunks: 'all',
       cacheGroups: {
         vendor: {
+          name: 'vendor',
           test: /[\\/]node_modules[\\/]/,
           chunks: 'initial',
           enforce: true,

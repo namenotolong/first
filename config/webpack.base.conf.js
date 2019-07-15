@@ -8,8 +8,8 @@ const resolve = (dir) => {
 
 module.exports = {
   entry: {
-    main: resolve('src/main.js'),
-    vendors: ['axios', 'vue', 'element-ui']
+    app: resolve('src/main.js'),
+    // vendors: ['axios', 'vue', 'element-ui']
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -22,7 +22,7 @@ module.exports = {
         collapseWhitespace: true,
       }
     }),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
   ],
   module: {
     rules: [{
