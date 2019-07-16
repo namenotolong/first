@@ -9,7 +9,6 @@ const resolve = (dir) => {
 module.exports = {
   entry: {
     app: resolve('src/main.js'),
-    // vendors: ['axios', 'vue', 'element-ui']
   },
   plugins: [
     new HtmlWebpackPlugin({

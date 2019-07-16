@@ -29,15 +29,15 @@
       // ['409eff', '64,158,255', '53a8ff', '66b1ff', '79bbff', '8cc5ff', 'a0cfff', 'b3d8ff', 'c6e2ff', 'd9ecff', 'ecf5ff', '3a8ee6']
     },
     mounted() {
-      this.getDefaultCustomStyle();
       this.createStyleTag('element_theme');
+      const aa = async () => {
+        this.getDefaultElementStyle();
+        this.getDefaultCustomStyle();
+      }
+
       const ms_theme = localStorage.getItem('ms_theme');
       if (ms_theme) {
-        this.getDefaultElementStyle(() => {
-          this.primaryTheme = ms_theme;
-        });
-      } else {
-        this.getDefaultElementStyle();
+        this.primaryTheme = ms_theme;
       }
     },
     methods: {
@@ -52,19 +52,14 @@
       },
 
       // 获取element的默认样式
-      getDefaultElementStyle(callback) {
+      getDefaultElementStyle() {
         const version = require('element-ui/package.json').version;
         const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`;
         const xhr = new XMLHttpRequest();
         xhr.onreadystatechange = () => {
           if (xhr.readyState === 4 && xhr.status === 200) {
-            this.defaultElementStyle = xhr.responseText.replace(
-              /@font-face{[^}]+}/,
-              ''
-            ); //字体文件还是用element的theme-chalk中的
-            if (callback) {
-              callback();
-            }
+            //字体文件还是用element的theme-chalk中的
+            this.defaultElementStyle = xhr.responseText.replace(/@font-face{[^}]+}/, '');
           }
         };
         xhr.open('GET', url, true);
@@ -73,15 +68,33 @@
 
       // 获取custom-theme的默认样式
       getDefaultCustomStyle() {
+        // 开发环境下可以从内部style元素中获取custom-theme
+        // 生产环境下style会被抽离成单独的外部css文件，需要从link中获取custom-theme
         const styles = document.head.querySelectorAll('style');
-        Array.from(styles).some(style => {
-          const styleText = style.innerText;
-          if (styleText.includes('277040a3-ee24-9156-6686-56eaad8218a9')) {
-            style.setAttribute('id', 'custom_theme');
-            this.defaultCustomStyle = styleText;
-            return true;
-          }
-        });
+        const customStyle = Array.from(styles).find(style => {
+          return style.innerText.includes('277040a3-ee24-9156-6686-56eaad8218a9');
+        })
+        if (customStyle) {
+          customStyle.setAttribute('id', 'custom_theme');
+          this.defaultCustomStyle = customStyle.innerText;
+        } else {
+          const styleSheets = document.head.styleSheets;
+          Array.from(styleSheets).forEach(styleSheet => {
+            const url = styleSheet.href;
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = () => {
+              if (xhr.readyState === 4 && xhr.status === 200) {
+                const cssText = xhr.responseText;
+                if (cssText.includes('277040a3-ee24-9156-6686-56eaad8218a9')) {
+                  this.createStyleTag('custom_theme');
+                  this.defaultCustomStyle = cssText;
+                }
+              }
+            };
+            xhr.open('GET', url, true);
+            xhr.send();
+          })
+        }
       },
 
       // 由基础颜色值生成一系列颜色值
