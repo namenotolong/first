@@ -1,9 +1,13 @@
 // 覆盖一些element-ui的样式
 .el-table {
-    th>.cell ,
-    .cell {
-        text-align: center;
-    }
- 
+
+  th>.cell,
+  .cell {
+    text-align: center;
+  }
 }
 
+
+.reject .el-carousel__indicators {
+  display: none;
+}

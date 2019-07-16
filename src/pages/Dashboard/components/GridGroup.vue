@@ -2,9 +2,9 @@
   <div class="grid-wrap">
     <el-row :gutter="30">
       <el-col :lg="6" :sm="12" v-for="grid in grids" :key="grid.name">
-        <div class="grid clearfix" :class="grid.gridBackground" @click="handleChart(grid.name)">
+        <div class="grid" :class="grid.gridBackground" @click="handleChart(grid.name)">
           <i class="iconfont grid-icon" :class="grid.icon"></i>
-          <div class=" grid-right fr">
+          <div class="grid-right">
             <p class="grid-name" v-text="grid.name"></p>
             <p class="grid-value" v-text="grid.value"></p>
           </div>
@@ -69,6 +69,7 @@
     color: #fff;
     box-shadow: 0px 0px 10px rgba(100, 100, 100, .5);
     cursor: pointer;
+    @include clearfix;
 
     &--green {
       background-color: #06d6a0;
@@ -111,6 +112,7 @@
     }
 
     .grid-right {
+      float: right;
       padding: 16px;
 
       p {

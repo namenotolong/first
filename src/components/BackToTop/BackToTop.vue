@@ -104,7 +104,7 @@
     position: fixed;
     width: 31px;
     height: 76px;
-    background: url(../../assets/img/common/rocket.png) no-repeat -31px -15px;
+    background: url(~@/assets/img/common/rocket.png) no-repeat -31px -15px;
     cursor: pointer;
     z-index: 10000;
   }

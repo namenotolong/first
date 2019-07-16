@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="handle">
-      <div class="fr">
+      <div :style="{float:'right'}">
         <export-excel file-name="文章列表" :header="excelHeader" :filter-filed="filterFiled" :data="articleList">导出表格</export-excel>
       </div>
       <el-input class="handle-item" v-model="queryCondition.title" placeholder="请输入文章标题关键字" clearable style="width: 200px;"></el-input>

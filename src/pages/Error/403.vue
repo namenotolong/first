@@ -1,7 +1,7 @@
 <template>
   <div class="reject">
     <div class="content">
-      <img class="fr" :src="errGif" alt="">
+      <img :style="{float:'right'}" :src="errGif" alt="">
       <p class="oops">Oops!</p>
       <h2>你没有权限访问该页面</h2>
       <p class="dissatisfy">如有不满请联系相关领导</p>
@@ -95,13 +95,6 @@
         width: 100%;
         height: 100%;
       }
-
-
     }
-  }
-</style>
-<style>
-  .reject .el-carousel__indicators {
-    display: none;
   }
 </style>

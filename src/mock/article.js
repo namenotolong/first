@@ -40,7 +40,7 @@ export default {
       if (authorsLength === 0) {
         validAuthor = true;
       } else {
-        validAuthor = authors.some(item1 => {
+        validAuthor = author.some(item1 => {
           return item.author.includes(item1);
         })
       }

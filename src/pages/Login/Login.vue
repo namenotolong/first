@@ -68,7 +68,7 @@
           if (valid) {
             this.$store.dispatch("login", this.loginForm).then(() => {
               this.loginLoading = false;
-              this.$router.push("/dashboard");
+              this.$router.replace("/dashboard");
             }).catch((error) => {
               this.$message({
                 type: "error",

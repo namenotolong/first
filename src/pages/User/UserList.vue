@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="handle">
-      <div class="fr">
+      <div :style="{float:'right'}">
         <el-button class="handle-item" type="primary" round @click="editUser">创建用户</el-button>
         <el-button class="handle-item" type="primary" round @click="deleteUserBatch">批量删除</el-button>
         <export-excel file-name="用户列表" :header="excelHeader" :filter-filed="filterFiled" :data="userList">导出表格</export-excel>

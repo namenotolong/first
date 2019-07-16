@@ -40,7 +40,7 @@ const account = {
         getUserInfo({
           token: state.token
         }).then(res => {
-          commit("setRole", res.data.role);
+          commit("setRole", res.data.userInfo.role);
           resolve();
         }).catch((error) => {
           reject(error);

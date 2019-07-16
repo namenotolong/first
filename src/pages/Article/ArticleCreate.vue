@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="handle">
-      <div class="fr">
+      <div :style="{float:'right'}">
         <el-button class="handle-item" type="primary" round :loading="publishLoading" @click="publish">发布</el-button>
         <el-button class="handle-item" type="warning" round :loading="draftLoading" @click="draft">存草稿</el-button>
       </div>
