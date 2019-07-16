@@ -30,15 +30,7 @@
     },
     mounted() {
       this.createStyleTag('element_theme');
-      const aa = async () => {
-        this.getDefaultElementStyle();
-        this.getDefaultCustomStyle();
-      }
-
-      const ms_theme = localStorage.getItem('ms_theme');
-      if (ms_theme) {
-        this.primaryTheme = ms_theme;
-      }
+      this.getDefaultStyle();
     },
     methods: {
       createStyleTag(id) {
@@ -50,9 +42,18 @@
         styleTag.setAttribute('id', id);
         document.head.appendChild(styleTag);
       },
-
+      getDefaultStyle() {
+        this.getDefaultElementStyle(() => {
+          this.getDefaultCustomStyle(() => {
+            const ms_theme = localStorage.getItem('ms_theme');
+            if (ms_theme) {
+              this.primaryTheme = ms_theme;
+            }
+          })
+        })
+      },
       // 获取element的默认样式
-      getDefaultElementStyle() {
+      getDefaultElementStyle(callback) {
         const version = require('element-ui/package.json').version;
         const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`;
         const xhr = new XMLHttpRequest();
@@ -60,6 +61,7 @@
           if (xhr.readyState === 4 && xhr.status === 200) {
             //字体文件还是用element的theme-chalk中的
             this.defaultElementStyle = xhr.responseText.replace(/@font-face{[^}]+}/, '');
+            callback();
           }
         };
         xhr.open('GET', url, true);
@@ -67,7 +69,7 @@
       },
 
       // 获取custom-theme的默认样式
-      getDefaultCustomStyle() {
+      getDefaultCustomStyle(callback) {
         // 开发环境下可以从内部style元素中获取custom-theme
         // 生产环境下style会被抽离成单独的外部css文件，需要从link中获取custom-theme
         const styles = document.head.querySelectorAll('style');
@@ -77,10 +79,11 @@
         if (customStyle) {
           customStyle.setAttribute('id', 'custom_theme');
           this.defaultCustomStyle = customStyle.innerText;
+          callback()
         } else {
-          const styleSheets = document.head.styleSheets;
-          Array.from(styleSheets).forEach(styleSheet => {
-            const url = styleSheet.href;
+          const links = document.head.getElementsByTagName('link');
+          Array.from(links).forEach(link => {
+            const url = link.href;
             const xhr = new XMLHttpRequest();
             xhr.onreadystatechange = () => {
               if (xhr.readyState === 4 && xhr.status === 200) {
@@ -88,6 +91,7 @@
                 if (cssText.includes('277040a3-ee24-9156-6686-56eaad8218a9')) {
                   this.createStyleTag('custom_theme');
                   this.defaultCustomStyle = cssText;
+                  callback()
                 }
               }
             };
