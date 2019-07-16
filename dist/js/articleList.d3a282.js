@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[25],{716:function(e,t,n){"use strict";n.r(t);var l={name:"ArticleList",components:{ArticleTable:n(597).a}},i=n(78),c=Object(i.a)(l,function(){var e=this.$createElement;return(this._self._c||e)("article-table")},[],!1,null,null,null);c.options.__file="ArticleList.vue";t.default=c.exports}}]);
