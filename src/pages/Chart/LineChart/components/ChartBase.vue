@@ -49,28 +49,33 @@
           height: this.height,
           padding: [30, 60, 50, 65],
           background: {
-            fill: "#fff"
+            fill: '#fff'
           }
         })
         chart.source(data);
         chart.scale({
-          "week": {
+          week: {
             range: [0, 1]
           },
-          "value": {
+          value: {
             min: 0,
-            alias: "数量"
+            alias: '数量'
           }
         })
-        chart.axis("value", {
+        chart.axis('value', {
           line: {
             lineWidth: 1,
-            stroke: "rgb(202,202,202)",
+            stroke: 'rgb(202,202,202)',
           },
           title: {
             textStyle: {
-              fill: "#4a4a4a"
+              fill: '#4a4a4a'
             }
+          }
+        });
+        chart.axis('week', {
+          tickLine: {
+            length: -3
           }
         });
         chart.tooltip({
@@ -78,11 +83,18 @@
             type: 'line'
           }
         });
-        chart.line().position('week*value');
-        chart.point().position('week*value').size(4).shape('circle').style({
-          stroke: '#fff',
-          lineWidth: 1
-        });
+        chart
+          .line()
+          .position('week*value');
+        chart
+          .point()
+          .position('week*value')
+          .size(4)
+          .shape('circle')
+          .style({
+            stroke: '#fff',
+            lineWidth: 1
+          });
         chart.render();
       },
     }
