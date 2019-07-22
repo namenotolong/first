@@ -9,14 +9,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "wluyao",
   "license": "ISC",
   "dependencies": {
     "@antv/data-set": "^0.10.1",
     "@antv/g2": "^3.4.5",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
-    "element-ui": "^2.4.9",
+    "element-ui": "^2.10.1",
     "html2canvas": "^1.0.0-rc.3",
     "mockjs": "^1.0.1-beta3",
     "vue": "^2.5.17",

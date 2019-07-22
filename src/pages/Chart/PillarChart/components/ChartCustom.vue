@@ -51,15 +51,13 @@
         });
         chart.source(data);
         chart.scale({
-          "name": {
-            alias: "姓名",
+          name: {
+            alias: '姓名',
           },
-          "vote": {
+          vote: {
             min: 0,
-            alias: "票数",
-            formatter(val) {
-              return val / 1000 + "k";
-            }
+            alias: '票数',
+            formatter: (val) => (Number(val) / 1000) + 'k'
           }
         });
         chart
