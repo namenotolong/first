@@ -49,7 +49,7 @@
     </el-submenu>
 
     <el-menu-item index="/map">
-     <i class="el-icon-location-outline"></i>
+      <i class="el-icon-location-outline"></i>
       <span slot="title">地图</span>
     </el-menu-item>
 
@@ -119,6 +119,7 @@
       <el-menu-item index="/print">打印</el-menu-item>
       <el-menu-item index="/html2canvas">html2canvas</el-menu-item>
       <el-menu-item index="/dragDialog">可拖拽Dialog</el-menu-item>
+      <el-menu-item index="/reminder">消息提示</el-menu-item>
     </el-submenu>
   </el-menu>
 

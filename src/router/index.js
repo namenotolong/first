@@ -216,6 +216,12 @@ const router = new VueRouter({
       meta: {
         title: '拖拽Dialog'
       }
+    }, {
+      path: '/reminder',
+      component: () => import( /* webpackChunkName:'reminder' */ '@/pages/Component/Reminder.vue'),
+      meta: {
+        title: '消息提示'
+      }
     }]
   }]
 })
