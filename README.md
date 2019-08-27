@@ -92,7 +92,7 @@
 |	|-- main.js								入口文件，加载各种组件	
 |-- static								第三方纯静态资源，不被webpcak打包
 |-- .babelrc							babel-loader 配置
-|-- .editorconfig					    编辑器配置
+|-- .editorconfig					    IDE配置
 |-- .gitignore							git提交时忽略的文件
 |--	package.json						项目基本信息
 |-- README.md							项目说明			

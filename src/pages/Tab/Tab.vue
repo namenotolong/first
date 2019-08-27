@@ -1,43 +1,43 @@
 <template>
-    <div>
-        <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
-            <el-tab-pane v-for="tab in tabOptions" :key="tab.name" :label="tab.label" :name="tab.name">
-                <keep-alive>
-                    <tab-pane v-if="activeName == tab.name" :name="tab.name"></tab-pane>
-                </keep-alive>
-            </el-tab-pane>
-        </el-tabs>
-        <p>#默认情况下，tab选项卡会一次性将所有pane中的数据获取完。使用keep-alive和v-if来按需加载对应的pane。</p>
-    </div>
+  <div>
+    <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
+      <el-tab-pane v-for="tab in tabOptions" :key="tab.name" :label="tab.label" :name="tab.name">
+        <keep-alive>
+          <tab-pane v-if="activeName == tab.name" :name="tab.name"></tab-pane>
+        </keep-alive>
+      </el-tab-pane>
+    </el-tabs>
+    <p>#默认情况下，tab选项卡会一次性将所有pane中的数据获取完。使用keep-alive和v-if来按需加载对应的pane。</p>
+  </div>
 </template>
 <script>
-    import TabPane from "./components/TabPane.vue";
-    export default {
-        components: {
-            TabPane
-        },
-        data() {
-            return {
-                activeName: "first",
-                tabOptions: [{
-                    label: "标签页一",
-                    name: "first"
-                }, {
-                    label: "标签页二",
-                    name: "second"
-                }, {
-                    label: "标签页三",
-                    name: "third"
-                }, {
-                    label: "标签页四",
-                    name: "fourth"
-                }]
-            }
-        },
-        methods: {
-            handleClick(tab, event) {
-                console.log(tab, event);
-            }
-        }
+  import TabPane from "./components/TabPane.vue";
+  export default {
+    components: {
+      TabPane
+    },
+    data() {
+      return {
+        activeName: "first",
+        tabOptions: [{
+          label: "标签页一",
+          name: "first"
+        }, {
+          label: "标签页二",
+          name: "second"
+        }, {
+          label: "标签页三",
+          name: "third"
+        }, {
+          label: "标签页四",
+          name: "fourth"
+        }]
+      }
+    },
+    methods: {
+      handleClick(tab, event) {
+        console.log(tab, event);
+      }
     }
+  }
 </script>
