@@ -16,8 +16,9 @@
 
 </template>
 <script>
-  import bus from "@/utils/bus.js"
-  import { getGridData } from "@/api/dashboard.js";
+  import bus from "@/utils/bus"
+  import api from '@/api';
+
   export default {
     data() {
       return {
@@ -49,7 +50,7 @@
     },
     methods: {
       getGridData() {
-        getGridData().then(res => {
+        api.dashboard.getGridData().then(res => {
           const data = res.data;
           this.grids.forEach((item, index) => {
             item.value = Object.values(res.data)[index]

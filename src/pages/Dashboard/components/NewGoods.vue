@@ -8,10 +8,9 @@
       <el-table-column prop="address" label="产地" width="160"></el-table-column>
       <el-table-column prop="price" label="价格(元)" width="100"></el-table-column>
     </el-table>
-
   </el-card>
-
 </template>
+
 <script>
   export default {
     data() {

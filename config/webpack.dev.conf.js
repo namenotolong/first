@@ -40,7 +40,9 @@ module.exports = merge(baseWebpackConfig, {
       test: /\.scss$/,
       use: ['style-loader', 'css-loader', {
         loader: 'sass-loader',
-        options: { data: `@import "./src/styles/variable.scss";@import "./src/styles/mixin.scss";` }
+        options: {
+          data: `@import "./src/assets/styles/variable.scss";@import "./src/assets/styles/mixin.scss";`
+        }
       }]
     }]
   }

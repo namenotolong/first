@@ -15,10 +15,12 @@
     <!-- 一个组件上的v-model默认会利用名为value的prop和名为input的事件。 -->
   </div>
 </template>
+
 <script>
-  import { getArticleDetail } from "../../api/article.js";
-  import { formatDate } from "../../utils/util.js"
-  import Tinymce from "../../components/Tinymce/Tinymce.vue";
+  import api from '@/api';
+  import { formatDate } from "@/utils/core"
+  import Tinymce from "@/components/Tinymce/Tinymce";
+
   export default {
     props: ["articleIndex", "articleId"],
     components: {
@@ -66,7 +68,7 @@
     },
     methods: {
       getArticleDetail() {
-        getArticleDetail({
+        api.article.getArticleDetail({
           id: this.articleId
         }).then(res => {
           this.articleDetail = res.data.articleDetail;

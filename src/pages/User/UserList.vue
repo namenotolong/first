@@ -35,11 +35,11 @@
 </template>
 
 <script>
-  import { scroll } from "@/utils/util.js";
-  import { getUserList, getUserDetail } from "@/api/user.js";
-  import bus from "@/utils/bus.js";
-  import UserDetail from "./components/UserDetail.vue";
-  import ExportExcel from "@/components/ExportExcel/ExportExcel.vue";
+  import { scroll } from "@/utils/core";
+  import api from '@/api';
+  import bus from "@/utils/bus";
+  import UserDetail from "./components/UserDetail";
+  import ExportExcel from "@/components/ExportExcel/ExportExcel";
 
   export default {
     name: "UserList",
@@ -91,7 +91,7 @@
     methods: {
       getUserList() {
         this.userTableLoading = true;
-        getUserList(this.queryCondition).then(res => {
+        api.user.getUserList(this.queryCondition).then(res => {
           this.userList = res.data.userList.map((item, index) => {
             return {
               id: item.id,

@@ -4,8 +4,9 @@
   </transition>
 </template>
 <script>
-  import {scroll,animate } from "@/utils/util.js";
-  import Animate from "@/utils/animate.js";
+  import { scroll, animate } from "@/utils/core";
+  import Animate from "@/utils/animate";
+
   export default {
     props: {
       visibleHeight: {

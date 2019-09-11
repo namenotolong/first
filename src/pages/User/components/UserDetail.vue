@@ -45,8 +45,8 @@
   </el-dialog>
 </template>
 <script>
-  import { getUserDetail } from "@/api/user.js";
-  import bus from "@/utils/bus.js";
+  import api from '@/api';
+  import bus from "@/utils/bus";
 
   export default {
     data() {
@@ -138,7 +138,7 @@
     methods: {
       getUserDetail(id) {
         this.getDetailLoading = true;
-        getUserDetail({
+        api.user.getUserDetail({
           id
         }).then(res => {
           this.userInfo = res.data.userDetail;

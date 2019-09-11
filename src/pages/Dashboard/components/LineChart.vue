@@ -14,9 +14,10 @@
 </template>
 
 <script>
-  import bus from "@/utils/bus.js"
+  import bus from "@/utils/bus"
   import G2 from "@antv/g2";
-  import { getLineChartData } from "@/api/dashboard.js"
+  import api from '@/api';
+
   export default {
     data() {
       return {
@@ -59,12 +60,12 @@
       // 获取图表数据
       getLineChartData() {
         let getWeekData = () => {
-          return getLineChartData({
+          return api.dashboard.getLineChartData({
             type: "week"
           })
         }
         let getMonthData = () => {
-          return getLineChartData({
+          return api.dashboard.getLineChartData({
             type: "month"
           })
         }

@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-  import { formatDate } from '@/utils/util.js'
+  import { formatDate } from '@/utils/core'
   import Tinymce from '@/components/Tinymce/Tinymce.vue';
   export default {
     name: 'ArticleCreate',

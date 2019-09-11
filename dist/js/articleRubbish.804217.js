@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[29],{721:function(e,t,n){"use strict";n.r(t);var i={name:"ArticleList",components:{ArticleTable:n(597).a},data:function(){return{}}},l=n(78),a=Object(l.a)(i,function(){var e=this.$createElement;return(this._self._c||e)("article-table")},[],!1,null,null,null);a.options.__file="ArticleRubbish.vue";t.default=a.exports}}]);

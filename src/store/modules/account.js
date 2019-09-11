@@ -1,4 +1,4 @@
-import { login, logout, getUserInfo } from "@/api/account.js"
+import api from '@/api';
 
 const account = {
   state: {
@@ -20,7 +20,7 @@ const account = {
       const username = loginInfo.username.trim();
       const password = loginInfo.password;
       return new Promise((resolve, reject) => {
-        login({
+        api.account.login({
           username,
           password
         }).then(res => {
@@ -37,7 +37,7 @@ const account = {
       state
     }) {
       return new Promise((resolve, reject) => {
-        getUserInfo({
+        api.account.getUserInfo({
           token: state.token
         }).then(res => {
           commit("setRole", res.data.userInfo.role);
@@ -52,7 +52,7 @@ const account = {
       state
     }) {
       return new Promise((resolve, reject) => {
-        logout({
+        api.account.logout({
           token: state.token
         }).then(res => {
           commit("setRole", "");

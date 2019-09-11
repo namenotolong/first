@@ -1,0 +1,17 @@
+.fade-enter[data-v-f7ad0666],
+.fade-leave-to[data-v-f7ad0666] {
+  opacity: 0;
+}
+.fade-enter-active[data-v-f7ad0666],
+.fade-leave-active[data-v-f7ad0666] {
+  transition: opacity .5s;
+}
+.rocket[data-v-f7ad0666] {
+  position: fixed;
+  width: 31px;
+  height: 76px;
+  background: url(../img/rocket-078810.png) no-repeat -31px -15px;
+  cursor: pointer;
+  z-index: 10000;
+}
+

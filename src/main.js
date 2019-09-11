@@ -9,7 +9,7 @@ import store from '@/store';
 
 import 'element-ui/lib/theme-chalk/index.css';
 
-import '@/styles/app.scss';
+import '@/assets/styles/app.scss';
 import '@/assets/fonts/iconfont.css';
 
 // mock数据

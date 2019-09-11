@@ -1,51 +1,29 @@
 <template>
-    <div class="map">
-        <section>
-            <p>标记点</p>
-            <map-maker></map-maker>
-        </section>
-
-        <section>
-            <p>插件</p>
-            <map-plugin></map-plugin>
-        </section>
-
-        <section>
-            <p>地图热点</p>
-            <map-hot-spot></map-hot-spot>
-        </section>
-    </div>
+  <div class="map">
+    <el-tabs type="border-card">
+      <el-tab-pane label="标记点">
+        <map-maker></map-maker>
+      </el-tab-pane>
+      <el-tab-pane label="插件">
+        <map-plugin></map-plugin>
+      </el-tab-pane>
+      <el-tab-pane label="地图热点">
+        <map-hot-spot></map-hot-spot>
+      </el-tab-pane>
+    </el-tabs>
+  </div>
 </template>
+
 <script>
-    import MapMaker from "./components/MapMaker.vue";
-    import MapPlugin from "./components/MapPlugin.vue";
-    import MapHotSpot from "./components/MapHotSpot.vue";
-    export default {
-        components: {
-            MapMaker,
-            MapPlugin,
-            MapHotSpot
-        },
-        data() {
-            return {
+  import MapMaker from "./components/MapMaker.vue";
+  import MapPlugin from "./components/MapPlugin.vue";
+  import MapHotSpot from "./components/MapHotSpot.vue";
 
-            }
-        },
-
-
+  export default {
+    components: {
+      MapMaker,
+      MapPlugin,
+      MapHotSpot
     }
+  }
 </script>
-<style lang="scss" scoped>
-    .map {
-        section {
-            &+section{
-                margin-top:20px;
-            }
-            p {
-                font-size: 18px;
-                line-height: 40px;
-            }
-        }
-
-    }
-</style>

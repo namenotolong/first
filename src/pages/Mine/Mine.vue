@@ -39,7 +39,7 @@
   </div>
 </template>
 <script>
-  import { getUserInfo } from "@/api/account.js";
+  import api from '@/api';
 
   export default {
     name: "Mine",
@@ -96,7 +96,7 @@
     },
     methods: {
       getUserInfo() {
-        getUserInfo({
+        api.account.getUserInfo({
           userId: sessionStorage.getItem("userId")
         }).then(res => {
           this.userInfo = res.data.userInfo;

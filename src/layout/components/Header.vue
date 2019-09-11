@@ -29,10 +29,10 @@
 
 
 <script>
-  import bus from "@/utils/bus.js";
-  import FullScreen from "@/components/FullScreen/FullScreen.vue";
-  import ThemePicker from "@/components/ThemePicker/ThemePicker.vue";
-  import { getUserInfo } from "@/api/account.js";
+  import bus from "@/utils/bus";
+  import FullScreen from "@/components/FullScreen/FullScreen";
+  import ThemePicker from "@/components/ThemePicker/ThemePicker";
+  import api from '@/api';
 
   export default {
     components: {
@@ -64,7 +64,7 @@
         }
       },
       getAvatar() {
-        getUserInfo({
+        api.account.getUserInfo({
           username: sessionStorage.getItem("userId")
         }).then(res => {
           this.avatar = res.data.userInfo.avatar;

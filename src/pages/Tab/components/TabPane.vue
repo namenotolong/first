@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import { getTabList } from "@/api/tab.js";
+  import api from '@/api';
 
   export default {
     props: {
@@ -31,7 +31,7 @@
     methods: {
       getTabList() {
         this.tabLoading = true;
-        getTabList({
+        api.tab.getTabList({
           name: this.name
         }).then(res => {
           this.tableData = res.data.tabList

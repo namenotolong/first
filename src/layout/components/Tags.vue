@@ -5,7 +5,7 @@
       <router-link :to="tag.path">
         <span v-text="tag.title"></span>
       </router-link>
-      <i class="el-icon-circle-close-outline" @click="closeTag(index)"></i>
+      <i class="el-icon-circle-close" @click="closeTag(index)"></i>
     </li>
   </ul>
 

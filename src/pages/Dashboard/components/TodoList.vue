@@ -30,8 +30,10 @@
 
   </el-card>
 </template>
+
 <script>
-  import { getTodoListData } from "@/api/dashboard.js";
+  import api from '@/api';
+
   export default {
     data() {
       return {
@@ -43,7 +45,7 @@
     },
     methods: {
       getTaskData() {
-        getTodoListData().then(res => {
+        api.dashboard.getTodoListData().then(res => {
           this.taskData = res.data.todoListData;
         })
       },

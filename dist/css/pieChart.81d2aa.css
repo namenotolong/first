@@ -1,0 +1,35 @@
+.g2-label-item-inner {
+  text-align: center;
+  font-size: 12px;
+  color: #fff !important;
+}
+.g2-label-item-outer {
+  width: 60px;
+  font-size: 12px;
+  color: #595959 !important;
+}
+
+.g2-guide-html {
+  width: 100px;
+  height: 80px;
+  vertical-align: middle;
+  text-align: center;
+}
+.g2-guide-html .title {
+  font-size: 12px;
+  color: #8c8c8c !important;
+  font-weight: 300;
+}
+.g2-guide-html .value {
+  font-size: 32px;
+  color: #000 !important;
+  font-weight: bold;
+}
+
+.chart-wrap .title[data-v-9c8f5c0e] {
+  font-size: 16px;
+  font-weight: 600;
+  text-indent: 2em;
+  line-height: 40px;
+}
+

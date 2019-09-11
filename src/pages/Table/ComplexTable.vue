@@ -22,8 +22,9 @@
 </template>
 
 <script>
-  import { scroll } from "@/utils/util.js";
-  import { getUserList, getUserDetail } from "@/api/user.js";
+  import { scroll } from "@/utils/core";
+  import api from '@/api';
+
   export default {
     data() {
       return {
@@ -67,7 +68,7 @@
     methods: {
       getUserList() {
         this.userTableLoading = true;
-        getUserList(this.queryCondition).then(res => {
+        api.user.getUserList(this.queryCondition).then(res => {
           this.userList = res.data.userList.map((item, index) => {
             return {
               id: item.id,

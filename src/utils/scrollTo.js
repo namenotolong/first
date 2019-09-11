@@ -1,55 +1,56 @@
 // 缓动公式
-Math.easeInOutQuad = function (t, b, c, d) {
-  t /= d / 2;
-  if (t < 1) {
-    return c / 2 * t * t + b;
+const easeInOutQuad = (t, b, c, d) => {
+  let time = t;
+  time /= d / 2;
+  if (time < 1) {
+    return (c / 2) * time * time + b;
   }
-  t--;
-  return -c / 2 * (t * (t - 2) - 1) + b;
+  time--;
+  return (-c / 2) * (time * (time - 2) - 1) + b;
+};
+
+// 设置要滚动到的位置
+const setTargetPosition = (element, target) => {
+  if (element === window) {
+    document.body.scrollTop = target;
+    document.documentElement.scrollTop = target;
+  } else {
+    element.scrollTop = target;
+  }
 }
 
-// 解决window.requestAnimationFrame()方法的兼容性问题
-var requestAnimFrame = (function () {
-  return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
-    window.setTimeout(callback, 1000 / 60);
+// 获取当前已经滚动到的位置。
+const getCurrentPosition = (element) => {
+  if (element === window) {
+    return window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
   }
-})()
-
-// 设置页面要滚动到的位置
-function move(amount) {
-  document.documentElement.scrollTop = amount;
-  document.body.parentNode.scrollTop = amount;
-  document.body.scrollTop = amount;
-}
-
-// 获取页面已经滚动的距离。
-function position() {
-  return document.documentElement.scrollTop || document.body.parentNode.scrollTop || document.body.scrollTop;
+  return element.scrollTop;
 }
 
 /**
  * 滚动
- * @param {Number} to 要滚动到的最终位置
- * @param {Number} duration    持续时间
+ * @param {Element | Window} element 要滚动的元素
+ * @param {Number} end 要滚动到的最终位置
+ * @param {Number} duration    滚动持续时间
  * @param { Function} callback  滚动完成后的回调函数
  */
-export function scrollTo(to, duration, callback) {
-  const start = position();
-  const change = to - start;
+const scrollTo = (element, end, duration = 500, callback = () => { }) => {
+  const start = getCurrentPosition(element);
+  const distance = end - start;
   const increment = 20;
   let currentTime = 0;
-  duration = (typeof (duration) === 'undefined') ? 500 : duration;
-  const animateScroll = function () {
+  const animateScroll = () => {
     currentTime += increment;
-    const val = Math.easeInOutQuad(currentTime, start, change, duration);
-    move(val)
+    const target = easeInOutQuad(currentTime, start, distance, duration);
+    setTargetPosition(element, target);
     if (currentTime < duration) {
-      requestAnimFrame(animateScroll);
+      window.requestAnimationFrame(animateScroll);
     } else {
-      if (callback && typeof (callback) === 'function') {
+      if (callback && typeof callback === 'function') {
         callback();
       }
     }
-  }
-  animateScroll()
+  };
+  animateScroll();
 }
+export default scrollTo;

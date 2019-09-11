@@ -1,0 +1,35 @@
+.mine[data-v-6bd576f8] {
+  width: 50%;
+  min-width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+.mine .avatar-uploader .el-upload[data-v-6bd576f8] {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.mine .avatar-uploader .el-upload[data-v-6bd576f8]:hover {
+    border-color: #409EFF;
+}
+.mine .avatar-uploader-icon[data-v-6bd576f8] {
+    font-size: 28px;
+    color: #8c939d;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+}
+.mine .avatar[data-v-6bd576f8] {
+    width: 120px;
+    display: block;
+}
+.mine .el-button[data-v-6bd576f8] {
+    display: block;
+    margin: 0 auto;
+}
+

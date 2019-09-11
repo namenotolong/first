@@ -37,43 +37,43 @@
 </template>
 
 <script>
-  import { scroll } from "@/utils/util.js";
-  import { getArticleList, getAuthorList } from "@/api/article.js";
-  import ExportExcel from "@/components/ExportExcel/ExportExcel.vue";
+  import { scroll } from '@/utils/core';
+  import api from '@/api';
+  import ExportExcel from '@/components/ExportExcel/ExportExcel';
 
   export default {
-    name: "ArticleList",
+    name: 'ArticleList',
     components: {
       ExportExcel
     },
     data() {
       return {
         articleList: [],
-        excelHeader: ["序号", "作者", "创建时间", "标题", "类型", "阅读数"],
-        filterFiled: ["index", "author", "createDate", "title", "type", "browseNum"],
+        excelHeader: ['序号', '作者', '创建时间', '标题', '类型', '阅读数'],
+        filterFiled: ['index', 'author', 'createDate', 'title', 'type', 'browseNum'],
         authorList: [],
         articleTypeList: [{
-          text: "新闻",
-          value: "新闻"
+          text: '新闻',
+          value: '新闻'
         }, {
-          text: "财经",
-          value: "财经"
+          text: '财经',
+          value: '财经'
         }, {
-          text: "娱乐",
-          value: "娱乐"
+          text: '娱乐',
+          value: '娱乐'
         }, {
-          text: "体育",
-          value: "体育"
+          text: '体育',
+          value: '体育'
         }, {
-          text: "科技",
-          value: "科技"
+          text: '科技',
+          value: '科技'
         }, {
-          text: "游戏",
-          value: "游戏"
+          text: '游戏',
+          value: '游戏'
         }],
         articleTableLoading: false,
         queryCondition: {
-          title: "",
+          title: '',
           author: [],
           type: [],
           currentPageNum: 1,
@@ -89,7 +89,7 @@
     methods: {
       getArticleList() {
         this.articleTableLoading = true;
-        getArticleList(this.queryCondition).then(res => {
+        api.article.getArticleList(this.queryCondition).then(res => {
           this.articleList = res.data.articleList.map((item, index) => {
             return {
               id: item.id,
@@ -104,12 +104,12 @@
           });
           this.articleAmount = res.data.articleAmount;
           this.articleTableLoading = false;
-          const scrollElement = document.querySelector(".page");
+          const scrollElement = document.querySelector('.page');
           scroll(scrollElement, 0, 15);
         })
       },
       getAuthorList() {
-        getAuthorList().then(res => {
+        api.article.getAuthorList().then(res => {
           this.authorList = res.data.authorList.map(item => {
             return {
               text: item,
@@ -123,10 +123,10 @@
         return row[property] === value;
       },
       deleteArticle(index, row) {
-        this.$confirm(`确认删除文章“${row.title}”？`, "提示", {
+        this.$confirm(`确认删除文章“${row.title}”？`, '提示', {
           type: 'warning',
         }).then(() => {
-          this.$message.success("删除成功！");
+          this.$message.success('删除成功！');
         }).catch(() => {
 
         })

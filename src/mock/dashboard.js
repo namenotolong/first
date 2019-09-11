@@ -1,5 +1,5 @@
 import Mock from 'mockjs';
-import { getURLParams } from "@/utils/util.js";
+import { getURLParams } from "@/utils/core";
 
 const gridData = Mock.mock({
   visiteNum: "@natural(15000,30000)",

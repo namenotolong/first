@@ -20,15 +20,15 @@ const tween = {
     }
 };
 
-//定义Animate类	
+//定义Animate类
 const Animate = function (elem) {
-    this.elem = elem; // 进行运动的 dom 节点 
-    this.startTime = 0; // 动画开始时间 
-    this.startPos = 0; // 动画开始时，dom 节点的位置，即 dom 的初始位置 
-    this.endPos = 0; // 动画结束时，dom 节点的位置，即 dom 的目标位置 
-    this.propertyName = null; // dom 节点需要被改变的 css 属性名 
-    this.easing = null; // 缓动算法 
-    this.duration = null; // 动画持续时间 
+    this.elem = elem; // 进行运动的 dom 节点
+    this.startTime = 0; // 动画开始时间
+    this.startPos = 0; // 动画开始时，dom 节点的位置，即 dom 的初始位置
+    this.endPos = 0; // 动画结束时，dom 节点的位置，即 dom 的目标位置
+    this.propertyName = null; // dom 节点需要被改变的 css 属性名
+    this.easing = null; // 缓动算法
+    this.duration = null; // 动画持续时间
 };
 
 //启动动画
@@ -50,11 +50,11 @@ Animate.prototype.start = function (propertyName, endPos, duration, easing, call
     }, 20);
 };
 
-//小球每次运动要做的事情
+//每次运动要做的事情
 Animate.prototype.step = function () {
-    const currentTime = +new Date; // 取得当前时间 
+    const currentTime = +new Date; // 取得当前时间
     if (currentTime >= this.startTime + this.duration) {
-        this.elem.style[this.propertyName] = this.endPos + 'px'; // 时间到了之后将小球位置精确定位到到最终位置
+        this.elem.style[this.propertyName] = this.endPos + 'px'; // 时间到了之后将位置精确定位到到最终位置
         return false;
     }
     const t = currentTime - this.startTime;
@@ -62,7 +62,7 @@ Animate.prototype.step = function () {
     const c = this.endPos - this.startPos;
     const d = this.duration;
     const currentPosition = this.easing(t, b, c, d);
-    this.elem.style[this.propertyName] = currentPosition + 'px'; // 更新小球位置 
+    this.elem.style[this.propertyName] = currentPosition + 'px'; // 更新位置
 };
 
 export default Animate;
