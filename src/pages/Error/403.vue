@@ -30,23 +30,23 @@
 </template>
 
 <script>
-  import gif from "@/assets/img/403/403.gif";
+  import gif from "@/assets/images/403/403.gif";
 
   export default {
     data() {
       return {
         errGif: gif + "?" + Date.now(), //图片路径加上参数，保证每次打开这个页面都会重新开始播放gif。
         gifList: [
-          require("@/assets/img/403/403-9.gif"),
-          require("@/assets/img/403/403-1.gif"),
-          require("@/assets/img/403/403-2.gif"),
-          require("@/assets/img/403/403-3.gif"),
-          require("@/assets/img/403/403-4.gif"),
-          require("@/assets/img/403/403-5.gif"),
-          require("@/assets/img/403/403-6.gif"),
-          require("@/assets/img/403/403-7.gif"),
-          require("@/assets/img/403/403-8.gif"),
-          require("@/assets/img/403/403-10.gif")
+          require("@/assets/images/403/403-9.gif"),
+          require("@/assets/images/403/403-1.gif"),
+          require("@/assets/images/403/403-2.gif"),
+          require("@/assets/images/403/403-3.gif"),
+          require("@/assets/images/403/403-4.gif"),
+          require("@/assets/images/403/403-5.gif"),
+          require("@/assets/images/403/403-6.gif"),
+          require("@/assets/images/403/403-7.gif"),
+          require("@/assets/images/403/403-8.gif"),
+          require("@/assets/images/403/403-10.gif")
         ],
         dialogVisible: false,
       }

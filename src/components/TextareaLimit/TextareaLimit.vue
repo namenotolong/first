@@ -4,6 +4,7 @@
         <span class="textarea-length" :class="{'warning-text':content.length >= textLimit}" v-text="content.length + '/' + textLimit"></span>
     </div>
 </template>
+
 <script>
     export default {
         props: {

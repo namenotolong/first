@@ -1,13 +1,20 @@
+// 控制页面窗口或DOM元素向上滚动
+
 // 缓动公式
-const easeInOutQuad = (t, b, c, d) => {
-  let time = t;
-  time /= d / 2;
-  if (time < 1) {
-    return (c / 2) * time * time + b;
+const easeIn = (t, b, c, d, s = 4) => {
+  return c * (t /= d) * Math.pow(t, s) + b;
+}
+
+
+// 获取元素的滚动位置。
+const getScrolltPosition = (element) => {
+  if (element === window) {
+    return window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
+  } else {
+    return element.scrollTop;
   }
-  time--;
-  return (-c / 2) * (time * (time - 2) - 1) + b;
-};
+}
+
 
 // 设置要滚动到的位置
 const setTargetPosition = (element, target) => {
@@ -19,38 +26,34 @@ const setTargetPosition = (element, target) => {
   }
 }
 
-// 获取当前已经滚动到的位置。
-const getCurrentPosition = (element) => {
-  if (element === window) {
-    return window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
-  }
-  return element.scrollTop;
-}
+
 
 /**
  * 滚动
  * @param {Element | Window} element 要滚动的元素
- * @param {Number} end 要滚动到的最终位置
+ * @param {Number} target 要滚动到的最终位置
  * @param {Number} duration    滚动持续时间
  * @param { Function} callback  滚动完成后的回调函数
  */
-const scrollTo = (element, end, duration = 500, callback = () => { }) => {
-  const start = getCurrentPosition(element);
-  const distance = end - start;
-  const increment = 20;
-  let currentTime = 0;
+const scrollTo = (element, target, duration = 500, callback = () => { }) => {
+  const startTime = Date.now();
+  const startPosition = getScrolltPosition(element);
+  const distance = target - startPosition;
   const animateScroll = () => {
-    currentTime += increment;
-    const target = easeInOutQuad(currentTime, start, distance, duration);
-    setTargetPosition(element, target);
-    if (currentTime < duration) {
+    const passTime = Date.now() - startTime;
+    const nextPosition = easeIn(passTime, startPosition, distance, duration);
+    setTargetPosition(element, nextPosition);
+    if (passTime < duration) {
       window.requestAnimationFrame(animateScroll);
     } else {
-      if (callback && typeof callback === 'function') {
-        callback();
-      }
+      //虽然经过 duration的时间之后元素已经非常接近要滚动到的最终位置，这里再精确设置一下。
+      setTargetPosition(element, target);
+      callback();
     }
   };
   animateScroll();
 }
+
+
 export default scrollTo;
+

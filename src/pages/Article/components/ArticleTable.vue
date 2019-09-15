@@ -23,7 +23,7 @@
       <el-table-column prop="browseNum" label="阅读数" sortable width="100px"></el-table-column>
       <el-table-column label="操作" width="200px">
         <template slot-scope="scope">
-          <router-link :to="'/articleEdit/' + scope.row.id + '/' + scope.row.index">
+          <router-link :to="`/article/articleEdit/${scope.row.id}/${scope.row.index}`">
             <el-button type="primary" size="mini" plain>编辑</el-button>
           </router-link>
           <el-button type="danger" size="mini" plain @click="deleteArticle(scope.$index, scope.row)">删除</el-button>

@@ -33,7 +33,7 @@
     },
     data() {
       return {
-        img: require('@/assets/img/login/login-bg.jpg')
+        img: require('@/assets/images/login/login-bg.jpg')
       }
     },
   }

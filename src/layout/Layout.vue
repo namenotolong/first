@@ -13,13 +13,14 @@
       </div>
     </div>
   </div>
-
 </template>
+
 <script>
-  import bus from "@/utils/bus.js";
-  import VHeader from "./components/Header.vue";
-  import VMenu from "./components/Menu.vue";
-  import VTags from "./components/Tags.vue";
+  import bus from "@/utils/bus";
+  import VHeader from "./components/Header";
+  import VMenu from "./components/Menu";
+  import VTags from "./components/Tags";
+
   export default {
     components: {
       VHeader,

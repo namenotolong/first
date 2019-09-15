@@ -19,7 +19,7 @@
 <script>
   import api from '@/api';
   import { formatDate } from "@/utils/core"
-  import Tinymce from "@/components/Tinymce/Tinymce";
+  import Tinymce from "@/components/Tinymce";
 
   export default {
     props: ["articleIndex", "articleId"],

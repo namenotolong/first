@@ -15,9 +15,11 @@
     <!-- 一个组件上的v-model默认会利用名为value的prop和名为input的事件。 -->
   </div>
 </template>
+
 <script>
   import { formatDate } from '@/utils/core'
-  import Tinymce from '@/components/Tinymce/Tinymce.vue';
+  import Tinymce from '@/components/Tinymce';
+
   export default {
     name: 'ArticleCreate',
     components: {

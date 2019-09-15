@@ -1,0 +1,106 @@
+.grid[data-v-1c5634a3] {
+  position: relative;
+  color: #fff;
+  box-shadow: 0px 0px 10px rgba(100, 100, 100, 0.5);
+  cursor: pointer;
+}
+.grid[data-v-1c5634a3]::after {
+    content: "";
+    display: block;
+    visibility: hidden;
+    height: 0;
+    line-height: 0;
+    clear: both;
+}
+.grid--green[data-v-1c5634a3] {
+    background-color: #06d6a0;
+}
+.grid--yellow[data-v-1c5634a3] {
+    background-color: #ffd166;
+}
+.grid--blue[data-v-1c5634a3] {
+    background-color: #06aed5;
+}
+.grid--red[data-v-1c5634a3] {
+    background-color: #ef476f;
+}
+.grid[data-v-1c5634a3]::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    width: 100px;
+    background-color: rgba(0, 0, 0, 0.05);
+    -webkit-transition: all 0.95s;
+    transition: width 0.5s;
+}
+.grid[data-v-1c5634a3]:hover::before {
+    width: 100%;
+    box-sizing: border-box;
+}
+.grid .grid-icon[data-v-1c5634a3] {
+    display: inline-block;
+    font-size: 48px;
+    width: 100px;
+    text-align: center;
+    line-height: 108px;
+}
+.grid .grid-right[data-v-1c5634a3] {
+    float: right;
+    padding: 16px;
+}
+.grid .grid-right p[data-v-1c5634a3] {
+      color: #fff !important;
+}
+.grid .grid-right .grid-name[data-v-1c5634a3] {
+      font-size: 20px;
+      margin-bottom: 10px;
+}
+.grid .grid-right .grid-value[data-v-1c5634a3] {
+      font-size: 30px;
+}
+
+.grid-wrap .el-col {
+  margin-bottom: 20px;
+}
+
+.chart-title[data-v-549283f5] {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.task-card .task-card__header[data-v-60c088c2] {
+  font-size: 16px;
+}
+.task-card .button--add[data-v-60c088c2] {
+  float: right;
+  padding: 3px 0;
+}
+.task-card .del[data-v-60c088c2] {
+  text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.task-card .el-card__body {
+  padding-top: 0px;
+}
+.task-card .el-table__header-wrapper {
+  display: none;
+}
+
+.progress-card .progress-card__header[data-v-3f244220] {
+  font-size: 16px;
+}
+
+.goods-card .goods-card__header[data-v-f4bdb4aa] {
+  font-size: 16px;
+}
+
+.goods-card .el-card__body {
+  padding-top: 0px;
+}
+
+.el-row[data-v-f41c020a] {
+  margin-bottom: 20px;
+}
+
