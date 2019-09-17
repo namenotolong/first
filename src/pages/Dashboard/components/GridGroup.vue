@@ -3,7 +3,10 @@
     <el-row :gutter="30">
       <el-col :lg="6" :sm="12" v-for="grid in grids" :key="grid.name">
         <div class="grid" :class="grid.gridBackground" @click="handleChart(grid.name)">
-          <i class="iconfont grid-icon" :class="grid.icon"></i>
+          <div class="grid-left">
+            <svg-icon :icon-name="grid.icon" icon-class="grid-icon" />
+          </div>
+
           <div class="grid-right">
             <p class="grid-name" v-text="grid.name"></p>
             <p class="grid-value" v-text="grid.value"></p>
@@ -24,22 +27,22 @@
       return {
         grids: [{
           gridBackground: "grid--red",
-          icon: "icon-visite",
+          icon: "view",
           name: "访问量",
           value: "",
         }, {
           gridBackground: "grid--blue",
-          icon: "icon-user",
+          icon: "user_filled",
           name: "用户数量",
           value: "",
         }, {
           gridBackground: "grid--green",
-          icon: "icon-goods",
+          icon: "goods",
           name: "商品数量",
           value: "",
         }, {
           gridBackground: "grid--yellow",
-          icon: "icon-comment",
+          icon: "message",
           name: "评论数量",
           value: "",
         }]
@@ -67,10 +70,10 @@
 <style lang="scss" scoped>
   .grid {
     position: relative;
+    height: 108px;
     color: #fff;
     box-shadow: 0px 0px 10px rgba(100, 100, 100, .5);
     cursor: pointer;
-    @include clearfix;
 
     &--green {
       background-color: #06d6a0;
@@ -104,16 +107,21 @@
       box-sizing: border-box;
     }
 
-    .grid-icon {
+    .grid-left {
       display: inline-block;
-      font-size: 48px;
       width: 100px;
-      text-align: center;
       line-height: 108px;
+      vertical-align: top;
+      text-align: center;
+
+      .grid-icon {
+        font-size: 48px;
+        vertical-align: middle;
+      }
     }
 
     .grid-right {
-      float: right;
+      display: inline-block;
       padding: 16px;
 
       p {
@@ -129,8 +137,6 @@
         font-size: 30px;
       }
     }
-
-
   }
 </style>
 <style lang="scss">

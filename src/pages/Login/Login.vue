@@ -34,51 +34,51 @@
     data() {
       return {
         loginForm: {
-          username: "admin",
-          password: "123456",
+          username: 'admin',
+          password: '123456',
           rememberPwd: false
         },
         loginRule: {
           username: [{
             required: true,
-            message: "请输入用户名",
-            trigger: "blur"
+            message: '请输入用户名',
+            trigger: 'blur'
           }],
           password: [{
             required: true,
-            message: "请输入密码",
-            trigger: "blur"
+            message: '请输入密码',
+            trigger: 'blur'
           }, {
             min: 6,
-            message: "密码长度不能少于六位",
-            trigger: "blur"
+            message: '密码长度不能少于六位',
+            trigger: 'blur'
           }]
         },
-        passwordType: "password",
+        passwordType: 'password',
         loginLoading: false
       };
     },
     methods: {
       showPwd() {
-        this.passwordType = this.passwordType == "password" ? "text" : "password";
+        this.passwordType = this.passwordType == 'password' ? 'text' : 'password';
       },
       submitLogin() {
         this.loginLoading = true;
         this.$refs.loginForm.validate((valid) => {
           if (valid) {
-            this.$store.dispatch("login", this.loginForm).then(() => {
+            this.$store.dispatch('Login', this.loginForm).then(() => {
               this.loginLoading = false;
-              this.$router.replace("/dashboard");
+              this.$router.replace('/dashboard');
             }).catch((error) => {
               this.$message({
-                type: "error",
-                message: "登录失败,请填写正确的信息！"
+                type: 'error',
+                message: '登录失败,请填写正确的信息！'
               })
             })
           } else {
             this.$message({
-              type: "error",
-              message: "登录失败,请填写正确的信息！"
+              type: 'error',
+              message: '登录失败,请填写正确的信息！'
             })
             this.loginLoading = false;
           }

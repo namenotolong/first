@@ -10,7 +10,7 @@ const userInfo = Mock.mock({
   avatar: "@image('100x100', '#aaa', 'avatar')",
   email: "@email",
   mobilePhone: /^1[345789]\d{9}$/,
-  role: '@pick(["编辑","普通会员","高级会员","普通用户"])'
+  roles: ['editor', 'guest']
 })
 
 
@@ -19,7 +19,7 @@ export default {
     return {
       code: 200,
       data: {
-        loginInfo: loginInfo.token
+        loginInfo: loginInfo
       }
     }
   },

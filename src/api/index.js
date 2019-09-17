@@ -1,8 +1,8 @@
-import * as account from './account';
-import * as article from './article';
-import * as dashboard from './dashboard';
-import * as tab from './tab';
-import * as user from './user';
+import * as account from './modules/account';
+import * as article from './modules/article';
+import * as dashboard from './modules/dashboard';
+import * as tab from './modules/tab';
+import * as user from './modules/user';
 
 const api = { account, article, dashboard, tab, user };
 

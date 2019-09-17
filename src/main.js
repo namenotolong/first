@@ -16,11 +16,13 @@ import '@/assets/fonts/iconfont.css';
 import './mock';
 
 // 全局注册的组件和指令
-import '@/components/component.js';
-import '@/directive/directive.js';
+import '@/components';
+import '@/directive';
 
 import reminder from '@/components/Reminder/index.js'
 
+// 权限
+import '@/assets/permission';
 
 Vue.use(ElementUI, {
   size: 'medium'
@@ -35,22 +37,7 @@ Object.defineProperty(Vue.prototype, '$reminder', {
 
 Vue.config.productionTip = false;
 
-// 导航守卫，每次进行跳转时都会执行这个钩子
-router.beforeEach((to, from, next) => {
-  const token = sessionStorage.getItem('token');
-  if (!token && to.path !== '/login') {
-    next('/login');
-  } else {
-    if (token && !store.state.account.role) {
-      // 获取用户信息
-      store.dispatch('getUserInfo').then(res => {
-        next();
-      })
-    } else {
-      next();
-    }
-  }
-})
+
 
 new Vue({
   el: '#app',

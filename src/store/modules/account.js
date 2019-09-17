@@ -2,21 +2,24 @@ import api from '@/api';
 
 const account = {
   state: {
-    token: sessionStorage.getItem("token"),
-    role: "",
+    token: sessionStorage.getItem('token'),
+    roles: [],
+    routes: []
   },
   mutations: {
-    setToken(state, token) {
+    SET_TOKEN(state, token) {
       state.token = token;
     },
-    setRole(state, role) {
-      state.role = role;
+    SET_ROLES(state, roles) {
+      state.roles = roles;
     },
+    SET_ROUTE_MAP(state, routeMap) {
+      state.routeMap = routeMap;
+    }
   },
   actions: {
-    login({
-      commit
-    }, loginInfo) {
+    // 登录获取token
+    Login({ commit }, loginInfo) {
       const username = loginInfo.username.trim();
       const password = loginInfo.password;
       return new Promise((resolve, reject) => {
@@ -24,24 +27,24 @@ const account = {
           username,
           password
         }).then(res => {
-          commit("setToken", res.data.loginInfo.token);
-          sessionStorage.setItem("token", res.data.loginInfo.token);
+          const token = res.data.loginInfo.token;
+          commit('SET_TOKEN', token);
+          sessionStorage.setItem('token', token);
           resolve();
         }).catch((error) => {
           reject(error);
         })
       })
     },
-    getUserInfo({
-      commit,
-      state
-    }) {
+    // 通过token获取用户信息
+    GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         api.account.getUserInfo({
           token: state.token
         }).then(res => {
-          commit("setRole", res.data.userInfo.role);
-          resolve();
+          const roles = res.data.userInfo.roles;
+          commit('SET_ROLES', roles);
+          resolve({ roles });
         }).catch((error) => {
           reject(error);
         })
@@ -55,8 +58,11 @@ const account = {
         api.account.logout({
           token: state.token
         }).then(res => {
-          commit("setRole", "");
+          commit('SET_TOKEN', '');
+          commit('SET_ROLES', []);
+          commit('SET_ROUTE_MAP', []);
           sessionStorage.clear();
+          location.reload() // 为了重新实例化vue-router对象
           resolve();
         }).catch((error) => {
           reject(error);
