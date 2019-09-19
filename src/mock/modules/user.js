@@ -3,23 +3,23 @@ import Mock from 'mockjs';
 
 const userDetail = Mock.mock({
   account: /^[a-zA-Z0-9_]{4,9}$/,
-  name: "@cname",
+  name: '@cname',
   gender: '@pick(["男", "女"])',
   avatar: "@image('100x100', '#02adea', 'avatar')",
-  email: "@email",
+  email: '@email',
   mobilePhone: /^1[345789]\d{9}$/,
   role: '@pick(["管理员", "编辑","普通会员","高级会员","普通用户"])'
 })
 
 const userList = Mock.mock({
   "list|127": [{
-    id: "@lower(@guid)",
-    name: "@cname",
-    age: "@natural(20,60)",
+    id: '@lower(@guid)',
+    name: '@cname',
+    age: '@natural(20,60)',
     gender: '@pick(["男","女"])',
     role: '@pick(["管理员", "编辑","普通会员","高级会员","普通用户"])',
-    registerDate: "@date",
-    consume: "@natural(0,10000)",
+    registerDate: '@date',
+    consume: '@natural(0,10000)',
   }]
 })
 

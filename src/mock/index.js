@@ -11,15 +11,15 @@ import tabRes from './modules/tab';
 Mock.XHR.prototype.proxy_send = Mock.XHR.prototype.send
 Mock.XHR.prototype.send = function () {
   if (this.custom.xhr) {
-    this.custom.xhr.withCredentials = this.withCredentials || false
+    this.custom.xhr.withCredentials = this.withCredentials || false;
   }
-  this.proxy_send(...arguments)
+  this.proxy_send(...arguments);
 }
 
 
 Mock.mock(/\/account\/login/, 'post', accountRes.login);
 Mock.mock(/\/account\/logout/, 'post', accountRes.logout);
-Mock.mock(/\/account\/userInfo/, 'get', accountRes.getUserInfo);
+Mock.mock(/\/account\/userInfo/, 'post', accountRes.getUserInfo);
 
 Mock.mock(/\/dashboard\/grid/, 'get', dashboardRes.getGridData);
 Mock.mock(/\/dashboard\/lineChart/, 'get', dashboardRes.getLineChartData);

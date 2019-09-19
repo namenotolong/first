@@ -22,13 +22,9 @@ input:focus{
 /* 去掉连接默认的下划线 */
 a{
     text-decoration:none;
-    color: #4a4a4a;
 }
 
-/* 去掉默认的边框 */
-fieldset,img{
-    border:none;
-}
+
 
 /* 去掉列表的标识 */
 ol,ul{
@@ -42,4 +38,3 @@ select{
 
 
 
-  

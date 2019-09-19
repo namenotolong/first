@@ -1,11 +1,13 @@
+// DOM级权限控制，若当前的角色不在指令传入的权限数组中，则该DOM元素不渲染。
+
 import store from "@/store";
 
 export default {
   inserted(el, binding) {
     const roles = binding.value;
     if (roles && roles instanceof Array && roles.length > 0) {
-      const role = store.state.account.role;
-      if (!roles.includes(role)) {
+      const currentRoles = store.getters.roles;
+      if (!currentRoles.some(role => roles.includes(role))) {
         el.parentNode && el.parentNode.removeChild(el);
       }
     } else {

@@ -33,7 +33,7 @@ const filterRouteMap = (routeNames, routeMap) => {
 }
 
 
-
+// 导航守卫
 router.beforeEach((to, from, next) => {
   const token = sessionStorage.getItem('token');
   if (!token && to.path !== '/login') {
@@ -44,9 +44,12 @@ router.beforeEach((to, from, next) => {
         const roles = res.roles;
         const routeNames = getRouteNames(roles, config.permission);
         const acceptedRouteMap = filterRouteMap(routeNames, dynamicRouteMap);
+        // 动态注册路由
         router.addRoutes(acceptedRouteMap);
         store.commit('SET_ROUTE_MAP', [...staticRouteMap, ...acceptedRouteMap])
-        next();
+        //  中断当前导航，重新导航到当前路由。刷新页面之后，会重新注册路由，这样可以确保路由注册完毕后，再进入。
+        // replace: true 是为了防止在history中留下之前中断的导航的记录。
+        next({ path: to.path, replace: true });
       })
     } else {
       next();

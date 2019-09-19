@@ -36,21 +36,25 @@
       // 获取需要在侧边菜单显示的路由表
       getMenuRouteMap(routes) {
         const routeMap = routes.filter(route => {
-          // 如果一级路由设置了hiddenInMenu：true，则它以及它的子路由都不能通过菜单栏访问
+          // 如果父路由设置了hiddenInMenu：true，则它以及它的子路由都不能通过菜单栏访问
           if (route.meta.hiddenInMenu) {
             return false;
           } else {
             if (route.children) {
               route.children = this.getMenuRouteMap(route.children);
+              if (route.children.length === 0) {
+                // 如果所有子路由都设置了hiddenInMenu：true，则父路由不显示
+                return false;
+              } else {
+                return true;
+              }
+            } else {
+              // 路由未设置hiddenInMenu：true，但是又不存在子路由的情况
+              return true;
             }
-            return true;
           }
         })
         return routeMap;
-      },
-      // 根据路由表生成导航菜单
-      getMenu(routes) {
-        return this.menuRouteMap.map(route => this.getMenuItem(route));
       },
       getMenuItem(route) {
         // children不存在代表是最后一级路由，只有一个children代表只有第一级路由
@@ -68,7 +72,11 @@
             children: route.children.map(childrenRoute => this.getMenuItem(childrenRoute))
           }
         }
-      }
+      },
+      // 根据路由表生成导航菜单
+      getMenu(routes) {
+        return this.menuRouteMap.map(route => this.getMenuItem(route));
+      },
     },
   }
 </script>

@@ -20,7 +20,6 @@ const route = {
     component: ArticleList,
     meta: {
       title: '文章列表',
-      // hiddenInMenu: true
     }
   }, {
     name: 'ArticleCreate',
@@ -28,7 +27,6 @@ const route = {
     component: ArticleCreate,
     meta: {
       title: '创建文章',
-      hiddenInMenu: true
     }
   }, {
     name: 'ArticleEdit',
@@ -49,7 +47,6 @@ const route = {
     component: ArticleDraft,
     meta: {
       title: '草稿箱',
-      hiddenInMenu: true
     }
   }, {
     name: 'ArticleRubbish',
@@ -57,7 +54,6 @@ const route = {
     component: ArticleRubbish,
     meta: {
       title: '垃圾箱',
-      hiddenInMenu: true
     }
   }]
 }
