@@ -1,5 +1,5 @@
 const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
-const Mine = () => import( /* webpackChunkName:'mine' */ '@/pages/Mine/Mine');
+const Mine = () => import( /* webpackChunkName:'mine' */ '@/pages/Mine');
 
 const route = {
   path: '/mine',

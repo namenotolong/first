@@ -1,10 +1,11 @@
 const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
-const BackToTop = () => import( /* webpackChunkName:'backToTop' */ '@/pages/Component/BackToTop');
-const Print = () => import( /* webpackChunkName:'print' */ '@/pages/Component/Print');
-const Html2canvas = () => import( /* webpackChunkName:'html2canvas' */ '@/pages/Component/html2canvas');
-const DragDialog = () => import( /* webpackChunkName:'dragDialog' */ '@/pages/Component/DragDialog');
-const Reminder = () => import( /* webpackChunkName:'reminder' */ '@/pages/Component/Reminder');
-const Carousel = () => import( /* webpackChunkName:'carousel' */ '@/pages/Component/Carousel');
+const BackToTop = () => import( /* webpackChunkName:'backToTop' */ '@/pages/Other/BackToTop');
+const Print = () => import( /* webpackChunkName:'print' */ '@/pages/Other/Print');
+const Html2canvas = () => import( /* webpackChunkName:'html2canvas' */ '@/pages/Other/html2canvas');
+const DragDialog = () => import( /* webpackChunkName:'dragDialog' */ '@/pages/Other/DragDialog');
+const Reminder = () => import( /* webpackChunkName:'reminder' */ '@/pages/Other/Reminder');
+const Carousel = () => import( /* webpackChunkName:'carousel' */ '@/pages/Other/Carousel');
+const ComponentDemo = () => import( /* webpackChunkName:'componentDemo' */ '@/pages/Other/ComponentDemo');
 
 const route = {
   name: 'Other',
@@ -56,7 +57,14 @@ const route = {
     meta: {
       title: '轮播图',
     }
-  }]
+  }, {
+    name: 'ComponentDemo',
+    path: '/other/componentDemo',
+    component: ComponentDemo,
+    meta: {
+      title: '小组件',
+    }
+  },]
 }
 
 export default route;

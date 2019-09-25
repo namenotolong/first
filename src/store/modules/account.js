@@ -1,5 +1,6 @@
 import api from '@/api';
 
+
 const account = {
   state: {
     token: sessionStorage.getItem('token'),
@@ -28,8 +29,8 @@ const account = {
           password
         }).then(res => {
           const token = res.data.loginInfo.token;
-          commit('SET_TOKEN', token);
           sessionStorage.setItem('token', token);
+          commit('SET_TOKEN', token);
           resolve();
         }).catch((error) => {
           reject(error);
@@ -61,8 +62,6 @@ const account = {
           commit('SET_TOKEN', '');
           commit('SET_ROLES', []);
           commit('SET_ROUTE_MAP', []);
-          sessionStorage.clear();
-          location.reload() // 为了重新实例化vue-router对象
           resolve();
         }).catch((error) => {
           reject(error);

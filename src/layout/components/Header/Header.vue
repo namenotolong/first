@@ -33,6 +33,7 @@
   import FullScreen from "@/components/FullScreen";
   import ThemePicker from "@/components/ThemePicker";
   import api from '@/api';
+  import { resetRouter } from '@/router';
 
   export default {
     components: {
@@ -59,6 +60,8 @@
       handleCommand(command) {
         if (command === 'logout') {
           this.$store.dispatch("logout").then(() => {
+            resetRouter();
+            sessionStorage.clear();
             this.$router.replace('/login');
           })
         }

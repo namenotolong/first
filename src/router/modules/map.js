@@ -1,5 +1,5 @@
 const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
-const AMap = () => import( /* webpackChunkName:'map' */ '@/pages/Map/Map');
+const AMap = () => import( /* webpackChunkName:'map' */ '@/pages/Map');
 
 const route = {
   path: '/map',

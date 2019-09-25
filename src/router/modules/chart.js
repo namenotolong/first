@@ -1,10 +1,10 @@
 const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
-const LineChart = () => import( /* webpackChunkName:'lineChart' */ '@/pages/Chart/LineChart/LineChart');
-const AreaChart = () => import( /* webpackChunkName:'areaChart' */ '@/pages/Chart/AreaChart/AreaChart');
-const PillarChart = () => import( /* webpackChunkName:'pillarChart' */ '@/pages/Chart/PillarChart/PillarChart');
-const BarChart = () => import( /* webpackChunkName:'barChart' */ '@/pages/Chart/BarChart/BarChart');
-const PieChart = () => import( /* webpackChunkName:'pieChart' */ '@/pages/Chart/PieChart/PieChart');
-const PointChart = () => import( /* webpackChunkName:'pointChart' */ '@/pages/Chart/PointChart/PointChart');
+const LineChart = () => import( /* webpackChunkName:'lineChart' */ '@/pages/Chart/LineChart');
+const AreaChart = () => import( /* webpackChunkName:'areaChart' */ '@/pages/Chart/AreaChart');
+const PillarChart = () => import( /* webpackChunkName:'pillarChart' */ '@/pages/Chart/PillarChart');
+const BarChart = () => import( /* webpackChunkName:'barChart' */ '@/pages/Chart/BarChart');
+const PieChart = () => import( /* webpackChunkName:'pieChart' */ '@/pages/Chart/PieChart');
+const PointChart = () => import( /* webpackChunkName:'pointChart' */ '@/pages/Chart/PointChart');
 
 
 const route = {

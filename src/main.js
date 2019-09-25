@@ -21,8 +21,7 @@ import '@/directive';
 
 import reminder from '@/components/Reminder/index.js'
 
-// 权限
-import '@/assets/permission';
+
 
 Vue.use(ElementUI, {
   size: 'medium'
