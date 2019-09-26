@@ -1,9 +1,9 @@
-const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
-const AMap = () => import( /* webpackChunkName:'map' */ '@/pages/Map');
+const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
+const AMap = () => import( /* webpackChunkName:'map' */ '@/pages/map');
 
 const route = {
   path: '/map',
-  component: Layout,
+  component: InnerLayout,
   redirect: '/map/index',
   meta: {
     title: '地图',

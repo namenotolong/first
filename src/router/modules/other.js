@@ -1,4 +1,4 @@
-const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
+const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
 const BackToTop = () => import( /* webpackChunkName:'backToTop' */ '@/pages/Other/BackToTop');
 const Print = () => import( /* webpackChunkName:'print' */ '@/pages/Other/Print');
 const Html2canvas = () => import( /* webpackChunkName:'html2canvas' */ '@/pages/Other/html2canvas');
@@ -10,7 +10,7 @@ const ComponentDemo = () => import( /* webpackChunkName:'componentDemo' */ '@/pa
 const route = {
   name: 'Other',
   path: '/other',
-  component: Layout,
+  component: InnerLayout,
   meta: {
     title: '其他功能',
     icon: 'other'

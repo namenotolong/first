@@ -1,29 +1,21 @@
-const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
-const UploadExcel = () => import( /* webpackChunkName:'uploadExcel' */ '@/pages/Excel/UploadExcel');
-const ExportExcel = () => import( /* webpackChunkName:'exportExcel' */ '@/pages/Excel/ExportExcel');
+const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
+const Excel = () => import( /* webpackChunkName:'excel' */ '@/pages/excel');
 
 
 const route = {
-  name: 'Excel',
   path: '/excel',
-  component: Layout,
+  component: InnerLayout,
+  redirect: '/excel/index',
   meta: {
     title: 'Excel',
     icon: 'excel'
   },
   children: [{
-    name: 'UploadExcel',
-    path: '/excel/uploadExcel',
-    component: UploadExcel,
+    name: 'Excel',
+    path: '/excel/index',
+    component: Excel,
     meta: {
-      title: '导入Excel',
-    }
-  }, {
-    name: 'ExportExcel',
-    path: '/excel/exportExcel',
-    component: ExportExcel,
-    meta: {
-      title: '导出Excel',
+      title: 'Excel',
     }
   }]
 }

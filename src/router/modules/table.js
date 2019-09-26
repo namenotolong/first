@@ -1,4 +1,4 @@
-const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
+const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
 const BaseTable = () => import( /* webpackChunkName:'baseTable' */ '@/pages/Table/BaseTable');
 const ComplexTable = () => import( /* webpackChunkName:'complexTable' */ '@/pages/Table/ComplexTable');
 
@@ -6,7 +6,7 @@ const ComplexTable = () => import( /* webpackChunkName:'complexTable' */ '@/page
 const route = {
   name:'Table',
   path: '/table',
-  component: Layout,
+  component: InnerLayout,
   meta: {
     title: '表格',
     icon: 'table'

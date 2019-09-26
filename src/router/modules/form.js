@@ -1,14 +1,14 @@
-const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
-const BaseForm = () => import( /* webpackChunkName:'baseForm' */ '@/pages/Form/BaseForm');
-const StepForm = () => import( /* webpackChunkName:'stepForm' */ '@/pages/Form/StepForm');
-const DynamicForm = () => import( /* webpackChunkName:'dynamicForm' */ '@/pages/Form/DynamicForm');
-const ValidForm = () => import( /* webpackChunkName:'validForm' */ '@/pages/Form/ValidForm');
+const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
+const BaseForm = () => import( /* webpackChunkName:'baseForm' */ '@/pages/form/BaseForm');
+const StepForm = () => import( /* webpackChunkName:'stepForm' */ '@/pages/form/StepForm');
+const DynamicForm = () => import( /* webpackChunkName:'dynamicForm' */ '@/pages/form/DynamicForm');
+const ValidForm = () => import( /* webpackChunkName:'validForm' */ '@/pages/form/ValidForm');
 
 
 const route = {
   name: 'Form',
   path: '/form',
-  component: Layout,
+  component: InnerLayout,
   meta: {
     title: '表单',
     icon: 'form'

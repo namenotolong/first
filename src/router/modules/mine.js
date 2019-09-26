@@ -1,9 +1,9 @@
-const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
-const Mine = () => import( /* webpackChunkName:'mine' */ '@/pages/Mine');
+const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
+const Mine = () => import( /* webpackChunkName:'mine' */ '@/pages/mine');
 
 const route = {
   path: '/mine',
-  component: Layout,
+  component: InnerLayout,
   redirect: '/mine/index',
   meta: {
     title: '个人中心',

@@ -1,9 +1,9 @@
-const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
-const Dashboard = () => import( /* webpackChunkName:'dashboard' */ '@/pages/Dashboard/Dashboard');
+const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
+const Dashboard = () => import( /* webpackChunkName:'dashboard' */ '@/pages/dashboard');
 
 const route = {
   path: '/dashboard',
-  component: Layout,
+  component: InnerLayout,
   redirect: '/dashboard/index',
   meta: {
     title: '首页',

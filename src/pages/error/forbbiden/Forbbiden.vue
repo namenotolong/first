@@ -1,5 +1,5 @@
 <template>
-  <div class="reject">
+  <div class="forbbiden">
     <div class="content">
       <img :style="{float:'right'}" :src="errGif" alt="">
       <p class="oops">Oops!</p>
@@ -55,7 +55,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .reject {
+  .forbbiden {
     position: absolute;
     top: 2px;
     bottom: 0;

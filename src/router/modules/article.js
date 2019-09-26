@@ -1,15 +1,15 @@
-const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
-const ArticleList = () => import( /* webpackChunkName:'articleList' */ '@/pages/Article/ArticleList');
-const ArticleCreate = () => import( /* webpackChunkName:'articleCreate' */ '@/pages/Article/ArticleCreate');
-const ArticleEdit = () => import( /* webpackChunkName:'articleEdit' */ '@/pages/Article/ArticleEdit');
-const ArticleDraft = () => import( /* webpackChunkName:'articleDraft' */ '@/pages/Article/ArticleDraft');
-const ArticleRubbish = () => import( /* webpackChunkName:'articleRubbish' */ '@/pages/Article/ArticleRubbish');
+const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
+const ArticleList = () => import( /* webpackChunkName:'articleList' */ '@/pages/article/ArticleList');
+const ArticleCreate = () => import( /* webpackChunkName:'articleCreate' */ '@/pages/article/ArticleCreate');
+const ArticleEdit = () => import( /* webpackChunkName:'articleEdit' */ '@/pages/article/ArticleEdit');
+const ArticleDraft = () => import( /* webpackChunkName:'articleDraft' */ '@/pages/article/ArticleDraft');
+const ArticleRubbish = () => import( /* webpackChunkName:'articleRubbish' */ '@/pages/article/ArticleRubbish');
 
 
 const route = {
   name: 'Article',
   path: '/article',
-  component: Layout,
+  component: InnerLayout,
   meta: {
     title: '文章管理',
     icon: 'article'

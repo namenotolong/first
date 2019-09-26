@@ -2,8 +2,8 @@
   <el-menu class="menu" :default-active="$route.path" :collapse="isCollapse" unique-opened router background-color="#545c64" text-color="#fff">
     <menu-item v-for="menu in menuList" :key="menu.path" :config="menu" />
   </el-menu>
-
 </template>
+
 <script>
   import bus from "@/utils/bus";
   import MenuItem from './MenuItem';

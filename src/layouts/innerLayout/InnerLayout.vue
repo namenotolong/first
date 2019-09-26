@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="inner-layout">
     <v-header></v-header>
     <v-menu></v-menu>
     <div class="container" :class="{collapse:isCollapse}">
@@ -48,42 +48,44 @@
 </script>
 
 <style lang="scss" scoped>
-  .container {
-    box-sizing: border-box;
-    position: absolute;
-    top: 62px;
-    bottom: 0px;
-    left: 220px;
-    right: 0px;
-    /* 查看element的menu.css源码可知transition的参数 */
-    transition: left .3s ease-in-out;
-    background-color: #f0f2f5;
-
-    &.collapse {
-      left: 65px;
-    }
-
-    .page {
-      position: relative;
+  .inner-layout {
+    .container {
       box-sizing: border-box;
-      height: calc(100% - 42px);
-      padding: 20px;
-      overflow-y: auto;
+      position: absolute;
+      top: 62px;
+      bottom: 0px;
+      left: 220px;
+      right: 0px;
+      /* 查看element的menu.css源码可知transition的参数 */
+      transition: left .3s ease-in-out;
+      background-color: #f0f2f5;
 
-      &-enter,
-      &-leave {
-        opacity: 0;
+      &.collapse {
+        left: 65px;
       }
 
-      &-enter-active,
-      &-leave-active {
-        transition: opacity .5s ease;
+      .page {
+        position: relative;
+        box-sizing: border-box;
+        height: calc(100% - 42px);
+        padding: 20px;
+        overflow-y: auto;
+
+        &-enter,
+        &-leave {
+          opacity: 0;
+        }
+
+        &-enter-active,
+        &-leave-active {
+          transition: opacity .5s ease;
+        }
+
+        /deep/ p {
+          color: #5e6d82;
+        }
       }
 
-      /deep/ p {
-        color: #5e6d82;
-      }
     }
-
   }
 </style>

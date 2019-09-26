@@ -1,9 +1,9 @@
-const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
-const Permission = () => import( /* webpackChunkName:'permission' */ '@/pages/Permission/Permission');
+const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
+const Permission = () => import( /* webpackChunkName:'permission' */ '@/pages/permission');
 
 const route = {
   path: '/permission',
-  component: Layout,
+  component: InnerLayout,
   redirect: '/permission/index',
   meta: {
     title: '权限控制',

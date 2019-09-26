@@ -35,39 +35,24 @@
 
       </el-col>
     </el-row>
-
-
-
   </div>
 </template>
 
 <script>
-  import ChartBase from "./components/ChartBase.vue";
-  import ChartNegative from "./components/ChartNegative.vue";
-  import ChartMaker from "./components/ChartMaker.vue";
-  import ChartRegion from "./components/ChartRegion.vue";
-  import ChartOverlay from "./components/ChartOverlay.vue";
+  import ChartBase from './components/ChartBase';
+  import ChartNegative from './components/ChartNegative';
+  import ChartMaker from './components/ChartMaker';
+  import ChartRegion from './components/ChartRegion';
+  import ChartOverlay from './components/ChartOverlay';
 
   export default {
-    name: "LineChart",
+    name: 'LineChart',
     components: {
       ChartBase,
       ChartNegative,
       ChartMaker,
       ChartRegion,
       ChartOverlay,
-    },
-    data() {
-      return {
-
-      }
-    },
-    mounted() {
-
-    },
-    methods: {
-
-
     }
   }
 </script>

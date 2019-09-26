@@ -1,9 +1,9 @@
-const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
-const User = () => import( /* webpackChunkName:'user' */ '@/pages/User/UserList');
+const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
+const User = () => import( /* webpackChunkName:'user' */ '@/pages/user');
 
 const route = {
   path: '/user',
-  component: Layout,
+  component: InnerLayout,
   redirect: '/user/index',
   meta: {
     title: '用户管理',

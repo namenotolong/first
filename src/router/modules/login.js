@@ -1,4 +1,4 @@
-const Login = () => import( /* webpackChunkName:'login' */ '@/pages/Login/Login');
+const Login = () => import( /* webpackChunkName:'login' */ '@/pages/login');
 
 const route = {
   name: 'Login',

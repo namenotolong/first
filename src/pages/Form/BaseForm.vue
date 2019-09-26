@@ -1,33 +1,52 @@
 <template>
   <div class="base-form">
-    <el-form ref="form" :model="form" :rules="formRules" status-icon label-width="80px" label-position="left">
-      <el-form-item label="名称" prop="name">
-        <el-input v-model="form.name" clearable placeholder="请填写活动名称"></el-input>
-      </el-form-item>
+    <el-form ref="form" :model="form" :rules="formRules" label-width="80px">
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <el-form-item label="名称" prop="name">
+            <el-input v-model="form.name" placeholder="请输入活动名称" clearable></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="数量" prop="amount">
+            <el-input v-model.number="form.amount" placeholder="请输入数量" clearable></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
 
-      <el-form-item label="区域" prop="region">
-        <el-select v-model="form.region" placeholder="请选择活动区域">
-          <el-option v-for="item in regionList" :key="item.value" :label="item.label" :value="item.value"></el-option>
-        </el-select>
-      </el-form-item>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <el-form-item label="区域" prop="region">
+            <el-select v-model="form.region" placeholder="请选择活动区域" clearable>
+              <el-option v-for="item in regionList" :key="item.value" :label="item.name" :value="item.id"></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="开始时间" prop="startTime">
+            <el-date-picker v-model="form.startTime" type="datetime" placeholder="请选择开始时间"></el-date-picker>
+          </el-form-item>
+        </el-col>
+      </el-row>
 
-      <el-form-item label="时间" prop="time">
-        <el-date-picker v-model="form.time" type="datetime" placeholder="请选择日期时间"></el-date-picker>
-      </el-form-item>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <el-form-item label="手机" prop="mobilePhone">
+            <el-input v-model="form.mobilePhone" placeholder="请输入主办方联系电话" clearable></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="邮箱" prop="email">
+            <el-input v-model="form.email" placeholder="请输入主办方联系邮箱" clearable></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
 
-      <el-form-item label="手机" prop="mobilePhone">
-        <el-input v-model="form.mobilePhone" clearable placeholder="请输入主办方联系电话"></el-input>
-      </el-form-item>
-
-      <el-form-item label="邮箱" prop="email">
-        <el-input v-model="form.email" clearable placeholder="请输入主办方联系邮箱"></el-input>
-      </el-form-item>
-
-      <el-form-item label="即时配送" prop="delivery">
+      <el-form-item class="inherit-line-height" label="即时配送" prop="delivery">
         <el-switch v-model="form.delivery"></el-switch>
       </el-form-item>
 
-      <el-form-item label="类型" prop="type">
+      <el-form-item class="inherit-line-height" label="类型" prop="type">
         <el-checkbox-group v-model="form.type">
           <el-checkbox label="美食线上活动"></el-checkbox>
           <el-checkbox label="地推活动"></el-checkbox>
@@ -36,61 +55,65 @@
         </el-checkbox-group>
       </el-form-item>
 
-      <el-form-item label="特殊资源" prop="resource">
+      <el-form-item class="inherit-line-height" label="特殊资源" prop="resource">
         <el-radio-group v-model="form.resource">
           <el-radio label="线上品牌商赞助"></el-radio>
           <el-radio label="线下场地免费"></el-radio>
         </el-radio-group>
       </el-form-item>
 
-      <el-form-item label="描述" prop="desc">
-        <textarea-limit v-model="form.desc" :maxlength="100" :rows="3"></textarea-limit>
+      <el-form-item label="描述" prop="description">
+        <el-input v-model="form.description" type="textarea" :rows="3" :maxlength="100" show-word-limit placeholder="请输入描述"></el-input>
       </el-form-item>
     </el-form>
 
     <div style="text-align:center;">
-      <el-button type="primary" round @click="submit" :loading="submitLoading">提交</el-button>
-      <el-button round @click="resetForm">重置</el-button>
+      <el-button type="primary" round @click="handleSubmit" :loading="submitLoading">提交</el-button>
+      <el-button round @click="handleCancel">取消</el-button>
     </div>
   </div>
 </template>
 
 <script>
-  import TextareaLimit from "@/components/TextareaLimit";
-
   export default {
-    name: "BaseForm",
-    components: {
-      TextareaLimit
-    },
+    name: 'BaseForm',
     data() {
       return {
         form: {
-          name: "",
-          region: "",
-          time: "",
-          mobilePhone: "",
-          email: "",
+          name: '',
+          amount: 0,
+          region: '',
+          startTime: '',
+          mobilePhone: '',
+          email: '',
           delivery: false,
           type: [],
-          resource: "",
-          desc: ""
+          resource: '',
+          description: ''
         },
         formRules: {
           name: [{
             required: true,
-            message: "请填写名称",
-            trigger: "blur"
+            message: '请填写名称',
+            trigger: 'blur'
+          }, {
+            max: 20,
+            message: '名称不能超过20个字',
+            trigger: 'blur'
+          }],
+          amount: [{
+            type: 'number',
+            message: '数量必须为数值'
           }],
           region: [{
             required: true,
-            message: "请选择区域",
-            trigger: "change"
+            message: '请选择区域',
+            trigger: 'change'
           }],
-          time: [{
+          startTime: [{
             required: true,
-            message: "请选择时间",
-            trigger: "change"
+            message: '请选择时间',
+            trigger: 'change'
           }],
           mobilePhone: [{
             required: true,
@@ -98,63 +121,75 @@
             trigger: 'blur'
           }, {
             pattern: /^1[345789]\d{9}$/,
-            message: "手机号码格式不正确",
-            trigger: "blur"
+            message: '手机号码格式不正确',
+            trigger: 'blur'
           }],
           email: [{
             required: true,
             message: '请填写邮箱',
             trigger: 'blur'
           }, {
-            type: "email",
-            message: "邮箱格式不正确",
-            trigger: "blur"
+            type: 'email',
+            message: '邮箱格式不正确',
+            trigger: 'blur'
           }],
           type: [{
             required: true,
-            message: "请选择类型",
-            trigger: "change"
+            message: '请选择类型',
+            trigger: 'change'
           }]
         },
         regionList: [{
-          label: "区域一",
-          value: "1",
+          id: '1',
+          name: '区域一',
         }, {
-          label: "区域二",
-          value: "2",
+          id: '2',
+          name: '区域二',
         }, {
-          label: "区域三",
-          value: "3",
+          id: '3',
+          name: '区域三',
         }],
         submitLoading: false,
       }
     },
     methods: {
-      submit() {
+      handleSubmit() {
         this.submitLoading = true;
         this.$refs.form.validate(valid => {
           if (valid) {
-            this.$message.success("提交成功！");
+            this.$message.success('提交成功！');
           } else {
-            this.$message.error("请填写带*星号的内容！");
+            this.$message.error('请按正确格式填写信息！');
           }
         })
         this.submitLoading = false;
       },
-      resetForm() {
+      handleCancel() {
         this.$refs.form.resetFields();
-        this.form.desc = "";
+        this.form.description = '';
       }
     }
   }
 </script>
-<style scoped>
+<style lang="scss" scoped>
   .base-form {
-    width: 50%;
+    width: 70%;
     min-width: 500px;
     padding: 20px;
     margin: 0 auto;
     border-radius: 10px;
     background-color: #fff;
+
+  }
+</style>
+<style lang="scss">
+  .base-form {
+    .inherit-line-height {
+
+      .el-form-item__label,
+      .el-form-item__content {
+        line-height: inherit;
+      }
+    }
   }
 </style>

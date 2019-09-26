@@ -1,9 +1,9 @@
-const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
-const Tab = () => import( /* webpackChunkName:'tab' */ '@/pages/Tab/Tab');
+const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
+const Tab = () => import( /* webpackChunkName:'tab' */ '@/pages/tab');
 
 const route = {
   path: '/tab',
-  component: Layout,
+  component: InnerLayout,
   redirect: '/tab/index',
   meta: {
     title: 'Tab选项卡',

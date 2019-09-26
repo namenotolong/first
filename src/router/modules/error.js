@@ -1,12 +1,12 @@
-const Layout = () => import( /* webpackChunkName:'layout' */ '@/layout/Layout');
-const Forbidden = () => import( /* webpackChunkName:'403' */ '@/pages/Error/403');
-const NotFound = () => import( /* webpackChunkName:'404' */ '@/pages/Error/404');
+const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
+const Forbidden = () => import( /* webpackChunkName:'403' */ '@/pages/error/forbbiden');
+const NotFound = () => import( /* webpackChunkName:'404' */ '@/pages/error/notFound');
 
 
 const route = {
   name: 'Error',
   path: '/error',
-  component: Layout,
+  component: InnerLayout,
   meta: {
     title: '错误处理',
     icon: 'error'
