@@ -1,0 +1,11 @@
+@charset "UTF-8";
+/*
+  全局scss变量
+*/
+.chart-wrap .title[data-v-74561414] {
+  font-size: 16px;
+  font-weight: 600;
+  text-indent: 2em;
+  line-height: 40px;
+}
+

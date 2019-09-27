@@ -1,0 +1,12 @@
+@charset "UTF-8";
+/*
+  全局scss变量
+*/
+.iconfont[data-v-e3a354d0] {
+  font-size: 30px;
+  color: #4a4a4a;
+}
+i + i[data-v-e3a354d0] {
+  margin-left: 10px;
+}
+

@@ -1,11 +1,11 @@
 const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
-const BackToTop = () => import( /* webpackChunkName:'backToTop' */ '@/pages/Other/BackToTop');
-const Print = () => import( /* webpackChunkName:'print' */ '@/pages/Other/Print');
-const Html2canvas = () => import( /* webpackChunkName:'html2canvas' */ '@/pages/Other/html2canvas');
-const DragDialog = () => import( /* webpackChunkName:'dragDialog' */ '@/pages/Other/DragDialog');
-const Reminder = () => import( /* webpackChunkName:'reminder' */ '@/pages/Other/Reminder');
-const Carousel = () => import( /* webpackChunkName:'carousel' */ '@/pages/Other/Carousel');
-const ComponentDemo = () => import( /* webpackChunkName:'componentDemo' */ '@/pages/Other/ComponentDemo');
+const BackToTop = () => import( /* webpackChunkName:'backToTop' */ '@/pages/other/BackToTop');
+const Print = () => import( /* webpackChunkName:'print' */ '@/pages/other/Print');
+const Html2canvas = () => import( /* webpackChunkName:'html2canvas' */ '@/pages/other/html2canvas');
+const DragDialog = () => import( /* webpackChunkName:'dragDialog' */ '@/pages/other/DragDialog');
+const Reminder = () => import( /* webpackChunkName:'reminder' */ '@/pages/other/Reminder');
+const Carousel = () => import( /* webpackChunkName:'carousel' */ '@/pages/other/Carousel');
+const ComponentDemo = () => import( /* webpackChunkName:'componentDemo' */ '@/pages/other/ComponentDemo');
 
 const route = {
   name: 'Other',

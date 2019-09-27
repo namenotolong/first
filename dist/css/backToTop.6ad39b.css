@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/*
+  全局scss变量
+*/
+.fade-enter[data-v-072a7f6a],
+.fade-leave-to[data-v-072a7f6a] {
+  opacity: 0;
+}
+.fade-enter-active[data-v-072a7f6a],
+.fade-leave-active[data-v-072a7f6a] {
+  transition: opacity .5s;
+}
+.rocket[data-v-072a7f6a] {
+  position: fixed;
+  width: 31px;
+  height: 76px;
+  background: url(../img/rocket-078810.png) no-repeat -31px -15px;
+  cursor: pointer;
+  z-index: 10000;
+}
+

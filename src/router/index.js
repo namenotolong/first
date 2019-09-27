@@ -5,7 +5,7 @@ import config from '@/assets/config';
 
 Vue.use(VueRouter);
 
-
+import accountRoute from './modules/account';
 import articleRoute from './modules/article';
 import chartRoute from './modules/chart';
 import dashboardRoute from './modules/dashboard';
@@ -13,7 +13,6 @@ import errorRoute from './modules/error';
 import excelRoute from './modules/excel';
 import formRoute from './modules/form';
 import iconRoute from './modules/icon';
-import loginRoute from './modules/login';
 import mapRoute from './modules/map';
 import mineRoute from './modules/mine';
 import otherRoute from './modules/other';
@@ -23,7 +22,7 @@ import tableRoute from './modules/table';
 import userRoute from './modules/user';
 
 
-// 不需要权限控制的路由
+// 不需要角色权限控制的路由(所有有角色都可以访问)
 const staticRouteMap = [{
   path: '/',
   redirect: '/dashboard',
@@ -31,7 +30,7 @@ const staticRouteMap = [{
     hiddenInMenu: true
   }
 },
-  loginRoute,
+  accountRoute,
   dashboardRoute,
   mineRoute,
 ]
@@ -51,7 +50,6 @@ const dynamicRouteMap = [
   articleRoute,
   otherRoute
 ]
-
 
 
 const createRouter = () => new VueRouter({
@@ -103,9 +101,12 @@ const filterRouteMap = (routeNames, routeMap) => {
 // 导航守卫
 router.beforeEach((to, from, next) => {
   const token = sessionStorage.getItem('token');
-  if (!token && to.path !== '/login') {
-    next('/login');
+  const outerPaths = ['/account/login', '/account/register'];
+  // token不存在(说明没登录),但是路由将要进入系统内部，自动跳到登录页面。
+  if (!token && !outerPaths.includes(to.path)) {
+    next('/account/login');
   } else {
+    // 如果token存在(说明已登录)，但是角色不存在(说明没获取到用户信息)，这时应该获取用户信息
     if (token && store.getters.roles.length === 0) {
       store.dispatch('GetUserInfo').then(res => {
         const roles = res.roles;

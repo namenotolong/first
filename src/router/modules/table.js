@@ -1,10 +1,10 @@
 const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
-const BaseTable = () => import( /* webpackChunkName:'baseTable' */ '@/pages/Table/BaseTable');
-const ComplexTable = () => import( /* webpackChunkName:'complexTable' */ '@/pages/Table/ComplexTable');
+const BaseTable = () => import( /* webpackChunkName:'baseTable' */ '@/pages/table/BaseTable');
+const ComplexTable = () => import( /* webpackChunkName:'complexTable' */ '@/pages/table/ComplexTable');
 
 
 const route = {
-  name:'Table',
+  name: 'Table',
   path: '/table',
   component: InnerLayout,
   meta: {

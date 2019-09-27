@@ -1,0 +1,22 @@
+@charset "UTF-8";
+/*
+  全局scss变量
+*/
+.base-form[data-v-25911fc0] {
+  width: 70%;
+  min-width: 500px;
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+@charset "UTF-8";
+/*
+  全局scss变量
+*/
+.base-form .inherit-line-height .el-form-item__label,
+.base-form .inherit-line-height .el-form-item__content {
+  line-height: inherit;
+}
+

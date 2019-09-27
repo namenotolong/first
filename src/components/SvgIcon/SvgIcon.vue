@@ -4,21 +4,21 @@
   </svg>
 </template>
 <script>
-  import "./fonts/iconfont";
+  import './fonts/iconfont';
 
   export default {
     props: {
       iconName: {
         required: true,
-        default: ""
+        default: ''
       },
       iconClass: {
-        default: ""
+        default: ''
       }
     },
     computed: {
       icon() {
-        return "#icon-" + this.iconName;
+        return '#icon-' + this.iconName;
       }
     }
   }

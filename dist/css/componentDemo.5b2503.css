@@ -1,0 +1,28 @@
+@charset "UTF-8";
+/*
+  全局scss变量
+*/
+.text-ellipsis .text-ellipsis__multiple[data-v-52be8172] {
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+}
+.text-ellipsis .text-ellipsis__single[data-v-52be8172] {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@charset "UTF-8";
+/*
+  全局scss变量
+*/
+.box[data-v-8cd19e96] {
+  width: 100px;
+}
+

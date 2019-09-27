@@ -62,7 +62,7 @@
           this.$store.dispatch("logout").then(() => {
             resetRouter();
             sessionStorage.clear();
-            this.$router.replace('/login');
+            this.$router.replace('/account/login');
           })
         }
       },

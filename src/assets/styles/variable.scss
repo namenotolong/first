@@ -1,17 +1,22 @@
-// 全局scss变量
+/*
+  全局scss变量
+*/
 
 // 主题色
 $theme-color:#409eff;
 
 
 //主要文字颜色
-$text-color-primary:#303133;
+$primary-text-color:#303133;
+
+// 常规文字颜色
+$secondary-text-color:#606266;
 
 // 次要文字颜色
-$text-color-secondary:#606266;
+$secondary-text-color:#606266;
 
 // 辅助性文字颜色
-$text-color-secondary-auxiliary:#909399;
+$auxiliary-text-color:#909399;
 
 // 基础边框
 $base-border:1px solid #dcdfe6;

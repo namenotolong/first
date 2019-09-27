@@ -1,0 +1,41 @@
+@charset "UTF-8";
+/*
+  全局scss变量
+*/
+.forbbiden[data-v-ea23e448] {
+  position: absolute;
+  top: 2px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  overflow: auto;
+}
+.forbbiden .content[data-v-ea23e448] {
+    width: 650px;
+    margin: 80px auto;
+}
+.forbbiden .content .oops[data-v-ea23e448] {
+      font-size: 50px;
+      font-weight: 600;
+      margin-bottom: 20px;
+}
+.forbbiden .content .dissatisfy[data-v-ea23e448] {
+      font-size: 12px;
+      margin: 10px 0;
+}
+.forbbiden .content .list[data-v-ea23e448] {
+      list-style-type: disc;
+      list-style-position: inside;
+}
+.forbbiden .content .list li[data-v-ea23e448] {
+        text-decoration: underline;
+        cursor: pointer;
+        margin-bottom: 4px;
+        color: #4a4a4a;
+}
+.forbbiden .content .dialog-img[data-v-ea23e448] {
+      width: 100%;
+      height: 100%;
+}
+
