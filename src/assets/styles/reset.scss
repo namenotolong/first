@@ -46,33 +46,14 @@ body {
   color: #303133;
 }
 
-/* 注意表单元素并不继承父级 font 的问题 */
-input,
-textarea,
-select,
-button {
-  font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
-}
-
-input:focus {
-  outline-style: none;
-}
-
-
-/* 去掉连接默认的下划线 */
+// 去掉连接默认的下划线
 a {
+  color: #4093ff;
   text-decoration: none;
 }
 
-
-
-/* 去掉列表的标识 */
+//  去掉列表的标识
 ol,
 ul {
   list-style: none;
-}
-
-/* 去掉下拉列表选中时的轮廓 */
-select {
-  outline: none;
 }

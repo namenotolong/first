@@ -1,6 +1,6 @@
 const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
-const Forbidden = () => import( /* webpackChunkName:'403' */ '@/pages/error/forbbiden');
-const NotFound = () => import( /* webpackChunkName:'404' */ '@/pages/error/notFound');
+const Forbidden = () => import( /* webpackChunkName:'forbidden' */ '@/pages/error/forbbiden');
+const NotFound = () => import( /* webpackChunkName:'notFound' */ '@/pages/error/notFound');
 
 
 const route = {

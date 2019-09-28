@@ -15,6 +15,7 @@ const route = {
     component: Tab,
     meta: {
       title: 'Tab选项卡',
+      activePath: '/tab'
     },
   }]
 }

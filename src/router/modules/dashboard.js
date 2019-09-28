@@ -7,7 +7,7 @@ const route = {
   redirect: '/dashboard/index',
   meta: {
     title: '首页',
-    icon: 'home'
+    icon: 'home',
   },
   children: [{
     name: 'dashboard',
@@ -15,6 +15,7 @@ const route = {
     component: Dashboard,
     meta: {
       title: '首页',
+      activePath: '/dashboard'
     },
   }]
 }

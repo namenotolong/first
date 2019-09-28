@@ -15,6 +15,7 @@ const route = {
     component: User,
     meta: {
       title: '用户管理',
+      activePath: '/user'
     },
   }]
 }

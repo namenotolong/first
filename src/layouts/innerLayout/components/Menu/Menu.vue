@@ -1,5 +1,11 @@
 <template>
-  <el-menu class="menu" :default-active="$route.path" :collapse="isCollapse" unique-opened router background-color="#545c64" text-color="#fff">
+  <el-menu
+    class="menu"
+    :default-active="activePath"
+    :collapse="isCollapse"
+    unique-opened router
+    background-color="#545c64"
+    text-color="#fff">
     <menu-item v-for="menu in menuList" :key="menu.path" :config="menu" />
   </el-menu>
 </template>
@@ -22,6 +28,14 @@
     computed: {
       routeMap() {
         return this.$store.getters.routeMap
+      },
+      activePath() {
+        const { meta, path } = this.$route;
+        if (meta.activePath) {
+          return meta.activePath;
+        } else {
+          return path;
+        }
       }
     },
     created() {

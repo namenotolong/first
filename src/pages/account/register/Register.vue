@@ -131,7 +131,7 @@
       },
       // 校验手机号
       validPhone() {
-        if (!this.formData.mobile.match(/^1[345789]\d{9}$/)) {
+        if (!this.accountInfo.phone.match(/^1[345789]\d{9}$/)) {
           this.$message.error('请填写正确的手机号！');
           return false;
         }
@@ -139,7 +139,7 @@
       },
       //获取验证码
       async getCaptcha() {
-        if (!Phone()) return;
+        if (!this.validPhone()) return;
 
         // 倒计时
         this.captchaLoading = true;
@@ -188,8 +188,6 @@
     .register__body {
       margin-top: 20px;
     }
-
-
   }
 </style>
 

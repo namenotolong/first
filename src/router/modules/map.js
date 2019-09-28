@@ -15,6 +15,7 @@ const route = {
     component: AMap,
     meta: {
       title: '地图',
+      activePath: '/map'
     },
   }]
 }

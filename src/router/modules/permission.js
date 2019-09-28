@@ -15,6 +15,7 @@ const route = {
     component: Permission,
     meta: {
       title: '权限控制',
+      activePath: '/permission'
     },
   }]
 }
