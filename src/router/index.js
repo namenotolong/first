@@ -101,7 +101,7 @@ const filterRouteMap = (routeNames, routeMap) => {
 // 导航守卫
 router.beforeEach((to, from, next) => {
   const token = sessionStorage.getItem('token');
-  const outerPaths = ['/account/login', '/account/register'];
+  const outerPaths = ['/account/login', '/account/register', '/account/forget'];
   // token不存在(说明没登录),但是路由将要进入系统内部，自动跳到登录页面。
   if (!token && !outerPaths.includes(to.path)) {
     next('/account/login');

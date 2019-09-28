@@ -18,7 +18,7 @@
         <el-input v-model="accountInfo.phone" placeholder="请填写手机号码"></el-input>
       </el-form-item>
 
-      <el-form-item class="valid-code" label="验证码" prop="captcha">
+      <el-form-item label="验证码" prop="captcha">
         <el-row>
           <el-col :span="13">
             <el-input v-model="accountInfo.captcha" placeholder="短信验证码"></el-input>
@@ -44,6 +44,8 @@
 </template>
 
 <script>
+  import api from '@/api';
+
   export default {
     data() {
       const validatePass = (rule, value, callback) => {
@@ -130,8 +132,8 @@
         this.captchaButtonText = '获取验证码';
       },
       // 校验手机号
-      validPhone() {
-        if (!this.accountInfo.phone.match(/^1[345789]\d{9}$/)) {
+      validPhone(phone) {
+        if (!phone.match(/^1[345789]\d{9}$/)) {
           this.$message.error('请填写正确的手机号！');
           return false;
         }
@@ -139,7 +141,7 @@
       },
       //获取验证码
       async getCaptcha() {
-        if (!this.validPhone()) return;
+        if (!this.validPhone(this.accountInfo.phone)) return;
 
         // 倒计时
         this.captchaLoading = true;
@@ -154,19 +156,27 @@
           }
         }, 1000);
 
-        // 获取验证码
-        const response = await api.account.getCaptcha({
-          phone: this.accountInfo.phone
-        })
-        if (res.meta.success == true) {
-          this.$message.success(`验证码已发送至手机${ this.accountInfo.phone }，请注意查收！`);
-        } else {
-          this.$message.error('发送失败，请重新发送');
-        }
-        this.setDefaultCaptchaButton(timer);
+        const response = await api.account.getCaptcha({ phone: this.accountInfo.phone });
+        this.$message.success(`验证码已发送至手机${ this.accountInfo.phone }，请注意查收！`);
       },
       handleRegister() {
-
+        this.registerLoading = true;
+        this.$refs.form.validate(async (valid) => {
+          if (valid) {
+            const response = await api.account.register(this.accountInfo);
+            this.$message.success('注册成功！');
+            this.$store.dispatch('Login', {
+              username: this.accountInfo.username,
+              password: this.accountInfo.password
+            }).then(() => {
+              this.$router.replace('/dashboard');
+              this.registerLoading = false;
+            })
+          } else {
+            this.$message.success('请按正确格式填写信息');
+            this.registerLoading = false;
+          }
+        })
       }
     }
   }
@@ -174,7 +184,7 @@
 
 <style lang="scss" scoped>
   .register {
-    padding: 15px 30px;
+    padding: 15px 20px;
     background-color: rgba(255, 255, 255, 0);
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.7);
     border-radius: 10px;

@@ -1,10 +1,10 @@
 import Mock from 'mockjs';
 
-import accountRes from './modules/account';
-import dashboardRes from './modules/dashboard';
-import articleRes from './modules/article';
-import userRes from './modules/user';
-import tabRes from './modules/tab';
+import account from './modules/account';
+import dashboard from './modules/dashboard';
+import article from './modules/article';
+import user from './modules/user';
+import tab from './modules/tab';
 
 // 修复在使用 MockJS 情况下，设置 withCredentials = true，且未被拦截的跨域请求丢失 Cookies 的问题
 // https://github.com/nuysoft/Mock/issues/300
@@ -17,27 +17,26 @@ Mock.XHR.prototype.send = function () {
 }
 
 
-Mock.mock(/\/account\/login/, 'post', accountRes.login);
-Mock.mock(/\/account\/logout/, 'post', accountRes.logout);
-Mock.mock(/\/account\/userInfo/, 'post', accountRes.getUserInfo);
+Mock.mock(/\/account\/login/, 'post', account.login);
+Mock.mock(/\/account\/logout/, 'post', account.logout);
+Mock.mock(/\/account\/userInfo/, 'post', account.getUserInfo);
+Mock.mock(/\/account\/captcha/, 'post', account.getCaptcha);
+Mock.mock(/\/account\/register/, 'post', account.register);
+Mock.mock(/\/account\/modifyPassword/, 'post', account.modifyPassword);
 
-Mock.mock(/\/dashboard\/grid/, 'get', dashboardRes.getGridData);
-Mock.mock(/\/dashboard\/lineChart/, 'get', dashboardRes.getLineChartData);
-Mock.mock(/\/dashboard\/todoList/, 'get', dashboardRes.getTodoListData);
+Mock.mock(/\/dashboard\/grid/, 'get', dashboard.getGridData);
+Mock.mock(/\/dashboard\/lineChart/, 'get', dashboard.getLineChartData);
+Mock.mock(/\/dashboard\/todoList/, 'get', dashboard.getTodoListData);
 
-Mock.mock(/\/article\/authorList/, 'get', articleRes.getAuthorList);
-Mock.mock(/\/article\/articleList/, 'post', articleRes.getArticleList);
-Mock.mock(/\/article\/articleDetail/, 'get', articleRes.getArticleDetail);
-
-
-Mock.mock(/\/user\/userList/, 'post', userRes.getUserList);
-Mock.mock(/\/user\/userDetail/, 'get', userRes.getUserDetail);
-
-
-Mock.mock(/\/tab\/tabList/, 'get', tabRes.getTabData);
+Mock.mock(/\/article\/authorList/, 'get', article.getAuthorList);
+Mock.mock(/\/article\/articleList/, 'post', article.getArticleList);
+Mock.mock(/\/article\/articleDetail/, 'get', article.getArticleDetail);
 
 
+Mock.mock(/\/user\/userList/, 'post', user.getUserList);
+Mock.mock(/\/user\/userDetail/, 'get', user.getUserDetail);
 
 
+Mock.mock(/\/tab\/tabList/, 'get', tab.getTabData);
 
 export default Mock;

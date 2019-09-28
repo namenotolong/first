@@ -1,6 +1,7 @@
 const OuterLayout = () => import( /* webpackChunkName:'outerLayout' */ '@/layouts/outerLayout');
 const Login = () => import( /* webpackChunkName:'login' */ '@/pages/account/login');
-const Register = () => import( /* webpackChunkName:'register' */ '@/pages/account/Register');
+const Register = () => import( /* webpackChunkName:'register' */ '@/pages/account/register');
+const Forget = () => import( /* webpackChunkName:'forget' */ '@/pages/account/forget');
 
 
 const route = {
@@ -23,6 +24,13 @@ const route = {
     component: Register,
     meta: {
       title: '注册',
+    }
+  }, {
+    name: 'Forget',
+    path: '/account/forget',
+    component: Forget,
+    meta: {
+      title: '忘记密码',
     }
   }]
 }

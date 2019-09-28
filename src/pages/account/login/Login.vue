@@ -19,7 +19,7 @@
       <el-form-item>
         <el-checkbox v-model="loginForm.rememberPwd">记住密码</el-checkbox>
         <div class="register">
-          <router-link to="/">忘记密码?</router-link>
+          <router-link to="/account/forget">忘记密码?</router-link>
           <span>没加入我们?</span>
           <router-link to="/account/register">立即注册</router-link>
         </div>
@@ -71,19 +71,14 @@
         this.$refs.loginForm.validate((valid) => {
           if (valid) {
             this.$store.dispatch('Login', this.loginForm).then(() => {
-              this.loginLoading = false;
               this.$router.replace('/dashboard');
+              this.loginLoading = false;
             }).catch((error) => {
-              this.$message({
-                type: 'error',
-                message: '登录失败,请填写正确的信息！'
-              })
+              this.$message.error('登录失败,请填写正确的信息！')
+              this.loginLoading = false;
             })
           } else {
-            this.$message({
-              type: 'error',
-              message: '登录失败,请填写正确的信息！'
-            })
+            this.$message.error('登录失败,请填写正确的信息！')
             this.loginLoading = false;
           }
         })
@@ -94,7 +89,7 @@
 
 <style lang="scss" scoped>
   .login {
-    padding: 15px 30px;
+    padding: 15px 20px;
     background-color: rgba(255, 255, 255, 0);
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.7);
     border-radius: 10px;

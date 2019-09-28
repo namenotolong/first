@@ -11,7 +11,8 @@ const permission = {
 
 
 const config = {
-  permission
+  permission,
+  apiUrl: 'https://mock.api'
 }
 
 

@@ -52,5 +52,29 @@ export default {
         userInfo
       }
     }
-  }
+  },
+  getCaptcha(config) {
+    return {
+      code: 200,
+      data: {
+
+      }
+    }
+  },
+  register(config) {
+    return {
+      code: 200,
+      data: {
+
+      }
+    }
+  },
+  modifyPassword(config) {
+    return {
+      code: 200,
+      data: {
+
+      }
+    }
+  },
 }

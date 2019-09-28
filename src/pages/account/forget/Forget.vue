@@ -1,32 +1,40 @@
 <template>
   <!-- 忘记密码 -->
-  <div class="forget-password">
+  <div class="forget">
+    <p class="forget__header">忘记密码</p>
 
-    <div class="form">
-      <div class="title">找回密码</div>
-      <el-form ref="form" :model="formData" :rules="rules" label-width="100px">
-        <el-form-item label="手机号：" prop="mobile">
-          <el-input v-model="formData.mobile" placeholder="请填写手机号"></el-input>
-        </el-form-item>
+    <el-form class="forget__body" ref="form" :model="formData" :rules="rules" label-width="80px">
 
-        <el-form-item class="valid-code" label="验证码：" prop="validCode">
-          <el-input v-model="formData.validCode" placeholder="短信验证码"></el-input>
-          <el-button class="valid-button" @click="getValidCode" :disabled="getValidCodeLoading" v-text="validButtonText"></el-button>
-        </el-form-item>
+      <el-form-item label="新密码" prop="password">
+        <el-input v-model="formData.password" type="password" placeholder="6~20位数字、字母、符号组合"></el-input>
+      </el-form-item>
 
-        <el-form-item label="密码：" prop="password">
-          <el-input v-model="formData.password" type="password" placeholder="6~20位数字、字母、符号组合"></el-input>
-        </el-form-item>
+      <el-form-item label="确认密码" prop="checkPassword">
+        <el-input v-model="formData.checkPassword" type="password" placeholder="请再次输入密码确认" @keyup.enter.native="submit"></el-input>
+      </el-form-item>
 
-        <el-form-item label="确认密码：" prop="checkPassword">
-          <el-input v-model="formData.checkPassword" type="password" placeholder="请再次输入密码确认" @keyup.enter.native="submit"></el-input>
-        </el-form-item>
 
-        <el-form-item class="submit">
-          <el-button type="primary" size="large" :loading="loading" @click="submit">确认</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
+      <el-form-item label="手机号" prop="phone">
+        <el-input v-model="formData.phone" placeholder="请填写手机号"></el-input>
+      </el-form-item>
+
+      <el-form-item label="验证码" prop="captcha">
+        <el-row>
+          <el-col :span="13">
+            <el-input v-model="formData.captcha" placeholder="短信验证码"></el-input>
+          </el-col>
+          <el-col :span="1">.</el-col>
+          <el-col :span="10">
+            <el-button round @click="getCaptcha" :disabled="captchaLoading">{{captchaButtonText}}</el-button>
+          </el-col>
+        </el-row>
+      </el-form-item>
+
+      <el-form-item class="submit">
+        <el-button type="primary" :loading="submitLoading" round @click="submit">确认</el-button>
+      </el-form-item>
+    </el-form>
+
 
   </div>
 
@@ -60,13 +68,13 @@
       };
       return {
         formData: {
-          mobile: '',
-          validCode: '',
+          phone: '',
+          captcha: '',
           password: '',
           checkPassword: ''
         },
         rules: {
-          mobile: [{
+          phone: [{
             required: true,
             message: '手机号码不能为空',
             trigger: 'blur'
@@ -75,7 +83,7 @@
             message: '手机号码格式不正确',
             trigger: 'blur'
           }],
-          validCode: [{
+          captcha: [{
             required: true,
             message: '请填写验证码',
             trigger: 'blur'
@@ -102,100 +110,59 @@
             trigger: 'blur'
           }],
         },
-        loading: false,
-        getValidCodeLoading: false,
-        validButtonText: '获取验证码'
+        submitLoading: false,
+        captchaLoading: false,
+        captchaButtonText: '获取验证码'
       }
     },
     methods: {
       // 设置获取验证码按钮的默认状态
-      setDefaultValidButton(timer) {
+      setDefaultCaptchaButton(timer) {
         clearInterval(timer);
-        this.getValidCodeLoading = false;
-        this.validButtonText = '获取验证码';
+        this.captchaLoading = false;
+        this.captchaButtonText = '获取验证码';
       },
-      // 获取验证码
-      getValidCode() {
-        if (!this.formData.mobile.match(/^1[345789]\d{9}$/)) {
-          this.$message({
-            type: 'error',
-            message: '请填写正确的手机号！'
-          });
+      // 校验手机号
+      validPhone(phone) {
+        if (!phone.match(/^1[345789]\d{9}$/)) {
+          this.$message.error('请填写正确的手机号！');
           return false;
         }
+        return true
+      },
+      // 获取验证码
+      async getCaptcha() {
+        if (!this.validPhone(this.formData.phone)) return;
 
-        this.getValidCodeLoading = true;
+        // 倒计时
+        this.captchaLoading = true;
         let totalTime = 60;
         let timer = null;
         timer = setInterval(() => {
           totalTime--;
           if (totalTime > 0) {
-            this.validButtonText = `获取验证码(${totalTime}s)`;
+            this.captchaButtonText = `获取验证码(${totalTime}s)`;
           } else {
-            this.setDefaultValidButton(timer);
+            this.setDefaultCaptchaButton(timer);
           }
         }, 1000);
 
-        // 发送获取验证码的请求
-        api.account.getValidCode({
-          phone: this.formData.mobile
-        }).then(res => {
-          if (res.meta.success == true) {
-            this.$message({
-              type: 'success',
-              message: `验证码已发送至手机${
-                  this.formData.mobile
-                }，请注意查收！`
-            });
-          } else {
-            this.$message({
-              type: 'error',
-              message: res.meta.msg
-            });
-            this.setDefaultValidButton(timer);
-          }
-        }).catch(err => {
-          this.$message({
-            type: 'error',
-            message: '发送失败，请稍后再试！'
-          });
-          this.setDefaultValidButton(timer);
-        });
+        const response = await api.account.getCaptcha({ phone: this.formData.phone });
+        this.$message.success(`验证码已发送至手机${ this.formData.phone }，请注意查收！`);
       },
       // 提交
       submit() {
-        this.loading = true;
-        this.$refs.form.validate(valid => {
+        this.submitLoading = true;
+        this.$refs.form.validate(async (valid) => {
           if (valid) {
             const formData = this.formData;
-            api.account.modifyPassword({
-              phone: formData.mobile,
-              verifyCode: formData.validCode,
-              password: formData.password,
-              retryPassword: formData.checkPassword,
-            }).then(res => {
-              if (res.meta.success == true) {
-                this.$message({
-                  type: "success",
-                  message: "密码修改成功，请重新登录！"
-                });
-                this.$router.push('/login')
-              } else {
-                this.$message({
-                  type: "error",
-                  message: res.data.users
-                });
-              }
-              this.loading = false;
-            }).catch(err => {
-              this.loading = false;
-            });
+            const response = api.account.modifyPassword(this.formData);
+            this.$message.success('修改成功,请使用新密码进行登录');
+            this.$router.replace('/dashboard');
+            this.submitLoading = false;
           } else {
-            this.$message({
-              type: 'error',
-              message: '请填写正确的信息！'
-            });
-            this.loading = false;
+            this.$message.success('请按正确格式填写信息');
+            this.submitLoading = false;
           }
         });
       }
@@ -204,41 +171,38 @@
 </script>
 
 <style lang="scss" scoped>
-  .forget-password {
-    .form {
-      box-sizing: border-box;
-      width: 1100px;
-      height: 600px;
-      padding: 20px 350px;
-      border: 10px solid rgba(255, 255, 255, 0.4);
-      border-radius: 14px;
-      background-clip: padding-box;
-      background-color: #fff;
+  .forget {
+    padding: 15px 20px;
+    background-color: rgba(255, 255, 255, 0);
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
 
-      .title {
-        margin-bottom: 20px;
-        text-align: center;
-        font-size: 18px;
-        color: $primary-text-color;
-      }
+    .forget__header {
+      font-size: 22px;
+      text-align: center;
+      color: #fff;
+    }
 
-      .valid-code {
-        .el-input {
-          display: inline-block;
-          width: 135px;
-          margin-right: 8px;
-        }
+    .forget__body {
+      margin-top: 20px;
+    }
 
-        .valid-button {
-          float: right;
-        }
-      }
+  }
+</style>
+<style lang="scss">
+  .forget {
+    .el-input__inner {
+      border-radius: 20px;
+    }
 
-      .submit {
-        .el-button {
-          width: 100%;
-        }
-      }
+    .el-form-item__label,
+    .el-checkbox__label {
+      color: #fff;
+    }
+
+    .el-button {
+      display: block;
+      width: 100%;
     }
   }
 </style>
