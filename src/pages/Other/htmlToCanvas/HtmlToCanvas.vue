@@ -7,7 +7,6 @@
       <img class="avatar" :src="dataURL">
       <p>文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容</p>
     </div>
-
     <br>
 
     <el-button type="primary" @click="download">下载图片</el-button>

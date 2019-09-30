@@ -7,7 +7,7 @@
         </keep-alive>
       </el-tab-pane>
     </el-tabs>
-    <p>#默认情况下，tab选项卡会一次性将所有pane中的数据获取完。使用keep-alive和v-if来按需加载对应的pane。</p>
+    <p>#默认情况下，tab选项卡会一次性将所有pane中的数据获取完。使用v-if来按需加载对应的pane,使用keep-alive做缓存。</p>
   </div>
 </template>
 <script>

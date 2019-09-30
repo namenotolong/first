@@ -1,0 +1,31 @@
+/*
+  覆盖element的样式
+*/
+
+$--color-text-primary: #333 !default;
+$--color-text-regular: #666 !default;
+$--color-text-secondary: #999 !default;
+
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+@import "~element-ui/packages/theme-chalk/src/index.scss";
+
+
+
+//table
+.el-table {
+
+  th>.cell,
+  .cell {
+    text-align: center;
+  }
+}
+
+// form
+.el-form {
+
+  .el-select,
+  .el-date-editor.el-input {
+    width: 100%;
+  }
+}

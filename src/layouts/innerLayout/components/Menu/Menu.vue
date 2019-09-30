@@ -11,8 +11,10 @@
 </template>
 
 <script>
+  // :active-text-color="variable.activeColor"
   import bus from "@/utils/bus";
   import MenuItem from './MenuItem';
+  // import variable from '@/assets/styles/variable.scss'
 
   export default {
     components: {
@@ -20,6 +22,7 @@
     },
     data() {
       return {
+        // variable,
         isCollapse: false,
         menuRouteMap: [],
         menuList: []
@@ -105,11 +108,6 @@
     border-top: 2px solid #434a50;
     border-right: none;
     overflow-y: auto;
-
-    .icon {
-      vertical-align: middle;
-      font-size: 18px;
-    }
   }
 
   .menu::-webkit-scrollbar {

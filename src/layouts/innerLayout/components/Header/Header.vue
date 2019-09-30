@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header" :style="{'background-color':theme}">
     <div class="header__logo" @click="toHome">
       <svg-icon icon-name="logo" />
       <span>后台管理系统</span>
@@ -8,9 +8,9 @@
     <i class="iconfont icon-menu" @click="changeCollapse"></i>
 
     <div class="header__menu">
-      <full-screen></full-screen>
+      <full-screen />
 
-      <theme-picker></theme-picker>
+      <theme-picker />
 
       <el-dropdown @command="handleCommand">
         <img class="header__menu__portrait" :src="avatar" alt />
@@ -26,114 +26,120 @@
 </template>
 
 <script>
-import bus from '@/utils/bus';
-import FullScreen from '@/components/FullScreen';
-import ThemePicker from '@/components/ThemePicker';
-import api from '@/api';
-import { resetRouter } from '@/router';
-import SvgIcon from '@/components/SvgIcon';
+  import bus from '@/utils/bus';
+  import FullScreen from '@/components/FullScreen';
+  import ThemePicker from '@/components/ThemePicker';
+  import api from '@/api';
+  import { resetRouter } from '@/router';
+  import SvgIcon from '@/components/SvgIcon';
 
-export default {
-  components: {
-    FullScreen,
-    ThemePicker
-  },
-  data() {
-    return {
-      isCollapse: false,
-      avatar: ''
-    };
-  },
-  created() {
-    this.getAvatar();
-  },
-  methods: {
-    toHome() {
-      this.$router.push('/dashboard');
+  export default {
+    components: {
+      FullScreen,
+      ThemePicker
     },
-    changeCollapse() {
-      this.isCollapse = !this.isCollapse;
-      bus.$emit('collapse', this.isCollapse);
-    },
-    handleCommand(command) {
-      if (command === 'logout') {
-        this.$store.dispatch('logout').then(() => {
-          resetRouter();
-          sessionStorage.clear();
-          this.$router.replace('/account/login');
-        });
+    computed: {
+      theme() {
+        return this.$store.getters.theme
       }
     },
-    getAvatar() {
-      api.account
-        .getUserInfo({
-          username: sessionStorage.getItem('userId')
-        })
-        .then(res => {
-          this.avatar = res.data.userInfo.avatar;
-        });
+    data() {
+      return {
+        isCollapse: false,
+        avatar: ''
+      };
+    },
+    created() {
+      this.getAvatar();
+    },
+    methods: {
+      toHome() {
+        this.$router.push('/dashboard');
+      },
+      changeCollapse() {
+        this.isCollapse = !this.isCollapse;
+        bus.$emit('collapse', this.isCollapse);
+      },
+      handleCommand(command) {
+        if (command === 'logout') {
+          this.$store.dispatch('logout').then(() => {
+            resetRouter();
+            sessionStorage.clear();
+            this.$router.replace('/account/login');
+          });
+        }
+      },
+      getAvatar() {
+        api.account
+          .getUserInfo({
+            username: sessionStorage.getItem('userId')
+          })
+          .then(res => {
+            this.avatar = res.data.userInfo.avatar;
+          });
+      }
     }
-  }
-};
+  };
 </script>
 <style lang="scss" scoped>
-.header {
-  height: 60px;
-  line-height: 60px;
-  padding-right: 30px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  .header {
+    height: 60px;
+    line-height: 60px;
+    padding-right: 30px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+      0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    // background-color: $theme-color;
 
-  .header__logo {
-    display: inline-block;
-    width: 220px;
-    background-color: #545c64;
-    font-weight: normal;
-    font-size: 24px;
-    color: #fff;
-    text-align: center;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #434a50;
-    }
-  }
-
-  .icon-system {
-    font-size: 24px;
-    margin-right: 10px;
-  }
-
-  .icon-menu {
-    color: #fff;
-    font-size: 20px;
-    margin-left: 16px;
-    cursor: pointer;
-
-    &:hover {
-      color: #4a4a4a;
-    }
-  }
-
-  .el-color-picker {
-    transform: translate(-10px, -4px);
-  }
-
-  .header__menu {
-    float: right;
-    height: 40px;
-    padding: 10px;
-
-    .el-dropdown {
-      height: 40px;
-    }
-
-    .header__menu__portrait {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+    .header__logo {
+      display: inline-block;
+      width: 220px;
+      background-color: #545c64;
+      font-weight: normal;
+      font-size: 24px;
+      color: #fff;
+      text-align: center;
       cursor: pointer;
+
+      &:hover {
+        background-color: #434a50;
+      }
+    }
+
+    .icon-system {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+
+    .icon-menu {
+      color: #fff;
+      font-size: 20px;
+      margin-left: 16px;
+      cursor: pointer;
+
+      &:hover {
+        color: #4a4a4a;
+      }
+    }
+
+    .el-color-picker {
+      transform: translate(-10px, -4px);
+    }
+
+    .header__menu {
+      float: right;
+      height: 40px;
+      padding: 10px;
+
+      .el-dropdown {
+        height: 40px;
+      }
+
+      .header__menu__portrait {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
     }
   }
-}
 </style>

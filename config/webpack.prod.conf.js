@@ -4,11 +4,15 @@ const baseWebpackConfig = require('./webpack.base.conf.js');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const resolve = (dir) => {
+  return path.resolve(process.cwd(), dir)
+}
+
 
 module.exports = merge(baseWebpackConfig, {
   mode: 'production',
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: resolve('dist'),
     filename: 'js/[name].[contenthash:6].js',
     chunkFilename: 'js/[name].[contenthash:6].js'
   },

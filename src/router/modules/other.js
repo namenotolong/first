@@ -1,11 +1,10 @@
 const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
-const BackToTop = () => import( /* webpackChunkName:'backToTop' */ '@/pages/other/BackToTop');
-const Print = () => import( /* webpackChunkName:'print' */ '@/pages/other/Print');
-const Html2canvas = () => import( /* webpackChunkName:'html2canvas' */ '@/pages/other/html2canvas');
-const DragDialog = () => import( /* webpackChunkName:'dragDialog' */ '@/pages/other/DragDialog');
-const Reminder = () => import( /* webpackChunkName:'reminder' */ '@/pages/other/Reminder');
-const Carousel = () => import( /* webpackChunkName:'carousel' */ '@/pages/other/Carousel');
-const ComponentDemo = () => import( /* webpackChunkName:'componentDemo' */ '@/pages/other/ComponentDemo');
+const Print = () => import( /* webpackChunkName:'print' */ '@/pages/other/print');
+const HtmlToCanvas = () => import( /* webpackChunkName:'htmlToCanvas' */ '@/pages/other/htmlToCanvas');
+const AMap = () => import( /* webpackChunkName:'aMap' */ '@/pages/other/aMap');
+const DragDialog = () => import( /* webpackChunkName:'dragDialog' */ '@/pages/other/dragDialog');
+const Carousel = () => import( /* webpackChunkName:'carousel' */ '@/pages/other/carousel');
+const ComponentDemo = () => import( /* webpackChunkName:'componentDemo' */ '@/pages/other/componentDemo');
 
 const route = {
   name: 'Other',
@@ -16,13 +15,6 @@ const route = {
     icon: 'other'
   },
   children: [{
-    name: 'BackToTop',
-    path: '/other/backToTop',
-    component: BackToTop,
-    meta: {
-      title: '返回顶部',
-    }
-  }, {
     name: 'Print',
     path: '/other/print',
     component: Print,
@@ -30,11 +22,18 @@ const route = {
       title: '打印',
     }
   }, {
-    name: 'Html2canvas',
-    path: '/other/html2canvas',
-    component: Html2canvas,
+    name: 'HtmlToCanvas',
+    path: '/other/htmlToCanvas',
+    component: HtmlToCanvas,
     meta: {
-      title: 'html2canvas',
+      title: 'htmlToCanvas',
+    }
+  }, {
+    name: 'AMap',
+    path: '/other/aMap',
+    component: AMap,
+    meta: {
+      title: '地图',
     }
   }, {
     name: 'DragDialog',
@@ -42,13 +41,6 @@ const route = {
     component: DragDialog,
     meta: {
       title: '拖拽Dialog',
-    }
-  }, {
-    name: 'Reminder',
-    path: '/other/reminder',
-    component: Reminder,
-    meta: {
-      title: '消息提示',
     }
   }, {
     name: 'Carousel',

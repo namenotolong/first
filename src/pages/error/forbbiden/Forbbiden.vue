@@ -98,3 +98,8 @@
     }
   }
 </style>
+<style lang="scss">
+  .forbidden .el-carousel__indicators {
+    display: none;
+  }
+</style>

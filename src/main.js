@@ -6,11 +6,8 @@ import ElementUI from 'element-ui';
 import App from '@/App.vue';
 import router from '@/router';
 import store from '@/store';
-
-import 'element-ui/lib/theme-chalk/index.css';
-
 import '@/assets/styles/app.scss';
-import '@/assets/fonts/iconfont.css';
+
 
 // mock数据
 import './mock';

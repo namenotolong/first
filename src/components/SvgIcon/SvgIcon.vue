@@ -3,9 +3,8 @@
     <use :xlink:href="icon"></use>
   </svg>
 </template>
-<script>
-  import './fonts/iconfont';
 
+<script>
   export default {
     props: {
       iconName: {

@@ -12,8 +12,6 @@ import dashboardRoute from './modules/dashboard';
 import errorRoute from './modules/error';
 import excelRoute from './modules/excel';
 import formRoute from './modules/form';
-import iconRoute from './modules/icon';
-import mapRoute from './modules/map';
 import mineRoute from './modules/mine';
 import otherRoute from './modules/other';
 import permissionRoute from './modules/permission';
@@ -37,13 +35,11 @@ const staticRouteMap = [{
 
 // 需要通过角色动态控制的路由表
 const dynamicRouteMap = [
-  iconRoute,
   chartRoute,
   formRoute,
   tableRoute,
   excelRoute,
   tabRoute,
-  mapRoute,
   errorRoute,
   permissionRoute,
   userRoute,

@@ -116,7 +116,7 @@
         color: #fff;
 
         a {
-          color: $theme-color;
+          // color: $theme-color;
         }
       }
     }

@@ -1,19 +1,32 @@
 <template>
-  <el-tabs v-model="activeName">
-    <el-tab-pane label="文本溢出" name="first">
-      <TextEllipsis />
-    </el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+  <div class="component-demo">
+    <el-tabs v-model="activeName">
+      <el-tab-pane label="文本溢出" name="first">
+        <TextEllipsis />
+      </el-tab-pane>
 
-  </el-tabs>
+      <el-tab-pane label="返回顶部" name="second">
+        <BackToTop />
+      </el-tab-pane>
+
+      <el-tab-pane label="消息提示" name="third">
+        <Reminder />
+      </el-tab-pane>
+    </el-tabs>
+  </div>
+
 </template>
 
 <script>
   import TextEllipsis from './components/TextEllipsis';
+  import BackToTop from './components/BackToTop';
+  import Reminder from './components/Reminder';
 
   export default {
     components: {
-      TextEllipsis
+      TextEllipsis,
+      BackToTop,
+      Reminder
     },
     data() {
       return {
@@ -22,3 +35,10 @@
     }
   }
 </script>
+<style scoped>
+  .component-demo {
+    min-height: 400px;
+    padding: 0 20px 20px;
+    background-color: #fff;
+  }
+</style>

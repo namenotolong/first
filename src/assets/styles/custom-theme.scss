@@ -1,10 +1,17 @@
-// 将换肤时需要改变的颜色样式提取到这个文件中
-$custom-white: #fff;
-$custom-primary:#409eff;
+$white: #fff;
+$theme-color:#409eff;
 
-$custom-primary-white__2:mix($custom-white, $custom-primary, 20%);
-$custom-primary-white__8:mix($custom-white, $custom-primary, 80%);
-$custom-primary-white__9:mix($custom-white, $custom-primary, 90%);
+$theme-color-white__2:mix($white, $theme-color, 20%);
+$theme-color-white__8:mix($white, $theme-color, 80%);
+$theme-color-white__9:mix($white, $theme-color, 90%);
+
+
+// the :export directive is the magic sauce for webpack
+// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
+:export {
+  themeColor: $theme-color;
+}
+
 
 
 .custom-theme-special-mark {
@@ -13,27 +20,27 @@ $custom-primary-white__9:mix($custom-white, $custom-primary, 90%);
 
 
 .header {
-  background-color: $custom-primary;
+
 
   .header__logo:hover {
-    color: $custom-primary;
+    color: $theme-color;
   }
 }
 
-.tags {
-  .tag-list {
-    background-color: $custom-primary-white__9;
+.layout-tags {
+  .layout-tags__item {
+    background-color: $theme-color-white__9;
   }
 
-  .tag-list a {
-    color: $custom-primary;
+  .layout-tags__item a {
+    color: $theme-color;
   }
 
-  .tag-list i {
-    color: $custom-primary;
+  .layout-tags__item i {
+    color: $theme-color;
   }
 
-  .tag-list.active {
-    background-color: $custom-primary;
+  .layout-tags__item.active {
+    background-color: $theme-color;
   }
 }

@@ -5,7 +5,7 @@ const account = {
   state: {
     token: sessionStorage.getItem('token'),
     roles: [],
-    routes: []
+    routeMap: []
   },
   mutations: {
     SET_TOKEN(state, token) {

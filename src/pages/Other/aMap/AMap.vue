@@ -1,5 +1,5 @@
 <template>
-  <div class="map">
+  <div class="a-map">
     <el-tabs type="border-card">
       <el-tab-pane label="标记点">
         <map-maker></map-maker>

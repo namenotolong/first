@@ -4,6 +4,10 @@ const baseWebpackConfig = require('./webpack.base.conf.js');
 const webpack = require('webpack');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
+const resolve = (dir) => {
+  return path.resolve(process.cwd(), dir)
+}
+
 module.exports = merge(baseWebpackConfig, {
   mode: 'development',
   plugins: [
@@ -25,7 +29,7 @@ module.exports = merge(baseWebpackConfig, {
     })
   ],
   devServer: {
-    contentBase: path.resolve(__dirname, '../dist'),
+    contentBase: resolve('dist'),
     compress: true,
     port: 3000,
     open: true,

@@ -1,13 +1,15 @@
 <template>
-  <ul class="tags">
-    <li class="tag-list" :class="{active:isTagActive(tag.path)}" v-for="(tag,index) in tagList" :key="tag.path">
+  <div class="layout-tags">
+    <div
+      class="layout-tags__item"
+      :class="{active:isTagActive(tag.path)}"
+      v-for="(tag,index) in tagList"
+      :key="tag.path">
       <!-- 关闭标签需要自定义，不能使用el-tag，点击它的关闭按钮，close事件会冒泡而触发超链接的点击 -->
-      <router-link :to="tag.path">
-        <span v-text="tag.title"></span>
-      </router-link>
-      <i class="el-icon-circle-close" @click="closeTag(index)"></i>
-    </li>
-  </ul>
+      <router-link class="link" :to="tag.path">{{tag.title}}</router-link>
+      <i class="el-icon-circle-close icon" @click="closeTag(index)"></i>
+    </div>
+  </div>
 
 </template>
 
@@ -78,45 +80,43 @@
 </script>
 
 <style lang="scss" scoped>
-  .tags {
+  .layout-tags {
+    display: flex;
     width: 100%;
     background-color: #fff;
-    padding-left: 10px;
+    padding: 5px 10px;
     box-sizing: border-box;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.1),
       0 2px 1px -1px rgba(0, 0, 0, 0.1);
     z-index: 100;
-    @include clearfix;
 
-    .tag-list {
-      float: left;
-      margin: 5px 10px 5px 0px;
+    .layout-tags__item {
       padding: 5px 10px;
       border-radius: 4px;
-      border: 1px solid #e6e6e6;
+      border: $base-border;
+      color: #409eff;
 
-      a {
+      &+.layout-tags__item {
+        margin-left: 10px;
+      }
+
+      .link {
         display: inline-block;
-        color: #666;
         font-size: 12px;
         margin-right: 5px;
       }
 
-      i {
+      .icon {
         cursor: pointer;
+
+        &:hover {
+          color: #4a4a4a !important;
+        }
       }
 
       &.active {
-        color: #fff;
-      }
-
-      &.active a,
-      &.active i {
-        color: #fff;
-      }
-
-      .tag-list i:hover {
-        color: #4a4a4a;
+        color: #fff !important;
+        background-color: #409eff;
       }
     }
   }
