@@ -1,0 +1,83 @@
+@charset "UTF-8";
+/*
+  全局scss变量
+*/
+.svg-icon[data-v-394db748] {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+@charset "UTF-8";
+/*
+  全局scss变量
+*/
+.reminder[data-v-2af085c7] {
+  min-width: 380px;
+  box-sizing: border-box;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 50%);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  z-index: 1000;
+}
+.reminder .reminder__icon[data-v-2af085c7] {
+    margin-right: 10px;
+}
+.reminder .reminder__content[data-v-2af085c7] {
+    padding-right: 16px;
+}
+.reminder .reminder__closeBtn[data-v-2af085c7] {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #C0C4CC;
+    cursor: pointer;
+}
+.reminder .reminder__closeBtn[data-v-2af085c7]:hover {
+      color: #aaa;
+}
+.reminder--info[data-v-2af085c7] {
+  background-color: #edf2fc;
+  border-color: #ebeef5;
+  color: #909399;
+}
+.reminder--success[data-v-2af085c7] {
+  background-color: #f0f9eb;
+  border-color: #e1f3d8;
+  color: #67c23a;
+}
+.reminder--warning[data-v-2af085c7] {
+  background-color: #fdf6ec;
+  border-color: #faecd8;
+  color: #e6a23c;
+}
+.reminder--error[data-v-2af085c7] {
+  background-color: #fef0f0;
+  border-color: #fde2e2;
+  color: #f56c6c;
+}
+.reminder--loading[data-v-2af085c7] {
+  background-color: #ecf5ff;
+  border-color: #d9ecff;
+  color: #409eff;
+}
+.reminder-fade-enter[data-v-2af085c7],
+.reminder-fade-leave-to[data-v-2af085c7] {
+  opacity: 0;
+}
+.reminder-fade-enter-active[data-v-2af085c7],
+.reminder-fade-leave-active[data-v-2af085c7] {
+  transition: opacity .5s;
+}
+

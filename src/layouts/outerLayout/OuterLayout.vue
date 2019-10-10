@@ -9,12 +9,17 @@
       <router-view></router-view>
     </div>
 
+    <theme-picker class="theme-picker" />
+
   </div>
 </template>
 
 <script>
+  import ThemePicker from '@/components/ThemePicker';
   export default {
-
+    components: {
+      ThemePicker
+    }
   }
 </script>
 
@@ -35,6 +40,10 @@
       width: 500px;
       margin: 0 auto;
       margin-top: 60px;
+    }
+
+    .theme-picker {
+      display: none;
     }
   }
 </style>

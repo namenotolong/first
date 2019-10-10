@@ -161,7 +161,7 @@
             this.$router.replace('/dashboard');
             this.submitLoading = false;
           } else {
-            this.$message.success('请按正确格式填写信息');
+            this.$message.warning('请按正确格式填写信息');
             this.submitLoading = false;
           }
         });

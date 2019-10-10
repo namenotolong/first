@@ -94,6 +94,7 @@
       padding: 5px 10px;
       border-radius: 4px;
       border: $base-border;
+      background-color: var(--theme-white__9);
       color: #409eff;
 
       &+.layout-tags__item {
@@ -104,19 +105,28 @@
         display: inline-block;
         font-size: 12px;
         margin-right: 5px;
+
+        &:hover {
+          color: $auxiliary-text-color !important;
+        }
       }
 
       .icon {
+        color: var(--theme);
         cursor: pointer;
 
         &:hover {
-          color: #4a4a4a !important;
+          color: $auxiliary-text-color;
         }
       }
 
       &.active {
-        color: #fff !important;
-        background-color: #409eff;
+        background-color: var(--theme);
+
+        .link,
+        .icon {
+          color: #fff;
+        }
       }
     }
   }

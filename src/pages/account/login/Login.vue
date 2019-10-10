@@ -114,15 +114,8 @@
       .register {
         float: right;
         color: #fff;
-
-        a {
-          // color: $theme-color;
-        }
       }
     }
-
-
-
   }
 </style>
 

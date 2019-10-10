@@ -16,15 +16,17 @@
     },
     watch: {
       theme(newTheme) {
-        this.updateStyle(newTheme);
+        this.updateElementTheme(newTheme);
+        this.updateCustomTheme(newTheme);
+        this.$store.commit('SET_THEME', newTheme);
       }
     },
     mounted() {
-      this.createStyleTag('element_theme');
+      this.createStyleElement('element_theme');
       this.getDefaultStyle();
     },
     methods: {
-      createStyleTag(id) {
+      createStyleElement(id) {
         //退出登录后再登录会重新渲染组件，避免重复创建。
         if (document.getElementById(id)) {
           return false;
@@ -53,7 +55,7 @@
       // 由基础颜色值生成一系列颜色值
       getColors(theme) {
         // 实现scss的mix函数，主题色与#fff进行混合。与白色混合其实就是改变透明度。
-        // mix(#fff, #409eff, 90%); rgba(64,158,255,0.1); 它们的效果是一样的
+        // mix(#fff, #409eff, 90%)和 rgba(64,158,255,0.1); 它们的效果是一样的
 
         const tintColor = (color, tint) => {
           let red = parseInt(color.slice(0, 2), 16);
@@ -94,19 +96,37 @@
         colors.push(shadeColor(theme, 0.1));
         return colors;
       },
-      // 更新样式
-      updateStyle(newTheme) {
+      // 更新element主题
+      updateElementTheme(newTheme) {
         const newColors = this.getColors(newTheme.replace('#', ''));
         let newStyle = this.defaultStyle;
         this.defaultColors.forEach((color, index) => {
           newStyle = newStyle.replace(new RegExp(color, 'ig'), newColors[index]);
         });
         document.head.querySelector('#element_theme').innerText = newStyle;
-        this.$store.commit('SET_THEME', newTheme);
       },
+      // 更新自己书写的css的主题
+      updateCustomTheme(newTheme) {
+        const newColors = this.getColors(newTheme.replace('#', ''));
+        const rootStyle = document.documentElement.style;
+        newColors.forEach((color, index) => {
+          if (index === 0) {
+            rootStyle.setProperty('--theme', `#${color}`);
+            return;
+          }
+          if (index === 11) {
+            rootStyle.setProperty('--theme-shade', `#${color}`);
+            return;
+          }
+          if (index >= 2) {
+            rootStyle.setProperty(`--theme-white__${index -1}`, `#${color}`);
+          }
+        })
+      }
     }
   };
 </script>
+
 <style lang="scss">
   .theme-picker {
 

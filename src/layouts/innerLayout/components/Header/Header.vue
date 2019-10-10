@@ -1,17 +1,15 @@
 <template>
-  <div class="header" :style="{'background-color':theme}">
-    <div class="header__logo" @click="toHome">
+  <div class="header">
+    <router-link class="header__logo" to="/">
       <svg-icon icon-name="logo" />
       <span>后台管理系统</span>
-    </div>
+    </router-link>
 
-    <i class="iconfont icon-menu" @click="changeCollapse"></i>
+    <i class="header__collapse" :class="isCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold'" @click="changeCollapse"></i>
 
     <div class="header__menu">
       <full-screen />
-
       <theme-picker />
-
       <el-dropdown @command="handleCommand">
         <img class="header__menu__portrait" :src="avatar" alt />
         <el-dropdown-menu slot="dropdown">
@@ -37,11 +35,6 @@
     components: {
       FullScreen,
       ThemePicker
-    },
-    computed: {
-      theme() {
-        return this.$store.getters.theme
-      }
     },
     data() {
       return {
@@ -81,6 +74,7 @@
     }
   };
 </script>
+
 <style lang="scss" scoped>
   .header {
     height: 60px;
@@ -88,7 +82,7 @@
     padding-right: 30px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
       0 2px 1px -1px rgba(0, 0, 0, 0.12);
-    // background-color: $theme-color;
+    background-color: var(--theme);
 
     .header__logo {
       display: inline-block;
@@ -105,19 +99,15 @@
       }
     }
 
-    .icon-system {
-      font-size: 24px;
-      margin-right: 10px;
-    }
 
-    .icon-menu {
+    .header__collapse {
       color: #fff;
-      font-size: 20px;
+      font-size: 24px;
       margin-left: 16px;
       cursor: pointer;
 
       &:hover {
-        color: #4a4a4a;
+        color: $auxiliary-text-color;
       }
     }
 

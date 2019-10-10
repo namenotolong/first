@@ -3,32 +3,11 @@
 */
 
 
-// 白色
-$white: #fff;
-// 主题色
-$theme-color:#409eff;
-// 主题色和白色的不同混合
-$theme-color-white__2:mix($white, $theme-color, 20%);
-$theme-color-white__8:mix($white, $theme-color, 80%);
-$theme-color-white__9:mix($white, $theme-color, 90%);
-
-
-
 //主要文字颜色
 $primary-text-color:#333;
 // 次要文字颜色
 $secondary-text-color:#666;
-
 // 辅助性文字颜色
 $auxiliary-text-color:#999;
-
 // 基础边框
 $base-border:1px solid #ddd;
-
-
-
-// the :export directive is the magic sauce for webpack
-// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
-:export {
-  themeColor: $theme-color;
-}

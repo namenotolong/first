@@ -1,0 +1,49 @@
+@charset "UTF-8";
+/*
+  全局scss变量
+*/
+.forbbiden[data-v-6ea1b93e] {
+  position: absolute;
+  top: 2px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  overflow: auto;
+}
+.forbbiden .content[data-v-6ea1b93e] {
+    width: 650px;
+    margin: 80px auto;
+}
+.forbbiden .content .oops[data-v-6ea1b93e] {
+      font-size: 50px;
+      font-weight: 600;
+      margin-bottom: 20px;
+}
+.forbbiden .content .dissatisfy[data-v-6ea1b93e] {
+      font-size: 12px;
+      margin: 10px 0;
+}
+.forbbiden .content .list[data-v-6ea1b93e] {
+      list-style-type: disc;
+      list-style-position: inside;
+}
+.forbbiden .content .list li[data-v-6ea1b93e] {
+        text-decoration: underline;
+        cursor: pointer;
+        margin-bottom: 4px;
+        color: #4a4a4a;
+}
+.forbbiden .content .dialog-img[data-v-6ea1b93e] {
+      width: 100%;
+      height: 100%;
+}
+
+@charset "UTF-8";
+/*
+  全局scss变量
+*/
+.forbidden .el-carousel__indicators {
+  display: none;
+}
+

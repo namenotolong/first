@@ -43,15 +43,18 @@ section {
 body {
   font-size: 14px;
   font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
-  color: #303133;
+  color: #333;
 }
 
-// 去掉连接默认的下划线
 a {
   text-decoration: none;
+  color: var(--theme);
+
+  &:hover {
+    color: var(--theme-white__3) !important;
+  }
 }
 
-//  去掉列表的标识
 ol,
 ul {
   list-style: none;
