@@ -10,7 +10,6 @@ import articleRoute from './modules/article';
 import chartRoute from './modules/chart';
 import dashboardRoute from './modules/dashboard';
 import errorRoute from './modules/error';
-import excelRoute from './modules/excel';
 import formRoute from './modules/form';
 import mineRoute from './modules/mine';
 import otherRoute from './modules/other';
@@ -38,7 +37,6 @@ const dynamicRouteMap = [
   chartRoute,
   formRoute,
   tableRoute,
-  excelRoute,
   tabRoute,
   errorRoute,
   permissionRoute,

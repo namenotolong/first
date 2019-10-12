@@ -21,6 +21,9 @@ const role = [{
 }, {
   id: 'editor',
   name: '编辑'
+}, {
+  id: 'vip',
+  name: '会员'
 }]
 
 

@@ -1,5 +1,5 @@
-import Vue from "vue";
-import Reminder from "./Reminder.vue";
+import Vue from 'vue';
+import Reminder from './Reminder';
 
 // 使用Vue的基础构造函数创建一个子类，参数是组件选项对象。
 let RemindConstructor = Vue.extend(Reminder);
@@ -7,7 +7,7 @@ let RemindConstructor = Vue.extend(Reminder);
 // 参数处理
 let argManage = function (options) {
   options = options || {};
-  if (typeof options === "string") {
+  if (typeof options === 'string') {
     options = {
       message: options
     }
@@ -40,4 +40,5 @@ TYPES.forEach(type => {
     return reminder(options);
   };
 });
+
 export default reminder;

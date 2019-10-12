@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import ExportExcel from "@/components/ExportExcel";
+  import ExportExcel from '@/components/excel/exportExcel';
 
   export default {
     components: {

@@ -25,11 +25,10 @@
 
 <script>
   import bus from '@/utils/bus';
-  import FullScreen from '@/components/FullScreen';
-  import ThemePicker from '@/components/ThemePicker';
+  import FullScreen from '@/components/fullScreen';
+  import ThemePicker from '@/components/themePicker';
   import api from '@/api';
   import { resetRouter } from '@/router';
-  import SvgIcon from '@/components/SvgIcon';
 
   export default {
     components: {

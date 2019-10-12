@@ -29,19 +29,20 @@
             <el-input v-model="item.value4"></el-input>
           </el-form-item>
 
-          <div class="block-item--remove" @click="removeBlock(index)">
+          <div class="block-item--remove" @click="handleRemove(index)">
             <span class="block-item--remove__inner"></span>
           </div>
         </div>
       </transition-group>
 
     </el-form>
-    <div class="block-item--add" @click="addBlock">点击新增履历</div>
+    <div class="block-item--add" @click="handleAdd">点击新增履历</div>
     <div style="text-align:center;">
-      <el-button type="success" round @click="submit" :loading="submitLoading">提交</el-button>
+      <el-button type="primary" round @click="handldeSubmit" :loading="submitLoading">提交</el-button>
     </div>
   </div>
 </template>
+
 <script>
   import { guid } from "@/utils/core";
 
@@ -70,18 +71,18 @@
     methods: {
       initFormItem(amount) {
         for (let i = amount; i--;) {
-          this.addBlock();
+          this.handleAdd();
         }
       },
-      addBlock() {
+      handleAdd() {
         const template = Object.assign({}, this.formTemplate);
         template.id = guid();
         this.form.workItem.push(template);
       },
-      removeBlock(index) {
+      handleRemove(index) {
         this.form.workItem.splice(index, 1)
       },
-      submit() {
+      handldeSubmit() {
         this.$message.success("提交成功！");
       }
     }
@@ -143,7 +144,7 @@
       height: 200px;
       line-height: 200px;
       text-align: center;
-      background: url(../../assets/images/form/add-bg.png) no-repeat;
+      background: url(~@/assets/images/form/add-bg.png) no-repeat;
       background-size: cover;
       color: #fff;
       font-size: 16px;

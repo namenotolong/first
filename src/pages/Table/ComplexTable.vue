@@ -1,6 +1,11 @@
 <template>
   <div>
-    <el-table :data="userList" border highlight-current-row v-loading="userTableLoading" @selection-change="handleSelectionChange">
+    <el-table
+      :data="userList"
+      border
+      highlight-current-row
+      v-loading="userTableLoading"
+      @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="index" label="序号"></el-table-column>
       <el-table-column prop="name" label="姓名"></el-table-column>
@@ -11,54 +16,73 @@
       <el-table-column prop="consume" label="累计消费额(元)" sortable></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" plain @click="editUser(scope.$index, scope.row)">编辑</el-button>
-          <el-button type="danger" size="mini" plain @click="deleteUser(scope.$index, scope.row)">删除</el-button>
+          <el-button type="text" @click="editUser(scope.$index, scope.row)">编辑</el-button>
+          <el-divider direction="vertical"></el-divider>
+          <el-button type="text" @click="deleteUser(scope.$index, scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <el-pagination class="pagination" :total="userAmount" :current-page="queryCondition.currentPageNum" :page-sizes="[20, 50, 100,1000]" :page-size="queryCondition.pageSize" layout="total, sizes, prev, pager, next, jumper" background @size-change="handleSizeChange" @current-change="handleCurrentChange"></el-pagination>
+    <!-- <el-pagination
+      class="pagination"
+      :total="total"
+      :current-page="queryCondition.pageNumber"
+      :page-sizes="[20, 50, 100,1000]"
+      :page-size="queryCondition.pageSize"> -->
+
+    <pagination
+      position="center"
+      :total="total"
+      :page-number.sync="queryCondition.pageNumber"
+      :page-size.sync="queryCondition.pageSize"
+      layout=" prev, pager, next, jumper"
+      @pagination="getUserList" />
   </div>
 </template>
 
 <script>
+  import Pagination from '@/components/table/pagination';
   import { scroll } from "@/utils/core";
   import api from '@/api';
 
+
   export default {
+    components: {
+      Pagination
+    },
     data() {
       return {
         userList: [],
         genderList: [{
-          text: "男",
-          value: "男"
+          text: '男',
+          value: '男'
         }, {
-          text: "女",
-          value: "女"
+          text: '女',
+          value: '女'
         }],
         roleList: [{
-          text: "管理员",
-          value: "管理员"
+          text: '管理员',
+          value: '管理员'
         }, {
-          text: "编辑",
-          value: "编辑"
+          text: '编辑',
+          value: '编辑'
         }, {
-          text: "普通会员",
-          value: "普通会员"
+          text: '普通会员',
+          value: '普通会员'
         }, {
-          text: "高级会员",
-          value: "高级会员"
+          text: '高级会员',
+          value: '高级会员'
         }, {
-          text: "普通用户",
-          value: "普通用户"
+          text: '普通用户',
+          value: '普通用户'
         }],
         userTableLoading: false,
         queryCondition: {
-          name: "",
-          currentPageNum: 1,
+          name: '',
+          pageNumber: 1,
           pageSize: 20
         },
-        userAmount: 0,
+        total: 0,
         multipleSelection: []
       }
     },
@@ -69,10 +93,10 @@
       getUserList() {
         this.userTableLoading = true;
         api.user.getUserList(this.queryCondition).then(res => {
-          this.userList = res.data.userList.map((item, index) => {
+          this.userList = res.data.list.map((item, index) => {
             return {
               id: item.id,
-              index: (this.queryCondition.currentPageNum - 1) * this.queryCondition.pageSize +
+              index: (this.queryCondition.pageNumber - 1) * this.queryCondition.pageSize +
                 index + 1,
               name: item.name,
               age: item.age,
@@ -82,7 +106,7 @@
               consume: item.consume
             }
           });
-          this.userAmount = res.data.userAmount;
+          this.total = res.data.total;
           this.userTableLoading = false;
           const scrollElement = document.querySelector(".page");
           scroll(scrollElement, 0, 15);
@@ -107,20 +131,7 @@
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
-      },
-      handleSizeChange(pageSize) {
-        this.queryCondition.pageSize = pageSize;
-        this.getUserList();
-      },
-      handleCurrentChange(currentPageNum) {
-        this.queryCondition.currentPageNum = currentPageNum;
-        this.getUserList();
-      },
+      }
     }
   }
 </script>
-<style lang="scss" scoped>
-  .pagination {
-    margin-top: 10px;
-  }
-</style>

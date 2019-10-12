@@ -69,7 +69,7 @@
 
     <div style="text-align:center;">
       <el-button type="primary" round @click="handleSubmit" :loading="submitLoading">提交</el-button>
-      <el-button round @click="handleCancel">取消</el-button>
+      <el-button type="info" round @click="handleCancel">取消</el-button>
     </div>
   </div>
 </template>

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import UploadExcel from "@/components/UploadExcel";
+  import UploadExcel from '@/components/excel/uploadExcel';
 
   export default {
     components: {

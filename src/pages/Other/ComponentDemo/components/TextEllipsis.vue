@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import TextEllipsis from '@/components/TextEllipsis';
+  import TextEllipsis from '@/components/textEllipsis';
 
   export default {
     components: {

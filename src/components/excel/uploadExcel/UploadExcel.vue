@@ -1,7 +1,7 @@
 <template>
   <div class="upload-excel">
     <input style="display:none" type="file" ref="fileInput" accept=".xlsx,.xls" @change="selectFile">
-    <el-button type="primary" round :loading="uploadLoading" @click="fileInputClick">点击选择文件</el-button>
+    <el-button type="info" round icon="el-icon-upload" :loading="loading" @click="handleUpload">点击选择文件</el-button>
     <span class="file-name" v-show="fileName">
       <i class="el-icon-document"></i>
       {{fileName}}
@@ -19,11 +19,11 @@
     data() {
       return {
         fileName: "",
-        uploadLoading: false,
+        loading: false,
       }
     },
     methods: {
-      fileInputClick() {
+      handleUpload() {
         this.$refs.fileInput.click();
       },
       selectFile(event) {
@@ -45,7 +45,7 @@
         this.$refs.fileInput.value = null; //将文件清掉，不然再次选择这个文件，change事件不会被触发。
       },
       readData(file) {
-        this.uploadLoading = true;
+        this.loading = true;
         const fileReader = new FileReader();
         fileReader.onload = event => {
           const data = event.target.result;
@@ -59,7 +59,7 @@
           const header = this.getHeaderRow(worksheet);
           const result = XLSX.utils.sheet_to_json(worksheet);
           this.onSuccess(header, result);
-          this.uploadLoading = false;
+          this.loading = false;
         };
         // 以二进制方式打开文件
         fileReader.readAsBinaryString(file);

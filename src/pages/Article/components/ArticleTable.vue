@@ -39,7 +39,7 @@
 <script>
   import { scroll } from '@/utils/core';
   import api from '@/api';
-  import ExportExcel from '@/components/ExportExcel/ExportExcel';
+  import ExportExcel from '@/components/excel/exportExcel';
 
   export default {
     name: 'ArticleList',
@@ -104,8 +104,8 @@
           });
           this.articleAmount = res.data.articleAmount;
           this.articleTableLoading = false;
-          const scrollElement = document.querySelector('.page');
-          scroll(scrollElement, 0, 15);
+          const scrollElement = document.querySelector('.inner-layout__page');
+          scroll(scrollElement, 0, 800);
         })
       },
       getAuthorList() {

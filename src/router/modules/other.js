@@ -1,5 +1,6 @@
 const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
 const Print = () => import( /* webpackChunkName:'print' */ '@/pages/other/print');
+const Excel = () => import( /* webpackChunkName:'excel' */ '@/pages/other/excel');
 const HtmlToCanvas = () => import( /* webpackChunkName:'htmlToCanvas' */ '@/pages/other/htmlToCanvas');
 const AMap = () => import( /* webpackChunkName:'aMap' */ '@/pages/other/aMap');
 const DragDialog = () => import( /* webpackChunkName:'dragDialog' */ '@/pages/other/dragDialog');
@@ -20,6 +21,13 @@ const route = {
     component: Print,
     meta: {
       title: '打印',
+    }
+  }, {
+    name: 'Excel',
+    path: '/other/excel',
+    component: Excel,
+    meta: {
+      title: 'excel',
     }
   }, {
     name: 'HtmlToCanvas',

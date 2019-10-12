@@ -1,10 +1,17 @@
 <template>
   <!-- 分页 -->
   <div class="pagination" :class="`pagination--${position}`">
-    <el-pagination :total="total" :current-page.sync="currentPage" :page-size.sync="pageSizeNum" :page-sizes="pageSizes" :layout="layout" :background="background" @size-change="handlePageSizeChange" @current-change="handlePageNumberrChange">
+    <el-pagination
+      :total="total"
+      :current-page.sync="currentPage"
+      :page-size.sync="pageSizeNum"
+      :page-sizes="pageSizes"
+      :layout="layout"
+      :background="background"
+      @size-change="handlePageSizeChange"
+      @current-change="handlePageNumberChange">
     </el-pagination>
   </div>
-
 </template>
 
 <script>
@@ -26,7 +33,7 @@
       pageSizes: {
         type: Array,
         default () {
-          return [10, 20, 30, 50];
+          return [10, 20, 30, 50, 1000];
         }
       },
       layout: {
@@ -41,7 +48,7 @@
         validator: function(value) {
           return ['left', 'center', 'right'].includes(value);
         },
-        default: 'left'
+        default: 'center'
       }
     },
     computed: {
@@ -64,11 +71,10 @@
     },
     methods: {
       handlePageSizeChange(val) {
-        // 也可以不用在父组件中监听pagezie和pageNumber的变化，而是直接触发自定义事件pagination。
-        // this.$emit('pagination')
+        this.$emit('pagination', val);
       },
-      handlePageNumberrChange(val) {
-        // this.$emit('pagination')
+      handlePageNumberChange(val) {
+        this.$emit('pagination', val)
       }
     }
   };
@@ -76,7 +82,6 @@
 <style lang="scss">
   .pagination {
     height: 32px;
-    padding: 14px 0px;
 
     &--left {
       float: left;
@@ -93,7 +98,7 @@
     .el-pagination .el-pager {
       .number {
         font-weight: normal;
-        color: #888;
+        color: $auxiliary-text-color;
       }
 
       .el-icon-more {
@@ -106,14 +111,14 @@
     .el-pagination.is-background .btn-next,
     .el-pagination.is-background .el-pager li {
       background-color: #fff;
-      border: 1px solid #D2D2D2;
+      border: $base-border;
       border-radius: 4px;
     }
 
     .el-pagination.is-background .el-pager li:not(.disabled).active {
-      border-color: $theme-color;
+      border-color: var(--theme);
       background-color: #fff;
-      color: #888;
+      color: $auxiliary-text-color;
     }
   }
 </style>

@@ -1,5 +1,6 @@
 <template>
-  <el-button type="primary" round :loading="exportLoading" @click="exportExcel">
+  <!--导出excel表格 -->
+  <el-button type="info" round icon="el-icon-download" :loading="loading" @click="handleExport">
     <slot></slot>
   </el-button>
 </template>
@@ -11,7 +12,7 @@
     props: {
       fileName: {
         type: String,
-        default: ""
+        default: ''
       },
       header: {
         required: true,
@@ -32,12 +33,12 @@
     },
     data() {
       return {
-        exportLoading: false,
+        loading: false,
       }
     },
     methods: {
-      exportExcel() {
-        this.exportLoading = true;
+      handleExport() {
+        this.loading = true;
         const header = this.header;
         let sheet;
         // 自动设置表格宽度所需要的数据格式与不设置宽度不一样。
@@ -58,7 +59,7 @@
           sheet = XLSX.utils.json_to_sheet(data);
         }
 
-        const sheetName = "Sheet1";
+        const sheetName = 'Sheet1';
         let wb = {
           SheetNames: [],
           Sheets: {},
@@ -72,10 +73,10 @@
           type: 'binary'
         });
         const blob = new Blob([this.s2ab(wbout)], {
-          type: "application/octet-stream"
+          type: 'application/octet-stream'
         });
         this.saveAs(this.fileName, blob);
-        this.exportLoading = false;
+        this.loading = false;
       },
       sheet_from_array_of_arrays(data) {
         var sheet = {};
@@ -168,10 +169,10 @@
         return buffer;
       },
       saveAs(fileName, obj) {
-        const link = document.createElement("a");
+        const link = document.createElement('a');
         link.href = window.URL.createObjectURL(obj);
-        fileName = fileName || "数据";
-        link.download = fileName + ".xlsx";
+        fileName = fileName || '数据';
+        link.download = fileName + '.xlsx';
         link.click();
         //延时释放
         setTimeout(function() {

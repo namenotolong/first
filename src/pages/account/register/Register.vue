@@ -203,9 +203,6 @@
 
 <style lang="scss">
   .register {
-    .el-input__inner {
-      border-radius: 20px;
-    }
 
     .el-form-item__label,
     .el-checkbox__label {

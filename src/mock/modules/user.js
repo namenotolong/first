@@ -34,20 +34,20 @@ export default {
     }
   },
   getUserList(config) {
-    const { name, currentPageNum, pageSize } = window.JSON.parse(config.body);
+    const { name, pageNumber, pageSize } = window.JSON.parse(config.body);
     const filterList = userList.list.filter(item => {
       let validName = false;
       validName = item.name.includes(name);
       return validName;
     })
 
-    const startIndex = (Number(currentPageNum) - 1) * Number(pageSize);
+    const startIndex = (Number(pageNumber) - 1) * Number(pageSize);
     const endIndex = startIndex + Number(pageSize);
     return {
       code: 200,
       data: {
-        userList: filterList.slice(startIndex, endIndex),
-        userAmount: filterList.length
+        list: filterList.slice(startIndex, endIndex),
+        total: filterList.length
       }
     }
   }

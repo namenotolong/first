@@ -2,9 +2,10 @@
   <div class="inner-layout">
     <v-header></v-header>
     <v-menu></v-menu>
-    <div class="container" :class="{collapse:isCollapse}">
+
+    <div class="inner-layout__container" :class="{collapse:isCollapse}">
       <v-tags></v-tags>
-      <div class="page">
+      <div class="inner-layout__page">
         <transition name="page" mode="out-in">
           <keep-alive :include="cachePages">
             <router-view></router-view>
@@ -49,7 +50,7 @@
 
 <style lang="scss" scoped>
   .inner-layout {
-    .container {
+    .inner-layout__container {
       box-sizing: border-box;
       position: absolute;
       top: 62px;
@@ -64,11 +65,11 @@
         left: 65px;
       }
 
-      .page {
+      .inner-layout__page {
         position: relative;
         box-sizing: border-box;
         height: calc(100% - 42px);
-        padding: 20px;
+        padding: 1em;
         overflow-y: auto;
 
         &-enter,
