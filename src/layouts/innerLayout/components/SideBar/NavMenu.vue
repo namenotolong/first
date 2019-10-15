@@ -1,20 +1,24 @@
 <template>
-  <el-menu
-    class="menu"
-    :default-active="activePath"
-    :collapse="isCollapse"
-    unique-opened router
-    background-color="#545c64"
-    text-color="#fff">
-    <menu-item v-for="menu in menuList" :key="menu.path" :config="menu" />
-  </el-menu>
+  <div class="nav-menu">
+    <el-scrollbar>
+      <el-menu
+        :default-active="activePath"
+        :collapse="sideCollapse"
+        unique-opened
+        router
+        background-color="#545c64"
+        text-color="#fff">
+        <menu-item v-for="menu in menuList" :key="menu.path" :config="menu" />
+      </el-menu>
+    </el-scrollbar>
+
+  </div>
+
 </template>
 
 <script>
-  // :active-text-color="variable.activeColor"
   import bus from "@/utils/bus";
   import MenuItem from './MenuItem';
-  // import variable from '@/assets/styles/variable.scss'
 
   export default {
     components: {
@@ -22,23 +26,20 @@
     },
     data() {
       return {
-        // variable,
-        isCollapse: false,
         menuRouteMap: [],
         menuList: []
       }
     },
     computed: {
+      sideCollapse() {
+        return this.$store.getters.sideCollapse;
+      },
       routeMap() {
         return this.$store.getters.routeMap
       },
       activePath() {
         const { meta, path } = this.$route;
-        if (meta.activePath) {
-          return meta.activePath;
-        } else {
-          return path;
-        }
+        return meta.activePath ? meta.activePath : path;
       }
     },
     created() {
@@ -93,28 +94,33 @@
       // 根据路由表生成导航菜单
       getMenu(routes) {
         return this.menuRouteMap.map(route => this.getMenuItem(route));
-      },
+      }
     },
   }
 </script>
 
 <style lang="scss" scoped>
-  .menu {
-    position: absolute;
-    top: 60px;
-    bottom: 0;
-    display: inline-block;
-    z-index: 10;
-    border-top: 2px solid #434a50;
-    border-right: none;
-    overflow-y: auto;
-  }
+  .nav-menu {
+    height: calc(100% - 60px);
 
-  .menu::-webkit-scrollbar {
-    width: 0;
-  }
+    .el-menu {
+      border-right: none;
 
-  .menu:not(.el-menu--collapse) {
-    width: 220px;
+      &:not(.el-menu--collapse) {
+        width: 200px;
+      }
+    }
+  }
+</style>
+<style lang="scss">
+  .nav-menu {
+    .el-scrollbar {
+      height: 100%;
+      background-color: #545c64;
+
+      .el-scrollbar__wrap {
+        overflow-x: hidden;
+      }
+    }
   }
 </style>

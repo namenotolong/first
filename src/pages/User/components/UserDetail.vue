@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :title="title" :visible.sync="dialogVisible" :before-close="handleClose" width="500px">
+  <el-dialog :title="title" :visible.sync="dialogVisible" :before-close="handleClose" width="700px">
     <el-form :model="userInfo" :rules="rules" ref="userInfo" label-width="70px" label-position="left" v-loading="getDetailLoading">
       <el-form-item label="账号：" prop="account">
         <el-input v-model="userInfo.account" placeholder="请填写账号" clearable :disabled="isEdit"></el-input>
@@ -127,7 +127,7 @@
         if (id) {
           this.isEdit = true;
           this.title = "编辑用户";
-          this.getUserDetail(id);
+          this.getDetail(id);
         } else {
           this.isEdit = false;
           this.title = "创建用户";
@@ -136,9 +136,9 @@
       })
     },
     methods: {
-      getUserDetail(id) {
+      getDetail(id) {
         this.getDetailLoading = true;
-        api.user.getUserDetail({
+        api.user.getDetail({
           id
         }).then(res => {
           this.userInfo = res.data.userDetail;

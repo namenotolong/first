@@ -1,17 +1,11 @@
 <template>
-  <div class="header">
-    <router-link class="header__logo" to="/">
-      <svg-icon icon-name="logo" />
-      <span>后台管理系统</span>
-    </router-link>
-
-    <i class="header__collapse" :class="isCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold'" @click="changeCollapse"></i>
-
-    <div class="header__menu">
+  <div class="header-bar">
+    <i class="header-bar__collapse" :class="sideCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold'" @click="handleCollapse"></i>
+    <div class="header-bar__menu">
       <full-screen />
       <theme-picker />
       <el-dropdown @command="handleCommand">
-        <img class="header__menu__portrait" :src="avatar" alt />
+        <img class="avatar" :src="avatar" alt />
         <el-dropdown-menu slot="dropdown">
           <router-link to="/mine">
             <el-dropdown-item>个人中心</el-dropdown-item>
@@ -37,21 +31,23 @@
     },
     data() {
       return {
-        isCollapse: false,
         avatar: ''
       };
+    },
+    computed: {
+      sideCollapse() {
+        return this.$store.getters.sideCollapse;
+      }
     },
     created() {
       this.getAvatar();
     },
     methods: {
-      toHome() {
-        this.$router.push('/dashboard');
+      //折叠侧边栏
+      handleCollapse() {
+        this.$store.commit('SET_SIDE_COLLAPSE', !this.sideCollapse);
       },
-      changeCollapse() {
-        this.isCollapse = !this.isCollapse;
-        bus.$emit('collapse', this.isCollapse);
-      },
+      // 退出登录
       handleCommand(command) {
         if (command === 'logout') {
           this.$store.dispatch('logout').then(() => {
@@ -62,20 +58,18 @@
         }
       },
       getAvatar() {
-        api.account
-          .getUserInfo({
-            username: sessionStorage.getItem('userId')
-          })
-          .then(res => {
-            this.avatar = res.data.userInfo.avatar;
-          });
+        api.account.getUserInfo({
+          username: sessionStorage.getItem('userId')
+        }).then(res => {
+          this.avatar = res.data.userInfo.avatar;
+        });
       }
     }
   };
 </script>
 
 <style lang="scss" scoped>
-  .header {
+  .header-bar {
     height: 60px;
     line-height: 60px;
     padding-right: 30px;
@@ -83,23 +77,7 @@
       0 2px 1px -1px rgba(0, 0, 0, 0.12);
     background-color: var(--theme);
 
-    .header__logo {
-      display: inline-block;
-      width: 220px;
-      background-color: #545c64;
-      font-weight: normal;
-      font-size: 24px;
-      color: #fff;
-      text-align: center;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #434a50;
-      }
-    }
-
-
-    .header__collapse {
+    .header-bar__collapse {
       color: #fff;
       font-size: 24px;
       margin-left: 16px;
@@ -114,7 +92,7 @@
       transform: translate(-10px, -4px);
     }
 
-    .header__menu {
+    .header-bar__menu {
       float: right;
       height: 40px;
       padding: 10px;
@@ -123,7 +101,7 @@
         height: 40px;
       }
 
-      .header__menu__portrait {
+      .avatar {
         width: 40px;
         height: 40px;
         border-radius: 50%;

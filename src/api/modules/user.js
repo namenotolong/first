@@ -1,23 +1,22 @@
-import service from "@/utils/service.js";
+import service from '@/utils/service';
 
-function getUserList(data) {
+function getList(data) {
   return service({
-    url: "/user/userList",
-    method: "post",
-    data: data
+    url: '/user/list',
+    method: 'post',
+    data
   })
 }
 
-function getUserDetail(params) {
+function getDetail(data) {
   return service({
-    url: "/user/userDetail",
-    method: "get",
-    params: params
+    url: '/user/detail',
+    method: 'post',
+    data
   })
 }
 
 export {
-  getUserList,
-  getUserDetail
-
+  getList,
+  getDetail
 }

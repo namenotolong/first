@@ -2,8 +2,6 @@ const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layout
 const ArticleList = () => import( /* webpackChunkName:'articleList' */ '@/pages/article/ArticleList');
 const ArticleCreate = () => import( /* webpackChunkName:'articleCreate' */ '@/pages/article/ArticleCreate');
 const ArticleEdit = () => import( /* webpackChunkName:'articleEdit' */ '@/pages/article/ArticleEdit');
-const ArticleDraft = () => import( /* webpackChunkName:'articleDraft' */ '@/pages/article/ArticleDraft');
-const ArticleRubbish = () => import( /* webpackChunkName:'articleRubbish' */ '@/pages/article/ArticleRubbish');
 
 
 const route = {
@@ -40,20 +38,6 @@ const route = {
     beforeEnter: (to, from, next) => {
       to.meta.title = '编辑文章' + to.params.articleIndex;
       next();
-    }
-  }, {
-    name: 'ArticleDraft',
-    path: '/article/articleDraft',
-    component: ArticleDraft,
-    meta: {
-      title: '草稿箱',
-    }
-  }, {
-    name: 'ArticleRubbish',
-    path: '/article/articleRubbish',
-    component: ArticleRubbish,
-    meta: {
-      title: '垃圾箱',
     }
   }]
 }

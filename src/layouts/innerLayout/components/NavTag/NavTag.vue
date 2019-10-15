@@ -1,7 +1,7 @@
 <template>
-  <div class="layout-tags">
+  <div class="nav-tag">
     <div
-      class="layout-tags__item"
+      class="nav-tag__item"
       :class="{active:isTagActive(tag.path)}"
       v-for="(tag,index) in tagList"
       :key="tag.path">
@@ -80,7 +80,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .layout-tags {
+  .nav-tag {
     display: flex;
     width: 100%;
     background-color: #fff;
@@ -90,14 +90,14 @@
       0 2px 1px -1px rgba(0, 0, 0, 0.1);
     z-index: 100;
 
-    .layout-tags__item {
+    .nav-tag__item {
       padding: 5px 10px;
       border-radius: 4px;
       border: $base-border;
       background-color: var(--theme-white__9);
       color: #409eff;
 
-      &+.layout-tags__item {
+      &+.nav-tag__item {
         margin-left: 10px;
       }
 

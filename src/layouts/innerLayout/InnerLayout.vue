@@ -1,10 +1,10 @@
 <template>
   <div class="inner-layout">
-    <v-header></v-header>
-    <v-menu></v-menu>
+    <side-bar></side-bar>
 
-    <div class="inner-layout__container" :class="{collapse:isCollapse}">
-      <v-tags></v-tags>
+    <div class="inner-layout__main">
+      <header-bar></header-bar>
+      <nav-tag></nav-tag>
       <div class="inner-layout__page">
         <transition name="page" mode="out-in">
           <keep-alive :include="cachePages">
@@ -17,60 +17,45 @@
 </template>
 
 <script>
-  import bus from "@/utils/bus";
-  import VHeader from "./components/Header";
-  import VMenu from "./components/Menu";
-  import VTags from "./components/Tags";
+  import bus from '@/utils/bus';
+  import { HeaderBar, SideBar, NavTag } from './components';
 
   export default {
     components: {
-      VHeader,
-      VMenu,
-      VTags
+      HeaderBar,
+      SideBar,
+      NavTag
     },
     data() {
       return {
-        isCollapse: false,
         cachePages: []
       }
     },
     created() {
-      bus.$on("collapse", msg => {
-        this.isCollapse = msg;
-      })
-      bus.$on("cachePage", msg => {
+      bus.$on('cachePage', msg => {
         this.cachePages = msg;
       })
-    },
-    methods: {
-
     }
   }
 </script>
 
 <style lang="scss" scoped>
   .inner-layout {
-    .inner-layout__container {
-      box-sizing: border-box;
-      position: absolute;
-      top: 62px;
-      bottom: 0px;
-      left: 220px;
-      right: 0px;
-      /* 查看element的menu.css源码可知transition的参数 */
-      transition: left .3s ease-in-out;
-      background-color: #f0f2f5;
+    display: flex;
+    height: 100vh;
 
-      &.collapse {
-        left: 65px;
-      }
+    .inner-layout__main {
+      width: 100%;
+      overflow-x: hidden;
+      background-color: #f0f2f5;
 
       .inner-layout__page {
         position: relative;
         box-sizing: border-box;
-        height: calc(100% - 42px);
-        padding: 1em;
+        height: calc(100% - 102px);
+        overflow-x: hidden;
         overflow-y: auto;
+        padding: 1em;
 
         &-enter,
         &-leave {
@@ -81,12 +66,7 @@
         &-leave-active {
           transition: opacity .5s ease;
         }
-
-        /deep/ p {
-          color: #5e6d82;
-        }
       }
-
     }
   }
 </style>

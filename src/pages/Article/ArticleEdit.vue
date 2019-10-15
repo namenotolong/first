@@ -68,7 +68,7 @@
     },
     methods: {
       getArticleDetail() {
-        api.article.getArticleDetail({
+        api.article.getDetail({
           id: this.articleId
         }).then(res => {
           this.articleDetail = res.data.articleDetail;

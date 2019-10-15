@@ -26,13 +26,12 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button round icon="el-icon-search" @click="getUserList">查询</el-button>
+          <el-button type="primary" round icon="el-icon-search" @click="getUserList">查询</el-button>
         </el-form-item>
       </el-form>
-
     </div>
 
-    <div class="user-manager__list">
+    <div class="user-manager__table">
       <el-table
         :data="userList"
         border
@@ -56,7 +55,6 @@
         </el-table-column>
       </el-table>
     </div>
-
 
     <pagination
       :total="total"
@@ -112,7 +110,7 @@
       //获取用户列表
       async getUserList() {
         this.userTableLoading = true;
-        const response = await api.user.getUserList(this.queryCondition)
+        const response = await api.user.getList(this.queryCondition)
         this.userList = response.data.list.map((item, index) => {
           return {
             id: item.id,
@@ -157,7 +155,7 @@
         this.$confirm(`确认删除用户“${row.name}”？`, '提示', {
           type: 'warning',
         }).then(() => {
-          this.getUserList();
+          this.getList();
           this.$message.success('删除成功！');
         }).catch(() => {
 
@@ -194,7 +192,7 @@
       justify-content: space-between;
     }
 
-    .user-manager__list {
+    .user-manager__table {
       margin-bottom: 20px;
     }
   }

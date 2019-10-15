@@ -28,13 +28,13 @@ Mock.mock(/\/dashboard\/grid/, 'get', dashboard.getGridData);
 Mock.mock(/\/dashboard\/lineChart/, 'get', dashboard.getLineChartData);
 Mock.mock(/\/dashboard\/todoList/, 'get', dashboard.getTodoListData);
 
-Mock.mock(/\/article\/authorList/, 'get', article.getAuthorList);
-Mock.mock(/\/article\/articleList/, 'post', article.getArticleList);
-Mock.mock(/\/article\/articleDetail/, 'get', article.getArticleDetail);
+
+Mock.mock(/\/article\/list/, 'post', article.getList);
+Mock.mock(/\/article\/detail/, 'post', article.getDetail);
 
 
-Mock.mock(/\/user\/userList/, 'post', user.getUserList);
-Mock.mock(/\/user\/userDetail/, 'get', user.getUserDetail);
+Mock.mock(/\/user\/list/, 'post', user.getList);
+Mock.mock(/\/user\/detail/, 'post', user.getDetail);
 
 
 Mock.mock(/\/tab\/tabList/, 'get', tab.getTabData);

@@ -11,10 +11,6 @@ const articleList = Mock.mock({
   }],
 })
 
-const authorList = Mock.mock({
-  list: ["常伟", "何军", "程强", "孔秀兰", "吴刚", "吕平", "张强"],
-})
-
 const articleDetail = Mock.mock({
   id: "@lower(@guid)",
   author: '@pick(["常伟", "何军", "程强", "孔秀兰", "吴刚", "吕平", "张强"])',
@@ -27,8 +23,8 @@ const articleDetail = Mock.mock({
 )
 
 export default {
-  getArticleList(config) {
-    const { type, author, currentPageNum, pageSize, title } = window.JSON.parse(config.body);
+  getList(config) {
+    const { type, author, pageNumber, pageSize, title } = window.JSON.parse(config.body);
 
     const authorsLength = author.length;
     const typesLength = type.length;
@@ -58,25 +54,17 @@ export default {
     })
 
 
-    const startIndex = (Number(currentPageNum) - 1) * Number(pageSize);
+    const startIndex = (Number(pageNumber) - 1) * Number(pageSize);
     const endIndex = startIndex + Number(pageSize);
     return {
       code: 200,
       data: {
         articleList: filterList.slice(startIndex, endIndex),
-        articleAmount: filterList.length
+        total: filterList.length
       }
     }
   },
-  getAuthorList() {
-    return {
-      code: 200,
-      data: {
-        authorList: authorList.list
-      }
-    }
-  },
-  getArticleDetail() {
+  getDetail() {
     return {
       code: 200,
       data: { articleDetail }

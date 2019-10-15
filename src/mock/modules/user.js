@@ -25,15 +25,7 @@ const userList = Mock.mock({
 
 
 export default {
-  getUserDetail() {
-    return {
-      code: 200,
-      data: {
-        userDetail
-      }
-    }
-  },
-  getUserList(config) {
+  getList(config) {
     const { name, pageNumber, pageSize } = window.JSON.parse(config.body);
     const filterList = userList.list.filter(item => {
       let validName = false;
@@ -50,6 +42,15 @@ export default {
         total: filterList.length
       }
     }
+  },
+  getDetail() {
+    return {
+      code: 200,
+      data: {
+        userDetail
+      }
+    }
   }
+
 }
 
