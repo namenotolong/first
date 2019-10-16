@@ -55,7 +55,7 @@ const route = {
     path: '/chart/pointChart',
     component: PointChart,
     meta: {
-      title: '饼状图',
+      title: '点状图',
     }
   }]
 }

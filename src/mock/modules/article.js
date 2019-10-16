@@ -3,7 +3,7 @@ import Mock from "mockjs";
 const articleList = Mock.mock({
   "list|113": [{
     id: "@lower(@guid)",
-    author: '@pick(["常伟", "何军", "程强", "孔秀兰", "吴刚", "吕平", "张强"])',
+    author: '@cname',
     createDate: '@datetime("yyyy-MM-dd HH:mm:ss")',
     title: "@ctitle",
     type: '@pick(["新闻", "财经", "娱乐", "体育", "科技", "游戏"])',
@@ -13,10 +13,12 @@ const articleList = Mock.mock({
 
 const articleDetail = Mock.mock({
   id: "@lower(@guid)",
-  author: '@pick(["常伟", "何军", "程强", "孔秀兰", "吴刚", "吕平", "张强"])',
-  createDate: '@datetime("yyyy-MM-dd HH:mm:ss")',
   title: "@ctitle",
-  type: '@pick(["新闻", "财经", "娱乐", "体育", "科技", "游戏"])',
+  author: '@cname',
+  date: '@datetime("yyyy-MM-dd HH:mm:ss")',
+  imageUrl: 'https://s2.ax1x.com/2019/08/02/edRc1P.jpg',
+  brief: '@cparagraph(2,5)',
+  type: '@pick(["1", "2", "3", "4", "5"])',
   browseNum: "@natural(1000,9999)",
   content: "@cparagraph",
 }
@@ -53,7 +55,6 @@ export default {
       return validAuthor && validType && validTitle;
     })
 
-
     const startIndex = (Number(pageNumber) - 1) * Number(pageSize);
     const endIndex = startIndex + Number(pageSize);
     return {
@@ -64,7 +65,7 @@ export default {
       }
     }
   },
-  getDetail() {
+  getDetail(config) {
     return {
       code: 200,
       data: { articleDetail }

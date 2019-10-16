@@ -2,7 +2,7 @@
   <el-card class="task-card">
     <div slot="header">
       <span class="task-card__header">待办事项</span>
-      <el-button type="text" class="button--add" @click="addTask">添加</el-button>
+      <el-button type="text" class="button--add" @click="handleAdd">添加</el-button>
     </div>
 
     <el-table :data="taskData" height="400">
@@ -18,10 +18,11 @@
         </template>
       </el-table-column>
 
-      <el-table-column width="150">
+      <el-table-column width="120">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary" plain @click="editTask(scope.$index, scope.row)">编辑</el-button>
-          <el-button size="mini" type="danger" plain @click="deleteTask(scope.$index)">删除</el-button>
+          <el-button type="text" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          <el-divider direction="vertical"></el-divider>
+          <el-button type="text" @click="handleDelete(scope.$index)">删除</el-button>
         </template>
       </el-table-column>
 
@@ -41,15 +42,15 @@
       }
     },
     created() {
-      this.getTaskData();
+      this.getTask();
     },
     methods: {
-      getTaskData() {
+      getTask() {
         api.dashboard.getTodoListData().then(res => {
           this.taskData = res.data.todoListData;
         })
       },
-      addTask() {
+      handleAdd() {
         this.$prompt("添加新的待办事项:", "", {
           inputPlaceholder: "请输入待办事项",
           inputValidator(value) {
@@ -57,7 +58,6 @@
               return "内容不能为空！"
             }
           },
-
         }).then(res => {
           this.taskData.unshift({
             isCompleted: false,
@@ -65,7 +65,7 @@
           })
         })
       },
-      editTask(index) {
+      handleEdit(index) {
         this.$prompt("修改待办事项", "", {
           inputPlaceholder: "请输入待办事项",
           inputValidator(value) {
@@ -77,7 +77,7 @@
           this.taskData[index].content = res.value;
         })
       },
-      deleteTask(index) {
+      handleDelete(index) {
         this.taskData.splice(index, 1);
       }
     }
@@ -100,6 +100,7 @@
     }
   }
 </style>
+
 <style lang="scss">
   .task-card {
     .el-card__body {

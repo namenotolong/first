@@ -11,13 +11,10 @@
         <menu-item v-for="menu in menuList" :key="menu.path" :config="menu" />
       </el-menu>
     </el-scrollbar>
-
   </div>
-
 </template>
 
 <script>
-  import bus from "@/utils/bus";
   import MenuItem from './MenuItem';
 
   export default {
@@ -43,10 +40,6 @@
       }
     },
     created() {
-      // 折叠侧边栏菜单
-      bus.$on("collapse", (data) => {
-        this.isCollapse = data;
-      })
       this.menuRouteMap = this.getMenuRouteMap(this.routeMap);
       this.menuList = this.getMenu(this.menuRouteMap);
     },

@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import Vue from 'vue';
 import axios from 'axios';
+import dayjs from 'dayjs';
 import ElementUI from 'element-ui';
 
 import App from '@/App.vue';
@@ -26,7 +27,10 @@ Vue.use(ElementUI, {
 
 Object.defineProperty(Vue.prototype, '$axios', {
   value: axios
-})
+});
+Object.defineProperty(Vue.prototype, '$dayjs', {
+  value: dayjs
+});
 Object.defineProperty(Vue.prototype, '$reminder', {
   value: reminder
 })

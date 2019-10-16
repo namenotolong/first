@@ -1,34 +1,36 @@
 const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
-const ArticleList = () => import( /* webpackChunkName:'articleList' */ '@/pages/article/ArticleList');
-const ArticleCreate = () => import( /* webpackChunkName:'articleCreate' */ '@/pages/article/ArticleCreate');
-const ArticleEdit = () => import( /* webpackChunkName:'articleEdit' */ '@/pages/article/ArticleEdit');
+const ArticleList = () => import( /* webpackChunkName:'articleList' */ '@/pages/article/articleList');
+const ArticleEdit = () => import( /* webpackChunkName:'articleEdit' */ '@/pages/article/articleEdit');
 
 
 const route = {
   name: 'Article',
   path: '/article',
   component: InnerLayout,
+  redirect: '/article/list',
   meta: {
     title: '文章管理',
     icon: 'article'
   },
   children: [{
     name: 'ArticleList',
-    path: '/article/articleList',
+    path: '/article/list',
     component: ArticleList,
     meta: {
       title: '文章列表',
+      activePath: '/article'
     }
   }, {
-    name: 'ArticleCreate',
-    path: '/article/articleCreate',
-    component: ArticleCreate,
+    name: 'ArticleAdd',
+    path: '/article/add',
+    component: ArticleEdit,
     meta: {
-      title: '创建文章',
-    }
+      title: '新增文章',
+      hiddenInMenu: true
+    },
   }, {
     name: 'ArticleEdit',
-    path: '/article/articleEdit/:articleId/:articleIndex',
+    path: '/article/edit/:articleId/:articleIndex',
     component: ArticleEdit,
     meta: {
       title: '编辑文章',
@@ -36,7 +38,7 @@ const route = {
     },
     props: true,
     beforeEnter: (to, from, next) => {
-      to.meta.title = '编辑文章' + to.params.articleIndex;
+      to.meta.title = '编辑文章' + '-' + to.params.articleIndex;
       next();
     }
   }]

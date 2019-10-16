@@ -1,17 +1,17 @@
-import service from "@/utils/service.js";
+import service from '@/utils/service.js';
 
 function getList(data) {
   return service({
-    url: "/article/list",
-    method: "post",
+    url: '/article/list',
+    method: 'post',
     data
   })
 }
 
 function getDetail(data) {
   return service({
-    url: "/article/Detail",
-    method: "post",
+    url: '/article/detail',
+    method: 'post',
     data
   })
 }

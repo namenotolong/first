@@ -92,7 +92,7 @@
     methods: {
       getUserList() {
         this.userTableLoading = true;
-        api.user.getUserList(this.queryCondition).then(res => {
+        api.user.getList(this.queryCondition).then(res => {
           this.userList = res.data.list.map((item, index) => {
             return {
               id: item.id,
@@ -108,8 +108,8 @@
           });
           this.total = res.data.total;
           this.userTableLoading = false;
-          const scrollElement = document.querySelector(".page");
-          scroll(scrollElement, 0, 15);
+          const scrollElement = document.querySelector('.inner-layout__page');
+          scroll(scrollElement, 0, 800);
         })
       },
       filter(value, row, column) {

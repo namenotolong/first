@@ -2,7 +2,7 @@
   <div class="user-manager">
 
     <div class="user-manager__header">
-      <table-title name="用户列表" />
+      <section-title name="用户列表" />
       <div>
         <el-button type="primary" round icon="el-icon-plus" @click="handleEdit">新增用户</el-button>
         <el-button type="danger" round icon="el-icon-minus" @click="handleDeleteBatch">批量删除</el-button>
@@ -72,14 +72,14 @@
   import api from '@/api';
   import bus from '@/utils/bus';
   import { scroll } from '@/utils/core';
-  import TableTitle from '@/components/table/tableTitle';
+  import SectionTitle from '@/components/sectionTitle';
   import ExportExcel from '@/components/excel/exportExcel';
   import Pagination from '@/components/table/pagination';
   import UserDetail from './components/UserDetail';
 
   export default {
     components: {
-      TableTitle,
+      SectionTitle,
       ExportExcel,
       Pagination,
       UserDetail
@@ -140,6 +140,8 @@
             this.getUserList().then(res => {
               this.$message.success('删除成功！');
             });
+          }).catch(() => {
+
           })
         }
       },
@@ -157,8 +159,6 @@
         }).then(() => {
           this.getList();
           this.$message.success('删除成功！');
-        }).catch(() => {
-
         })
       },
       handleSelectionChange(val) {

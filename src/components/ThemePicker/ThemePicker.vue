@@ -10,7 +10,7 @@
     data() {
       return {
         theme: '',
-        predefineThemes: ['#409eff', '#1cc09d', '#ffa69e', '#ff4879', '#DDC9B4', '#5b5bea', '#FF8822', '#757575', '#5FC3D7', '#ffd166'],
+        predefineThemes: ['#409eff', '#1cc09d', '#ffa69e', '#ff4879', '#373737', '#5b5bea', '#FF8822', '#757575', '#5FC3D7', '#ffd166'],
         defaultColors: [],
         defaultStyle: ''
       };
