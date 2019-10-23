@@ -39,7 +39,7 @@
       }
     },
     mounted() {
-      this.scrollElem = document.getElementsByClassName("page")[0];
+      this.scrollElem = document.querySelector('.inner-layout__page');
       this.scrollElem.addEventListener("scroll", this.handleRocketShow);
       const rocket = this.$refs.rocket;
       rocket.style.bottom = this.customStyle.bottom;

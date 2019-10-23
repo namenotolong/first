@@ -22,7 +22,7 @@ const route = {
     meta: {
       title: '打印',
     }
-  }, {
+  },{
     name: 'Excel',
     path: '/other/excel',
     component: Excel,

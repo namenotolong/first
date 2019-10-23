@@ -58,7 +58,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'media/[name].[hash:7].[ext]'
+          name: 'media/[name].[hash:6].[ext]'
         }
       }
     }, {

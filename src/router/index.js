@@ -7,12 +7,14 @@ Vue.use(VueRouter);
 
 import accountRoute from './modules/account';
 import articleRoute from './modules/article';
+import blankRoute from './modules/blank';
 import chartRoute from './modules/chart';
 import dashboardRoute from './modules/dashboard';
 import errorRoute from './modules/error';
 import formRoute from './modules/form';
 import mineRoute from './modules/mine';
 import otherRoute from './modules/other';
+import pdfRoute from './modules/pdf';
 import permissionRoute from './modules/permission';
 import tabRoute from './modules/tab';
 import tableRoute from './modules/table';
@@ -30,6 +32,7 @@ const staticRouteMap = [{
   accountRoute,
   dashboardRoute,
   mineRoute,
+  blankRoute
 ]
 
 // 需要通过角色动态控制的路由表
@@ -42,6 +45,7 @@ const dynamicRouteMap = [
   permissionRoute,
   userRoute,
   articleRoute,
+  pdfRoute,
   otherRoute
 ]
 

@@ -154,3 +154,7 @@ export function getCommaNumber(value) {
   return `${prefix}${result}${list[1] ? `.${list[1]}` : ''}`;
 }
 
+
+// 判断数据类型
+export const getType = value => value ? value.constructor.name.toLowerCase() : value;
+
