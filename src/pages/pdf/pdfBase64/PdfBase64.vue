@@ -34,14 +34,15 @@
         // 如果后端返回的base64数据带有MIME类型，需要从MIME类型之后开始清除换行和回车符。
         // 如果不带MIME类型，直接去除回车和换行，然后使用atob解码(不需要手动加上MIME类型头)。
         const maker = ';base64,';
-        let newData = '';
+        let dataURI = '';
         if (data.indexOf(maker) > -1) {
           const base64Index = data.indexOf(maker) + maker.length;
-          newData = data.substring(base64Index).replace(/[\r\n]/g, '');
+          dataURI = data.substring(base64Index).replace(/[\r\n]/g, '');
         } else {
-          newData = data.replace(/[\r\n]/g, '');
+          dataURI = data.replace(/[\r\n]/g, '');
         }
-        return window.atob(newData);
+
+        return window.atob(dataURI);
       },
       // 加载pdf文件
       loadFile() {

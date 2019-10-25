@@ -1,7 +1,7 @@
 <template>
   <div class="pdf-component">
     <pdf
-      fileType="file"
+      sourceType="url"
       url="http://www.xdocin.com/xdoc?_key=fedii4dtyfhmvgryqyntfjavte&_func=down&_dir=pdfdemo.pdf" />
   </div>
 </template>
