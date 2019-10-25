@@ -1,0 +1,55 @@
+.theme-picker .el-color-dropdown__value,
+.theme-picker .el-color-dropdown__link-btn {
+  display: none;
+}
+
+.table-title[data-v-5feb8276] {
+  display: inline-block;
+  margin-right: 10px;
+}
+.table-title .table-title__tag[data-v-5feb8276] {
+    display: inline-block;
+    width: 6px;
+    height: 18px;
+    background-color: var(--theme);
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.table-title .table-title__name[data-v-5feb8276] {
+    font-size: 18px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.pagination {
+  height: 32px;
+}
+.pagination--left {
+    float: left;
+}
+.pagination--center {
+    text-align: center;
+}
+.pagination--right {
+    float: right;
+}
+.pagination .el-pagination .el-pager .number {
+    font-weight: normal;
+    color: #999;
+}
+.pagination .el-pagination .el-pager .el-icon-more {
+    border: none !important;
+}
+.pagination .el-pagination.is-background .btn-prev,
+  .pagination .el-pagination.is-background .btn-next,
+  .pagination .el-pagination.is-background .el-pager li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.pagination .el-pagination.is-background .el-pager li:not(.disabled).active {
+    border-color: var(--theme);
+    background-color: #fff;
+    color: #999;
+}
+

@@ -1,0 +1,40 @@
+.login[data-v-158c82a8] {
+  padding: 15px 20px;
+  background-color: rgba(255, 255, 255, 0);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+}
+.login .login__header[data-v-158c82a8] {
+    font-size: 22px;
+    text-align: center;
+    color: #fff;
+}
+.login .login__body .icon[data-v-158c82a8] {
+    color: #333;
+    font-size: 18px;
+}
+.login .login__body .icon.icon-eye[data-v-158c82a8] {
+    padding-right: 10px;
+    cursor: pointer;
+}
+.login .login__body .register[data-v-158c82a8] {
+    float: right;
+    color: #fff;
+}
+
+.login .el-input--prefix .el-input__prefix {
+  left: 10px;
+}
+.login .el-input--prefix .el-input__inner {
+  padding-left: 35px;
+  padding-right: 35px;
+}
+.login .el-form-item__label,
+.login .el-checkbox__label {
+  color: #fff;
+}
+.login .el-button {
+  display: block;
+  width: 100%;
+}
+

@@ -14,23 +14,8 @@
 <script>
   import pdfjs from 'pdfjs-dist';
   import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.entry';
+  import data from './data';
   pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
-
-
-  const pdfData = atob(
-    'JVBERi0xLjcKCjEgMCBvYmogICUgZW50cnkgcG9pbnQKPDwKICAvVHlwZSAvQ2F0YWxvZwog' +
-    'IC9QYWdlcyAyIDAgUgo+PgplbmRvYmoKCjIgMCBvYmoKPDwKICAvVHlwZSAvUGFnZXMKICAv' +
-    'TWVkaWFCb3ggWyAwIDAgMjAwIDIwMCBdCiAgL0NvdW50IDEKICAvS2lkcyBbIDMgMCBSIF0K' +
-    'Pj4KZW5kb2JqCgozIDAgb2JqCjw8CiAgL1R5cGUgL1BhZ2UKICAvUGFyZW50IDIgMCBSCiAg' +
-    'L1Jlc291cmNlcyA8PAogICAgL0ZvbnQgPDwKICAgICAgL0YxIDQgMCBSIAogICAgPj4KICA+' +
-    'PgogIC9Db250ZW50cyA1IDAgUgo+PgplbmRvYmoKCjQgMCBvYmoKPDwKICAvVHlwZSAvRm9u' +
-    'dAogIC9TdWJ0eXBlIC9UeXBlMQogIC9CYXNlRm9udCAvVGltZXMtUm9tYW4KPj4KZW5kb2Jq' +
-    'Cgo1IDAgb2JqICAlIHBhZ2UgY29udGVudAo8PAogIC9MZW5ndGggNDQKPj4Kc3RyZWFtCkJU' +
-    'CjcwIDUwIFRECi9GMSAxMiBUZgooSGVsbG8sIHdvcmxkISkgVGoKRVQKZW5kc3RyZWFtCmVu' +
-    'ZG9iagoKeHJlZgowIDYKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDEwIDAwMDAwIG4g' +
-    'CjAwMDAwMDAwNzkgMDAwMDAgbiAKMDAwMDAwMDE3MyAwMDAwMCBuIAowMDAwMDAwMzAxIDAw' +
-    'MDAwIG4gCjAwMDAwMDAzODAgMDAwMDAgbiAKdHJhaWxlcgo8PAogIC9TaXplIDYKICAvUm9v' +
-    'dCAxIDAgUgo+PgpzdGFydHhyZWYKNDkyCiUlRU9G');
 
   export default {
     data() {
@@ -43,10 +28,27 @@
       this.loadFile();
     },
     methods: {
+      //将base64数据解码
+      decodeBase64(data) {
+        //[RFC2045]中有规定：base64一行不能超过76字符，超过则添加回车换行符。因此需要把base64字段中的换行符，回车符给去掉。
+        // 如果后端返回的base64数据带有MIME类型，需要从MIME类型之后开始清除换行和回车符。
+        // 如果不带MIME类型，直接去除回车和换行，然后使用atob解码(不需要手动加上MIME类型头)。
+        const maker = ';base64,';
+        let newData = '';
+        if (data.indexOf(maker) > -1) {
+          const base64Index = data.indexOf(maker) + maker.length;
+          newData = data.substring(base64Index).replace(/[\r\n]/g, '');
+        } else {
+          newData = data.replace(/[\r\n]/g, '');
+        }
+        return window.atob(newData);
+      },
       // 加载pdf文件
       loadFile() {
         this.fileLoading = true;
-        const loadingTask = pdfjs.getDocument({ data: pdfData });
+        const loadingTask = pdfjs.getDocument({
+          data: this.decodeBase64(data)
+        });
         loadingTask.promise.then((pdf) => {
           const totalPage = pdf.numPages;
           this.totalPage = totalPage;
