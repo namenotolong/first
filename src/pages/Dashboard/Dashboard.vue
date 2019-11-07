@@ -32,11 +32,6 @@
       TodoList,
       ProgressBar,
       NewGoods
-    },
-    data() {
-      return {
-
-      }
-    },
+    }
   }
 </script>

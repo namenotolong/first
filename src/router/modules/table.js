@@ -1,6 +1,6 @@
 const InnerLayout = () => import( /* webpackChunkName:'innerLayout' */ '@/layouts/innerLayout');
-const BaseTable = () => import( /* webpackChunkName:'baseTable' */ '@/pages/table/BaseTable');
-const ComplexTable = () => import( /* webpackChunkName:'complexTable' */ '@/pages/table/ComplexTable');
+const BaseTable = () => import( /* webpackChunkName:'baseTable' */ '@/pages/table/baseTable');
+const ComplexTable = () => import( /* webpackChunkName:'complexTable' */ '@/pages/table/complexTable');
 
 
 const route = {

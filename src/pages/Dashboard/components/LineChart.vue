@@ -2,12 +2,12 @@
   <el-row class="dashboard-line-chart" :gutter="30">
     <el-col :lg="12" :sm="24">
       <p class="title">周{{chartName}}增长趋势图</p>
-      <div id="weekLineChart"></div>
+      <div id="weekChartContainer"></div>
     </el-col>
 
     <el-col :lg="12" :sm="24">
       <p class="title">月{{chartName}}增长趋势图</p>
-      <div id="monthLineChart"></div>
+      <div id="monthChartContainer"></div>
     </el-col>
   </el-row>
 </template>
@@ -44,12 +44,15 @@
     watch: {
       // 折叠或展开菜单栏的时候，图表宽度不会跟着变，需要重建。
       sideCollapse() {
-        let timer = setTimeout(() => {
-          this.weekChart.destroy();
-          this.monthChart.destroy();
-          this.createChart('weekLineChart', this.weekData[this.chartType], 'weekChart');
-          this.createChart('monthLineChart', this.monthData[this.chartType], 'monthChart');
-        }, 350)
+        // Dashboard页面使用keep-alive做了缓存，如果当前不在Dashbord页面，折叠/展开菜单会出现container不存在的情况
+        if (this.$route.path === '/dashboard/index') {
+          const timer = setTimeout(() => {
+            this.weekChart.destroy();
+            this.monthChart.destroy();
+            this.createChart('weekChartContainer', this.weekData[this.chartType], 'weekChart');
+            this.createChart('monthChartContainer', this.monthData[this.chartType], 'monthChart');
+          }, 350)
+        }
       }
     },
     created() {
@@ -64,8 +67,8 @@
     mounted() {
       this.getLineChartData(() => {
         this.setDate(this.weekData, this.monthData);
-        this.createChart('weekLineChart', this.weekData[this.chartType], 'weekChart');
-        this.createChart('monthLineChart', this.monthData[this.chartType], 'monthChart');
+        this.createChart('weekChartContainer', this.weekData[this.chartType], 'weekChart');
+        this.createChart('monthChartContainer', this.monthData[this.chartType], 'monthChart');
       });
     },
     methods: {

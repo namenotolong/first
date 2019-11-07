@@ -78,7 +78,7 @@
   import tableMng from '@/utils/tableMng';
   import api from '@/api';
   import SectionTitle from '@/components/sectionTitle';
-  import Tinymce from '@/components/Tinymce';
+  import Tinymce from '@/components/tinymce';
 
   export default {
     props: ['articleId'],

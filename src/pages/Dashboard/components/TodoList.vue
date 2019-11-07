@@ -14,7 +14,7 @@
 
       <el-table-column>
         <template slot-scope="scope">
-          <span v-text="scope.row.content" :class="{delete:scope.row.isCompleted}"></span>
+          <span :class="{delete:scope.row.isCompleted}">{{scope.row.content}}</span>
         </template>
       </el-table-column>
 
@@ -61,10 +61,11 @@
             isCompleted: false,
             content: res.value
           })
-        })
+        }).catch(() => {})
       },
-      handleEdit(index) {
+      handleEdit(index,row) {
         this.$prompt('修改待办事项', '', {
+          inputValue:row.content,
           inputPlaceholder: '请输入待办事项',
           inputValidator(value) {
             if (!value) {
@@ -73,7 +74,7 @@
           },
         }).then(res => {
           this.taskData[index].content = res.value;
-        })
+        }).catch(() => {})
       },
       handleDelete(index) {
         this.taskData.splice(index, 1);
