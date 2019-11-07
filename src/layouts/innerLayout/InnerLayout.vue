@@ -43,6 +43,7 @@
   .inner-layout {
     display: flex;
     height: 100vh;
+    overflow-y: hidden;
 
     .inner-layout__main {
       width: 100%;

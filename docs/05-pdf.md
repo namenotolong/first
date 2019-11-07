@@ -12,6 +12,8 @@
 
 #### 1.使用远程服务器上的pdf文件
 
+   如果后端直接提供pdf文件的地址，使用以下做法。
+
 (1)在web/viewer.js中注释掉以下代码
 
 ```js
@@ -20,24 +22,7 @@ if (origin !== viewerOrigin && protocol !== 'blob:') {
 }
 ```
 
-
-
-(2)使用iframe插入viewer.html
-
-```html
-<iframe
-  frameborder="0"
-  width="100%"
-  height="100%"
-  :src="`./static/pdf/url/web/viewer.html?file=${encodeURIComponent('http://www.xdocin.com/xdoc?_key=fedii4dtyfhmvgryqyntfjavte&_func=down&_dir=pdfdemo.pdf')}`">
-</iframe>
-```
-
-远程服务器上的文件地址最好使用encodeURIComponent()编码。
-
-
-
-(3)使用远程文件以后默认加载的本地pdf文件就不需要了，可以删除。然后最好将viewer.js和viewer.js.map中的相关设置取消(实际使用不修改这一部分代码也没问题)。
+(2)使用远程文件以后默认加载的本地pdf文件就不需要了，可以删除。然后最好将viewer.js和viewer.js.map中的相关设置取消(实际使用不修改这一部分代码也没问题)。
 
 ```js
 defaultUrl: {
@@ -61,6 +46,19 @@ value: ''
 
 
 
+(3)使用iframe插入viewer.html
+
+```html
+<iframe
+  frameborder="0"
+  width="100%"
+  height="100%"
+  :src="`./static/pdf/url/web/viewer.html?file=${encodeURIComponent('http://www.xdocin.com/xdoc?_key=fedii4dtyfhmvgryqyntfjavte&_func=down&_dir=pdfdemo.pdf')}`">
+</iframe>
+```
+
+远程服务器上的文件地址最好使用encodeURIComponent()编码。
+
 #### 2.使用base64格式的文件数据
 
 ​    如果后端给的文件不是文件在远程服务器上的地址，而是base64的数据，需要做以下处理。
@@ -68,7 +66,7 @@ value: ''
 (1)打开viewer.html，在<script src="viewer.js"></script>之前增加以下代码：
 
 ```js
-// data.js是在本地存储的base64数据，实际开发从后端获取
+// data.js是放在本地的base64数据，实际开发从后端获取
 <script src="../data.js"></script>
 <script>
   // 去除DataURI中的换行和空格
@@ -93,7 +91,7 @@ value: ''
     const rawLength = raw.length;
     // 创建储存二进制数据的内存
     const buffer = new ArrayBuffer(rawLength);
-    // 在buffe内存中创建8位不带符号整数的TypedArray视图
+    // 在buffer内存中创建8位不带符号整数的TypedArray视图
     const typedArray = new Uint8Array(buffer);
     for (let i = 0; i < rawLength; i++) {
       typedArray[i] = raw.charCodeAt(i) & 0xff;

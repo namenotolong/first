@@ -1,7 +1,7 @@
 <template>
-  <el-card class="task-card">
+  <el-card class="dashboard-todolist">
     <div slot="header">
-      <span class="task-card__header">待办事项</span>
+      <span class="dashboard-todolist__header">待办事项</span>
       <el-button type="text" class="button--add" @click="handleAdd">添加</el-button>
     </div>
 
@@ -14,7 +14,7 @@
 
       <el-table-column>
         <template slot-scope="scope">
-          <span v-text="scope.row.content" :class="{del:scope.row.isCompleted}"></span>
+          <span v-text="scope.row.content" :class="{delete:scope.row.isCompleted}"></span>
         </template>
       </el-table-column>
 
@@ -27,8 +27,6 @@
       </el-table-column>
 
     </el-table>
-
-
   </el-card>
 </template>
 
@@ -51,11 +49,11 @@
         })
       },
       handleAdd() {
-        this.$prompt("添加新的待办事项:", "", {
-          inputPlaceholder: "请输入待办事项",
+        this.$prompt('添加新的待办事项:', '', {
+          inputPlaceholder: '请输入待办事项',
           inputValidator(value) {
             if (!value) {
-              return "内容不能为空！"
+              return '内容不能为空！'
             }
           },
         }).then(res => {
@@ -66,11 +64,11 @@
         })
       },
       handleEdit(index) {
-        this.$prompt("修改待办事项", "", {
-          inputPlaceholder: "请输入待办事项",
+        this.$prompt('修改待办事项', '', {
+          inputPlaceholder: '请输入待办事项',
           inputValidator(value) {
             if (!value) {
-              return "内容不能为空！"
+              return '内容不能为空！'
             }
           },
         }).then(res => {
@@ -84,8 +82,8 @@
   }
 </script>
 <style lang="scss" scoped>
-  .task-card {
-    .task-card__header {
+  .dashboard-todolist {
+    .dashboard-todolist__header {
       font-size: 16px;
     }
 
@@ -94,7 +92,7 @@
       padding: 3px 0;
     }
 
-    .del {
+    .delete {
       text-decoration: line-through;
       color: rgba(0, 0, 0, .4);
     }
@@ -102,7 +100,7 @@
 </style>
 
 <style lang="scss">
-  .task-card {
+  .dashboard-todolist {
     .el-card__body {
       padding-top: 0px;
     }

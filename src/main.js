@@ -37,8 +37,6 @@ Object.defineProperty(Vue.prototype, '$reminder', {
 
 Vue.config.productionTip = false;
 
-
-
 new Vue({
   el: '#app',
   router: router,

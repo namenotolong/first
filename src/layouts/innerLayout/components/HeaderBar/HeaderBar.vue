@@ -18,7 +18,6 @@
 </template>
 
 <script>
-  import bus from '@/utils/bus';
   import FullScreen from '@/components/fullScreen';
   import ThemePicker from '@/components/themePicker';
   import api from '@/api';

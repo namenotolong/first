@@ -1,9 +1,9 @@
-import service from "@/utils/service.js";
+import service from '@/utils/service';
 
 function getTabList(params) {
     return service({
-        url: "/tab/tabList",
-        method: "get",
+        url: '/tab/tabList',
+        method: 'get',
         params: params
     })
 }

@@ -4,9 +4,7 @@
     <div class="pdf-acroforms__tip">
       <p>参考的是pdf.js官方例子：
         <a href="https://github.com/mozilla/pdf.js/tree/master/examples/acroforms" target="_blank">acroforms</a></p>
-      <p>优点：1.清晰度更高。</p>
-      <p>2.可以使用pdf.js已经实现好的一些功能，比如可以直接从每个page的dataset中获取每一个的页码(虽然也可以自己实现)。</p>
-      <p>3.可以保持pdf原文件的大小(A4纸)不变。比如开发一个电子签章功能，需要保证鼠标在page上点击盖章的位置与真实的位置一致。</p>
+      <p>清晰度更高。</p>
     </div>
 
     <div

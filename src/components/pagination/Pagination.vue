@@ -1,7 +1,8 @@
 <template>
   <!-- 分页 -->
-  <div class="pagination" :class="`pagination--${position}`">
+  <div class="pagination">
     <el-pagination
+      :class="`pagination--${position}`"
       :total="total"
       :current-page.sync="currentPage"
       :page-size.sync="pageSizeNum"

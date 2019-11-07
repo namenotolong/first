@@ -3,22 +3,23 @@
 
     <!-- 工具条 -->
     <div class="pdf__toolbar">
+
+      <!-- 选择缩放模式 -->
+      <div class="left">
+        <el-select v-model="scaleMode" size="mini" @change="handleChangeScale">
+          <el-option v-for="item in scaleOptions" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+        </el-select>
+      </div>
+
       <!-- 搜索 -->
-      <!-- <div class="left">
-        <el-input
+      <div class=" middle">
+        <!-- <el-input
           v-model="searchText"
           prefix-icon="el-icon-search"
           placeholder="请输入搜索内容"
           size="mini">
-        </el-input>
-      </div> -->
-
-      <!-- 选择缩放模式 -->
-      <!-- <div class=" middle">
-        <el-select v-model="scaleMode" size="mini" @change="handleChangeScale">
-          <el-option v-for="item in scaleOptions" :key="item.value" :label="item.label" :value="item.value"> </el-option>
-        </el-select>
-      </div> -->
+        </el-input> -->
+      </div>
 
       <div class="right">
         <!-- 翻页 -->
@@ -26,7 +27,7 @@
           layout="prev, pager, next,jumper"
           :page-size="1"
           :total="totalPage"
-          @current-change="handleChangePageNumber"
+          @current-change="handlePaginaiton"
           background
           small>
         </el-pagination>
@@ -217,10 +218,9 @@
         this.pdfViewer.currentScaleValue = this.scaleMode;
       },
       // 翻页
-      handleChangePageNumber(value) {
+      handlePaginaiton(value) {
         const pages = document.getElementById('pdfViewer').getElementsByClassName('page');
         const targetPage = Array.from(pages).find(page => page.dataset.pageNumber === String(value));
-        console.log(targetPage.offsetTop)
         const offsetTop = targetPage.offsetTop;
         scrollTo(document.querySelector('.pdf__container'), offsetTop, 500)
       }

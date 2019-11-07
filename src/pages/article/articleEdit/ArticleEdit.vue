@@ -48,13 +48,13 @@
         <el-row :gutter="20">
           <el-col :span="12">
             <el-form-item label="附件上传:">
-              <el-input placeholder="请输入内容">
+              <el-input placeholder="请上传文件">
                 <template slot="append">
                   <el-upload
                     action="https://jsonplaceholder.typicode.com/posts/"
                     :show-file-list="false"
                     :on-success="handleAccessorySuccess">
-                    <el-button type="primary">点击上传</el-button>
+                    <el-button type="primary" round>点击上传</el-button>
                   </el-upload>
                 </template>
               </el-input>
@@ -66,11 +66,8 @@
             </el-form-item>
           </el-col>
         </el-row>
-
-
       </el-form>
     </div>
-
 
     <tinymce v-model="articleDetail.content"></tinymce>
     <!-- 一个组件上的v-model默认会利用名为value的prop和名为input的事件。 -->
@@ -78,7 +75,7 @@
 </template>
 
 <script>
-  import codeMng from '@/assets/codeMng';
+  import tableMng from '@/utils/tableMng';
   import api from '@/api';
   import SectionTitle from '@/components/sectionTitle';
   import Tinymce from '@/components/Tinymce';
@@ -116,7 +113,7 @@
             trigger: 'change'
           }]
         },
-        articleTypes: codeMng.getTable('articleType'),
+        articleTypes: tableMng.getTable('article'),
         publishLoading: false,
       }
     },
@@ -162,7 +159,7 @@
         this.articleDetail.image = URL.createObjectURL(file.raw);
       },
       handleAccessorySuccess() {
-
+        this.$message.success('上传成功');
       },
       handlePublish() {
         this.$message.success('发布成功');

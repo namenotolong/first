@@ -65,12 +65,13 @@
 </template>
 
 <script>
-  import codeMng from '@/assets/codeMng';
+  import tableMng from '@/utils/tableMng';
   import api from '@/api';
   import { scroll } from '@/utils/core';
   import SectionTitle from '@/components/sectionTitle';
   import ExportExcel from '@/components/excel/exportExcel';
-  import Pagination from '@/components/table/pagination';
+  import Pagination from '@/components/pagination';
+
 
   export default {
     name: 'ArticleList',
@@ -84,7 +85,7 @@
         articleList: [],
         excelHeader: ['序号', '作者', '创建时间', '标题', '类型', '阅读数'],
         filterFiled: ['index', 'author', 'createDate', 'title', 'type', 'browseNum'],
-        articleTypes: codeMng.getTable('articleType'),
+        articleTypes: tableMng.getTable('article'),
         articleTableLoading: false,
         queryCondition: {
           title: '',

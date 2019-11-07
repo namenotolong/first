@@ -1,9 +1,8 @@
 <template>
   <div class="pdf-base">
     <p class="pdf-base__tip">
-      使用
       <a href="http://mozilla.github.io/pdf.js" target="_blank">pdf.js</a>
-      将pdf文件使用canvas渲染出来</p>
+    </p>
     <div
       class="pdf-base__canvas"
       v-loading="fileLoading"

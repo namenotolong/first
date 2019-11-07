@@ -1,4 +1,4 @@
-import service from '@/utils/service.js';
+import service from '@/utils/service';
 
 function getList(data) {
   return service({

@@ -1,15 +1,15 @@
 <template>
-  <div class="base-form">
-    <el-form ref="form" :model="form" :rules="formRules" label-width="80px">
+  <div class="form-base">
+    <el-form ref="form" :model="formData" :rules="formRules" label-width="80px">
       <el-row :gutter="20">
         <el-col :span="12">
           <el-form-item label="名称" prop="name">
-            <el-input v-model="form.name" placeholder="请输入活动名称" clearable></el-input>
+            <el-input v-model="formData.name" placeholder="请输入活动名称" clearable></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="数量" prop="amount">
-            <el-input v-model.number="form.amount" placeholder="请输入数量" clearable></el-input>
+            <el-input v-model.number="formData.amount" placeholder="请输入数量" clearable></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -17,14 +17,14 @@
       <el-row :gutter="20">
         <el-col :span="12">
           <el-form-item label="区域" prop="region">
-            <el-select v-model="form.region" placeholder="请选择活动区域" clearable>
-              <el-option v-for="item in regionList" :key="item.value" :label="item.name" :value="item.id"></el-option>
+            <el-select v-model="formData.region" placeholder="请选择活动区域" clearable>
+              <el-option v-for="item in regionList" :key="item.id" :label="item.name" :value="item.id"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="开始时间" prop="startTime">
-            <el-date-picker v-model="form.startTime" type="datetime" placeholder="请选择开始时间"></el-date-picker>
+            <el-date-picker v-model="formData.startTime" type="datetime" placeholder="请选择开始时间"></el-date-picker>
           </el-form-item>
         </el-col>
       </el-row>
@@ -32,54 +32,56 @@
       <el-row :gutter="20">
         <el-col :span="12">
           <el-form-item label="手机" prop="mobilePhone">
-            <el-input v-model="form.mobilePhone" placeholder="请输入主办方联系电话" clearable></el-input>
+            <el-input v-model="formData.mobilePhone" placeholder="请输入主办方联系电话" clearable></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="邮箱" prop="email">
-            <el-input v-model="form.email" placeholder="请输入主办方联系邮箱" clearable></el-input>
+            <el-input v-model="formData.email" placeholder="请输入主办方联系邮箱" clearable></el-input>
           </el-form-item>
         </el-col>
       </el-row>
 
       <el-form-item class="inherit-line-height" label="即时配送" prop="delivery">
-        <el-switch v-model="form.delivery"></el-switch>
+        <el-switch v-model="formData.delivery"></el-switch>
       </el-form-item>
 
       <el-form-item class="inherit-line-height" label="类型" prop="type">
-        <el-checkbox-group v-model="form.type">
-          <el-checkbox label="美食线上活动"></el-checkbox>
-          <el-checkbox label="地推活动"></el-checkbox>
-          <el-checkbox label="线下主题活动"></el-checkbox>
-          <el-checkbox label="单纯品牌曝光"></el-checkbox>
+        <el-checkbox-group v-model="formData.type">
+          <el-checkbox label="1">美食线上活动</el-checkbox>
+          <el-checkbox label="2">地推活动</el-checkbox>
+          <el-checkbox label="3">线下主题活动</el-checkbox>
+          <el-checkbox label="4">单纯品牌曝光</el-checkbox>
         </el-checkbox-group>
       </el-form-item>
 
       <el-form-item class="inherit-line-height" label="特殊资源" prop="resource">
-        <el-radio-group v-model="form.resource">
-          <el-radio label="线上品牌商赞助"></el-radio>
-          <el-radio label="线下场地免费"></el-radio>
+        <el-radio-group v-model="formData.resource">
+          <el-radio label="1">线上品牌商赞助</el-radio>
+          <el-radio label="2">线下场地免费</el-radio>
         </el-radio-group>
       </el-form-item>
 
       <el-form-item label="描述" prop="description">
-        <el-input v-model="form.description" type="textarea" :rows="3" :maxlength="100" show-word-limit placeholder="请输入描述"></el-input>
+        <el-input v-model="formData.description" type="textarea" :rows="3" :maxlength="100" show-word-limit placeholder="请输入描述"></el-input>
       </el-form-item>
     </el-form>
 
     <div style="text-align:center;">
-      <el-button type="primary" round @click="handleSubmit" :loading="submitLoading">提交</el-button>
-      <el-button type="info" round @click="handleCancel">取消</el-button>
+      <el-button type="primary" @click="handleSubmit" :loading="submitLoading">提交</el-button>
+      <el-button type="info" @click="handleCancel">取消</el-button>
     </div>
   </div>
 </template>
 
 <script>
+  import tableMng from '@/utils/tableMng';
+
   export default {
     name: 'BaseForm',
     data() {
       return {
-        form: {
+        formData: {
           name: '',
           amount: 0,
           region: '',
@@ -139,24 +141,19 @@
             trigger: 'change'
           }]
         },
-        regionList: [{
-          id: '1',
-          name: '区域一',
-        }, {
-          id: '2',
-          name: '区域二',
-        }, {
-          id: '3',
-          name: '区域三',
-        }],
+        regionList: [],
         submitLoading: false,
       }
+    },
+    created() {
+      this.regionList = tableMng.getTable('region');
     },
     methods: {
       handleSubmit() {
         this.submitLoading = true;
         this.$refs.form.validate(valid => {
           if (valid) {
+            console.log(this.formData);
             this.$message.success('提交成功！');
           } else {
             this.$message.error('请按正确格式填写信息！');
@@ -166,13 +163,13 @@
       },
       handleCancel() {
         this.$refs.form.resetFields();
-        this.form.description = '';
       }
     }
   }
 </script>
+
 <style lang="scss" scoped>
-  .base-form {
+  .form-base {
     width: 70%;
     min-width: 500px;
     padding: 20px;
@@ -182,8 +179,9 @@
 
   }
 </style>
+
 <style lang="scss">
-  .base-form {
+  .form-base {
     .inherit-line-height {
 
       .el-form-item__label,

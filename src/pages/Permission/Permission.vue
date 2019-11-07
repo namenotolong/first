@@ -6,7 +6,7 @@
     <div>
       当前角色为：
       <span v-for="(role,index) in roles" :key="role">
-        {{codeMng.getNameById('role',role)}}
+        {{tableMng.getNameById('role',role)}}
         <span v-if="index < roles.length-1">、</span>
       </span>
     </div>
@@ -38,12 +38,12 @@
 </template>
 
 <script>
-  import codeMng from '@/assets/codeMng';
+ import tableMng from '@/utils/tableMng';
 
   export default {
     data() {
       return {
-        codeMng,
+        tableMng,
         key: 1
       };
     },
@@ -61,7 +61,6 @@
         }
       }
     },
-
     methods: {
       handleChange(val) {},
 

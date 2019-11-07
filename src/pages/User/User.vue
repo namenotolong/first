@@ -68,13 +68,13 @@
 </template>
 
 <script>
-  import codeMng from '@/assets/codeMng';
+  import tableMng from '@/utils/tableMng';
   import api from '@/api';
   import bus from '@/utils/bus';
   import { scroll } from '@/utils/core';
   import SectionTitle from '@/components/sectionTitle';
   import ExportExcel from '@/components/excel/exportExcel';
-  import Pagination from '@/components/table/pagination';
+  import Pagination from '@/components/pagination';
   import UserDetail from './components/UserDetail';
 
   export default {
@@ -89,8 +89,8 @@
         userList: [],
         excelHeader: ['序号', '姓名', '年龄', '性别', '角色', '注册时间', '累计消费额(元)'],
         filterFiled: ['index', 'name', 'age', 'gender', 'role', 'registerDate', 'consume'],
-        genders: codeMng.getTable('gender'),
-        roles: codeMng.getTable('role'),
+        genders: tableMng.getTable('gender'),
+        roles: tableMng.getTable('role'),
         userTableLoading: false,
         queryCondition: {
           name: '',

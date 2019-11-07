@@ -9,16 +9,16 @@ const gridData = Mock.mock({
 })
 
 const lineChartData = Mock.mock({
-  "visiteData|50": [{
+  "visite|50": [{
     value: "@natural(0,200)"
   }],
-  "userData|50": [{
+  "user|50": [{
     value: "@natural(0,80)"
   }],
-  "goodsData|50": [{
+  "goods|50": [{
     value: "@natural(0,10)"
   }],
-  "commentData|50": [{
+  "comment|50": [{
     value: "@natural(0,30)"
   }],
 })
@@ -40,11 +40,11 @@ export default {
   getLineChartData(config) {
     const { type } = getURLParams(config.url);
     let data = {};
-    if (type == "week") {
+    if (type === 'week') {
       for (let [key, value] of Object.entries(lineChartData)) {
         data[key] = value.slice(-7);
       }
-    } else if (type == "month") {
+    } else if (type === 'month') {
       for (let [key, value] of Object.entries(lineChartData)) {
         data[key] = value.slice(-31);
       }

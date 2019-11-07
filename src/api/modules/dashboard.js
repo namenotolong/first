@@ -1,25 +1,25 @@
-import service from "@/utils/service.js";
+import service from '@/utils/service';
 
 function getGridData(params) {
     return service({
-        url: "/dashboard/grid",
-        method: "get",
+        url: '/dashboard/grid',
+        method: 'get',
         params
     })
 }
 
 function getLineChartData(params) {
     return service({
-        url: "/dashboard/lineChart",
-        method: "get",
+        url: '/dashboard/lineChart',
+        method: 'get',
         params
     })
 }
 
 function getTodoListData(params) {
     return service({
-        url: "/dashboard/todoList",
-        method: "get",
+        url: '/dashboard/todoList',
+        method: 'get',
         params
     })
 }

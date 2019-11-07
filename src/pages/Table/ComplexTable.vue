@@ -41,7 +41,7 @@
 </template>
 
 <script>
-  import Pagination from '@/components/table/pagination';
+  import Pagination from '@/components/pagination';
   import { scroll } from "@/utils/core";
   import api from '@/api';
 

@@ -9,7 +9,15 @@
           <el-row>
             <el-col :span="12">
               <el-form-item :label="item.label1">
-                <el-date-picker type="daterange" v-model="item.value1" format="yyyy年MM月dd日" value-format="yyyy-MM-dd" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" unlink-panels>
+                <el-date-picker
+                  type="daterange"
+                  v-model="item.value1"
+                  format="yyyy年MM月dd日"
+                  value-format="yyyy-MM-dd"
+                  range-separator="至"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期"
+                  unlink-panels>
                 </el-date-picker>
               </el-form-item>
             </el-col>
