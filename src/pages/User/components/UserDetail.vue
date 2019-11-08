@@ -10,14 +10,13 @@
 
       <el-form-item label="角色：" prop="role">
         <el-select v-model="userInfo.role" placeholder="请选择用户角色">
-          <el-option v-for="item in roleList" :key="item.value" :label="item.label" :value="item.value"></el-option>
+          <el-option v-for="item in tableMng.getTable('role')" :key="item.id" :label="item.name" :value="item.id"></el-option>
         </el-select>
       </el-form-item>
 
       <el-form-item label="性别：">
         <el-radio-group v-model="userInfo.gender">
-          <el-radio label="男"></el-radio>
-          <el-radio label="女"></el-radio>
+          <el-radio v-for="item in tableMng.getTable('gender')" :key="item.id" :label="item.id">{{item.name}}</el-radio>
         </el-radio-group>
       </el-form-item>
 
@@ -26,7 +25,6 @@
           <img v-if="userInfo.avatar" :src="userInfo.avatar" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
-
       </el-form-item>
 
       <el-form-item label="手机：" placeholder="请填写手机号" prop="mobilePhone">
@@ -44,22 +42,25 @@
     </span>
   </el-dialog>
 </template>
+
 <script>
   import api from '@/api';
   import bus from "@/utils/bus";
+  import tableMng from '@/utils/tableMng';
 
   export default {
     data() {
       return {
+        tableMng,
         isEdit: false,
         userInfo: {
-          account: "",
-          name: "",
-          role: "",
-          gender: "",
-          avatar: "",
-          mobilePhone: "",
-          email: "",
+          account: '',
+          name: '',
+          role: '',
+          gender: '',
+          avatar: '',
+          mobilePhone: '',
+          email: '',
         },
         userInfoReset: {},
         userInfoBackup: {},
@@ -98,22 +99,6 @@
             trigger: "blur"
           }]
         },
-        roleList: [{
-          value: "管理员",
-          label: "管理员"
-        }, {
-          value: "编辑",
-          label: "编辑"
-        }, {
-          value: "普通会员",
-          label: "普通会员"
-        }, {
-          value: "高级会员",
-          label: "高级会员"
-        }, {
-          value: "普通用户",
-          label: "普通用户"
-        }],
         submitLoading: false,
         getDetailLoading: false,
         dialogVisible: false,

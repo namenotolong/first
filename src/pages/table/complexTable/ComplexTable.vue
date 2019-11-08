@@ -1,34 +1,44 @@
 <template>
-  <div>
+  <div class="table-complex">
     <el-table
-      :data="userList"
+      class="table-complex__body"
+      :data="tableData"
       border
       highlight-current-row
-      v-loading="userTableLoading"
+      v-loading="tableLoading"
       @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="index" label="序号"></el-table-column>
+      <el-table-column prop="index" label="序号" width="80"></el-table-column>
       <el-table-column prop="name" label="姓名"></el-table-column>
       <el-table-column prop="age" label="年龄" sortable></el-table-column>
-      <el-table-column prop="gender" label="性别" :filters="genderList" :filter-method="filter" filter-placement="bottom"></el-table-column>
-      <el-table-column prop="role" label="角色" :filters="roleList" :filter-method="filter" filter-placement="bottom"></el-table-column>
+      <el-table-column
+        prop="gender"
+        label="性别"
+        :filters="tableMng.formatTable('gender', 'value', 'text')"
+        :filter-method="handleFilter">
+        <template slot-scope="scope">
+          <span>{{tableMng.getNameById('gender',scope.row.gender)}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="role"
+        label="角色"
+        :filters="tableMng.formatTable('role', 'value', 'text')"
+        :filter-method="handleFilter">
+        <template slot-scope="scope">
+          <span>{{tableMng.getNameById('role',scope.row.role)}}</span>
+        </template>
+      </el-table-column>
       <el-table-column prop="registerDate" label="注册时间" sortable></el-table-column>
       <el-table-column prop="consume" label="累计消费额(元)" sortable></el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="操作" width="120">
         <template slot-scope="scope">
-          <el-button type="text" @click="editUser(scope.$index, scope.row)">编辑</el-button>
+          <el-button type="text" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
           <el-divider direction="vertical"></el-divider>
-          <el-button type="text" @click="deleteUser(scope.$index, scope.row)">删除</el-button>
+          <el-button type="text" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-
-    <!-- <el-pagination
-      class="pagination"
-      :total="total"
-      :current-page="queryCondition.pageNumber"
-      :page-sizes="[20, 50, 100,1000]"
-      :page-size="queryCondition.pageSize"> -->
 
     <pagination
       position="center"
@@ -36,15 +46,15 @@
       :page-number.sync="queryCondition.pageNumber"
       :page-size.sync="queryCondition.pageSize"
       layout=" prev, pager, next, jumper"
-      @pagination="getUserList" />
+      @pagination="getTableData" />
   </div>
 </template>
 
 <script>
   import Pagination from '@/components/pagination';
-  import { scroll } from "@/utils/core";
+  import { scroll } from '@/utils/core';
   import api from '@/api';
-
+  import tableMng from '@/utils/tableMng';
 
   export default {
     components: {
@@ -52,31 +62,9 @@
     },
     data() {
       return {
-        userList: [],
-        genderList: [{
-          text: '男',
-          value: '男'
-        }, {
-          text: '女',
-          value: '女'
-        }],
-        roleList: [{
-          text: '管理员',
-          value: '管理员'
-        }, {
-          text: '编辑',
-          value: '编辑'
-        }, {
-          text: '普通会员',
-          value: '普通会员'
-        }, {
-          text: '高级会员',
-          value: '高级会员'
-        }, {
-          text: '普通用户',
-          value: '普通用户'
-        }],
-        userTableLoading: false,
+        tableMng,
+        tableData: [],
+        tableLoading: false,
         queryCondition: {
           name: '',
           pageNumber: 1,
@@ -87,13 +75,13 @@
       }
     },
     created() {
-      this.getUserList();
+      this.getTableData();
     },
     methods: {
-      getUserList() {
-        this.userTableLoading = true;
+      getTableData() {
+        this.tableLoading = true;
         api.user.getList(this.queryCondition).then(res => {
-          this.userList = res.data.list.map((item, index) => {
+          this.tableData = res.data.list.map((item, index) => {
             return {
               id: item.id,
               index: (this.queryCondition.pageNumber - 1) * this.queryCondition.pageSize +
@@ -107,23 +95,23 @@
             }
           });
           this.total = res.data.total;
-          this.userTableLoading = false;
+          this.tableLoading = false;
           const scrollElement = document.querySelector('.inner-layout__page');
           scroll(scrollElement, 0, 800);
         })
       },
-      filter(value, row, column) {
+      handleFilter(value, row, column) {
         const property = column['property'];
         return row[property] === value;
       },
-      editUser() {
+      handleEdit() {
 
       },
-      deleteUser(index, row) {
+      handleDelete(index, row) {
         this.$confirm(`确认删除用户“${row.name}”？`, "提示", {
           type: 'warning',
         }).then(() => {
-          this.getUserList();
+          this.getTableData();
           this.$message.success("删除成功！");
         }).catch(() => {
 
@@ -135,3 +123,14 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .table-complex {
+    padding: 1em;
+    background-color: #fff;
+
+    .table-complex__body {
+      margin-bottom: 20px;
+    }
+  }
+</style>

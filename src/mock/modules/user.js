@@ -4,11 +4,11 @@ import Mock from 'mockjs';
 const userDetail = Mock.mock({
   account: /^[a-zA-Z0-9_]{4,9}$/,
   name: '@cname',
-  gender: '@pick(["男", "女"])',
+  gender: '@pick(["1", "2"])',
   avatar: "@image('100x100', '#02adea', 'avatar')",
   email: '@email',
   mobilePhone: /^1[345789]\d{9}$/,
-  role: '@pick(["管理员", "编辑","普通会员","高级会员","普通用户"])'
+  role: '@pick(["admin", "guest","editor"])'
 })
 
 const userList = Mock.mock({
@@ -16,9 +16,9 @@ const userList = Mock.mock({
     id: '@lower(@guid)',
     name: '@cname',
     age: '@natural(20,60)',
-    gender: '@pick(["男","女"])',
-    role: '@pick(["管理员", "编辑","普通会员","高级会员","普通用户"])',
-    registerDate: '@date',
+    gender: '@pick(["1", "2"])',
+    role: '@pick(["admin", "guest","editor"])',
+    registerDate: '@datetime("yyyy-MM-dd HH:mm:ss")',
     consume: '@natural(0,10000)',
   }]
 })

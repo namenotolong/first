@@ -60,15 +60,19 @@ class TableMng {
       throw new Error(`表“${tableName}”中，不存在id为“${id}”的项`)
     }
   }
+
+  // 格式化为前端需要的数据结构
+  formatTable(tableName, idFiled, nameFiled) {
+    const table = this.getTable(tableName);
+    return table.map(item => ({
+      [idFiled]: item.id,
+      [nameFiled]: item.name
+    }))
+  }
 }
 
 //后端未提供，前端定义的表数据
-const fixTable = {
-  qqq: [{
-    id: "1",
-    name: '23'
-  }]
-};
+const fixTable = {};
 
 const tableMng = new TableMng(fixTable);
 

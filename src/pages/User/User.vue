@@ -17,12 +17,12 @@
         </el-form-item>
         <el-form-item label="性别:">
           <el-select v-model="queryCondition.gender" placeholder="请选择性别" clearable>
-            <el-option v-for="item in genders" :key="item.value" :label="item.name" :value="item.id"></el-option>
+            <el-option v-for="item in tableMng.getTable('gender')" :key="item.id" :label="item.name" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="角色:">
           <el-select v-model="queryCondition.roles" placeholder="请选择角色" multiple clearable>
-            <el-option v-for="item in roles" :key="item.value" :label="item.name" :value="item.id"></el-option>
+            <el-option v-for="item in tableMng.getTable('role')" :key="item.id" :label="item.name" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -42,9 +42,17 @@
         <el-table-column prop="index" label="序号" width="80px"></el-table-column>
         <el-table-column prop="name" label="姓名"></el-table-column>
         <el-table-column prop="age" label="年龄" width="120px" sortable></el-table-column>
-        <el-table-column prop="gender" label="性别" width="120px"></el-table-column>
-        <el-table-column prop="role" label="角色"></el-table-column>
-        <el-table-column prop="registerDate" label="注册时间" width="120px" sortable></el-table-column>
+        <el-table-column prop="gender" label="性别" width="120px">
+          <template slot-scope="scope">
+            <span>{{tableMng.getNameById('gender',scope.row.gender)}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="role" label="角色">
+          <template slot-scope="scope">
+            <span>{{tableMng.getNameById('role',scope.row.role)}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="registerDate" label="注册时间" sortable></el-table-column>
         <el-table-column prop="consume" label="累计消费额(元)" width="160px" sortable></el-table-column>
         <el-table-column label="操作" width="120px">
           <template slot-scope="scope">
@@ -68,10 +76,10 @@
 </template>
 
 <script>
-  import tableMng from '@/utils/tableMng';
   import api from '@/api';
   import bus from '@/utils/bus';
   import { scroll } from '@/utils/core';
+  import tableMng from '@/utils/tableMng';
   import SectionTitle from '@/components/sectionTitle';
   import ExportExcel from '@/components/excel/exportExcel';
   import Pagination from '@/components/pagination';
@@ -86,11 +94,10 @@
     },
     data() {
       return {
+        tableMng,
         userList: [],
         excelHeader: ['序号', '姓名', '年龄', '性别', '角色', '注册时间', '累计消费额(元)'],
         filterFiled: ['index', 'name', 'age', 'gender', 'role', 'registerDate', 'consume'],
-        genders: tableMng.getTable('gender'),
-        roles: tableMng.getTable('role'),
         userTableLoading: false,
         queryCondition: {
           name: '',
