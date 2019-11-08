@@ -1,17 +1,16 @@
 <template>
-  <div class="dynamic-form">
+  <div class="form-dynamic">
     <el-form ref="form" :model="form" label-position="top">
-
       <transition-group name="block" tag="div">
         <div class="block-item" v-for="(item,index) in form.workItem" :key="item.id">
-          <div class="block-item__index" v-text="index + 1"></div>
+          <div class="block-item__index">{{index + 1}}</div>
 
           <el-row>
             <el-col :span="12">
-              <el-form-item :label="item.label1">
+              <el-form-item :label="item.date.label">
                 <el-date-picker
                   type="daterange"
-                  v-model="item.value1"
+                  v-model="item.date.value"
                   format="yyyy年MM月dd日"
                   value-format="yyyy-MM-dd"
                   range-separator="至"
@@ -23,27 +22,25 @@
             </el-col>
 
             <el-col :span="12">
-              <el-form-item :label="item.label2">
-                <el-input v-model="item.value2"></el-input>
+              <el-form-item :label="item.department.label">
+                <el-input v-model="item.department.value"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
 
-          <el-form-item :label="item.label3">
-            <el-input v-model="item.value3"></el-input>
+          <el-form-item :label="item.title.label">
+            <el-input v-model="item.title.value"></el-input>
           </el-form-item>
 
-          <el-form-item :label="item.label4">
-            <el-input v-model="item.value4"></el-input>
+          <el-form-item :label="item.task.label">
+            <el-input v-model="item.task.value"></el-input>
           </el-form-item>
 
-          <div class="block-item--remove" @click="handleRemove(index)">
-            <span class="block-item--remove__inner"></span>
-          </div>
+          <i class="el-icon-remove block-item--remove" @click="handleRemove(index)"></i>
         </div>
       </transition-group>
-
     </el-form>
+
     <div class="block-item--add" @click="handleAdd">点击新增履历</div>
     <div style="text-align:center;">
       <el-button type="primary" round @click="handldeSubmit" :loading="submitLoading">提交</el-button>
@@ -52,21 +49,30 @@
 </template>
 
 <script>
-  import { guid } from "@/utils/core";
+  import { guid } from '@/utils/core';
+
+  const workTemplate = {
+    date: {
+      label: '起止时间',
+      value: []
+    },
+    department: {
+      label: '所在单位',
+      value: ''
+    },
+    title: {
+      label: '职务职称',
+      value: ''
+    },
+    task: {
+      label: '主要工作',
+      value: ''
+    }
+  }
 
   export default {
     data() {
       return {
-        formTemplate: {
-          label1: "起止时间",
-          value1: [],
-          label2: "所在单位",
-          value2: "",
-          label3: "主要工作",
-          value3: "",
-          label4: "职务职称",
-          value4: "",
-        },
         form: {
           workItem: []
         },
@@ -74,16 +80,16 @@
       }
     },
     created() {
-      this.initFormItem(3);
+      this.initWorkItem(3);
     },
     methods: {
-      initFormItem(amount) {
+      initWorkItem(amount) {
         for (let i = amount; i--;) {
           this.handleAdd();
         }
       },
       handleAdd() {
-        const template = Object.assign({}, this.formTemplate);
+        const template = Object.assign({}, workTemplate);
         template.id = guid();
         this.form.workItem.push(template);
       },
@@ -91,13 +97,14 @@
         this.form.workItem.splice(index, 1)
       },
       handldeSubmit() {
-        this.$message.success("提交成功！");
+        this.$message.success('提交成功！');
       }
     }
   }
 </script>
+
 <style lang="scss" scoped>
-  .dynamic-form {
+  .form-dynamic {
     box-sizing: border-box;
     width: 1000px;
     padding: 20px 100px;
@@ -131,20 +138,9 @@
       top: 50%;
       right: -61px;
       transform: translate(0, -11px);
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background-color: #d95d5d;
+      font-size: 28px;
+      color: #d95d5d;
       cursor: pointer;
-
-      .block-item--remove__inner {
-        position: absolute;
-        top: 10px;
-        left: 5px;
-        width: 12px;
-        height: 3px;
-        background-color: #fff;
-      }
     }
 
     .block-item--add {
@@ -175,8 +171,9 @@
     }
   }
 </style>
+
 <style>
-  .dynamic-form .el-form-item__label {
+  .form-dynamicm .el-form-item__label {
     line-height: 20px;
   }
 </style>

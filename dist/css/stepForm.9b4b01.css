@@ -1,0 +1,36 @@
+.form-steptwo .avatar-uploader .el-upload[data-v-72af704e] {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.form-steptwo .avatar-uploader .el-upload[data-v-72af704e]:hover {
+  border-color: #409EFF;
+}
+.form-steptwo .avatar-uploader-icon[data-v-72af704e] {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.form-steptwo .avatar[data-v-72af704e] {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+
+.form-step[data-v-00372e3e] {
+  width: 50%;
+  min-width: 500px;
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: #fff;
+}
+.form-step .el-steps[data-v-00372e3e] {
+    margin-bottom: 20px;
+}
+

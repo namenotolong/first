@@ -1,54 +1,57 @@
 <template>
-  <el-form
-    ref="form"
-    :model="formData"
-    :rules="formRule"
-    status-icon
-    label-width="80px"
-    label-position="left">
+  <div class="form-steptwo">
+    <ul class="upload-list">
+      <li v-for="item in uploadList" :key="item.type">
+        <upload :name="item.name" :type="item.type" @onUploadSuccess="handleUploadSuccess" />
+      </li>
+    </ul>
 
-    <el-form-item label="字段1" prop="value1">
-      <el-input v-model="formData.value1" clearable placeholder="请输入"></el-input>
-    </el-form-item>
-
-
-    <div style="text-align:center;">
+    <div class="button">
       <el-button type="primary" @click="handlePrevStep">上一步</el-button>
-      <el-button type="primary" @click="handleStep">下一步</el-button>
+      <el-button type="primary" @click="handleNextStep">下一步</el-button>
     </div>
-  </el-form>
+  </div>
+
 </template>
 
 <script>
+  import Upload from './Upload';
   export default {
+    components: {
+      Upload
+    },
     data() {
       return {
-        formData: {
-          value1: '',
-
-        },
-        formRule: {
-          value1: [{
-            required: true,
-            message: '不能为空',
-            trigger: 'blur'
-          }],
-
-        },
+        uploadList: [{
+          type: 'entrust',
+          name: '授权委托书'
+        }, {
+          type: 'license',
+          name: '营业执照副本'
+        }, {
+          type: 'collect',
+          name: '数据采集表'
+        }],
+        fileList: []
       }
     },
     methods: {
+      handleUploadSuccess(data) {
+        const fileIndex = this.fileList.findIndex(item => item.type === data.type);
+        if (fileIndex !== -1) {
+          this.fileList.splice(fileIndex, 1);
+        }
+        this.fileList.push(data)
+      },
       validForm() {
         let result = true;
-        this.$refs.form.validate(valid => {
-          if (!valid) {
-            result = false;
-          }
-        })
+        if (this.uploadList.length !== this.fileList.length) {
+          result = false;
+        }
         return result;
       },
-      handleStep() {
-        this.$emit('onStep', this.validForm())
+      handleNextStep() {
+        this.$emit('onNextStep', this.validForm())
       },
       handlePrevStep() {
         this.$emit('onPrevStep')
@@ -56,3 +59,21 @@
     },
   }
 </script>
+
+<style lang="scss" scoped>
+  .form-steptwo {
+    .upload-list {
+      display: flex;
+      justify-content: center;
+
+      li {
+        margin: 0 10px;
+      }
+    }
+
+    .button {
+      margin-top: 20px;
+      text-align: center;
+    }
+  }
+</style>

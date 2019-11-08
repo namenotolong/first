@@ -18,7 +18,7 @@
     </el-form-item>
 
     <div style="text-align:center;">
-      <el-button type="primary" @click="handleStep">下一步</el-button>
+      <el-button type="primary" @click="handleNextStep">下一步</el-button>
     </div>
   </el-form>
 </template>
@@ -61,8 +61,8 @@
         })
         return result;
       },
-      handleStep() {
-        this.$emit('onStep', this.validForm())
+      handleNextStep() {
+        this.$emit('onNextStep', this.validForm())
       }
     },
   }

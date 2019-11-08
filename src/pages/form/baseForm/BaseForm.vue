@@ -83,7 +83,7 @@
       return {
         formData: {
           name: '',
-          amount: 0,
+          amount: '',
           region: '',
           startTime: '',
           mobilePhone: '',

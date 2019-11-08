@@ -9,9 +9,9 @@
         :status="step.status" />
     </el-steps>
 
-    <step-one v-show="stepNumber === 0" @onStep="handleStep" />
-    <step-two v-show="stepNumber === 1" @onStep="handleStep" @onPrevStep="handlePrevStep" />
-    <step-three v-show="stepNumber === 2" @onReload="handleRload" />
+    <step-one v-show="stepNumber === 0" @onNextStep="handleNextStep" />
+    <step-two v-show="stepNumber === 1" @onNextStep="handleNextStep" @onPrevStep="handlePrevStep" />
+    <step-three v-show="stepNumber === 2" @onAgain="handleAgain" />
   </div>
 </template>
 
@@ -19,9 +19,23 @@
   import StepOne from './components/StepOne';
   import StepTwo from './components/StepTwo';
   import StepThree from './components/StepThree';
+  import { deepClone } from '@/utils/core';
+
+  const initSteps = [{
+    title: '基本信息',
+    status: 'process',
+    description: '请填写用户基本信息'
+  }, {
+    title: '资料上传',
+    status: 'wait',
+    description: '请上传认证资料'
+  }, {
+    title: '提交结果',
+    status: 'wait'
+  }]
 
   export default {
-    // name: 'StepForm',
+    name: 'StepForm',
     components: {
       StepOne,
       StepTwo,
@@ -30,92 +44,32 @@
     data() {
       return {
         pageKey: 0,
-        submitLoading: false,
         stepNumber: 0,
-        steps: [{
-          title: '基本信息',
-          status: 'process',
-          description: '请填写用户基本信息'
-        }, {
-          title: '资料上传',
-          status: 'wait',
-          description: '请上传认证资料'
-        }, {
-          title: '提交结果',
-          status: 'wait'
-        }],
+        steps: deepClone(initSteps),
       }
     },
-    created(){
-      console.log('shuax')
-    },
-    destroyed() {
-      console.log(33)
-    },
     methods: {
-      handleStep(result) {
+      // 下一步
+      handleNextStep(result) {
         if (result) {
           this.steps[this.stepNumber].status = 'success';
           this.steps[++this.stepNumber].status = 'process';
         } else {
-          this.$message.error('信息填写有误！');
+          this.$message.error('信息有误！');
           this.steps[this.stepNumber].status = 'error';
         }
       },
+      // 上一步
       handlePrevStep() {
         this.steps[this.stepNumber].status = 'wait';
         this.steps[--this.stepNumber].status = 'process';
       },
-      handleRload() {
-        this.pageKey = +new Date();
-        console.log(this.pageKey)
-
-      },
-      nextStep() {
-        this.stepValid();
-        this.stepNumber++;
-        this.steps[this.stepNumber].status = 'finish';
-      },
-      prevStep() {
-        this.stepValid();
-        this.stepNumber--;
-        this.steps[this.stepNumber].status = 'finish';
-      },
-      stepValid() {
-        const currentStep = this.stepNumber;
-        const formName = 'form' + (currentStep + 1);
-        this.$refs[formName].validate(valid => {
-          if (valid) {
-            this.steps[currentStep].status = 'success';
-          } else {
-            this.steps[currentStep].status = 'error';
-          }
-        })
-      },
-      submit() {
-        this.submitLoading = true;
-        let form1 = this.form1;
-        let form2 = this.form2;
-        let form3 = this.form3;
-        let valid1 = false;
-        let valid2 = false;
-        let valid3 = false;
-        this.$refs.form1.validate(valid => {
-          valid1 = valid;
-        })
-        this.$refs.form2.validate(valid => {
-          valid2 = valid;
-        })
-        this.$refs.form3.validate(valid => {
-          valid3 = valid;
-        })
-        if (valid1 && valid2 && valid3) {
-          this.$message.success('提交成功！');
-        } else {
-          this.$message.error('内容填写有误！');
-        }
-        this.submitLoading = false;
-      },
+      // 重新填写
+      handleAgain() {
+        this.pageKey++;
+        this.stepNumber = 0;
+        this.steps = deepClone(initSteps)
+      }
     }
   }
 </script>

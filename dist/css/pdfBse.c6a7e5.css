@@ -1,0 +1,12 @@
+.pdf-base[data-v-f0a8870e] {
+  height: 100%;
+}
+.pdf-base .pdf-base__tip[data-v-f0a8870e] {
+    margin-bottom: 1em;
+}
+.pdf-base .pdf-base__canvas[data-v-f0a8870e] {
+    min-height: 100%;
+    width: 800px;
+    margin: 0 auto;
+}
+

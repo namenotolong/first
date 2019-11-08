@@ -1,0 +1,14 @@
+.article-list[data-v-8be09dac] {
+  background-color: #fff;
+  padding: 20px;
+}
+.article-list .article-list__header[data-v-8be09dac] {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+.article-list .article-list__table[data-v-8be09dac] {
+    margin-bottom: 20px;
+}
+
