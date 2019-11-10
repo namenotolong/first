@@ -18,6 +18,12 @@ Mock.XHR.prototype.send = function () {
 }
 
 
+//延时数据返回
+Mock.setup({
+  timeout: '300-800'
+})
+
+
 Mock.mock(/\/account\/login/, 'post', account.login);
 Mock.mock(/\/account\/logout/, 'post', account.logout);
 Mock.mock(/\/account\/userInfo/, 'post', account.getUserInfo);
@@ -37,8 +43,9 @@ Mock.mock(/\/article\/list/, 'post', article.getList);
 Mock.mock(/\/article\/detail/, 'post', article.getDetail);
 
 
-Mock.mock(/\/user\/list/, 'post', user.getList);
-Mock.mock(/\/user\/detail/, 'post', user.getDetail);
+Mock.mock(/\/user\/list/, 'get', user.getList);
+Mock.mock(/\/user\/detail/, 'get', user.getDetail);
+Mock.mock(/\/user\/save/, 'post', user.save);
 
 
 Mock.mock(/\/tab\/tabList/, 'get', tab.getTabData);

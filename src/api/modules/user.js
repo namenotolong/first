@@ -1,16 +1,33 @@
 import service from '@/utils/service';
 
-function getList(data) {
+function getList(params) {
   return service({
     url: '/user/list',
+    method: 'get',
+    params
+  })
+}
+
+function getDetail(params) {
+  return service({
+    url: '/user/detail',
+    method: 'get',
+    params
+  })
+}
+
+function save(data) {
+  return service({
+    url: '/user/save',
     method: 'post',
     data
   })
 }
 
-function getDetail(data) {
+
+function remove(data) {
   return service({
-    url: '/user/detail',
+    url: '/user/remove',
     method: 'post',
     data
   })
@@ -18,5 +35,7 @@ function getDetail(data) {
 
 export {
   getList,
-  getDetail
+  getDetail,
+  save,
+  remove
 }

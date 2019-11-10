@@ -7,10 +7,13 @@ class TableMng {
 
   // 初始化数据表
   initTable(data) {
-    this.baseTbale = {
+    const baseTable = {
       ...this.baseTbale,
       ...data
     };
+    this.baseTbale = baseTable;
+    sessionStorage.setItem('baseTable', window.JSON.stringify(baseTable));
+
   }
 
 
@@ -54,11 +57,7 @@ class TableMng {
   getNameById(tableName, id) {
     const table = this.getTable(tableName);
     const result = table.find(item => item.id === id);
-    if (result) {
-      return result.name
-    } else {
-      throw new Error(`表“${tableName}”中，不存在id为“${id}”的项`)
-    }
+    return result ? result.name : '';
   }
 
   // 格式化为前端需要的数据结构
@@ -74,6 +73,13 @@ class TableMng {
 //后端未提供，前端定义的表数据
 const fixTable = {};
 
-const tableMng = new TableMng(fixTable);
+// 为什么需要存一份到本地？
+// 用户在使用的时候可能会刷新页面，这个时候会去重新请求baseTable的数据，数据有可能会在页面渲染完成之后才返回。
+const storageTable = JSON.parse(sessionStorage.getItem('baseTable'));
+
+
+const tableMng = new TableMng({ ...fixTable, ...storageTable });
 
 export default tableMng;
+
+

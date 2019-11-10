@@ -1,6 +1,7 @@
 <template>
   <div class="user-manager">
 
+    <!-- 工具栏 -->
     <div class="user-manager__header">
       <section-title name="用户列表" />
       <div>
@@ -10,6 +11,7 @@
       </div>
     </div>
 
+    <!-- 查询 -->
     <div class="user-manager__search">
       <el-form :inline="true" :model="queryCondition">
         <el-form-item label="姓名:">
@@ -31,6 +33,7 @@
       </el-form>
     </div>
 
+    <!-- 用户列表 -->
     <div class="user-manager__table">
       <el-table
         :data="userList"
@@ -41,7 +44,7 @@
         <el-table-column type="selection" width="50"></el-table-column>
         <el-table-column prop="index" label="序号" width="80px"></el-table-column>
         <el-table-column prop="name" label="姓名"></el-table-column>
-        <el-table-column prop="age" label="年龄" width="120px" sortable></el-table-column>
+        <el-table-column prop="mobilePhone" label="手机" width="120px"></el-table-column>
         <el-table-column prop="gender" label="性别" width="120px">
           <template slot-scope="scope">
             <span>{{tableMng.getNameById('gender',scope.row.gender)}}</span>
@@ -64,41 +67,48 @@
       </el-table>
     </div>
 
+    <!-- 分页 -->
     <pagination
       :total="total"
       :page-number.sync="queryCondition.pageNumber"
       :page-size.sync="queryCondition.pageSize"
       @pagination="getUserList" />
 
-    <user-detail></user-detail>
+    <!-- 用户编辑/新增 -->
+    <edit
+      :id="editId"
+      :visible="editVisible"
+      @onClose="handleClose"
+      @onSave="handleSave" />
 
   </div>
 </template>
 
 <script>
   import api from '@/api';
-  import bus from '@/utils/bus';
   import { scroll } from '@/utils/core';
   import tableMng from '@/utils/tableMng';
   import SectionTitle from '@/components/sectionTitle';
   import ExportExcel from '@/components/excel/exportExcel';
   import Pagination from '@/components/pagination';
-  import UserDetail from './components/UserDetail';
+  import Edit from './components/Edit';
 
   export default {
     components: {
       SectionTitle,
       ExportExcel,
       Pagination,
-      UserDetail
+      Edit
     },
     data() {
       return {
         tableMng,
         userList: [],
-        excelHeader: ['序号', '姓名', '年龄', '性别', '角色', '注册时间', '累计消费额(元)'],
-        filterFiled: ['index', 'name', 'age', 'gender', 'role', 'registerDate', 'consume'],
+        excelHeader: ['序号', '姓名', '手机', '性别', '角色', '注册时间', '累计消费额(元)'],
+        filterFiled: ['index', 'name', 'mobilePhone', 'gender', 'role', 'registerDate', 'consume'],
         userTableLoading: false,
+        editId: '',
+        editVisible: false,
         queryCondition: {
           name: '',
           gender: '',
@@ -123,10 +133,10 @@
             id: item.id,
             index: (this.queryCondition.pageNumber - 1) * this.queryCondition.pageSize + index + 1,
             name: item.name,
-            age: item.age,
+            mobilePhone: item.mobilePhone,
             gender: item.gender,
             role: item.role,
-            registerDate: item.registerDate,
+            registerDate: this.$dayjs(item.registerDate).format('YYYY-MM-DD HH:mm:ss'),
             consume: item.consume
           }
         });
@@ -144,9 +154,8 @@
           this.$confirm(`确认删除用户“${names.join('，')}”？`, '提示', {
             type: 'warning',
           }).then(() => {
-            this.getUserList().then(res => {
-              this.$message.success('删除成功！');
-            });
+            this.$message.success('删除成功！');
+            this.getUserList();
           }).catch(() => {
 
           })
@@ -154,18 +163,16 @@
       },
       // 编辑用户
       handleEdit(index, row) {
-        if (!row) {
-          row = {};
-        }
-        bus.$emit('userDetail', row.id)
+        this.editId = row ? row.id : '';
+        this.editVisible = true;
       },
       // 删除用户
       handleDelete(index, row) {
         this.$confirm(`确认删除用户“${row.name}”？`, '提示', {
           type: 'warning',
         }).then(() => {
-          this.getList();
           this.$message.success('删除成功！');
+          this.getUserList();
         })
       },
       handleSelectionChange(val) {
@@ -182,6 +189,13 @@
           })
           return newItem;
         })
+      },
+      handleSave() {
+        this.getUserList();
+        this.handleClose();
+      },
+      handleClose() {
+        this.editVisible = false;
       }
     }
   }

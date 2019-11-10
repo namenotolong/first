@@ -18,6 +18,7 @@
         type: String,
         default: ''
       },
+      // 用来判断使用的是哪个上传控件
       type: {
         type: String,
         required: true

@@ -7,7 +7,7 @@ const loginInfo = Mock.mock({
 const userInfo = Mock.mock({
   name: "@cname",
   gender: '@pick(["男", "女"])',
-  avatar: "@image('100x100', '#aaa', 'avatar')",
+  avatar: 'https://s2.ax1x.com/2019/08/02/edRc1P.jpg',
   email: "@email",
   mobilePhone: /^1[345789]\d{9}$/,
   roles: ['admin']
