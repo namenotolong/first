@@ -1,6 +1,10 @@
 <template>
   <!--导出excel表格 -->
-  <el-button type="info" round icon="el-icon-download" :loading="loading" @click="handleExport">
+  <el-button
+    type="info"
+    icon="el-icon-download"
+    :loading="loading"
+    @click="handleExport">
     <slot></slot>
   </el-button>
 </template>
@@ -43,14 +47,14 @@
         let sheet;
         // 自动设置表格宽度所需要的数据格式与不设置宽度不一样。
         if (this.autoWidth) {
-          let data = this.data.map(item => this.filterFiled.map(j => item[j]))
+          const data = this.data.map(item => this.filterFiled.map(j => item[j]))
           data.unshift(header);
           sheet = this.sheet_from_array_of_arrays(data);
           this.adaptWidth(data, sheet);
         } else {
-          let data = this.data.map(item => {
+          const data = this.data.map(item => {
             const values = this.filterFiled.map(j => item[j]);
-            let newItem = {};
+            const newItem = {};
             header.forEach((item, index) => {
               newItem[header[index]] = values[index];
             })
@@ -60,7 +64,7 @@
         }
 
         const sheetName = 'Sheet1';
-        let wb = {
+        const wb = {
           SheetNames: [],
           Sheets: {},
           Props: {}
@@ -72,15 +76,16 @@
           bookSST: false,
           type: 'binary'
         });
-        const blob = new Blob([this.s2ab(wbout)], {
-          type: 'application/octet-stream'
-        });
-        this.saveAs(this.fileName, blob);
+        if (window.btoa) {
+          this.downloadURI(wbout, this.fileName)
+        } else {
+          this.downloadBlob(wbout, this.fileName);
+        }
         this.loading = false;
       },
       sheet_from_array_of_arrays(data) {
-        var sheet = {};
-        var range = {
+        const sheet = {};
+        const range = {
           s: {
             c: 10000000,
             r: 10000000
@@ -90,17 +95,17 @@
             r: 0
           }
         };
-        for (var R = 0; R != data.length; ++R) {
-          for (var C = 0; C != data[R].length; ++C) {
+        for (let R = 0; R != data.length; ++R) {
+          for (let C = 0; C != data[R].length; ++C) {
             if (range.s.r > R) range.s.r = R;
             if (range.s.c > C) range.s.c = C;
             if (range.e.r < R) range.e.r = R;
             if (range.e.c < C) range.e.c = C;
-            var cell = {
+            const cell = {
               v: data[R][C]
             };
             if (cell.v == null) continue;
-            var cell_ref = XLSX.utils.encode_cell({
+            const cell_ref = XLSX.utils.encode_cell({
               c: C,
               r: R
             });
@@ -125,7 +130,7 @@
       },
       datenum(v, date1904) {
         if (date1904) v += 1462;
-        var epoch = Date.parse(v);
+        const epoch = Date.parse(v);
         return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
       },
       adaptWidth(data, sheet) {
@@ -149,7 +154,7 @@
           }
         }))
         /*以第一行为初始值*/
-        let result = colWidth[0];
+        const result = colWidth[0];
         for (let i = 1; i < colWidth.length; i++) {
           for (let j = 0; j < colWidth[i].length; j++) {
             if (result[j]['wch'] < colWidth[i][j]['wch']) {
@@ -159,26 +164,39 @@
         }
         sheet['!cols'] = result;
       },
-      //字符串转字符流
+      //二进制字符串转字符流
       s2ab(s) {
-        let buffer = new ArrayBuffer(s.length);
-        let view = new Uint8Array(buffer);
-        for (let i = 0; i != s.length; ++i) {
+        const buffer = new ArrayBuffer(s.length);
+        const view = new Uint8Array(buffer);
+        for (let i = 0; i < s.length; i++) {
           view[i] = s.charCodeAt(i) & 0xFF;
         }
         return buffer;
       },
-      saveAs(fileName, obj) {
+      // 使用blob对象下载文件
+      downloadBlob(binaryString, name) {
+        const stream = this.s2ab(binaryString);
+        const blob = new Blob([stream], { type: 'application/octet-stream' });
         const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(obj);
-        fileName = fileName || '数据';
+        const fileName = name || '数据';
+        link.href = window.URL.createObjectURL(blob);
         link.download = fileName + '.xlsx';
         link.click();
         //延时释放
         setTimeout(function() {
-          window.URL.revokeObjectURL(obj);
+          window.URL.revokeObjectURL(blob);
         }, 100);
       },
+      // 使用base64下载文件
+      downloadURI(binaryString, name) {
+        const header = 'data:application/octet-stream;base64,';
+        const dataURI = window.btoa(binaryString);
+        const link = document.createElement('a');
+        const fileName = name || '数据';
+        link.href = header + dataURI;
+        link.download = fileName + '.xlsx';
+        link.click();
+      }
     }
   }
 </script>

@@ -6,7 +6,13 @@
       <div>
         <el-button type="primary" round icon="el-icon-plus" @click="handleAdd">新增文章</el-button>
         <el-button type="danger" round icon="el-icon-minus" @click="handleDeleteBatch">批量删除</el-button>
-        <export-excel file-name="文章列表" :header="excelHeader" :filter-filed="filterFiled" :data="articleList">导出表格</export-excel>
+        <export-excel
+          file-name="文章数据表"
+          :header="['序号', '作者', '创建时间', '标题', '类型', '阅读数']"
+          :filter-filed="['index', 'author', 'createDate', 'title', 'type', 'browseNum']"
+          :data="articleList">
+          导出表格
+        </export-excel>
       </div>
     </div>
 
@@ -35,7 +41,7 @@
         border
         highlight-current-row
         v-loading="articleTableLoading"
-        @selection-change="handleSelectionChange">
+        @selection-change="handleSelectedRows">
         <el-table-column type="selection" width="50"></el-table-column>
         <el-table-column prop="index" label="序号" width="80px"></el-table-column>
         <el-table-column prop="author" label="作者" width="120px"></el-table-column>
@@ -48,6 +54,7 @@
             <router-link :to="`/article/edit/${scope.row.id}/${scope.row.index}`">
               <el-button type="text">编辑</el-button>
             </router-link>
+            <el-divider direction="vertical"></el-divider>
             <el-button type="text" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
           </template>
         </el-table-column>
@@ -83,8 +90,7 @@
     data() {
       return {
         articleList: [],
-        excelHeader: ['序号', '作者', '创建时间', '标题', '类型', '阅读数'],
-        filterFiled: ['index', 'author', 'createDate', 'title', 'type', 'browseNum'],
+
         articleTypes: tableMng.getTable('article'),
         articleTableLoading: false,
         queryCondition: {
@@ -95,7 +101,7 @@
           pageSize: 20
         },
         total: 0,
-        multipleSelection: [],
+        selectedRows: [],
       }
     },
     created() {
@@ -130,10 +136,10 @@
         this.$router.push('/article/add');
       },
       handleDeleteBatch() {
-        if (this.multipleSelection.length === 0) {
+        if (this.selectedRows.length === 0) {
           this.$message.warning('请勾选要删除的文章！');
         } else {
-          const names = this.multipleSelection.map(row => row.title);
+          const names = this.selectedRows.map(row => row.title);
           this.$confirm(`确认删除以下文章“${names.join('，')}”？`, '提示', {
             type: 'warning',
             dangerouslyUseHTMLString: true
@@ -153,8 +159,8 @@
           this.$message.success('删除成功！');
         })
       },
-      handleSelectionChange(val) {
-        this.multipleSelection = val;
+      handleSelectedRows(rows) {
+        this.selectedRows = rows;
       },
     }
   }

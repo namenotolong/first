@@ -1,5 +1,5 @@
 <template>
-  <div class="upload-excel">
+  <div class="excel-upload">
     <input style="display:none" type="file" ref="fileInput" accept=".xlsx,.xls" @change="selectFile">
     <el-button type="info" round icon="el-icon-upload" :loading="loading" @click="handleUpload">点击选择文件</el-button>
     <span class="file-name" v-show="fileName">
@@ -11,6 +11,7 @@
 
 <script>
   import XLSX from 'xlsx';
+
   export default {
     props: {
       beforeUpload: Function,
@@ -18,7 +19,7 @@
     },
     data() {
       return {
-        fileName: "",
+        fileName: '',
         loading: false,
       }
     },
@@ -61,7 +62,6 @@
           this.onSuccess(header, result);
           this.loading = false;
         };
-        // 以二进制方式打开文件
         fileReader.readAsBinaryString(file);
       },
       // 获取表头
@@ -74,7 +74,7 @@
             c: C,
             r: R
           })]
-          let hdr = "UNKNOWN" + (C + 1); //设置表头不存在时的默认值
+          let hdr = 'UNKNOWN' + (C + 1); //设置表头不存在时的默认值
           if (cell && cell.t) {
             hdr = XLSX.utils.format_cell(cell);
           }
@@ -90,7 +90,7 @@
 </script>
 
 <style scoped>
-  .upload-excel {
+  .excel-upload {
     display: inline-block;
   }
 

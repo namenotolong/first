@@ -10,28 +10,27 @@
       :rules="formRules"
       ref="form"
       label-width="70px"
-      label-position="left"
       v-loading="getDetailLoading">
-      <el-form-item label="账号：" prop="account">
+      <el-form-item label="账号:" prop="account">
         <el-input v-model="userInfo.account" placeholder="请填写账号" clearable :disabled="id ? true : false"></el-input>
       </el-form-item>
-      <el-form-item label="姓名：" prop="name">
+      <el-form-item label="姓名:" prop="name">
         <el-input v-model="userInfo.name" placeholder="请填写用户姓名" clearable></el-input>
       </el-form-item>
 
-      <el-form-item label="角色：" prop="role">
+      <el-form-item label="角色:" prop="role">
         <el-select v-model="userInfo.role" placeholder="请选择用户角色">
           <el-option v-for="item in tableMng.getTable('role')" :key="item.id" :label="item.name" :value="item.id"></el-option>
         </el-select>
       </el-form-item>
 
-      <el-form-item label="性别：">
+      <el-form-item label="性别:">
         <el-radio-group v-model="userInfo.gender">
           <el-radio v-for="item in tableMng.getTable('gender')" :key="item.id" :label="item.id">{{item.name}}</el-radio>
         </el-radio-group>
       </el-form-item>
 
-      <el-form-item label="头像：">
+      <el-form-item label="头像:">
         <el-upload
           class="avatar-uploader"
           action="https://jsonplaceholder.typicode.com/posts/"
@@ -43,13 +42,19 @@
         </el-upload>
       </el-form-item>
 
-      <el-form-item label="手机：" placeholder="请填写手机号" prop="mobilePhone">
-        <el-input v-model="userInfo.mobilePhone" clearable></el-input>
-      </el-form-item>
+      <el-row>
+        <el-col :span="12">
+          <el-form-item label="手机:" placeholder="请填写手机号" prop="mobilePhone">
+            <el-input v-model="userInfo.mobilePhone" clearable></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="邮箱:" placeholder="请填写邮箱地址" prop="email">
+            <el-input v-model="userInfo.email" clearable></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
 
-      <el-form-item label="邮箱：" placeholder="请填写邮箱地址" prop="email">
-        <el-input v-model="userInfo.email" clearable></el-input>
-      </el-form-item>
     </el-form>
 
     <span slot="footer">
@@ -173,22 +178,23 @@
         this.$emit('onClose');
       },
       beforeUpload(file) {
-        this.userInfo.avatar = '';
         this.uploading = true;
-        const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+        this.userInfo.avatar = '';
+        const isImage = /\.(jpg|png)$/.test(file.name);
         const isLt2M = file.size / 1024 / 1024 < 2;
-        if (!isJpgOrPng) {
+        if (!isImage) {
           this.$message.error('上传头像图片只能是jpg或png格式!');
+          this.uploading = false;
         }
         if (!isLt2M) {
           this.$message.error('上传头像图片大小不能超过 2MB!');
+          this.uploading = false;
         }
-        return isJpgOrPng && isLt2M;
+        return isImage && isLt2M;
       },
       handleUploadSuccess(res, file) {
         this.uploading = false;
-        // 实际开发中使用后端返回的图片地址。
-        this.userInfo.avatar = URL.createObjectURL(file.raw);
+        this.userInfo.avatar = window.URL.createObjectURL(file.raw);
       },
     }
   }

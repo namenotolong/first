@@ -17,8 +17,6 @@ const userList = Mock.mock({
   }]
 })
 
-
-
 export default {
   getList(config) {
     const { name, pageNumber, pageSize } = getURLParams(config.url);
@@ -27,7 +25,6 @@ export default {
       validName = item.name.includes(name);
       return validName;
     })
-
     const startIndex = (Number(pageNumber) - 1) * Number(pageSize);
     const endIndex = startIndex + Number(pageSize);
     return {
@@ -74,8 +71,18 @@ export default {
       }
     }
   },
-  delete(config) {
+  remove(config) {
+    const { id } = window.JSON.parse(config.body);
+    id.forEach(item => {
+      const index = userList.data.findIndex(user => user.id === item);
+      userList.data.splice(index, 1);
+    })
+    return {
+      code: 200,
+      data: {
 
+      }
+    }
   }
 }
 

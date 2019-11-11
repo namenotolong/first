@@ -1,6 +1,8 @@
 <template>
   <div>
-    <upload-excel :before-upload="beforeUpload" :on-success="handleSuccess"></upload-excel>
+    <upload-excel
+      :before-upload="beforeUpload"
+      :on-success="handleSuccess" />
     <el-table :data="tableData" border highlight-current-row>
       <el-table-column v-for="item of tableHeader" :key="item" :prop="item" :label="item" />
     </el-table>
@@ -22,9 +24,9 @@
     },
     methods: {
       beforeUpload(file) {
-        const isLt2M = file.size / 1024 / 1024 < 2;
-        if (!isLt2M) {
-          this.$message.error('上传的文件大小不能超过 2MB!');
+        const isLt20M = file.size / 1024 / 1024 < 20;
+        if (!isLt20M) {
+          this.$message.error('上传的文件大小不能超过 20MB!');
         }
         return isLt2M;
       },

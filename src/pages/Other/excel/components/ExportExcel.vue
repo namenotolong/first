@@ -1,7 +1,12 @@
 <template>
   <div>
-    <el-input style="width: 320px;" v-model="fileName" placeholder="请输入要导出的文件的名称，默认为“数据”。"></el-input>
-    <export-excel :file-name="fileName" :header="excelHeader" :filter-filed="filterFiled" :data="tableData" :auto-width="true">导出excel</export-excel>
+    <export-excel
+      file-name="数据表"
+      :header="['姓名', '年龄', '性别', '电话', '电子邮箱', '毕业时间', '婚否']"
+      :filter-filed="['name', 'age', 'gender', 'mobilePhone', 'email', 'graduationDate', 'isMarry']"
+      :data="tableData">
+      导出excel
+    </export-excel>
 
     <el-table border highlight-current-row :data="tableData">
       <el-table-column prop="name" label="姓名"> </el-table-column>
@@ -24,45 +29,44 @@
     },
     data() {
       return {
-        fileName: "",
-        tableData: [{
-          name: "张三",
-          age: 21,
-          gender: "男",
-          mobilePhone: "15999999991",
-          email: "",
-          graduationDate: "2005/07/01",
-          isMarry: "否"
-        }, {
-          name: "赵六",
-          age: 20,
-          gender: "男",
-          mobilePhone: "",
-          email: "1235@qq.com",
-          graduationDate: "2011/08/10",
-          isMarry: "是"
-        }, {
-          name: "李四",
-          age: 30,
-          gender: "",
-          mobilePhone: "15999999939",
-          email: "1236@qq.com",
-          graduationDate: "1997/06/05",
-          isMarry: "否"
-        }, {
-          name: "王五",
-          age: 28,
-          gender: "男",
-          mobilePhone: "15999999996",
-          email: "12387777777777777777777777@qq.com",
-          graduationDate: "1998/06/05",
-          isMarry: "是"
-        }],
-        excelHeader: ["姓名", "年龄", "性别", "电话", "电子邮箱", "毕业时间", "婚否"],
-        filterFiled: ["name", "age", "gender", "mobilePhone", "email", "graduationDate", "isMarry"]
+        tableData,
       }
     },
   }
+
+  const tableData = [{
+    name: '张三',
+    age: 21,
+    gender: '男',
+    mobilePhone: '15999999991',
+    email: '',
+    graduationDate: '2005/07/01',
+    isMarry: '否'
+  }, {
+    name: '赵六',
+    age: 20,
+    gender: '男',
+    mobilePhone: '',
+    email: '1235@qq.com',
+    graduationDate: '2011/08/10',
+    isMarry: '是'
+  }, {
+    name: '李四',
+    age: 30,
+    gender: '',
+    mobilePhone: '15999999939',
+    email: '1236@qq.com',
+    graduationDate: '1997/06/05',
+    isMarry: '否'
+  }, {
+    name: '王五',
+    age: 28,
+    gender: '男',
+    mobilePhone: '15999999996',
+    email: '12387777777777777777777777@qq.com',
+    graduationDate: '1998/06/05',
+    isMarry: '是'
+  }]
 </script>
 
 <style scoped>

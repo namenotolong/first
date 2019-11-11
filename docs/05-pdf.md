@@ -57,7 +57,7 @@ value: ''
 </iframe>
 ```
 
-远程服务器上的文件地址最好使用encodeURIComponent()编码。
+​    远程服务器上的文件地址最好使用encodeURIComponent()编码。
 
 #### 2.使用base64格式的文件数据
 
@@ -65,13 +65,12 @@ value: ''
 
 (1)打开viewer.html，在<script src="viewer.js"></script>之前增加以下代码：
 
-```js
 // data.js是放在本地的base64数据，实际开发从后端获取
 <script src="../data.js"></script>
 <script>
   // 去除DataURI中的换行和空格
   function filterData(data) {
-    //[RFC2045]中有规定：base64一行不能超过76字符，超过则添加回车换行符。因此需要把base64字段中的换行符，回车符给去掉。
+    //[RFC2045]中有规定：base64一行不能超过76字符，超过则添加回车换行符。因此需要把base64字段中的换行符、回车符给去掉。
     // 如果后端返回的base64数据带有MIME类型，需要从MIME类型之后开始清除换行和回车符。
     // 如果不带MIME类型，直接去除回车和换行，然后使用atob解码(不需要手动加上MIME类型头)。
     const maker = ';base64,';
@@ -86,21 +85,19 @@ value: ''
   }
   //将dataURI转换成pdf.js能够直接解析的Uint8Array类型
   function convertDataURIToBinary(dataURI) {
-    // 将base64解码
+    // 将base64解码为二进制字符串
     const raw = window.atob(dataURI);
-    const rawLength = raw.length;
     // 创建储存二进制数据的内存
-    const buffer = new ArrayBuffer(rawLength);
-    // 在buffer内存中创建8位不带符号整数的TypedArray视图
-    const typedArray = new Uint8Array(buffer);
+    const buffer = new ArrayBuffer(raw.length);
+    // 创建视图
+    const typedArrayView = new Uint8Array(buffer);
     for (let i = 0; i < rawLength; i++) {
-      typedArray[i] = raw.charCodeAt(i) & 0xff;
+      typedArrayView[i] = raw.charCodeAt(i) & 0xff;
     }
-    return typedArray;
+    return typedArrayView;
   }
   const DEFAULT_URL = convertDataURIToBinary(filterData(data));
 </script>
-```
 
 (2)在viewer.js设置默认default_url
 

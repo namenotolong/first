@@ -46,6 +46,7 @@ Mock.mock(/\/article\/detail/, 'post', article.getDetail);
 Mock.mock(/\/user\/list/, 'get', user.getList);
 Mock.mock(/\/user\/detail/, 'get', user.getDetail);
 Mock.mock(/\/user\/save/, 'post', user.save);
+Mock.mock(/\/user\/remove/, 'post', user.remove);
 
 
 Mock.mock(/\/tab\/tabList/, 'get', tab.getTabData);

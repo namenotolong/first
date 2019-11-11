@@ -6,8 +6,14 @@
       <section-title name="用户列表" />
       <div>
         <el-button type="primary" round icon="el-icon-plus" @click="handleEdit">新增用户</el-button>
-        <el-button type="danger" round icon="el-icon-minus" @click="handleDeleteBatch">批量删除</el-button>
-        <export-excel file-name="用户列表" :header="excelHeader" :filter-filed="filterFiled" :data="userList">导出表格</export-excel>
+        <el-button type="danger" round icon="el-icon-minus" @click="handleDelete">批量删除</el-button>
+        <export-excel
+          file-name="用户数据表"
+          :header="['序号', '姓名', '手机', '性别', '角色', '注册时间', '累计消费额(元)']"
+          :filter-filed="['index', 'name', 'mobilePhone', 'gender', 'role', 'registerDate', 'consume']"
+          :data="userList">
+          导出表格
+        </export-excel>
       </div>
     </div>
 
@@ -39,8 +45,8 @@
         :data="userList"
         border
         highlight-current-row
-        v-loading="userTableLoading"
-        @selection-change="handleSelectionChange">
+        v-loading="tableLoading"
+        @selection-change="handleSelectedRows">
         <el-table-column type="selection" width="50"></el-table-column>
         <el-table-column prop="index" label="序号" width="80px"></el-table-column>
         <el-table-column prop="name" label="姓名"></el-table-column>
@@ -104,11 +110,7 @@
       return {
         tableMng,
         userList: [],
-        excelHeader: ['序号', '姓名', '手机', '性别', '角色', '注册时间', '累计消费额(元)'],
-        filterFiled: ['index', 'name', 'mobilePhone', 'gender', 'role', 'registerDate', 'consume'],
-        userTableLoading: false,
-        editId: '',
-        editVisible: false,
+        tableLoading: false,
         queryCondition: {
           name: '',
           gender: '',
@@ -117,7 +119,9 @@
           pageSize: 20
         },
         total: 0,
-        multipleSelection: []
+        selectedRows: [],
+        editId: '',
+        editVisible: false,
       }
     },
     created() {
@@ -126,7 +130,7 @@
     methods: {
       //获取用户列表
       async getUserList() {
-        this.userTableLoading = true;
+        this.tableLoading = true;
         const response = await api.user.getList(this.queryCondition)
         this.userList = response.data.list.map((item, index) => {
           return {
@@ -141,59 +145,48 @@
           }
         });
         this.total = response.data.total;
-        this.userTableLoading = false;
+        this.tableLoading = false;
         const scrollElement = document.querySelector('.inner-layout__page');
         scroll(scrollElement, 0, 800);
       },
-      // 批量删除
-      handleDeleteBatch() {
-        if (this.multipleSelection.length === 0) {
-          this.$message.warning('请勾选要删除的用户！');
-        } else {
-          const names = this.multipleSelection.map(row => row.name)
-          this.$confirm(`确认删除用户“${names.join('，')}”？`, '提示', {
-            type: 'warning',
-          }).then(() => {
-            this.$message.success('删除成功！');
-            this.getUserList();
-          }).catch(() => {
-
-          })
-        }
-      },
-      // 编辑用户
+      // 编辑/新增
       handleEdit(index, row) {
         this.editId = row ? row.id : '';
         this.editVisible = true;
       },
-      // 删除用户
+      // 删除
       handleDelete(index, row) {
-        this.$confirm(`确认删除用户“${row.name}”？`, '提示', {
-          type: 'warning',
-        }).then(() => {
-          this.$message.success('删除成功！');
-          this.getUserList();
-        })
+        let id = [];
+        let name = [];
+        if (row) {
+          id = [row.id];
+          name = [row.name];
+        } else {
+          id = this.selectedRows.map(row => row.id);
+          name = this.selectedRows.map(row => row.name);
+        }
+        if (name.length === 0) {
+          this.$message.warning('请选择要删除的用户！');
+        } else {
+          this.$confirm(`确认删除用户“${name.join('，')}”？`, '提示', {
+            type: 'warning',
+          }).then(async () => {
+            await api.user.remove({ id });
+            this.$message.success('删除成功！');
+            this.getUserList();
+          }).catch(() => {})
+        }
       },
-      handleSelectionChange(val) {
-        this.multipleSelection = val;
+      // 多选
+      handleSelectedRows(rows) {
+        this.selectedRows = rows;
       },
-      transmitData() {
-        const header = this.tableHeader;
-        return this.userList.map(item => {
-          delete item.id;
-          const values = Object.values(item);
-          let newItem = {};
-          header.forEach((item, index) => {
-            newItem[header[index]] = values[index];
-          })
-          return newItem;
-        })
-      },
+      // 保存
       handleSave() {
-        this.getUserList();
         this.handleClose();
+        this.getUserList();
       },
+      // 关闭编辑模态窗
       handleClose() {
         this.editVisible = false;
       }
