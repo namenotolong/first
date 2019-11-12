@@ -15,26 +15,31 @@
 
 
       <el-form-item label="手机号" prop="phone">
-        <el-input v-model="formData.phone" placeholder="请填写手机号"></el-input>
+        <el-input v-model="formData.phone" placeholder="请输入手机号"></el-input>
       </el-form-item>
 
       <el-form-item label="验证码" prop="captcha">
         <el-row>
-          <el-col :span="13">
-            <el-input v-model="formData.captcha" placeholder="短信验证码"></el-input>
+          <el-col :span="12">
+            <el-input v-model="formData.captcha" placeholder="请输入短信验证码"></el-input>
           </el-col>
-          <el-col :span="1">.</el-col>
-          <el-col :span="10">
-            <el-button round @click="getCaptcha" :disabled="captchaLoading">{{captchaButtonText}}</el-button>
+          <el-col :span="10" :offset="2">
+            <el-button style="width:100%" @click="getCaptcha" :disabled="captchaLoading">{{captchaButtonText}}</el-button>
           </el-col>
         </el-row>
       </el-form-item>
 
-      <el-form-item class="submit">
-        <el-button type="primary" :loading="submitLoading" round @click="submit">确认</el-button>
+      <el-form-item>
+        <el-row>
+          <el-col :span="11">
+            <el-button style="width:100%" type="primary" :loading="submitLoading" @click="handleSubmit">确认</el-button>
+          </el-col>
+          <el-col :span="11" :offset="2">
+            <el-button style="width:100%" type="info" @click="handleCancel">取消 </el-button>
+          </el-col>
+        </el-row>
       </el-form-item>
     </el-form>
-
 
   </div>
 
@@ -151,7 +156,7 @@
         this.$message.success(`验证码已发送至手机${ this.formData.phone }，请注意查收！`);
       },
       // 提交
-      submit() {
+      handleSubmit() {
         this.submitLoading = true;
         this.$refs.form.validate(async (valid) => {
           if (valid) {
@@ -165,6 +170,9 @@
             this.submitLoading = false;
           }
         });
+      },
+      handleCancel() {
+        this.$router.push('/account/login');
       }
     }
   };
@@ -186,20 +194,15 @@
     .forget__body {
       margin-top: 20px;
     }
-
   }
 </style>
+
 <style lang="scss">
   .forget {
 
     .el-form-item__label,
     .el-checkbox__label {
       color: #fff;
-    }
-
-    .el-button {
-      display: block;
-      width: 100%;
     }
   }
 </style>

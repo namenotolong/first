@@ -23,7 +23,7 @@
       }
     },
     mounted() {
-      this.createStyleElement('element_theme');
+      this.createStyleElement('elementTheme');
       this.getDefaultStyle();
     },
     methods: {
@@ -38,20 +38,13 @@
       },
       // 获取element的默认样式
       getDefaultStyle() {
-        const version = require('element-ui/package.json').version;
-        const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`;
-        const xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = () => {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            //字体文件还是用element的theme-chalk中的
-            this.defaultStyle = xhr.responseText.replace(/@font-face{[^}]+}/, '');
-            this.defaultColors = this.getColors('#409eff'.replace('#', ''));
-            // 生成的颜色系列：["409eff", "64,158,255", "53a8ff", "66b1ff", "79bbff", "8cc5ff", "a0cfff", "b3d8ff", "c6e2ff", "d9ecff", "ecf5ff", "3a8ee6"]
-            this.theme = this.$store.getters.theme;
-          }
-        };
-        xhr.open('GET', url, true);
-        xhr.send();
+        const content = require('!css-loader!element-ui/lib/theme-chalk/index.css');
+        const elementCss = content[0][1];
+        //字体文件还是用element的theme-chalk中的
+        this.defaultStyle = elementCss.replace(/@font-face{[^}]+}/, '');
+        this.defaultColors = this.getColors('409eff');
+        // 生成的颜色系列：["409eff", "64,158,255", "53a8ff", "66b1ff", "79bbff", "8cc5ff", "a0cfff", "b3d8ff", "c6e2ff", "d9ecff", "ecf5ff", "3a8ee6"]
+        this.theme = this.$store.getters.theme;
       },
       // 由基础颜色值生成一系列颜色值
       getColors(theme) {
@@ -104,7 +97,7 @@
         this.defaultColors.forEach((color, index) => {
           newStyle = newStyle.replace(new RegExp(color, 'ig'), newColors[index]);
         });
-        document.head.querySelector('#element_theme').innerText = newStyle;
+        document.head.querySelector('#elementTheme').innerText = newStyle;
       },
       // 更新自己书写的css的主题
       updateCustomTheme(newTheme) {

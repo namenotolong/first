@@ -9,7 +9,6 @@ import router from '@/router';
 import store from '@/store';
 import '@/assets/styles/app.scss';
 
-
 // mock数据
 import './mock';
 
