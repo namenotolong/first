@@ -34,6 +34,8 @@
 </template>
 
 <script>
+  import { encryptByDES } from '@/utils/crypto';
+
   export default {
     data() {
       return {
@@ -70,7 +72,11 @@
         this.loginLoading = true;
         this.$refs.loginForm.validate((valid) => {
           if (valid) {
-            this.$store.dispatch('Login', this.loginForm).then(() => {
+            const account = {
+              username: this.loginForm.username,
+              password: encryptByDES(this.loginForm.password, '123456781111')
+            }
+            this.$store.dispatch('Login', account).then(() => {
               this.$router.replace('/dashboard');
               this.loginLoading = false;
             }).catch((error) => {
