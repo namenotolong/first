@@ -7,8 +7,8 @@
       highlight-current-row
       v-loading="tableLoading"
       @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="index" label="序号" width="80"></el-table-column>
+      <el-table-column type="selection" width="50px"></el-table-column>
+      <el-table-column prop="index" label="序号" width="80px"></el-table-column>
       <el-table-column prop="name" label="姓名"></el-table-column>
       <el-table-column prop="age" label="年龄" sortable></el-table-column>
       <el-table-column

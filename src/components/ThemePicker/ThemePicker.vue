@@ -32,9 +32,9 @@
         if (document.getElementById(id)) {
           return false;
         }
-        let styleTag = document.createElement('style');
-        styleTag.setAttribute('id', id);
-        document.head.appendChild(styleTag);
+        const styleElem = document.createElement('style');
+        styleElem.setAttribute('id', id);
+        document.head.appendChild(styleElem);
       },
       // 获取element的默认样式
       getDefaultStyle() {

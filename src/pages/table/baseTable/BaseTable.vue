@@ -1,6 +1,6 @@
 <template>
   <el-table :data="tableData" border highlight-current-row>
-    <el-table-column type="index" label="序号" width="80"></el-table-column>
+    <el-table-column type="index" label="序号" width="80px"></el-table-column>
     <el-table-column prop="date" label="日期"></el-table-column>
     <el-table-column prop="name" label="姓名"></el-table-column>
     <el-table-column prop="age" label="年龄" sortable></el-table-column>

@@ -38,19 +38,20 @@
       },
       // 添加标签
       addTag(route) {
-        let tagExist = this.tagList.some(item => {
-          return item.path === route.path;
-        })
+        let tagExist = this.tagList.some(item => item.path === route.path);
         if (!tagExist) {
           if (this.tagList.length >= 8) {
             this.tagList.shift();
           }
-          this.tagList.push({
-            title: route.meta.title,
-            path: route.path,
-            name: route.name,
-            noCache: route.meta.noCache,
-          });
+          // 路由名称存在才在tag栏中显示，比如Reload路由没设置name，就不显示tag。
+          if (route.name) {
+            this.tagList.push({
+              title: route.meta.title,
+              path: route.path,
+              name: route.name,
+              noCache: route.meta.noCache,
+            });
+          }
         }
       },
       // 关闭标签

@@ -13,7 +13,6 @@ const route = {
     component: Reload,
     meta: {
       title: '',
-
     },
   }]
 }

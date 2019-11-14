@@ -25,13 +25,8 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
   width: 100% !important;
 }
 
-.el-input__inner {
-  border-radius: 24px !important;
-}
-
 // 按钮
 .el-button {
-  border-radius: 40px !important;
 
   &:not(.el-button--text) {
     min-width: 100px;
@@ -39,9 +34,13 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 }
 
 // 抽屉
-.el-drawer{
-  .el-drawer__header{
+.el-drawer {
+  .el-drawer__header {
     font-size: 18px;
-    color: #333;
+    color: $--color-text-primary;
+    margin-bottom: 0px;
+  }
+  .el-drawer__body{
+    padding: 20px;
   }
 }

@@ -2,13 +2,10 @@ import config from '@/assets/config';
 
 const setting = {
   state: {
-    // 主题
     theme: localStorage.getItem('theme') || config.theme,
-    // 是否折叠侧边菜单
     sideCollapse: localStorage.getItem('sideCollapse') ? !!+localStorage.getItem('sideCollapse') : config.sideCollapse, // Boolean(Number('1'))
-    // 是否启用标签导航
     tagVisible: localStorage.getItem('tagVisible') ? !!+localStorage.getItem('tagVisible') : config.tagVisible,
-    // 组件大小
+    style: localStorage.getItem('style') || config.style,
     size: localStorage.getItem('size') || config.size,
   },
   mutations: {
@@ -23,6 +20,10 @@ const setting = {
     SET_TAG_VISIBLE(state, visible) {
       state.tagVisible = visible;
       localStorage.setItem('tagVisible', visible ? '1' : '0');
+    },
+    SET_STYLE(state, style) {
+      state.style = style;
+      localStorage.setItem('style', style);
     },
     SET_SIZE(state, size) {
       state.size = size;
