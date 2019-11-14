@@ -18,6 +18,7 @@
 <script>
   import html2canvas from "html2canvas";
   export default {
+    name:'HtmlToCanvas',
     data() {
       return {
         imgURL: "https://goss.veer.com/creative/vcg/veer/800water/veer-305609193.jpg" + "?v=" + +new Date(), //保证每次都会从服务器请求图片，而不是从浏览器缓存中获取。

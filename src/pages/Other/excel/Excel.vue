@@ -13,7 +13,9 @@
 <script>
   import ExportExcel from './components/ExportExcel';
   import UploadExcel from './components/UploadExcel';
+
   export default {
+    name:'Excel',
     components: {
       ExportExcel,
       UploadExcel

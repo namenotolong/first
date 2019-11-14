@@ -1,10 +1,15 @@
 import service from '@/utils/service';
+import { paramsSerializer } from '@/utils/core';
+
 
 function getList(params) {
   return service({
     url: '/user/list',
     method: 'get',
-    params
+    params,
+    paramsSerializer(params) {
+      return paramsSerializer(params);
+    }
   })
 }
 

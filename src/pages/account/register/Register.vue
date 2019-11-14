@@ -20,23 +20,21 @@
 
       <el-form-item label="验证码" prop="captcha">
         <el-row>
-          <el-col :span="13">
-            <el-input v-model="accountInfo.captcha" placeholder="短信验证码"></el-input>
+          <el-col :span="12">
+            <el-input v-model="accountInfo.captcha" placeholder="请输入短信验证码"></el-input>
           </el-col>
-          <el-col :span="1">.</el-col>
-          <el-col :span="10">
-            <el-button round @click="getCaptcha" :disabled="captchaLoading">{{captchaButtonText}}</el-button>
+          <el-col :span="10" :offset="2">
+            <el-button style="width:100%" @click="getCaptcha" :disabled="captchaLoading">{{captchaButtonText}}</el-button>
           </el-col>
         </el-row>
       </el-form-item>
 
       <el-form-item>
-        <el-col :span="13">
-          <el-button type="primary" :loading="registerLoading" round @click="handleRegister">注册</el-button>
+        <el-col :span="11">
+          <el-button style="width:100%" type="primary" :loading="registerLoading" @click="handleRegister">注册</el-button>
         </el-col>
-        <el-col :span="2">.</el-col>
-        <el-col :span="9">
-          <router-link to="/account/login">使用已有账号登录</router-link>
+        <el-col :span="11" :offset="2">
+          <router-link  to="/account/login">使用已有账号登录</router-link>
         </el-col>
       </el-form-item>
     </el-form>
@@ -204,14 +202,8 @@
 <style lang="scss">
   .register {
 
-    .el-form-item__label,
-    .el-checkbox__label {
+    .el-form-item__label {
       color: #fff;
-    }
-
-    .el-button {
-      display: block;
-      width: 100%;
     }
   }
 </style>

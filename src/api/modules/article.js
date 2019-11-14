@@ -1,18 +1,22 @@
 import service from '@/utils/service';
+import { paramsSerializer } from '@/utils/core';
 
-function getList(data) {
+function getList(params) {
   return service({
     url: '/article/list',
-    method: 'post',
-    data
+    method: 'get',
+    params,
+    paramsSerializer(params) {
+      return paramsSerializer(params);
+    }
   })
 }
 
-function getDetail(data) {
+function getDetail(params) {
   return service({
     url: '/article/detail',
-    method: 'post',
-    data
+    method: 'get',
+    params
   })
 }
 

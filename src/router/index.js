@@ -13,9 +13,11 @@ import dashboardRoute from './modules/dashboard';
 import errorRoute from './modules/error';
 import formRoute from './modules/form';
 import mineRoute from './modules/mine';
+import notMatchRoute from './modules/notMatch';
 import otherRoute from './modules/other';
 import pdfRoute from './modules/pdf';
 import permissionRoute from './modules/permission';
+import reloadRoute from './modules/reload';
 import tabRoute from './modules/tab';
 import tableRoute from './modules/table';
 import userRoute from './modules/user';
@@ -32,6 +34,8 @@ const staticRouteMap = [{
   accountRoute,
   dashboardRoute,
   mineRoute,
+  reloadRoute,
+  // notMatchRoute,
   blankRoute
 ]
 

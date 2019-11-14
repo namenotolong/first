@@ -1,21 +1,18 @@
 <template>
+  <!-- 导航标签，同时负责缓存页面 -->
   <div class="nav-tag">
     <div
       class="nav-tag__item"
       :class="{active:isTagActive(tag.path)}"
-      v-for="(tag,index) in tagList"
+      v-for="(tag, index) in tagList"
       :key="tag.path">
-      <!-- 关闭标签需要自定义，不能使用el-tag，点击它的关闭按钮，close事件会冒泡而触发超链接的点击 -->
       <router-link class="link" :to="tag.path">{{tag.title}}</router-link>
       <i class="el-icon-circle-close icon" @click="closeTag(index)"></i>
     </div>
   </div>
-
 </template>
 
 <script>
-  import bus from "@/utils/bus";
-
   export default {
     data() {
       return {
@@ -28,13 +25,8 @@
       },
       tagList() {
         // 缓存页面
-        const tagListNames = this.tagList.map(item => {
-          // keep-alive会匹配组件的name属性进行缓存,组件设置了name选项，就会对这个页面就行缓存。
-          if (item.name) {
-            return item.name;
-          }
-        })
-        bus.$emit("cachePage", tagListNames);
+        const cachePages = this.tagList.filter(item => !item.noCache).map(item => item.name);
+        this.$store.commit('SET_CACHE_PAGES', cachePages);
       }
     },
     created() {
@@ -42,28 +34,29 @@
     },
     methods: {
       isTagActive(path) {
-        return this.$route.path == path;
+        return this.$route.path === path;
       },
       // 添加标签
       addTag(route) {
-        let isTagExist = this.tagList.some(item => {
-          return item.path == route.path;
+        let tagExist = this.tagList.some(item => {
+          return item.path === route.path;
         })
-        if (!isTagExist) {
+        if (!tagExist) {
           if (this.tagList.length >= 8) {
             this.tagList.shift();
           }
           this.tagList.push({
             title: route.meta.title,
             path: route.path,
-            name: route.matched[1].components.default.name //如果路由是命名路由，就做缓存
+            name: route.name,
+            noCache: route.meta.noCache,
           });
         }
       },
       // 关闭标签
       closeTag(index) {
         // taglist中只有首页时不关闭首页
-        if (this.tagList.length == 1 && this.tagList[0].path == "/dashboard") return false;
+        if (this.tagList.length === 1 && this.tagList[0].path === '/dashboard') return false;
         const delTag = this.tagList.splice(index, 1)[0];
         //判断关闭的tag的下一个tag存不存在，存在就跳到下一个tag，不存在就跳到上一个tag。
         const toTag = this.tagList[index] ? this.tagList[index] : this.tagList[index - 1];
@@ -72,7 +65,7 @@
           delTag.path == this.$route.path && this.$router.push(toTag.path);
         } else {
           // 如果上一个tag也不存在就跳到首页(也就是关闭完所有tag了)
-          this.$router.push("/dashboard");
+          this.$router.push('/dashboard');
         }
       }
     }
@@ -83,9 +76,10 @@
   .nav-tag {
     display: flex;
     width: 100%;
+    height: 40px;
+    box-sizing: border-box;
     background-color: #fff;
     padding: 5px 10px;
-    box-sizing: border-box;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.1),
       0 2px 1px -1px rgba(0, 0, 0, 0.1);
     z-index: 100;

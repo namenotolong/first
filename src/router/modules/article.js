@@ -34,7 +34,8 @@ const route = {
     component: ArticleEdit,
     meta: {
       title: '编辑文章',
-      hiddenInMenu: true
+      hiddenInMenu: true,
+      noCache: true
     },
     props: true,
     beforeEnter: (to, from, next) => {

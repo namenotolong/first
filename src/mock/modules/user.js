@@ -1,13 +1,13 @@
 import Mock from 'mockjs';
 import { getURLParams, guid } from '@/utils/core';
 
-
 const userList = Mock.mock({
   'data|127': [{
     id: '@lower(@guid)',
     name: '@cname',
     mobilePhone: /^1[345789]\d{9}$/,
     gender: '@pick(["1", "2"])',
+    age: '@natural(20,60)',
     role: '@pick(["admin", "guest","editor"])',
     registerDate: '@datetime("yyyy-MM-dd HH:mm:ss")',
     consume: '@natural(0,10000)',
@@ -16,6 +16,7 @@ const userList = Mock.mock({
     email: '@email'
   }]
 })
+
 
 export default {
   getList(config) {

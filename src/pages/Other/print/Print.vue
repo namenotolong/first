@@ -36,11 +36,7 @@
 </template>
 <script>
   export default {
-    data() {
-      return {
-
-      };
-    },
+    name: 'Print',
     methods: {
       print1(id) {
         const body = document.body.innerHTML;

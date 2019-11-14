@@ -3,7 +3,7 @@
 // 路由权限表
 // 如果配置了一级路由，则它之下的所有子路由都可访问。
 const permission = {
-  admin: ['Icon', 'Chart', 'Form', 'Table', 'Excel', 'Tab', 'AMap', 'Error', 'Permission', 'User', 'Article', 'Pdf','Other'],
+  admin: ['Icon', 'Chart', 'Form', 'Table', 'Excel', 'Tab', 'AMap', 'Error', 'Permission', 'User', 'Article', 'Pdf', 'Other'],
   guest: ['Icon', 'Chart', 'Form', 'Table', 'Excel', 'Tab', 'AMap', 'Other'],
   editor: ['Article', 'Other']
 }
@@ -12,7 +12,11 @@ const permission = {
 
 const config = {
   permission,
-  apiUrl: 'https://mock.api'
+  apiUrl: 'https://mock.api',
+  theme: '#373737',
+  sideCollapse: false,
+  tagVisible: true,
+  size: 'medium'
 }
 
 

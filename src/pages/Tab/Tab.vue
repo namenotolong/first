@@ -12,7 +12,9 @@
 </template>
 <script>
   import TabPane from "./components/TabPane.vue";
+
   export default {
+    name: 'Tab',
     components: {
       TabPane
     },

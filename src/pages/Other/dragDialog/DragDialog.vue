@@ -16,6 +16,7 @@
 
 <script>
   export default {
+    name: 'DragDialog',
     data() {
       return {
         dialogVisible: false,

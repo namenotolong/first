@@ -39,8 +39,8 @@ Mock.mock(/\/dashboard\/lineChart/, 'get', dashboard.getLineChartData);
 Mock.mock(/\/dashboard\/todoList/, 'get', dashboard.getTodoListData);
 
 
-Mock.mock(/\/article\/list/, 'post', article.getList);
-Mock.mock(/\/article\/detail/, 'post', article.getDetail);
+Mock.mock(/\/article\/list/, 'get', article.getList);
+Mock.mock(/\/article\/detail/, 'get', article.getDetail);
 
 
 Mock.mock(/\/user\/list/, 'get', user.getList);

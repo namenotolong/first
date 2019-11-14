@@ -33,6 +33,7 @@
   import gif from "@/assets/images/403/403.gif";
 
   export default {
+    name:'Forbidden',
     data() {
       return {
         errGif: gif + "?" + Date.now(), //图片路径加上参数，保证每次打开这个页面都会重新开始播放gif。

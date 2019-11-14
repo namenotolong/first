@@ -1,12 +1,12 @@
 <template>
   <div class="outer-layout">
     <div class="logo">
-      <svg-icon icon-name="logo"></svg-icon>
+      <svg-icon icon-name="logo"/>
       <span>后台管理系统</span>
     </div>
 
     <div class="page">
-      <router-view></router-view>
+      <router-view />
     </div>
 
     <theme-picker class="theme-picker" />
@@ -38,7 +38,7 @@
     }
 
     .page {
-      width: 500px;
+      width: 440px;
       margin: 0 auto;
       margin-top: 60px;
     }

@@ -41,6 +41,7 @@
   })
 
   export default {
+    name: 'BaseTable',
     data() {
       return {
         tableMng,

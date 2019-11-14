@@ -21,7 +21,7 @@ import reminder from '@/components/Reminder/index.js'
 
 
 Vue.use(ElementUI, {
-  size: 'medium'
+  size: store.getters.size
 });
 
 Object.defineProperty(Vue.prototype, '$axios', {

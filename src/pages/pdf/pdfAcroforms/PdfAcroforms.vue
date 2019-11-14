@@ -26,6 +26,7 @@
 
 
   export default {
+    name:'PdfAcroforms',
     data() {
       return {
         fileLoading: false,

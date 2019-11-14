@@ -60,6 +60,20 @@ export function animate(element, properties, interval = 20, callback = () => { }
   }, interval);
 };
 
+// 用于需要在get请求中传递数组的情况
+export function paramsSerializer(params = {}) {
+  const paramArr = [];
+  for (const [key, value] of Object.entries(params)) {
+    if (Array.isArray(value)) {
+      value.forEach(item => paramArr.push(`${encodeURIComponent(key)}=${encodeURIComponent(item)}`));
+    } else {
+      paramArr.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+    }
+  }
+  return paramArr.join('&');
+}
+
+
 
 /**
  * 获取url中的查询字符串参数
@@ -70,15 +84,12 @@ export function getURLParams(url) {
   if (!search) {
     return {}
   }
-  return JSON.parse(
-    '{"'
-    + decodeURIComponent(search)
-      .replace(/"/g, '\\"')
-      .replace(/&/g, '","')
-      .replace(/=/g, '":"')
-    + '"}'
-  )
+  return JSON.parse('{"' + decodeURIComponent(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
 }
+
+
+
+
 
 // 深克隆
 export function deepClone(source) {

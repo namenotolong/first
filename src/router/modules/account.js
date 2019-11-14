@@ -8,7 +8,6 @@ const route = {
   path: '/account',
   component: OuterLayout,
   meta: {
-    title: 'Account',
     hiddenInMenu: true
   },
   children: [{

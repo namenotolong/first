@@ -38,9 +38,10 @@
 </template>
 
 <script>
- import tableMng from '@/utils/tableMng';
+  import tableMng from '@/utils/tableMng';
 
   export default {
+    name: 'Permission',
     data() {
       return {
         tableMng,

@@ -10,7 +10,7 @@ const route = {
     icon: 'home',
   },
   children: [{
-    name: 'dashboard',
+    name: 'Dashboard',
     path: '/dashboard/index',
     component: Dashboard,
     meta: {

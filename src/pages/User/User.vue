@@ -100,6 +100,7 @@
   import Edit from './components/Edit';
 
   export default {
+    name:'User',
     components: {
       SectionTitle,
       ExportExcel,

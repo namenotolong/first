@@ -4,6 +4,7 @@
     <div class="header-bar__menu">
       <full-screen />
       <theme-picker />
+
       <el-dropdown @command="handleCommand">
         <img class="avatar" :src="avatar" alt />
         <el-dropdown-menu slot="dropdown">
@@ -71,7 +72,7 @@
   .header-bar {
     height: 60px;
     line-height: 60px;
-    padding-right: 30px;
+    padding-right: 40px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
       0 2px 1px -1px rgba(0, 0, 0, 0.12);
     background-color: var(--theme);

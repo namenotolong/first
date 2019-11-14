@@ -17,6 +17,7 @@ const route = {
     component: Forbidden,
     meta: {
       title: '403',
+      noCache: true
     }
   }, {
     name: 'NotFound',
@@ -24,6 +25,7 @@ const route = {
     component: NotFound,
     meta: {
       title: '404',
+      noCache: true
     }
   }]
 }

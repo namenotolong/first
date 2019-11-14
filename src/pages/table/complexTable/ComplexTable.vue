@@ -57,6 +57,7 @@
   import tableMng from '@/utils/tableMng';
 
   export default {
+    name: 'ComplexTable',
     components: {
       Pagination
     },
@@ -78,27 +79,24 @@
       this.getTableData();
     },
     methods: {
-      getTableData() {
+      async getTableData() {
         this.tableLoading = true;
-        api.user.getList(this.queryCondition).then(res => {
-          this.tableData = res.data.list.map((item, index) => {
-            return {
-              id: item.id,
-              index: (this.queryCondition.pageNumber - 1) * this.queryCondition.pageSize +
-                index + 1,
-              name: item.name,
-              age: item.age,
-              gender: item.gender,
-              role: item.role,
-              registerDate: item.registerDate,
-              consume: item.consume
-            }
-          });
-          this.total = res.data.total;
-          this.tableLoading = false;
-          const scrollElement = document.querySelector('.inner-layout__page');
-          scroll(scrollElement, 0, 800);
-        })
+        const response = await api.user.getList(this.queryCondition);
+        this.tableData = response.data.list.map((item, index) => ({
+          id: item.id,
+          index: (this.queryCondition.pageNumber - 1) * this.queryCondition.pageSize +
+            index + 1,
+          name: item.name,
+          age: item.age,
+          gender: item.gender,
+          role: item.role,
+          registerDate: item.registerDate,
+          consume: item.consume
+        }))
+        this.total = response.data.total;
+        this.tableLoading = false;
+        const scrollElement = document.querySelector('.inner-layout__page');
+        scroll(scrollElement, 0, 800);
       },
       handleFilter(value, row, column) {
         const property = column['property'];

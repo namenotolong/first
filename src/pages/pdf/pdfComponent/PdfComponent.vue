@@ -10,6 +10,7 @@
   import Pdf from '@/components/pdf';
 
   export default {
+    name: 'PdfComponent',
     components: {
       Pdf
     },

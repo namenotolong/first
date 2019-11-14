@@ -26,7 +26,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" :loading="loginLoading" round @click="handleLogin">登录</el-button>
+        <el-button type="primary" :loading="loginLoading"  @click="handleLogin">登录</el-button>
       </el-form-item>
     </el-form>
 

@@ -19,6 +19,7 @@
   pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
   export default {
+    name:'PdfBase',
     data() {
       return {
         fileLoading: false,

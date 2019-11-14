@@ -24,6 +24,7 @@
   pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
   export default {
+    name:'PdfPagination',
     data() {
       return {
         pdfDoc: null,

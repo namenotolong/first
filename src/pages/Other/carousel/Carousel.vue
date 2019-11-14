@@ -3,6 +3,11 @@
 </template>
 
 
+<script>
+  export default {
+    name: 'Carousel'
+  }
+</script>
 <style lang="scss" scoped>
   .demo {
     width: 200px;

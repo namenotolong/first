@@ -1,40 +1,38 @@
 <template>
   <div class="inner-layout">
-    <side-bar></side-bar>
+    <!-- 侧边菜单 -->
+    <side-bar />
 
     <div class="inner-layout__main">
-      <header-bar></header-bar>
-      <nav-tag></nav-tag>
-      <div class="inner-layout__page">
+      <!-- 顶部工具栏 -->
+      <header-bar />
+      <!--导航标签 -->
+      <nav-tag v-show="tagVisible" />
+
+      <div class="inner-layout__page" :class="{'with-navtag':tagVisible}">
+        <!-- 路由页面 -->
         <transition name="page" mode="out-in">
           <keep-alive :include="cachePages">
-            <router-view></router-view>
+            <router-view />
           </keep-alive>
         </transition>
       </div>
     </div>
+
+    <!-- 系统界面设置 -->
+    <setting />
+
   </div>
 </template>
 
 <script>
-  import bus from '@/utils/bus';
-  import { HeaderBar, SideBar, NavTag } from './components';
+  import { HeaderBar, SideBar, NavTag, Setting } from './components';
+  import { mapGetters } from 'vuex';
 
   export default {
-    components: {
-      HeaderBar,
-      SideBar,
-      NavTag
-    },
-    data() {
-      return {
-        cachePages: []
-      }
-    },
-    created() {
-      bus.$on('cachePage', msg => {
-        this.cachePages = msg;
-      })
+    components: { HeaderBar, SideBar, NavTag, Setting },
+    computed: {
+      ...mapGetters(['tagVisible', 'cachePages', ])
     }
   }
 </script>
@@ -53,10 +51,14 @@
       .inner-layout__page {
         position: relative;
         box-sizing: border-box;
-        height: calc(100% - 102px);
+        height: calc(100vh - 60px);
         overflow-x: hidden;
         overflow-y: auto;
         padding: 1em;
+
+        &.with-navtag {
+          height: calc(100vh - 100px);
+        }
 
         &-enter,
         &-leave {

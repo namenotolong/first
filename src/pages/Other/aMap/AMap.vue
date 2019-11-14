@@ -20,6 +20,7 @@
   import MapHotSpot from "./components/MapHotSpot.vue";
 
   export default {
+    name:'AMap',
     components: {
       MapMaker,
       MapPlugin,

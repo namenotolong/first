@@ -13,7 +13,6 @@ class TableMng {
     };
     this.baseTbale = baseTable;
     sessionStorage.setItem('baseTable', window.JSON.stringify(baseTable));
-
   }
 
 
@@ -74,12 +73,9 @@ class TableMng {
 const fixTable = {};
 
 // 为什么需要存一份到本地？
-// 用户在使用的时候可能会刷新页面，这个时候会去重新请求baseTable的数据，数据有可能会在页面渲染完成之后才返回。
+// 用户在使用的时候可能会刷新页面，这个时候会去重新请求baseTable的数据，而数据有可能会在页面渲染完成之后才返回，这个时候页面中使用到了baseTable，就会出现表不存在的情况。
 const storageTable = JSON.parse(sessionStorage.getItem('baseTable'));
-
 
 const tableMng = new TableMng({ ...fixTable, ...storageTable });
 
 export default tableMng;
-
-

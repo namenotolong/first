@@ -71,6 +71,7 @@
   }
 
   export default {
+    name:'DynamicForm',
     data() {
       return {
         form: {

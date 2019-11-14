@@ -119,29 +119,27 @@
     },
     watch: {
       $route() {
-        this.getArticleDetail();
+        this.getDetail();
       }
     },
     created() {
-      this.getArticleDetail();
+      this.getDetail();
     },
     methods: {
-      getArticleDetail() {
+      async getDetail() {
         if (!this.articleId) return;
-        api.article.getDetail({
-          id: this.articleId,
-        }).then(res => {
-          const data = res.data.articleDetail;
-          this.articleDetail = {
-            title: data.title,
-            author: data.author,
-            date: this.$dayjs(data.date).format('YYYY-MM-DD HH:mm:ss'),
-            imageUrl: data.imageUrl,
-            type: data.type,
-            brief: data.brief,
-            content: data.content,
-          };
-        })
+        const response = await api.article.getDetail({ id: this.articleId })
+
+        const data = response.data.articleDetail;
+        this.articleDetail = {
+          title: data.title,
+          author: data.author,
+          date: this.$dayjs(data.date).format('YYYY-MM-DD HH:mm:ss'),
+          imageUrl: data.imageUrl,
+          type: data.type,
+          brief: data.brief,
+          content: data.content,
+        };
       },
       beforeImageUpload(file) {
         const isImage = /\.(jpg|png)$/.test(file.name);

@@ -23,6 +23,7 @@
   import Reminder from './components/Reminder';
 
   export default {
+    name:'ComponentDemo',
     components: {
       TextEllipsis,
       BackToTop,

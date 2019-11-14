@@ -27,6 +27,7 @@
   pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
   export default {
+    name:'PdfSimple',
     data() {
       return {
         fileLoading: false,
