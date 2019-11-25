@@ -1,0 +1,12 @@
+.pdf-base64[data-v-ed059834] {
+  height: 100%;
+}
+.pdf-base64 .pdf-base64__tip[data-v-ed059834] {
+    margin-bottom: 1em;
+}
+.pdf-base64 .pdf-base64__canvas[data-v-ed059834] {
+    min-height: 100%;
+    width: 800px;
+    margin: 0 auto;
+}
+

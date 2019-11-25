@@ -1,0 +1,35 @@
+.article-edit[data-v-0fde053f] {
+  background-color: #fff;
+  padding: 20px;
+}
+.article-edit .article-edit__header[data-v-0fde053f] {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+.article-edit .article-list__form .image[data-v-0fde053f] {
+    width: 74px;
+    height: 74px;
+    display: block;
+}
+.article-edit .article-list__form .image-uploader-icon[data-v-0fde053f] {
+    font-size: 28px;
+    color: #8c939d;
+    width: 74px;
+    height: 74px;
+    line-height: 74px;
+    text-align: center;
+}
+
+.article-list__form .image-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.article-list__form .image-uploader .el-upload:hover {
+    border-color: #409EFF;
+}
+

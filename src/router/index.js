@@ -14,6 +14,7 @@ import errorRoute from './modules/error';
 import formRoute from './modules/form';
 import mineRoute from './modules/mine';
 import notMatchRoute from './modules/notMatch';
+import officeRoute from './modules/office';
 import otherRoute from './modules/other';
 import pdfRoute from './modules/pdf';
 import permissionRoute from './modules/permission';
@@ -50,6 +51,7 @@ const dynamicRouteMap = [
   userRoute,
   articleRoute,
   pdfRoute,
+  officeRoute,
   otherRoute
 ]
 

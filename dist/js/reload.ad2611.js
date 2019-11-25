@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[43],{864:function(n,e,t){"use strict";t.r(e);var r={beforeRouteEnter:function(n,e,t){t(function(n){n.$router.replace(e.path)})}},u=t(70),o=Object(u.a)(r,function(){var n=this.$createElement;return(this._self._c||n)("div")},[],!1,null,null,null).exports;t.d(e,"default",function(){return o})}}]);
