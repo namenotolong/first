@@ -1,7 +1,7 @@
 import service from '@/utils/service';
 
 
-// 获取基础码表
+// 获取基础数据表
 function getBaseTable(params) {
   return service({
     url: '/baseTable',

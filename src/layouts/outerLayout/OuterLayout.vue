@@ -1,11 +1,11 @@
 <template>
   <div class="outer-layout">
-    <div class="logo">
-      <svg-icon icon-name="logo"/>
+    <div class="outer-layout__header">
+      <svg-icon icon-name="logo" />
       <span>后台管理系统</span>
     </div>
 
-    <div class="page">
+    <div class="outer-layout__page">
       <router-view />
     </div>
 
@@ -27,17 +27,17 @@
 <style lang="scss" scoped>
   .outer-layout {
     min-height: 100vh;
-    background: url(~@/assets/images/login/login-bg.jpg) no-repeat fixed center;
+    background: url(~@/assets/images/layout/outer_bg.jpg) no-repeat fixed center;
     background-size: cover;
 
-    .logo {
+    .outer-layout__header {
       padding-top: 60px;
       text-align: center;
       font-size: 32px;
       color: #fff;
     }
 
-    .page {
+    .outer-layout__page {
       width: 440px;
       margin: 0 auto;
       margin-top: 60px;

@@ -1,19 +1,5 @@
-// 覆盖element的scss变量
-$--color-primary:#373737;
-$--color-text-primary: #333;
-$--color-text-regular: #666;
-$--color-text-secondary: #999;
+// 借用element的类名全局覆盖element中对应的样式
 
-
-// 改变 icon 字体路径变量，必需
-$--font-path: '~element-ui/lib/theme-chalk/fonts';
-@import "~element-ui/packages/theme-chalk/src/index.scss";
-
-
-
-
-// 借用element的类名定义全局样式
-// 受换肤的影响，如果定义的样式属性在element中已经存在(相当于重写)，需要加上important，不然换肤之后又会将这些重写的样式覆盖
 
 // 表单元素
 .el-form-item {
@@ -37,10 +23,11 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 .el-drawer {
   .el-drawer__header {
     font-size: 18px;
-    color: $--color-text-primary;
+    color: #333;
     margin-bottom: 0px;
   }
-  .el-drawer__body{
+
+  .el-drawer__body {
     padding: 20px;
   }
 }

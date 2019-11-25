@@ -6,13 +6,16 @@
 </template>
 
 <script>
+  // 获取element的样式
+  const elementContent = require('!css-loader!element-ui/lib/theme-chalk/index.css');
+
   export default {
     data() {
       return {
         theme: '',
         predefineThemes: ['#409eff', '#1cc09d', '#ffa69e', '#ff4879', '#373737', '#5b5bea', '#FF8822', '#757575', '#5FC3D7', '#ffd166'],
+        defaultStyle: elementContent[0][1],
         defaultColors: [],
-        defaultStyle: ''
       };
     },
     watch: {
@@ -22,29 +25,20 @@
         this.$store.commit('SET_THEME', newTheme);
       }
     },
+    created() {
+      this.defaultColors = this.getColors('409eff');
+      // 生成的颜色系列：["409eff", "64,158,255", "53a8ff", "66b1ff", "79bbff", "8cc5ff", "a0cfff", "b3d8ff", "c6e2ff", "d9ecff", "ecf5ff", "3a8ee6"]
+      this.theme = this.$store.getters.theme;
+    },
     mounted() {
       this.createStyleElement('elementTheme');
-      this.getDefaultStyle();
     },
     methods: {
       createStyleElement(id) {
-        //退出登录后再登录会重新渲染组件，避免重复创建。
-        if (document.getElementById(id)) {
-          return false;
-        }
+        if (document.getElementById(id)) return;
         const styleElem = document.createElement('style');
         styleElem.setAttribute('id', id);
         document.head.appendChild(styleElem);
-      },
-      // 获取element的默认样式
-      getDefaultStyle() {
-        const content = require('!css-loader!element-ui/lib/theme-chalk/index.css');
-        const elementCss = content[0][1];
-        //字体文件还是用element的theme-chalk中的
-        this.defaultStyle = elementCss.replace(/@font-face{[^}]+}/, '');
-        this.defaultColors = this.getColors('409eff');
-        // 生成的颜色系列：["409eff", "64,158,255", "53a8ff", "66b1ff", "79bbff", "8cc5ff", "a0cfff", "b3d8ff", "c6e2ff", "d9ecff", "ecf5ff", "3a8ee6"]
-        this.theme = this.$store.getters.theme;
       },
       // 由基础颜色值生成一系列颜色值
       getColors(theme) {

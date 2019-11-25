@@ -71,7 +71,7 @@
   }
 
   export default {
-    name:'DynamicForm',
+    name: 'DynamicForm',
     data() {
       return {
         form: {
@@ -149,7 +149,7 @@
       height: 200px;
       line-height: 200px;
       text-align: center;
-      background: url(~@/assets/images/form/add-bg.png) no-repeat;
+      background: url(~@/assets/images/form/add.jpg) no-repeat;
       background-size: cover;
       color: #fff;
       font-size: 16px;

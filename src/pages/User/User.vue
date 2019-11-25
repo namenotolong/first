@@ -56,9 +56,12 @@
             <span>{{tableMng.getNameById('gender',scope.row.gender)}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="role" label="角色">
+        <el-table-column prop="roles" label="角色">
           <template slot-scope="scope">
-            <span>{{tableMng.getNameById('role',scope.row.role)}}</span>
+            <span v-for="(role , index) in scope.row.roles" :key="role">
+              {{tableMng.getNameById('role',role)}}
+              <span v-if="scope.row.roles.length !== index + 1">,</span>
+            </span>
           </template>
         </el-table-column>
         <el-table-column prop="registerDate" label="注册时间" sortable></el-table-column>
@@ -100,7 +103,7 @@
   import Edit from './components/Edit';
 
   export default {
-    name:'User',
+    name: 'User',
     components: {
       SectionTitle,
       ExportExcel,
@@ -140,7 +143,7 @@
             name: item.name,
             mobilePhone: item.mobilePhone,
             gender: item.gender,
-            role: item.role,
+            roles: item.roles,
             registerDate: this.$dayjs(item.registerDate).format('YYYY-MM-DD HH:mm:ss'),
             consume: item.consume
           }

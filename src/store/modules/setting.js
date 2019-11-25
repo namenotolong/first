@@ -1,4 +1,4 @@
-import config from '@/assets/config';
+import config from '@/config';
 
 const setting = {
   state: {

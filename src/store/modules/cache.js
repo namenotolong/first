@@ -1,4 +1,3 @@
-import config from '@/assets/config';
 
 const cache = {
   state: {

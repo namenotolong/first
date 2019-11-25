@@ -8,7 +8,7 @@ const userList = Mock.mock({
     mobilePhone: /^1[345789]\d{9}$/,
     gender: '@pick(["1", "2"])',
     age: '@natural(20,60)',
-    role: '@pick(["admin", "guest","editor"])',
+    roles: '@pick(["admin", "guest","editor"])'.split(),
     registerDate: '@datetime("yyyy-MM-dd HH:mm:ss")',
     consume: '@natural(0,10000)',
     account: /^[a-zA-Z0-9_]{5,10}$/,
@@ -41,6 +41,7 @@ export default {
     let detail = null;
     if (id) {
       detail = userList.data.find(item => item.id === id);
+      console.log(detail);
     }
     return {
       code: 200,

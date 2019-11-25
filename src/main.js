@@ -1,6 +1,5 @@
 import 'babel-polyfill';
 import Vue from 'vue';
-import axios from 'axios';
 import dayjs from 'dayjs';
 import ElementUI from 'element-ui';
 
@@ -24,9 +23,7 @@ Vue.use(ElementUI, {
   size: store.getters.size
 });
 
-Object.defineProperty(Vue.prototype, '$axios', {
-  value: axios
-});
+
 Object.defineProperty(Vue.prototype, '$dayjs', {
   value: dayjs
 });

@@ -1,8 +1,17 @@
 /* 基础数据表管理 */
 
+// 表名。方便使用的时候查看
+const TABLE_NAME_MAP = {
+  gender: 'gender',
+  role: 'role',
+  region: 'region',
+  article: 'article'
+}
+
 class TableMng {
   constructor(data) {
     this.baseTbale = data;
+    this.tableNameMap = TABLE_NAME_MAP;
   }
 
   // 初始化数据表
@@ -69,7 +78,7 @@ class TableMng {
   }
 }
 
-//后端未提供，前端定义的表数据
+//如果后端未提供，前端也可以自行定义
 const fixTable = {};
 
 // 为什么需要存一份到本地？

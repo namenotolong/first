@@ -17,7 +17,7 @@
       <el-row :gutter="20">
         <el-col :span="12">
           <el-form-item label="区域" prop="region">
-            <el-select v-model="formData.region" placeholder="请选择活动区域" clearable>
+            <el-select v-model="formData.region" placeholder="请选择活动区域" clearable >
               <el-option v-for="item in regionList" :key="item.id" :label="item.name" :value="item.id"></el-option>
             </el-select>
           </el-form-item>

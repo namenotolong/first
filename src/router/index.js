@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from '@/store';
-import config from '@/assets/config';
+import config from '@/config';
 
 Vue.use(VueRouter);
 

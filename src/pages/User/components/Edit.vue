@@ -18,8 +18,8 @@
         <el-input v-model="userInfo.name" placeholder="请填写用户姓名" clearable></el-input>
       </el-form-item>
 
-      <el-form-item label="角色:" prop="role">
-        <el-select v-model="userInfo.role" placeholder="请选择用户角色">
+      <el-form-item label="角色:" prop="roles">
+        <el-select v-model="userInfo.roles" multiple placeholder="请选择用户角色">
           <el-option v-for="item in tableMng.getTable('role')" :key="item.id" :label="item.name" :value="item.id"></el-option>
         </el-select>
       </el-form-item>
@@ -68,6 +68,16 @@
   import api from '@/api';
   import tableMng from '@/utils/tableMng';
 
+  const defaultInfo = {
+    account: '',
+    name: '',
+    roles: [],
+    gender: '',
+    avatar: '',
+    mobilePhone: '',
+    email: ''
+  }
+
   export default {
     props: {
       id: {
@@ -89,8 +99,8 @@
     data() {
       return {
         tableMng,
-        userInfoBackup: {},
-        userInfo: {},
+        userInfoBackup: { ...defaultInfo },
+        userInfo: { ...defaultInfo },
         formRules: {
           account: [{
             required: true,
@@ -110,12 +120,16 @@
             message: '姓名长度不能超过6个字',
             trigger: 'blur'
           }],
-          role: [{
+          roles: [{
             required: true,
             message: '请选择角色',
             trigger: 'change'
           }],
           mobilePhone: [{
+            required: true,
+            message: '请填写手机号',
+            trigger: 'blur'
+          }, {
             pattern: /^1[345789]\d{9}$/,
             message: '手机号码格式不正确',
             trigger: 'blur'
@@ -135,9 +149,7 @@
       async getDetail() {
         if (!this.id) return;
         this.getDetailLoading = true;
-        const response = await api.user.getDetail({
-          id: this.id
-        });
+        const response = await api.user.getDetail({ id: this.id });
         this.userInfo = { ...response.data.detail };
         this.userInfoBackup = { ...response.data.detail };
         this.getDetailLoading = false;
@@ -173,8 +185,8 @@
       },
       handleClose() {
         this.$refs.form.resetFields();
-        this.userInfo = {};
-        this.userInfoBackup = {};
+        this.userInfo = defaultInfo;
+        this.userInfoBackup = defaultInfo;
         this.$emit('onClose');
       },
       beforeUpload(file) {
