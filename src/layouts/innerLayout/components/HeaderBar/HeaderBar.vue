@@ -3,7 +3,7 @@
     <i class="header-bar__collapse" :class="sideCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold'" @click="handleCollapse"></i>
     <div class="header-bar__menu">
       <full-screen />
-      <theme-picker />
+      <theme-setting />
 
       <el-dropdown @command="handleCommand">
         <img class="avatar" :src="avatar" alt />
@@ -20,14 +20,14 @@
 
 <script>
   import FullScreen from '@/components/fullScreen';
-  import ThemePicker from '@/components/themePicker';
+  import ThemeSetting from '@/components/setting/themeSetting';
   import api from '@/api';
   import { resetRouter } from '@/router';
 
   export default {
     components: {
       FullScreen,
-      ThemePicker
+      ThemeSetting
     },
     data() {
       return {

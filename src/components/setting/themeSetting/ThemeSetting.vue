@@ -1,11 +1,12 @@
 <template>
   <!-- 换肤 -->
   <el-tooltip effect="dark" content="换肤" placement="bottom">
-    <el-color-picker popper-class="theme-picker" v-model="theme" :predefine="predefineThemes" size="small" />
+    <el-color-picker popper-class="theme-setting" v-model="theme" :predefine="predefineThemes" size="small" />
   </el-tooltip>
 </template>
 
 <script>
+
   // 获取element的样式
   const elementContent = require('!css-loader!element-ui/lib/theme-chalk/index.css');
 
@@ -116,7 +117,7 @@
 </script>
 
 <style lang="scss">
-  .theme-picker {
+  .theme-setting {
 
     .el-color-dropdown__value,
     .el-color-dropdown__link-btn {

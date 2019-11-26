@@ -3,7 +3,7 @@ import Vue from 'vue';
 import dayjs from 'dayjs';
 import ElementUI from 'element-ui';
 
-import App from '@/App.vue';
+import App from '@/App';
 import router from '@/router';
 import store from '@/store';
 import '@/assets/styles/app.scss';
@@ -31,7 +31,11 @@ Object.defineProperty(Vue.prototype, '$reminder', {
   value: reminder
 })
 
+
+
 Vue.config.productionTip = false;
+
+
 
 new Vue({
   el: '#app',

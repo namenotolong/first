@@ -60,15 +60,19 @@
           height: calc(100vh - 100px);
         }
 
-        &-enter,
-        &-leave {
-          opacity: 0;
+        .page {
+
+          &-enter,
+          &-leave {
+            opacity: 0;
+          }
+
+          &-enter-active,
+          &-leave-active {
+            transition: opacity .5s ease;
+          }
         }
 
-        &-enter-active,
-        &-leave-active {
-          transition: opacity .5s ease;
-        }
       }
     }
   }

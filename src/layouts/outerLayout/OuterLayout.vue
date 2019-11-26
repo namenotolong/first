@@ -9,17 +9,20 @@
       <router-view />
     </div>
 
-    <theme-picker class="theme-picker" />
+    <theme-setting class="theme-setting" />
+    <style-setting class="style-setting" />
 
   </div>
 </template>
 
 <script>
-  import ThemePicker from '@/components/themePicker';
+  import ThemeSetting from '@/components/setting/themeSetting';
+  import StyleSetting from '@/components/setting/StyleSetting';
 
   export default {
     components: {
-      ThemePicker
+      ThemeSetting,
+      StyleSetting
     }
   }
 </script>
@@ -43,7 +46,8 @@
       margin-top: 60px;
     }
 
-    .theme-picker {
+    .theme-setting,
+    .style-setting {
       display: none;
     }
   }

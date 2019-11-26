@@ -1,7 +1,6 @@
 <template>
   <div>
-    <input type="text">
-    <p>dfjvknk缴费你看见对方那边</p>
+
   </div>
 </template>
 

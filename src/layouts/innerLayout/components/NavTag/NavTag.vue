@@ -8,7 +8,7 @@
         v-for="(tag, index) in tagList"
         :key="tag.path">
         <router-link class="link" :to="tag.path">{{tag.title}}</router-link>
-        <i class="el-icon-circle-close icon" @click="closeTag(index)"></i>
+        <i class="el-icon-circle-close close" @click="handleClose(index)"></i>
       </div>
     </div>
   </scroll-bar>
@@ -61,7 +61,7 @@
         }
       },
       // 关闭标签
-      closeTag(index) {
+      handleClose(index) {
         // taglist中只有首页时不关闭首页
         if (this.tagList.length === 1 && this.tagList[0].path === '/dashboard') return false;
         const delTag = this.tagList.splice(index, 1)[0];
@@ -85,9 +85,6 @@
     height: 40px;
     box-sizing: border-box;
     padding: 5px 10px;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.1),
-      0 2px 1px -1px rgba(0, 0, 0, 0.1);
-    z-index: 100;
 
     .nav-tag__item {
       padding: 5px 10px;
@@ -110,7 +107,7 @@
         }
       }
 
-      .icon {
+      .close {
         color: var(--theme);
         cursor: pointer;
 
@@ -123,8 +120,12 @@
         background-color: var(--theme);
 
         .link,
-        .icon {
+        .close {
           color: #fff;
+
+          &:hover {
+            color: $auxiliary-text-color;
+          }
         }
       }
     }
