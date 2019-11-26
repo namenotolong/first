@@ -20,15 +20,16 @@
           <span>{{tableMng.getNameById('gender',scope.row.gender)}}</span>
         </template>
       </el-table-column>
-      <el-table-column
-        prop="role"
-        label="角色"
-        :filters="tableMng.formatTable('role', 'value', 'text')"
-        :filter-method="handleFilter">
+
+      <el-table-column prop="roles" label="角色">
         <template slot-scope="scope">
-          <span>{{tableMng.getNameById('role',scope.row.role)}}</span>
+          <span v-for="(role , index) in scope.row.roles" :key="role">
+            {{tableMng.getNameById('role',role)}}
+            <span v-if="scope.row.roles.length !== index + 1">,</span>
+          </span>
         </template>
       </el-table-column>
+
       <el-table-column prop="registerDate" label="注册时间" sortable></el-table-column>
       <el-table-column prop="consume" label="累计消费额(元)" sortable></el-table-column>
       <el-table-column label="操作" width="120">
@@ -45,7 +46,6 @@
       :total="total"
       :page-number.sync="queryCondition.pageNumber"
       :page-size.sync="queryCondition.pageSize"
-      layout=" prev, pager, next, jumper"
       @pagination="getTableData" />
   </div>
 </template>
@@ -89,7 +89,7 @@
           name: item.name,
           age: item.age,
           gender: item.gender,
-          role: item.role,
+          roles: item.roles,
           registerDate: item.registerDate,
           consume: item.consume
         }))

@@ -44,7 +44,7 @@ const fourthData = Mock.mock({
 
 
 export default {
-  getTabData(config) {
+  getList(config) {
     const { name } = getURLParams(config.url);
     let data = {};
     switch (name) {

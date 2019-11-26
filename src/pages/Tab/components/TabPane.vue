@@ -17,7 +17,6 @@
         required: true,
         type: String,
       }
-
     },
     data() {
       return {
@@ -26,19 +25,14 @@
       }
     },
     created() {
-      this.getTabList();
+      this.getList();
     },
     methods: {
-      getTabList() {
+      async getList() {
         this.tabLoading = true;
-        api.tab.getTabList({
-          name: this.name
-        }).then(res => {
-          this.tableData = res.data.tabList
-          this.tabLoading = false;
-        }).catch(error => {
-          this.tabLoading = false;
-        })
+        const resposne = await api.tab.getList({ name: this.name });
+        this.tableData = resposne.data.tabList
+        this.tabLoading = false;
       }
     }
   }

@@ -49,6 +49,6 @@ Mock.mock(/\/user\/save/, 'post', user.save);
 Mock.mock(/\/user\/remove/, 'post', user.remove);
 
 
-Mock.mock(/\/tab\/tabList/, 'get', tab.getTabData);
+Mock.mock(/\/tab\/list/, 'get', tab.getList);
 
 export default Mock;

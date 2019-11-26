@@ -36,18 +36,17 @@ const staticRouteMap = [{
   dashboardRoute,
   mineRoute,
   reloadRoute,
-  // notMatchRoute,
-  blankRoute
+  blankRoute,
+  notMatchRoute,
 ]
-
 // 需要通过角色动态控制的路由表
 const dynamicRouteMap = [
   chartRoute,
   formRoute,
   tableRoute,
+  permissionRoute,
   tabRoute,
   errorRoute,
-  permissionRoute,
   userRoute,
   articleRoute,
   pdfRoute,

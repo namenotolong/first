@@ -46,9 +46,7 @@
       addTag(route) {
         let tagExist = this.tagList.some(item => item.path === route.path);
         if (!tagExist) {
-          // if (this.tagList.length >= 8) {
-          //   this.tagList.shift();
-          // }
+
           // 路由名称存在才在tag栏中显示，比如Reload路由没设置name，就不显示tag。
           if (route.name) {
             this.tagList.push({

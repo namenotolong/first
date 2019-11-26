@@ -2,10 +2,11 @@
 
 const route = {
   path: '*',
-  redirect: '/error/forbidden',
+  redirect: '/error/notFound',
   meta: {
-    hiddenInMenu: true
-  },
+    hiddenInMenu: true,
+    noCache: true
+  }
 }
 
 export default route;
