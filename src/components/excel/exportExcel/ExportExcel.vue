@@ -129,7 +129,9 @@
         return sheet;
       },
       datenum(v, date1904) {
-        if (date1904) v += 1462;
+        if (date1904) {
+          v += 1462;
+        };
         const epoch = Date.parse(v);
         return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
       },
@@ -164,7 +166,7 @@
         }
         sheet['!cols'] = result;
       },
-      //二进制字符串转字符流
+      //二进制字符串转字节流
       s2ab(s) {
         const buffer = new ArrayBuffer(s.length);
         const view = new Uint8Array(buffer);

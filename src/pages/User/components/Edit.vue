@@ -59,7 +59,7 @@
 <script>
   import api from '@/api';
   import tableMng from '@/utils/tableMng';
-  import AvatarUpload from '@/components/avatarUpload';
+  import AvatarUpload from '@/components/upload/avatarUpload';
 
   const defaultInfo = {
     id: '',

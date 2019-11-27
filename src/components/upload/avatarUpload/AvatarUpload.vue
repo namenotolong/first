@@ -2,44 +2,69 @@
   <!--上传头像 -->
   <el-upload
     class="avatar-uploader"
+    :style="style"
     :action="action"
     :name="name"
     :show-file-list="false"
     :before-upload="beforeUpload"
-    :on-success="handleUploadSuccess"
-    :style="{backgroundImage:`url(${image || '' })`}">
-    <i class="icon" :class="loading ? 'el-icon-loading' : 'el-icon-plus' " v-if="loading || !image"></i>
+    :on-success="handleUploadSuccess">
+    <i
+      class="avatar-uploader__icon"
+      :class="loading ? 'el-icon-loading' : 'el-icon-plus' "
+      :style="{lineHeight:this.width}"
+      v-if="loading || !image">
+    </i>
   </el-upload>
 </template>
 
 <script>
   export default {
     props: {
+      //上传地址
       action: {
         required: true,
         type: String,
         default: '',
       },
+      // 对应inpu控件的name属性，后端依据这个字段获取文件。
       name: {
         type: String,
         default: 'file'
       },
+      // 图片地址
       image: {
         type: String,
         default: ''
       },
+      // 图片是否为圆形
+      round: {
+        type: Boolean,
+        default: true
+      },
+      // 图片文件的大小限制,单位为MB
       sizeLimit: {
         type: Number,
         default: 2
       },
-      round: {
-        type: Boolean,
-        default: true
+      // 图片宽度
+      width: {
+        type: String,
+        default: '120px'
       }
     },
     data() {
       return {
         loading: false
+      }
+    },
+    computed: {
+      style() {
+        return {
+          backgroundImage: `url(${this.image || '' })`,
+          width: this.width,
+          height: this.width,
+          borderRadius: this.round ? '50% ' : '6%'
+        }
       }
     },
     methods: {
@@ -73,23 +98,23 @@
 <style lang="scss" scoped>
   .avatar-uploader {
     box-sizing: border-box;
-    width: 140px;
-    height: 140px;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     border: 1px dashed #d9d9d9;
-    border-radius: 50%;
     cursor: pointer;
 
     &:hover {
-      border-color: #409EFF;
+      border-color: var(--theme);
     }
 
-    .icon {
+    &--round {
+      border-radius: 50%;
+    }
+
+    .avatar-uploader__icon {
       font-size: 28px;
       color: #8c939d;
-      line-height: 140px;
       text-align: center;
     }
   }

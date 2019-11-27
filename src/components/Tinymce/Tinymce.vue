@@ -6,9 +6,15 @@
 <script>
   export default {
     props: {
+      // 内容
       value: {
         type: String,
         default: ""
+      },
+      // 编辑器高度
+      height: {
+        type: Number,
+        default: 400
       }
     },
     data() {
@@ -54,7 +60,7 @@
         tinymce.init({
           selector: `#${this.editorId}`,
           language: "zh_CN",
-          height: 400,
+          height: this.height,
           plugins: "advlist autosave autolink charmap code colorpicker contextmenu emoticons fullscreen help hr image  insertdatetime link lists media pagebreak paste preview print searchreplace table textcolor textpattern visualblocks visualchars wordcount",
           toolbar: "restoredraft | undo redo | styleselect | bold italic underline forecolor backcolor removeformat | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table link image media emoticons | searchreplace fullscreen preview code print",
           contextmenu: "copy paste | link image inserttable",

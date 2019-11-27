@@ -23,16 +23,7 @@
       </el-form-item>
 
       <el-form-item label="头像：">
-        <el-upload
-          class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :show-file-list="false"
-          :before-upload="beforeAvatarUpload"
-          :on-success="handleAvatarSuccess">
-          <img class="avatar" v-if="userInfo.avatar" :src="userInfo.avatar">
-          <i class="el-icon-plus avatar-uploader-icon" v-else></i>
-          <p>点击上传</p>
-        </el-upload>
+        <avatar-upload action="https://sm.ms/api/v2/upload" name="smfile" :image.sync="userInfo.avatar" />
       </el-form-item>
 
 
@@ -57,9 +48,13 @@
 <script>
   import api from '@/api';
   import tableMng from '@/utils/tableMng';
+  import AvatarUpload from '@/components/upload/avatarUpload';
 
   export default {
-    name: "Mine",
+    name: 'Mine',
+    components: {
+      AvatarUpload
+    },
     data() {
       return {
         tableMng,
@@ -113,22 +108,6 @@
         const response = await api.account.getUserInfo({ userId: sessionStorage.getItem('userId') });
         this.userInfo = response.data.userInfo;
       },
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isPNG = file.type === 'image/png';
-        const isLt2M = file.size / 1024 / 1024 < 2;
-        if (!isJPG && !isPNG) {
-          this.$message.error('上传头像图片只能是jpg或png格式!');
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return (isJPG || isPNG) && isLt2M;
-      },
-      handleAvatarSuccess(res, file) {
-        // 实例开发中使用后端返回的图片地址。
-        this.userInfo.avatar = URL.createObjectURL(file.raw);
-      },
       handleSubmit() {
         this.submitLoading = true;
         this.$refs.userInfo.validate(valid => {
@@ -144,37 +123,11 @@
 <style lang="scss" scoped>
   .mine {
     width: 50%;
-    min-width: 300px;
+    min-width: 400px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
-
-    .avatar-uploader .el-upload {
-      border: 1px dashed #d9d9d9;
-      border-radius: 6px;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .avatar-uploader .el-upload:hover {
-      border-color: #409EFF;
-    }
-
-    .avatar-uploader-icon {
-      font-size: 28px;
-      color: #8c939d;
-      width: 120px;
-      height: 120px;
-      line-height: 120px;
-      text-align: center;
-    }
-
-    .avatar {
-      width: 120px;
-      display: block;
-    }
 
     .el-button {
       display: block;

@@ -14,7 +14,7 @@ const userData = Mock.mock({
     createDate: '@datetime("yyyy-MM-dd HH:mm:ss")',
     consume: '@natural(0,10000)',
     account: /^[a-zA-Z0-9_]{5,10}$/,
-    avatar: 'https://source.unsplash.com/random/200x200',
+    avatar: 'https://picsum.photos/200/200/?random',
     email: '@email'
   }]
 })
