@@ -21,9 +21,10 @@ function getDetail(params) {
   })
 }
 
-function save(data) {
+
+function update(data) {
   return service({
-    url: '/user/save',
+    url: '/user/update',
     method: 'post',
     data
   })
@@ -41,6 +42,6 @@ function remove(data) {
 export {
   getList,
   getDetail,
-  save,
+  update,
   remove
 }

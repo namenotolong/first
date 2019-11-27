@@ -1,7 +1,7 @@
 <template>
   <el-row :gutter="30">
     <el-col :lg="6" :sm="12" v-for="grid in grids" :key="grid.name">
-      <div class="dashboard-statistic" :class="grid.backgroundColor" @click="handleChangeType(grid.type)">
+      <div class="dashboard-statistic" :class="grid.backgroundColor" @click="$emit('onChangeType', grid.type)">
         <div class="grid-left">
           <svg-icon :icon-name="grid.icon" icon-class="grid-icon" />
         </div>
@@ -16,7 +16,6 @@
 </template>
 
 <script>
-  import bus from '@/utils/bus'
   import api from '@/api';
 
   export default {
@@ -58,9 +57,6 @@
         this.grids.forEach((item, index) => {
           item.number = Object.values(response.data)[index]
         })
-      },
-      handleChangeType(type) {
-        bus.$emit('changeStatisticType', type);
       }
     }
   }

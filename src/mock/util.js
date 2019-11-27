@@ -1,32 +1,65 @@
+import { guid } from '@/utils/core';
+
+/**
+ * 过滤对象的属性，数据表中有些字段前端不需要，可以使用此方法过滤掉
+ * @param {String} fields 可变参数，需要的字段
+ */
+const filterFieldByRow = (row, ...fields) => {
+  const keys = Object.keys(row);
+  const newRow = {};
+  keys.forEach(key => {
+    if (fields.includes(key)) {
+      newRow[key] = row[key];
+    }
+  })
+  return newRow;
+}
+
+
+const filterFieldByTable = (table, ...fields) => {
+  return table.map(row => filterFieldByRow(row, ...fields))
+}
 
 
 
 /**
- * 过滤对象的属性，list数据中有些字段前端不需要，可以使用此方法过滤掉
- * @param {Array} data    源数据
- * @param {String} fields 可变参数，需要的字段
+ * 新增/修改
  */
-const filterField = (data, ...fields) => {
-  return data.map(dataItem => {
-    const keys = Object.keys(dataItem);
-    const newDataItem = {};
-    keys.forEach(key => {
-      if (fields.includes(key)) {
-        newDataItem[key] = dataItem[key]
-      }
-    })
-    return newDataItem;
+const update = (table, row) => {
+  if (row.id) {
+    const index = table.findIndex(item => item.id === row.id);
+    Object.assign(table[index], row);
+  } else {
+    row.id = guid();
+    table.unshift(row);
+  }
+}
+
+
+/**
+ * 单个删除/批量删除
+ * @param {Array} ids   要删除的项的id组成的数组
+ */
+const remove = (table, ids) => {
+  ids.forEach(id => {
+    const index = table.findIndex(row => row.id === id);
+    table.splice(index, 1);
   })
 }
 
+
 /**
- * 根据id查找list中的某一项
+ * 根据id查找表的某一项
  */
-const findById = (data, id) => {
-  return data.find(item => item.id === id);
+const find = (table, id) => {
+  return table.find(row => row.id === id);
 }
 
-export {
-  filterField,
-  findById
+
+export default {
+  filterFieldByRow,
+  filterFieldByTable,
+  update,
+  remove,
+  find,
 }

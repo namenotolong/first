@@ -6,9 +6,9 @@
     :visible="visible"
     :before-close="handleBeforeClose">
     <el-form
+      ref="form"
       :model="userInfo"
       :rules="formRules"
-      ref="form"
       label-width="70px"
       v-loading="getDetailLoading">
       <el-form-item label="账号:" prop="account">
@@ -31,15 +31,7 @@
       </el-form-item>
 
       <el-form-item label="头像:">
-        <el-upload
-          class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :show-file-list="false"
-          :before-upload="beforeUpload"
-          :on-success="handleUploadSuccess"
-          :style="{backgroundImage:`url(${userInfo.avatar ? userInfo.avatar : '' })`}">
-          <i class="icon" :class="uploading ? 'el-icon-loading' : 'el-icon-plus' " v-if="!userInfo.avatar"></i>
-        </el-upload>
+        <avatar-upload action="https://sm.ms/api/v2/upload" name="smfile" :image.sync="userInfo.avatar" />
       </el-form-item>
 
       <el-row>
@@ -67,8 +59,10 @@
 <script>
   import api from '@/api';
   import tableMng from '@/utils/tableMng';
+  import AvatarUpload from '@/components/avatarUpload';
 
   const defaultInfo = {
+    id: '',
     account: '',
     name: '',
     roles: [],
@@ -88,6 +82,9 @@
         type: Boolean,
         default: false
       }
+    },
+    components: {
+      AvatarUpload
     },
     watch: {
       visible(value) {
@@ -140,7 +137,6 @@
             trigger: 'blur'
           }]
         },
-        uploading: false,
         submitLoading: false,
         getDetailLoading: false
       }
@@ -155,19 +151,15 @@
         this.getDetailLoading = false;
       },
       handleSubmit() {
-        this.submitLoading = true;
-        this.$refs.form.validate((valid) => {
+        this.$refs.form.validate(async (valid) => {
           if (valid) {
-            api.user.save({
-              detail: this.userInfo
-            }).then(res => {
-              this.submitLoading = false;
-              this.handleClose();
-              this.$emit('onSave');
-              this.$message.success('提交成功');
-            })
-          } else {
+            this.submitLoading = true;
+            const rsponse = await api.user.update({ detail: this.userInfo });
             this.submitLoading = false;
+            this.handleClose();
+            this.$emit('onSave');
+            this.$message.success('提交成功');
+          } else {
             this.$message.error('请按照正确格式填写');
           }
         });
@@ -188,65 +180,11 @@
         this.userInfo = defaultInfo;
         this.userInfoBackup = defaultInfo;
         this.$emit('onClose');
-      },
-      beforeUpload(file) {
-        this.uploading = true;
-        this.userInfo.avatar = '';
-        const isImage = /\.(jpg|png)$/.test(file.name);
-        const isLt2M = file.size / 1024 / 1024 < 2;
-        if (!isImage) {
-          this.$message.error('上传头像图片只能是jpg或png格式!');
-          this.uploading = false;
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-          this.uploading = false;
-        }
-        return isImage && isLt2M;
-      },
-      handleUploadSuccess(res, file) {
-        this.uploading = false;
-        this.userInfo.avatar = window.URL.createObjectURL(file.raw);
-      },
+      }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-  .user-edit {
-    .avatar-uploader {
-      box-sizing: border-box;
-      width: 140px;
-      height: 140px;
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      border: 1px dashed #d9d9d9;
-      border-radius: 50%;
-      cursor: pointer;
-
-      &:hover {
-        border-color: #409EFF;
-      }
-
-      .icon {
-        font-size: 28px;
-        color: #8c939d;
-        line-height: 140px;
-        text-align: center;
-      }
-    }
-  }
-</style>
-
-<style lang="scss">
-  .user-edit {
-    .avatar-uploader {
-      .el-upload {
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-  }
+  .user-edit {}
 </style>

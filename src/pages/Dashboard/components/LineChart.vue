@@ -13,10 +13,8 @@
 </template>
 
 <script>
-  import bus from '@/utils/bus'
   import G2 from '@antv/g2';
   import api from '@/api';
-
 
   const TYPE_NAME_MAP = {
     visite: '访问量',
@@ -26,6 +24,7 @@
   };
 
   export default {
+    props: ['statisticType'],
     data() {
       return {
         chartName: '访问量',
@@ -39,7 +38,7 @@
     computed: {
       sideCollapse() {
         return this.$store.getters.sideCollapse;
-      }
+      },
     },
     watch: {
       // 折叠或展开菜单栏的时候，图表宽度不会跟着变，需要重建。
@@ -53,16 +52,14 @@
             this.createChart('monthChartContainer', this.monthData[this.chartType], 'monthChart');
           }, 350)
         }
-      }
-    },
-    created() {
+      },
       // 点击数量统计信息的时候，图表展现对应的数据
-      bus.$on('changeStatisticType', type => {
-        this.chartType = type;
-        this.chartName = TYPE_NAME_MAP[type];
-        this.weekChart.changeData(this.weekData[type]);
-        this.monthChart.changeData(this.monthData[type]);
-      });
+      statisticType(value) {
+        this.chartType = value;
+        this.chartName = TYPE_NAME_MAP[value];
+        this.weekChart.changeData(this.weekData[value]);
+        this.monthChart.changeData(this.monthData[value]);
+      }
     },
     mounted() {
       this.getLineChartData(() => {

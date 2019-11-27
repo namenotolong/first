@@ -9,8 +9,8 @@
         <el-button type="danger" icon="el-icon-minus" @click="handleDelete">批量删除</el-button>
         <export-excel
           file-name="用户数据表"
-          :header="['序号', '姓名', '手机', '性别', '角色', '注册时间', '累计消费额(元)']"
-          :filter-filed="['index', 'name', 'mobilePhone', 'gender', 'role', 'registerDate', 'consume']"
+          :header="['序号', '姓名', '手机', '性别', '角色', '创建时间', '累计消费额(元)']"
+          :filter-filed="['index', 'name', 'mobilePhone', 'gender', 'role', 'createDate', 'consume']"
           :data="userList">
           导出表格
         </export-excel>
@@ -64,7 +64,7 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column prop="registerDate" label="注册时间" sortable></el-table-column>
+        <el-table-column prop="createDate" label="创建时间" sortable></el-table-column>
         <el-table-column prop="consume" label="累计消费额(元)" width="160px" sortable></el-table-column>
         <el-table-column label="操作" width="120px">
           <template slot-scope="scope">
@@ -135,7 +135,7 @@
       //获取用户列表
       async getUserList() {
         this.tableLoading = true;
-        const response = await api.user.getList(this.queryCondition)
+        const response = await api.user.getList(this.queryCondition);
         this.userList = response.data.list.map((item, index) => {
           return {
             id: item.id,
@@ -144,7 +144,7 @@
             mobilePhone: item.mobilePhone,
             gender: item.gender,
             roles: item.roles,
-            registerDate: this.$dayjs(item.registerDate).format('YYYY-MM-DD HH:mm:ss'),
+            createDate: this.$dayjs(item.createDate).format('YYYY-MM-DD HH:mm:ss'),
             consume: item.consume
           }
         });
@@ -172,13 +172,12 @@
         if (name.length === 0) {
           this.$message.warning('请选择要删除的用户！');
         } else {
-          this.$confirm(`确认删除以下用户：“${name.join('，')}”？`, '提示', {
-            type: 'warning',
-          }).then(async () => {
-            await api.user.remove({ id });
-            this.$message.success('删除成功！');
-            this.getUserList();
-          }).catch(() => {})
+          this.$confirm(`确定删除用户：“${name.join('，')}”？`, '提示', { type: 'warning', })
+            .then(async () => {
+              await api.user.remove({ id });
+              this.$message.success('删除成功！');
+              this.getUserList();
+            }).catch(() => {})
         }
       },
       // 多选
@@ -201,17 +200,17 @@
 <style lang="scss" scoped>
   .user-manager {
     background-color: #fff;
-    padding: 20px;
+    padding: 1em;
 
     .user-manager__header {
       display: flex;
-      margin-bottom: 20px;
+      margin-bottom: 1em;
       align-items: center;
       justify-content: space-between;
     }
 
     .user-manager__table {
-      margin-bottom: 20px;
+      margin-bottom: 1em;
     }
   }
 </style>

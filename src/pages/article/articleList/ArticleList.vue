@@ -5,11 +5,11 @@
       <section-title name="文章列表" />
       <div>
         <el-button type="primary" icon="el-icon-plus" @click="handleAdd">新增文章</el-button>
-        <el-button type="danger" icon="el-icon-minus" @click="handleDeleteBatch">批量删除</el-button>
+        <el-button type="danger" icon="el-icon-minus" @click="handleDelete">批量删除</el-button>
         <export-excel
           file-name="文章数据表"
           :header="['序号', '作者', '创建时间', '标题', '类型', '阅读数']"
-          :filter-filed="['index', 'author', 'createDate', 'title', 'type', 'browseNum']"
+          :filter-filed="['index', 'author', 'createDate', 'name', 'type', 'browseNum']"
           :data="articleList">
           导出表格
         </export-excel>
@@ -19,7 +19,7 @@
     <div class="article-list__search">
       <el-form :inline="true" :model="queryCondition">
         <el-form-item label="标题:">
-          <el-input v-model="queryCondition.title" placeholder="请输入文章标题关键字" clearable></el-input>
+          <el-input v-model="queryCondition.name" placeholder="请输入文章标题关键字" clearable></el-input>
         </el-form-item>
         <el-form-item label="作者:">
           <el-input v-model="queryCondition.author" placeholder="请输入作者姓名关键字" clearable></el-input>
@@ -44,15 +44,15 @@
         @selection-change="handleSelectedRows">
         <el-table-column type="selection" width="50"></el-table-column>
         <el-table-column prop="index" label="序号" width="80px"></el-table-column>
+        <el-table-column prop="name" label="标题"></el-table-column>
         <el-table-column prop="author" label="作者" width="120px"></el-table-column>
-        <el-table-column prop="createDate" label="创建时间" sortable width="180px"></el-table-column>
-        <el-table-column prop="title" label="标题"></el-table-column>
         <el-table-column prop="type" label="类型" width="120px">
           <template slot-scope="scope">
             <span>{{tableMng.getNameById('article',scope.row.type)}}</span>
           </template>
         </el-table-column>
         <el-table-column prop="browseNum" label="阅读数" sortable width="100px"></el-table-column>
+        <el-table-column prop="createDate" label="创建时间" sortable width="180px"></el-table-column>
         <el-table-column label="操作" width="120px">
           <template slot-scope="scope">
             <router-link :to="`/article/edit/${scope.row.id}/${scope.row.index}`">
@@ -96,7 +96,7 @@
         articleList: [],
         articleTableLoading: false,
         queryCondition: {
-          title: '',
+          name: '',
           author: '',
           type: [],
           pageNumber: 1,
@@ -122,7 +122,7 @@
             index: (this.queryCondition.pageNumber - 1) * this.queryCondition.pageSize + index + 1,
             author: item.author,
             createDate: item.createDate,
-            title: item.title,
+            name: item.name,
             type: item.type,
             browseNum: item.browseNum,
           }
@@ -132,33 +132,30 @@
         const scrollElement = document.querySelector('.inner-layout__page');
         scroll(scrollElement, 0, 800);
       },
-      filter(value, row, column) {
-        const property = column['property'];
-        return row[property] === value;
-      },
       handleAdd() {
         this.$router.push('/article/add');
       },
-      handleDeleteBatch() {
-        if (this.selectedRows.length === 0) {
-          this.$message.warning('请勾选要删除的文章！');
-        } else {
-          const names = this.selectedRows.map(row => row.title);
-          this.$confirm(`确认删除以下文章：“${names.join('，')}”？`, '提示', {
-            type: 'warning',
-          }).then(() => {
-            this.getArticleList();
-            this.$message.success('删除成功！');
-          }).catch(() => {})
-        }
-      },
+      // 删除
       handleDelete(index, row) {
-        this.$confirm(`确认删除文章“${row.title}”？`, '提示', {
-          type: 'warning',
-        }).then(() => {
-          this.getList();
-          this.$message.success('删除成功！');
-        })
+        let id = [];
+        let name = [];
+        if (row) {
+          id = [row.id];
+          name = [row.name];
+        } else {
+          id = this.selectedRows.map(row => row.id);
+          name = this.selectedRows.map(row => row.name);
+        }
+        if (name.length === 0) {
+          this.$message.warning('请选择要删除的文章！');
+        } else {
+          this.$confirm(`确定删除文章：“${name.join('，')}”？`, '提示', { type: 'warning', })
+            .then(async () => {
+              await api.article.remove({ id });
+              this.$message.success('删除成功！');
+              this.getArticleList();
+            }).catch(() => {})
+        }
       },
       handleSelectedRows(rows) {
         this.selectedRows = rows;
@@ -170,17 +167,17 @@
 <style lang="scss" scoped>
   .article-list {
     background-color: #fff;
-    padding: 20px;
+    padding: 1em;
 
     .article-list__header {
       display: flex;
-      margin-bottom: 20px;
+      margin-bottom: 1em;
       align-items: center;
       justify-content: space-between;
     }
 
     .article-list__table {
-      margin-bottom: 20px;
+      margin-bottom: 1em;
     }
   }
 </style>

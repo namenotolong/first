@@ -172,7 +172,7 @@
   .form-base {
     width: 70%;
     min-width: 500px;
-    padding: 20px;
+    padding: 1em;
     margin: 0 auto;
     border-radius: 10px;
     background-color: #fff;

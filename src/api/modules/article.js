@@ -1,6 +1,8 @@
 import service from '@/utils/service';
 import { paramsSerializer } from '@/utils/core';
 
+
+
 function getList(params) {
   return service({
     url: '/article/list',
@@ -21,8 +23,28 @@ function getDetail(params) {
 }
 
 
+function update(data) {
+  return service({
+    url: '/article/update',
+    method: 'post',
+    data
+  })
+}
+
+
+function remove(data) {
+  return service({
+    url: '/article/remove',
+    method: 'post',
+    data
+  })
+}
+
+
 
 export {
   getList,
-  getDetail
+  getDetail,
+  update,
+  remove
 }

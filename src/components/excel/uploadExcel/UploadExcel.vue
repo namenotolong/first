@@ -95,7 +95,7 @@
   }
 
   .file-name {
-    margin: 0 20px;
+    margin: 0 1em;
     color: #4a4a4a;
   }
 </style>

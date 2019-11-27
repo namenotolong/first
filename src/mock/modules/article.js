@@ -1,34 +1,35 @@
 import Mock from 'mockjs';
-import { getURLParams, guid } from '@/utils/core';
-import { filterField, findById } from '../util';
+import { getURLParams } from '@/utils/core';
+import util from '../util';
 
 const articleList = Mock.mock({
-  'data|213': [{
+  'table|213': [{
     id: '@lower(@guid)',
-    title: '@ctitle',
+    name: '@ctitle',
     author: '@cname',
     createDate: '@datetime("yyyy-MM-dd HH:mm:ss")',
     type: '@pick(["1", "2", "3", "4", "5"])',
     browseNum: '@natural(1000,9999)',
-    imageURL: 'https://s2.ax1x.com/2019/08/02/edRc1P.jpg',
-    brief: '@cparagraph(2,5)',
+    imageURL: 'https://source.unsplash.com/random/200x200',
+    brief: '@cparagraph(2,3)',
     content: '@cparagraph',
   }],
 })
 
 
 
+const table = articleList.table;
 
 
 export default {
   getList(config) {
-    const { type, author, pageNumber, pageSize, title } = getURLParams(config.url);
+    const { type, author, pageNumber, pageSize, name } = getURLParams(config.url);
     const types = type.split(',');
     const typesLength = types.length;
-    const result = articleList.data.filter(item => {
+    const result = table.filter(item => {
       let validAuthor = false;
       let validType = false;
-      let validTitle = false;
+      let validName = false;
 
       if (typesLength === 0) {
         validType = true;
@@ -38,9 +39,9 @@ export default {
         })
       }
 
-      validTitle = item.title.includes(title);
+      validName = item.name.includes(name);
       validAuthor = item.author.includes(author);
-      return validAuthor && validTitle && validType;
+      return validAuthor && validName && validType;
     })
 
     const startIndex = (Number(pageNumber) - 1) * Number(pageSize);
@@ -49,7 +50,7 @@ export default {
     return {
       code: 200,
       data: {
-        articleList: filterField(result.slice(startIndex, endIndex), 'id', 'title', 'author', 'createDate', 'type', 'browseNum'),
+        articleList: util.filterFieldByTable(result.slice(startIndex, endIndex), 'id', 'name', 'author', 'createDate', 'type', 'browseNum'),
         total: result.length
       }
     }
@@ -58,7 +59,30 @@ export default {
     const { id } = getURLParams(config.url);
     return {
       code: 200,
-      data: findById(articleList.data, id)
+      data: util.find(table, id)
+    }
+  },
+  update(config) {
+    const { detail } = window.JSON.parse(config.body);
+    if (!detail.id) {
+      const initRow = {
+        createDate: Date.now(),
+        browseNum: 0
+      };
+      Object.assign(detail, initRow);
+    }
+    util.update(table, detail);
+    return {
+      code: 200,
+      data: {}
+    }
+  },
+  remove(config) {
+    const { id } = window.JSON.parse(config.body);
+    util.remove(table, id);
+    return {
+      code: 200,
+      data: {}
     }
   }
 }

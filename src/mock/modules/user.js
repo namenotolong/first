@@ -1,16 +1,17 @@
 import Mock from 'mockjs';
-import { getURLParams, guid } from '@/utils/core';
-import { filterField, findById } from '../util';
+import { getURLParams } from '@/utils/core';
+import util from '../util';
 
-const userList = Mock.mock({
-  'data|127': [{
+
+const userData = Mock.mock({
+  'table|127': [{
     id: '@lower(@guid)',
     name: '@cname',
     mobilePhone: /^1[345789]\d{9}$/,
     gender: '@pick(["1", "2"])',
     age: '@natural(20,60)',
     roles: '@pick(["admin", "guest","editor"])'.split(),
-    registerDate: '@datetime("yyyy-MM-dd HH:mm:ss")',
+    createDate: '@datetime("yyyy-MM-dd HH:mm:ss")',
     consume: '@natural(0,10000)',
     account: /^[a-zA-Z0-9_]{5,10}$/,
     avatar: 'https://source.unsplash.com/random/200x200',
@@ -18,13 +19,15 @@ const userList = Mock.mock({
   }]
 })
 
+const table = userData.table;
+
 
 export default {
   getList(config) {
     const { name, pageNumber, pageSize } = getURLParams(config.url);
-    const result = userList.data.filter(item => {
+    const result = table.filter(row => {
       let validName = false;
-      validName = item.name.includes(name);
+      validName = row.name.includes(name);
       return validName;
     })
     const startIndex = (Number(pageNumber) - 1) * Number(pageSize);
@@ -32,7 +35,7 @@ export default {
     return {
       code: 200,
       data: {
-        list: filterField(result.slice(startIndex, endIndex), 'id', 'name', 'mobilePhone', 'gender', 'roles', 'registerDate', 'consume'),
+        list: util.filterFieldByTable(result.slice(startIndex, endIndex), 'id', 'name', 'mobilePhone', 'gender', 'roles', 'createDate', 'consume', 'age'),
         total: result.length
       }
     }
@@ -41,25 +44,19 @@ export default {
     const { id } = getURLParams(config.url);
     return {
       code: 200,
-      data: findById(userList.data, id)
+      data: util.find(table, id)
     }
   },
-  save(config) {
+  update(config) {
     const { detail } = window.JSON.parse(config.body);
-    const userId = detail.id;
-    if (userId) {
-      const userIndex = userList.data.findIndex(item => item.id === userId);
-      userList.data[userIndex] = detail;
-    } else {
-      userList.data.unshift({
-        ...detail,
-        ...{
-          id: guid(),
-          registerDate: Date.now(),
-          consume: 0
-        }
-      })
+    if (!detail.id) {
+      const initRow = {
+        createDate: Date.now(),
+        consume: 0
+      };
+      Object.assign(detail, initRow);
     }
+    util.update(table, detail);
     return {
       code: 200,
       data: {}
@@ -67,10 +64,7 @@ export default {
   },
   remove(config) {
     const { id } = window.JSON.parse(config.body);
-    id.forEach(item => {
-      const index = userList.data.findIndex(user => user.id === item);
-      userList.data.splice(index, 1);
-    })
+    util.remove(table, id);
     return {
       code: 200,
       data: {}

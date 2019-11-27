@@ -41,11 +41,13 @@ Mock.mock(/\/dashboard\/todoList/, 'get', dashboard.getTodoListData);
 
 Mock.mock(/\/article\/list/, 'get', article.getList);
 Mock.mock(/\/article\/detail/, 'get', article.getDetail);
+Mock.mock(/\/article\/update/, 'post', article.update);
+Mock.mock(/\/article\/remove/, 'post', article.remove);
 
 
 Mock.mock(/\/user\/list/, 'get', user.getList);
 Mock.mock(/\/user\/detail/, 'get', user.getDetail);
-Mock.mock(/\/user\/save/, 'post', user.save);
+Mock.mock(/\/user\/update/, 'post', user.update);
 Mock.mock(/\/user\/remove/, 'post', user.remove);
 
 

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <statistic />
-    <line-chart />
+    <statistic @onChangeType="hanldeChangeType" />
+    <line-chart :statistic-type="statisticType" />
 
     <el-row :gutter="20">
       <el-col :span="8">
@@ -32,6 +32,16 @@
       TodoList,
       ProgressBar,
       NewGoods
-    }
+    },
+    data() {
+      return {
+        statisticType: 'visite'
+      }
+    },
+    methods: {
+      hanldeChangeType(type) {
+        this.statisticType = type;
+      }
+    },
   }
 </script>
