@@ -17,7 +17,7 @@ const route = {
     path: '/article/list',
     component: ArticleList,
     meta: {
-      title: '文章列表',
+      title: '文章管理',
       activePath: '/article'
     }
   }, {
@@ -26,7 +26,8 @@ const route = {
     component: ArticleEdit,
     meta: {
       title: '新增文章',
-      hiddenInMenu: true
+      hiddenInMenu: true,
+      noCache: true
     },
   }, {
     name: 'ArticleEdit',

@@ -6,7 +6,6 @@
 </template>
 
 <script>
-
   // 获取element的样式
   const elementContent = require('!css-loader!element-ui/lib/theme-chalk/index.css');
 

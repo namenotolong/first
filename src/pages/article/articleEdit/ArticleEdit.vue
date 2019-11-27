@@ -38,7 +38,7 @@
                 :show-file-list="false"
                 :before-upload="beforeImageUpload"
                 :on-success="handleImageSuccess">
-                <img v-if="articleDetail.imageUrl" :src="articleDetail.imageUrl" class="image">
+                <img v-if="articleDetail.imageURL" :src="articleDetail.imageURL" class="image">
                 <i v-else class="el-icon-plus image-uploader-icon"></i>
               </el-upload>
             </el-form-item>
@@ -61,8 +61,8 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="创建时间:" prop="date">
-              <el-input v-model="articleDetail.date" disabled></el-input>
+            <el-form-item label="创建时间:" prop="createDate">
+              <el-input v-model="articleDetail.createDate" disabled></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -91,8 +91,8 @@
         articleDetail: {
           title: '',
           author: '',
-          date: '',
-          imageUrl: '',
+          createDate: '',
+          imageURL: '',
           type: '',
           brief: '',
           content: '',
@@ -130,12 +130,12 @@
         if (!this.articleId) return;
         const response = await api.article.getDetail({ id: this.articleId })
 
-        const data = response.data.articleDetail;
+        const data = response.data;
         this.articleDetail = {
           title: data.title,
           author: data.author,
-          date: this.$dayjs(data.date).format('YYYY-MM-DD HH:mm:ss'),
-          imageUrl: data.imageUrl,
+          createDate: this.$dayjs(data.createDate).format('YYYY-MM-DD HH:mm:ss'),
+          imageURL: data.imageURL,
           type: data.type,
           brief: data.brief,
           content: data.content,

@@ -13,7 +13,6 @@ import dashboardRoute from './modules/dashboard';
 import errorRoute from './modules/error';
 import formRoute from './modules/form';
 import mineRoute from './modules/mine';
-import notMatchRoute from './modules/notMatch';
 import officeRoute from './modules/office';
 import otherRoute from './modules/other';
 import pdfRoute from './modules/pdf';
@@ -29,7 +28,7 @@ const staticRouteMap = [{
   path: '/',
   redirect: '/dashboard',
   meta: {
-    hiddenInMenu: true
+    hiddenInMenu: true,
   }
 },
   accountRoute,
@@ -37,7 +36,6 @@ const staticRouteMap = [{
   mineRoute,
   reloadRoute,
   blankRoute,
-  notMatchRoute,
 ]
 // 需要通过角色动态控制的路由表
 const dynamicRouteMap = [
@@ -51,7 +49,15 @@ const dynamicRouteMap = [
   articleRoute,
   pdfRoute,
   officeRoute,
-  otherRoute
+  otherRoute,
+  {
+    name: '404',
+    path: '*',
+    redirect: '/error/notFound',
+    meta: {
+      hiddenInMenu: true
+    }
+  },
 ]
 
 

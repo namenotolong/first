@@ -4,8 +4,8 @@
     <div class="article-list__header">
       <section-title name="文章列表" />
       <div>
-        <el-button type="primary" round icon="el-icon-plus" @click="handleAdd">新增文章</el-button>
-        <el-button type="danger" round icon="el-icon-minus" @click="handleDeleteBatch">批量删除</el-button>
+        <el-button type="primary" icon="el-icon-plus" @click="handleAdd">新增文章</el-button>
+        <el-button type="danger" icon="el-icon-minus" @click="handleDeleteBatch">批量删除</el-button>
         <export-excel
           file-name="文章数据表"
           :header="['序号', '作者', '创建时间', '标题', '类型', '阅读数']"
@@ -26,11 +26,11 @@
         </el-form-item>
         <el-form-item label="类型:">
           <el-select v-model="queryCondition.type" placeholder="请选择文章类型" filterable multiple clearable>
-            <el-option v-for="item in articleTypes" :key="item.id" :label="item.name" :value="item.id"></el-option>
+            <el-option v-for="item in tableMng.getTable('article')" :key="item.id" :label="item.name" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" round icon="el-icon-search" @click="getArticleList">查询</el-button>
+          <el-button type="primary" icon="el-icon-search" @click="getArticleList">查询</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -47,7 +47,11 @@
         <el-table-column prop="author" label="作者" width="120px"></el-table-column>
         <el-table-column prop="createDate" label="创建时间" sortable width="180px"></el-table-column>
         <el-table-column prop="title" label="标题"></el-table-column>
-        <el-table-column prop="type" label="类型" width="120px"></el-table-column>
+        <el-table-column prop="type" label="类型" width="120px">
+          <template slot-scope="scope">
+            <span>{{tableMng.getNameById('article',scope.row.type)}}</span>
+          </template>
+        </el-table-column>
         <el-table-column prop="browseNum" label="阅读数" sortable width="100px"></el-table-column>
         <el-table-column label="操作" width="120px">
           <template slot-scope="scope">
@@ -60,7 +64,6 @@
         </el-table-column>
       </el-table>
     </div>
-
     <pagination
       :total="total"
       :page-number.sync="queryCondition.pageNumber"
@@ -72,9 +75,9 @@
 </template>
 
 <script>
-  import tableMng from '@/utils/tableMng';
   import api from '@/api';
   import { scroll } from '@/utils/core';
+  import tableMng from '@/utils/tableMng';
   import SectionTitle from '@/components/sectionTitle';
   import ExportExcel from '@/components/excel/exportExcel';
   import Pagination from '@/components/pagination';
@@ -89,9 +92,8 @@
     },
     data() {
       return {
+        tableMng,
         articleList: [],
-
-        articleTypes: tableMng.getTable('article'),
         articleTableLoading: false,
         queryCondition: {
           title: '',
@@ -108,25 +110,27 @@
       this.getArticleList();
     },
     methods: {
-      getArticleList() {
+      async getArticleList() {
         this.articleTableLoading = true;
-        api.article.getList(this.queryCondition).then(res => {
-          this.articleList = res.data.articleList.map((item, index) => {
-            return {
-              id: item.id,
-              index: (this.queryCondition.pageNumber - 1) * this.queryCondition.pageSize + index + 1,
-              author: item.author,
-              createDate: item.createDate,
-              title: item.title,
-              type: item.type,
-              browseNum: item.browseNum,
-            }
-          });
-          this.total = res.data.total;
-          this.articleTableLoading = false;
-          const scrollElement = document.querySelector('.inner-layout__page');
-          scroll(scrollElement, 0, 800);
+        const response = await api.article.getList({
+          ...this.queryCondition,
+          type: this.queryCondition.type.toString()
         })
+        this.articleList = response.data.articleList.map((item, index) => {
+          return {
+            id: item.id,
+            index: (this.queryCondition.pageNumber - 1) * this.queryCondition.pageSize + index + 1,
+            author: item.author,
+            createDate: item.createDate,
+            title: item.title,
+            type: item.type,
+            browseNum: item.browseNum,
+          }
+        });
+        this.total = response.data.total;
+        this.articleTableLoading = false;
+        const scrollElement = document.querySelector('.inner-layout__page');
+        scroll(scrollElement, 0, 800);
       },
       filter(value, row, column) {
         const property = column['property'];
@@ -140,15 +144,12 @@
           this.$message.warning('请勾选要删除的文章！');
         } else {
           const names = this.selectedRows.map(row => row.title);
-          this.$confirm(`确认删除以下文章“${names.join('，')}”？`, '提示', {
+          this.$confirm(`确认删除以下文章：“${names.join('，')}”？`, '提示', {
             type: 'warning',
-            dangerouslyUseHTMLString: true
           }).then(() => {
             this.getArticleList();
             this.$message.success('删除成功！');
-          }).catch(() => {
-
-          })
+          }).catch(() => {})
         }
       },
       handleDelete(index, row) {

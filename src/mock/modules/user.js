@@ -1,5 +1,6 @@
 import Mock from 'mockjs';
 import { getURLParams, guid } from '@/utils/core';
+import { filterField, findById } from '../util';
 
 const userList = Mock.mock({
   'data|127': [{
@@ -21,7 +22,7 @@ const userList = Mock.mock({
 export default {
   getList(config) {
     const { name, pageNumber, pageSize } = getURLParams(config.url);
-    const filterList = userList.data.filter(item => {
+    const result = userList.data.filter(item => {
       let validName = false;
       validName = item.name.includes(name);
       return validName;
@@ -31,23 +32,16 @@ export default {
     return {
       code: 200,
       data: {
-        list: filterList.slice(startIndex, endIndex),
-        total: filterList.length
+        list: filterField(result.slice(startIndex, endIndex), 'id', 'name', 'mobilePhone', 'gender', 'roles', 'registerDate', 'consume'),
+        total: result.length
       }
     }
   },
   getDetail(config) {
     const { id } = getURLParams(config.url);
-    let detail = null;
-    if (id) {
-      detail = userList.data.find(item => item.id === id);
-      console.log(detail);
-    }
     return {
       code: 200,
-      data: {
-        detail
-      }
+      data: findById(userList.data, id)
     }
   },
   save(config) {
@@ -68,9 +62,7 @@ export default {
     }
     return {
       code: 200,
-      data: {
-
-      }
+      data: {}
     }
   },
   remove(config) {
@@ -81,9 +73,7 @@ export default {
     })
     return {
       code: 200,
-      data: {
-
-      }
+      data: {}
     }
   }
 }

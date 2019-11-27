@@ -55,7 +55,8 @@
     methods: {
       // 获取需要在侧边菜单显示的路由表
       getMenuRouteMap(routes) {
-        const routeMap = routes.filter(route => {
+        const menuRouteMap = routes.filter(route => {
+
           // 如果父路由设置了hiddenInMenu：true，则它以及它的子路由都不能通过菜单栏访问
           if (route.meta.hiddenInMenu) {
             return false;
@@ -74,7 +75,7 @@
             }
           }
         })
-        return routeMap;
+        return menuRouteMap;
       },
       getMenuItem(route) {
         // children不存在代表是最后一级路由，只有一个children代表只有第一级路由

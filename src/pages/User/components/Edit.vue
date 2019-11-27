@@ -150,8 +150,8 @@
         if (!this.id) return;
         this.getDetailLoading = true;
         const response = await api.user.getDetail({ id: this.id });
-        this.userInfo = { ...response.data.detail };
-        this.userInfoBackup = { ...response.data.detail };
+        this.userInfo = { ...response.data };
+        this.userInfoBackup = { ...response.data };
         this.getDetailLoading = false;
       },
       handleSubmit() {

@@ -18,7 +18,6 @@ import '@/directive';
 import reminder from '@/components/Reminder/index.js'
 
 
-
 Vue.use(ElementUI, {
   size: store.getters.size
 });

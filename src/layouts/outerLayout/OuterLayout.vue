@@ -9,19 +9,16 @@
       <router-view />
     </div>
 
-    <theme-setting class="theme-setting" />
     <style-setting class="style-setting" />
 
   </div>
 </template>
 
 <script>
-  import ThemeSetting from '@/components/setting/themeSetting';
   import StyleSetting from '@/components/setting/StyleSetting';
 
   export default {
     components: {
-      ThemeSetting,
       StyleSetting
     }
   }
@@ -46,7 +43,6 @@
       margin-top: 60px;
     }
 
-    .theme-setting,
     .style-setting {
       display: none;
     }

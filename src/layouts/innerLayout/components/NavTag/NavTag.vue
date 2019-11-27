@@ -6,7 +6,8 @@
         class="nav-tag__item"
         :class="{active:isTagActive(tag.path)}"
         v-for="(tag, index) in tagList"
-        :key="tag.path">
+        :key="tag.path"
+        @dblclick="handleClose(index)">
         <router-link class="link" :to="tag.path">{{tag.title}}</router-link>
         <i class="el-icon-circle-close close" @click="handleClose(index)"></i>
       </div>
@@ -45,17 +46,14 @@
       // 添加标签
       addTag(route) {
         let tagExist = this.tagList.some(item => item.path === route.path);
-        if (!tagExist) {
-
-          // 路由名称存在才在tag栏中显示，比如Reload路由没设置name，就不显示tag。
-          if (route.name) {
-            this.tagList.push({
-              title: route.meta.title,
-              path: route.path,
-              name: route.name,
-              noCache: route.meta.noCache,
-            });
-          }
+        // 路由名称存在才在tag栏中显示，比如Reload路由没设置name，就不显示tag。
+        if (!tagExist && route.name) {
+          this.tagList.push({
+            title: route.meta.title,
+            path: route.path,
+            name: route.name,
+            noCache: route.meta.noCache,
+          });
         }
       },
       // 关闭标签

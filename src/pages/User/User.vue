@@ -5,8 +5,8 @@
     <div class="user-manager__header">
       <section-title name="用户列表" />
       <div>
-        <el-button type="primary" round icon="el-icon-plus" @click="handleEdit">新增用户</el-button>
-        <el-button type="danger" round icon="el-icon-minus" @click="handleDelete">批量删除</el-button>
+        <el-button type="primary" icon="el-icon-plus" @click="handleEdit">新增用户</el-button>
+        <el-button type="danger" icon="el-icon-minus" @click="handleDelete">批量删除</el-button>
         <export-excel
           file-name="用户数据表"
           :header="['序号', '姓名', '手机', '性别', '角色', '注册时间', '累计消费额(元)']"
@@ -34,7 +34,7 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" round icon="el-icon-search" @click="getUserList">查询</el-button>
+          <el-button type="primary" icon="el-icon-search" @click="getUserList">查询</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -172,7 +172,7 @@
         if (name.length === 0) {
           this.$message.warning('请选择要删除的用户！');
         } else {
-          this.$confirm(`确认删除用户“${name.join('，')}”？`, '提示', {
+          this.$confirm(`确认删除以下用户：“${name.join('，')}”？`, '提示', {
             type: 'warning',
           }).then(async () => {
             await api.user.remove({ id });
