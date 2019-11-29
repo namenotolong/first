@@ -5,9 +5,10 @@
     :style="style"
     :action="action"
     :name="name"
+    accept="image/jpeg,image/png"
     :show-file-list="false"
     :before-upload="beforeUpload"
-    :on-success="handleUploadSuccess">
+    :on-success="handleSuccess">
     <i
       class="avatar-uploader__icon"
       :class="loading ? 'el-icon-loading' : 'el-icon-plus' "
@@ -69,26 +70,26 @@
     },
     methods: {
       beforeUpload(file) {
-        const isImage = /\.(jpg|png)$/.test(file.name);
-        const isLt2M = file.size / 1024 / 1024 < this.sizeLimit;
-        if (!isImage) {
+        const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+        const limit = file.size / 1024 / 1024 < this.sizeLimit;
+        if (!isJpgOrPng) {
           this.$message.error('上传的图片只能是jpg或png格式!');
         }
-        if (!isLt2M) {
+        if (!limit) {
           this.$message.error(`上传的图片大小不能超过 ${this.sizeLimit}MB!`);
         }
-        const valid = isImage && isLt2M;
+        const valid = isJpgOrPng && limit;
         if (valid) {
           this.loading = true;
         }
         return valid;
       },
-      handleUploadSuccess(res, file) {
+      handleSuccess(res, file) {
         this.loading = false;
         if (res.success) {
           this.$emit('update:image', res.data.url);
         } else {
-          this.$message.error(res.message);
+          this.$message.error(res.message || '上传失败');
         }
       },
     }

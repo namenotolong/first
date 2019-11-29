@@ -1,7 +1,5 @@
 <template>
-  <div>
     <el-input type="textarea" :id="editorId" v-loading="editorLoading"></el-input>
-  </div>
 </template>
 <script>
   export default {

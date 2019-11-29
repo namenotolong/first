@@ -1,4 +1,5 @@
 <template>
+<!-- 页面全屏 -->
   <el-tooltip effect="dark" :content="isFullScreen ? '取消全屏' : '全屏浏览'" placement="bottom">
     <i class="el-icon-rank" @click="handleFullScreen"></i>
   </el-tooltip>

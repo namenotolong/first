@@ -11,8 +11,21 @@ const articleList = Mock.mock({
     type: '@pick(["1", "2", "3", "4", "5"])',
     browseNum: '@natural(1000,9999)',
     imageURL: 'https://source.unsplash.com/random/200x200',
-    brief: '@cparagraph(2,3)',
+    brief: '@cparagraph(1,3)',
     content: '@cparagraph',
+    accessory: [{
+      id: '1',
+      name: '图片图片.jpg',
+      url: 'https://s2.ax1x.com/2019/08/02/edRc1P.jpg'
+    }, {
+      id: '2',
+      name: '营业执照副本.pdf',
+      url: 'http://www.xdocin.com/xdoc?_key=fedii4dtyfhmvgryqyntfjavte&_func=down&_dir=document.pdf'
+    }, {
+      id: '3',
+      name: '数据采集表',
+      url: 'http://www.xdocin.com/xdoc?_key=fedii4dtyfhmvgryqyntfjavte&_func=down&_dir=data.xlsx'
+    }]
   }],
 })
 

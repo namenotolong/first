@@ -16,7 +16,9 @@
 </template>
 
 <script>
-  import ScrollBar from './ScrollBar'
+  import ScrollBar from './ScrollBar';
+  import bus from '@/utils/bus';
+
   export default {
     components: {
       ScrollBar
@@ -38,6 +40,10 @@
     },
     created() {
       this.addTag(this.$route);
+      bus.$on('closeTag', (path) => {
+        const tagIndex = this.tagList.findIndex(tag => tag.path === path);
+       this.tagList.splice(tagIndex, 1);
+      });
     },
     methods: {
       isTagActive(path) {

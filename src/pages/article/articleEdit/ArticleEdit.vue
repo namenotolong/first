@@ -2,19 +2,27 @@
   <div class="article-edit">
 
     <div class="article-edit__header">
-      <section-title :name="articleId ? '编辑文章' : '新增文章'" />
-      <el-button type="primary" icon="el-icon-s-promotion" :loading="submitLoading" @click="handleSubmit">发布</el-button>
+      <div class="title">
+        <section-title :name="articleId ? '编辑文章' : '新增文章'" />
+      </div>
+      <div class="operation">
+        <el-button type="primary" icon="el-icon-s-promotion" :loading="submitLoading" @click="handleSubmit">发布</el-button>
+        <el-button type="info" icon="el-icon-circle-close" @click="handleCancel">取消</el-button>
+      </div>
+
     </div>
 
-    <div class="article-edit__body">
-      <!-- 一个组件上的v-model默认会利用名为value的prop和名为input的事件。 -->
-      <tinymce
-        class="article-edit_editor"
-        v-model="articleDetail.content"
-        :height="500" />
 
-      <div class="article-edit__form">
-        <el-form ref="form" :model="articleDetail" :rules="formRules" label-width="90px">
+    <el-row>
+      <el-col :lg="16">
+        <!-- 一个组件上的v-model默认会利用名为value的prop和名为input的事件。 -->
+        <tinymce
+          v-model="articleDetail.content"
+          :height="500" />
+      </el-col>
+
+      <el-col :lg="8">
+        <el-form class="article-edit__form" ref="form" :model="articleDetail" :rules="formRules" label-width="90px">
           <el-form-item label="文章标题:" prop="name">
             <el-input v-model="articleDetail.name" placeholder="请输入文章标题" clearable></el-input>
           </el-form-item>
@@ -44,25 +52,39 @@
 
           <el-form-item label="附件上传:">
             <drag-upload
-              action="https://jsonplaceholder.typicode.com/posts" />
-
+              action="https://jsonplaceholder.typicode.com/posts"
+              :fileList.sync="articleDetail.accessory" />
           </el-form-item>
         </el-form>
-      </div>
-    </div>
+      </el-col>
+    </el-row>
 
   </div>
 </template>
 
 <script>
   import api from '@/api';
+  import bus from '@/utils/bus';
   import tableMng from '@/utils/tableMng';
   import AvatarUpload from '@/components/upload/avatarUpload';
   import DragUpload from '@/components/upload/dragUpload';
   import SectionTitle from '@/components/sectionTitle';
   import Tinymce from '@/components/tinymce';
+  import dayjs from 'dayjs';
+
+  const defaultDetail = {
+    id: '',
+    name: '',
+    type: '',
+    content: '',
+    createDate: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+    imageURL: '',
+    brief: '',
+    accessory: []
+  }
 
   export default {
+    name: 'ArticleEdit',
     props: ['articleId'],
     components: {
       AvatarUpload,
@@ -73,16 +95,7 @@
     data() {
       return {
         tableMng,
-        articleDetail: {
-          id: '',
-          name: '',
-          author: '',
-          createDate: this.$dayjs().format('YYYY-MM-DD HH:mm:ss'),
-          imageURL: '',
-          type: '',
-          brief: '',
-          content: '',
-        },
+        articleDetail: { ...defaultDetail },
         formRules: {
           name: [{
             required: true,
@@ -103,7 +116,7 @@
       }
     },
     watch: {
-      $route() {
+      $route(value) {
         this.getDetail();
       }
     },
@@ -112,23 +125,22 @@
     },
     methods: {
       async getDetail() {
-        if (!this.articleId) return;
-        const response = await api.article.getDetail({ id: this.articleId })
-        const data = response.data;
-        this.articleDetail = {
-          id: data.id,
-          name: data.name,
-          author: data.author,
-          createDate: this.$dayjs(data.createDate).format('YYYY-MM-DD HH:mm:ss'),
-          imageURL: data.imageURL,
-          type: data.type,
-          brief: data.brief,
-          content: data.content,
-        };
-      },
-
-      handleAccessorySuccess() {
-        this.$message.success('上传成功');
+        if (this.articleId) {
+          const response = await api.article.getDetail({ id: this.articleId })
+          const data = response.data;
+          this.articleDetail = {
+            id: data.id,
+            name: data.name,
+            createDate: this.$dayjs(data.createDate).format('YYYY-MM-DD HH:mm:ss'),
+            imageURL: data.imageURL,
+            type: data.type,
+            brief: data.brief,
+            content: data.content,
+            accessory: data.accessory
+          };
+        } else {
+          this.articleDetail = { ...defaultDetail };
+        }
       },
       handleSubmit() {
         this.$refs.form.validate(async (valid) => {
@@ -141,6 +153,10 @@
             this.$message.error('请按照正确格式填写');
           }
         })
+      },
+      handleCancel() {
+        bus.$emit('closeTag', this.$route.path);
+        this.$router.push('/article/list');
       }
     }
   }
@@ -153,24 +169,21 @@
 
     .article-edit__header {
       display: flex;
-      margin-bottom: 1em;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
+
+      .title,
+      .operation {
+        margin-bottom: 1em;
+      }
     }
 
-    .article-edit__body {
-      display: flex;
-
-      .article-edit_editor {
-        width: calc(100% - 360px);
-      }
-
-      .article-edit__form {
-        box-sizing: border-box;
-        width: 360px;
-        padding: 1em;
-        border: $base-border;
-      }
+    .article-edit__form {
+      height: 606px;
+      overflow-y: auto;
+      padding: 1em;
+      border: 1px solid #c5c5c5;
     }
   }
 </style>

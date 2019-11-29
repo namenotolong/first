@@ -2,8 +2,11 @@
   <div class="article-list">
 
     <div class="article-list__header">
-      <section-title name="文章列表" />
-      <div>
+      <div class="title">
+        <section-title name="文章列表" />
+      </div>
+
+      <div class="operation">
         <el-button type="primary" icon="el-icon-plus" @click="handleAdd">新增文章</el-button>
         <el-button type="danger" icon="el-icon-minus" @click="handleDelete">批量删除</el-button>
         <export-excel
@@ -171,9 +174,14 @@
 
     .article-list__header {
       display: flex;
-      margin-bottom: 1em;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+
+      .title,
+      .operation {
+        margin-bottom: 1em;
+      }
     }
 
     .article-list__table {

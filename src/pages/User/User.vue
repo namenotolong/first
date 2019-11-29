@@ -3,8 +3,10 @@
 
     <!-- 工具栏 -->
     <div class="user-manager__header">
-      <section-title name="用户列表" />
-      <div>
+      <div class="title">
+        <section-title name="用户列表" />
+      </div>
+      <div class="operation">
         <el-button type="primary" icon="el-icon-plus" @click="handleEdit">新增用户</el-button>
         <el-button type="danger" icon="el-icon-minus" @click="handleDelete">批量删除</el-button>
         <export-excel
@@ -204,9 +206,14 @@
 
     .user-manager__header {
       display: flex;
-      margin-bottom: 1em;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
+
+      .title,
+      .operation {
+        margin-bottom: 1em;
+      }
     }
 
     .user-manager__table {
