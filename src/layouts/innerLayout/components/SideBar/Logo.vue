@@ -26,8 +26,8 @@
     .link {
       display: block;
       width: 200px;
-      height: 60px;
-      line-height: 60px;
+      height: 50px;
+      line-height: 50px;
       background-color: #434a50;
       font-size: 24px;
       color: #fff;

@@ -1,5 +1,7 @@
 <template>
   <div>
+
+
   </div>
 </template>
 
@@ -11,7 +13,7 @@
     },
     created() {},
     mounted() {
-      this.init()
+
 
     },
     updated() {},
@@ -20,3 +22,6 @@
     },
   }
 </script>
+<style scoped>
+
+</style>

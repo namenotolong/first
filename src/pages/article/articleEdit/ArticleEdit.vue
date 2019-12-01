@@ -7,7 +7,7 @@
       </div>
       <div class="operation">
         <el-button type="primary" icon="el-icon-s-promotion" :loading="submitLoading" @click="handleSubmit">发布</el-button>
-        <el-button type="info" icon="el-icon-circle-close" @click="handleCancel">取消</el-button>
+        <el-button type="info" icon="el-icon-circle-close" @click="handleClose">取消</el-button>
       </div>
 
     </div>
@@ -148,12 +148,13 @@
             const response = await api.article.update({ detail: this.articleDetail });
             this.submitLoading = false;
             this.$message.success('发布成功');
+            this.handleClose();
           } else {
             this.$message.error('请按照正确格式填写');
           }
         })
       },
-      handleCancel() {
+      handleClose() {
         bus.$emit('closeTag', this.$route.path);
         this.$router.push('/article/list');
       }

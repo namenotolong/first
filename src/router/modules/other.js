@@ -6,6 +6,7 @@ const AMap = () => import( /* webpackChunkName:'aMap' */ '@/pages/other/aMap');
 const DragDialog = () => import( /* webpackChunkName:'dragDialog' */ '@/pages/other/dragDialog');
 const Carousel = () => import( /* webpackChunkName:'carousel' */ '@/pages/other/carousel');
 const ComponentDemo = () => import( /* webpackChunkName:'componentDemo' */ '@/pages/other/componentDemo');
+const Copy = () => import( /* webpackChunkName:'copy' */ '@/pages/other/copy');
 
 const route = {
   name: 'Other',
@@ -22,7 +23,7 @@ const route = {
     meta: {
       title: '打印',
     }
-  },{
+  }, {
     name: 'Excel',
     path: '/other/excel',
     component: Excel,
@@ -64,7 +65,14 @@ const route = {
     meta: {
       title: '小组件',
     }
-  },]
+  }, {
+    name: 'Copy',
+    path: '/other/copy',
+    component: Copy,
+    meta: {
+      title: '快捷复制',
+    }
+  }]
 }
 
 export default route;

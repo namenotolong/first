@@ -104,12 +104,12 @@
           // 右键菜单
           contextmenu: 'copy paste link inserttable ',
           // 自动获得焦点
-          auto_focus: `${this.editorId}`,
+          auto_focus: this.editorId,
           // 带格式粘贴,比如从word文档中复制了一段内容来粘贴,则不会清除格式.
           paste_enable_default_filters: false,
           // 定义插入的时间格式
           insertdatetime_formats: ['%Y-%m-%d %H:%M:%S', '%Y/%m/%d %H:%M:%S', '%Y年%m月%d日 %H点%M分%S秒', '%Y年%m月%d日', '%H点%M分'],
-          // 表格操作选项
+          // 表格操作工具栏
           table_toolbar: "tableprops tablerowprops tablecellprops | tableinsertcolbefore tableinsertcolafter tabledeletecol | tableinsertrowbefore tableinsertrowafter tabledeleterow | tablemergecells tablesplitcells | tabledelete",
           // 点击超链接时显示快捷工具条。用户可能不知道要按住ctrl再点击来打开超链接
           link_context_toolbar: true,
@@ -143,7 +143,7 @@
               base64 = 'data:image/gif;base64,' + base64;
             }
             const formData = new FormData();
-            formData.append('file', file);
+            formData.append('file', base64);
             formData.append('name', file.name);
             // 如果后端需要在文件服务中保存这个图片，就将图片传给后端
             // this.$axios({

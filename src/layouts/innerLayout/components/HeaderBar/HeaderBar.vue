@@ -70,8 +70,8 @@
 
 <style lang="scss" scoped>
   .header-bar {
-    height: 60px;
-    line-height: 60px;
+    height: 50px;
+    line-height: 50px;
     padding-right: 40px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
       0 2px 1px -1px rgba(0, 0, 0, 0.12);
@@ -89,13 +89,14 @@
     }
 
     .el-color-picker {
-      transform: translate(-10px, -4px);
+      transform: translate(-10px, -3px);
     }
 
     .header-bar__menu {
+      box-sizing: border-box;
       float: right;
-      height: 40px;
-      padding: 10px;
+      height: 50px;
+      padding: 5px;
 
       .el-dropdown {
         height: 40px;

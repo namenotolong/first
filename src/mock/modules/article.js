@@ -36,7 +36,7 @@ const table = articleList.table;
 
 export default {
   getList(config) {
-    const { type, author, pageNumber, pageSize, name } = getURLParams(config.url);
+    const { type, author, pageNumber = 1, pageSize = table.length, name } = getURLParams(config.url);
     const types = type.split(',');
     const typesLength = types.length;
     const result = table.filter(item => {
@@ -51,7 +51,6 @@ export default {
           return item.type.includes(item1);
         })
       }
-
       validName = item.name.includes(name);
       validAuthor = item.author.includes(author);
       return validAuthor && validName && validType;
@@ -82,7 +81,8 @@ export default {
     if (!detail.id) {
       const initRow = {
         createDate: Date.now(),
-        browseNum: 0
+        browseNum: 0,
+        author: '本人'
       };
       Object.assign(detail, initRow);
     }

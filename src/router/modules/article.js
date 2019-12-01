@@ -18,7 +18,8 @@ const route = {
     component: ArticleList,
     meta: {
       title: '文章管理',
-      activePath: '/article'
+      activePath: '/article',
+      noCache: true
     }
   }, {
     name: 'ArticleAdd',

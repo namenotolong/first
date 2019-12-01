@@ -7,7 +7,6 @@
       <UploadExcel />
     </el-tab-pane>
   </el-tabs>
-
 </template>
 
 <script>

@@ -104,7 +104,7 @@
 
 <style lang="scss" scoped>
   .nav-menu {
-    height: calc(100% - 60px);
+    height: calc(100% - 50px);
 
     .el-menu {
       border-right: none;

@@ -25,7 +25,16 @@
           <el-input v-model="queryCondition.name" placeholder="请输入文章标题关键字" clearable></el-input>
         </el-form-item>
         <el-form-item label="作者:">
-          <el-input v-model="queryCondition.author" placeholder="请输入作者姓名关键字" clearable></el-input>
+          <el-select
+            v-model="queryCondition.author"
+            placeholder="请输入作者姓名关键字"
+            filterable
+            remote
+            :remote-method="getRemoteUserList"
+            default-first-option
+            :loading="userLoading">
+            <el-option v-for="(item,index) in userListOptions" :key="item+index" :label="item" :value="item" />
+          </el-select>
         </el-form-item>
         <el-form-item label="类型:">
           <el-select v-model="queryCondition.type" placeholder="请选择文章类型" filterable multiple clearable>
@@ -96,6 +105,8 @@
     data() {
       return {
         tableMng,
+        userListOptions: [],
+        userLoading: false,
         articleList: [],
         articleTableLoading: false,
         queryCondition: {
@@ -113,6 +124,7 @@
       this.getArticleList();
     },
     methods: {
+      // 获取文章列表
       async getArticleList() {
         this.articleTableLoading = true;
         const response = await api.article.getList({
@@ -135,6 +147,7 @@
         const scrollElement = document.querySelector('.inner-layout__page');
         scroll(scrollElement, 0, 800);
       },
+      // 跳转到新建文章页面
       handleAdd() {
         this.$router.push('/article/add');
       },
@@ -160,9 +173,16 @@
             }).catch(() => {})
         }
       },
+      // 多选
       handleSelectedRows(rows) {
         this.selectedRows = rows;
       },
+      async getRemoteUserList(keyword) {
+        this.userLoading = true;
+        const response = await api.user.getList({ name: keyword });
+        this.userListOptions = response.data.list.map(item => item.name);
+        this.userLoading = false;
+      }
     }
   }
 </script>

@@ -8,7 +8,7 @@
 
         <div class="grid-right">
           <p class="grid-name">{{grid.name}}</p>
-          <p class="grid-number">{{grid.number}}</p>
+          <countTo class="grid-number" :startVal="0" :endVal="grid.number" :duration="3000"></countTo>
         </div>
       </div>
     </el-col>
@@ -17,8 +17,10 @@
 
 <script>
   import api from '@/api';
+  import countTo from 'vue-count-to';
 
   export default {
+    components: { countTo },
     data() {
       return {
         grids: [{
@@ -118,19 +120,21 @@
     }
   }
 
-  .grid--green {
-    background-color: #06d6a0;
-  }
+  .grid {
+    &--green {
+      background-color: #06d6a0;
+    }
 
-  .grid--yellow {
-    background-color: #ffd166;
-  }
+    &--yellow {
+      background-color: #ffd166;
+    }
 
-  .grid--blue {
-    background-color: #06aed5;
-  }
+    &--blue {
+      background-color: #06aed5;
+    }
 
-  .grid--red {
-    background-color: #ef476f;
+    &--red {
+      background-color: #ef476f;
+    }
   }
 </style>

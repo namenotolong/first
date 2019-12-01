@@ -24,7 +24,7 @@ const table = userData.table;
 
 export default {
   getList(config) {
-    const { name, pageNumber, pageSize } = getURLParams(config.url);
+    const { name, pageNumber = 1, pageSize = table.length } = getURLParams(config.url);
     const result = table.filter(row => {
       let validName = false;
       validName = row.name.includes(name);

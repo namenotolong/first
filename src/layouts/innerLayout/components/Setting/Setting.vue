@@ -54,7 +54,7 @@
     .setting__icon {
       position: absolute;
       left: -40px;
-      line-height: 60px;
+      line-height: 50px;
       font-size: 28px;
       color: #fff;
       cursor: pointer;

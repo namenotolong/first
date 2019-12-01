@@ -2,7 +2,7 @@
   <el-row class="dashboard-line-chart" :gutter="30">
     <el-col :lg="12" :sm="24">
       <p class="title">周{{chartName}}增长趋势图</p>
-      <div id="weekChartContainer" ></div>
+      <div id="weekChartContainer"></div>
     </el-col>
 
     <el-col :lg="12" :sm="24">
@@ -134,5 +134,12 @@
       text-align: center;
       margin-bottom: 10px;
     }
+
+    #weekChartContainer,
+    #monthChartContainer {
+      height: 300px;
+      background-color: #fff;
+    }
+
   }
 </style>

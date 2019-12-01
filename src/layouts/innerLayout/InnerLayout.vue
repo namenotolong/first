@@ -56,13 +56,13 @@
       .inner-layout__page {
         position: relative;
         box-sizing: border-box;
-        height: calc(100vh - 60px);
+        height: calc(100vh - 50px);
         overflow-x: hidden;
         overflow-y: auto;
         padding: 1em;
 
         &.with-navtag {
-          height: calc(100vh - 100px);
+          height: calc(100vh - 90px);
         }
 
         .page {
