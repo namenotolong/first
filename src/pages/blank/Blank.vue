@@ -1,21 +1,19 @@
 <template>
   <div>
-
-
   </div>
 </template>
 
 <script>
   export default {
     name: 'Blank',
-
     data() {
-      return {
-
-      }
+      return {}
     },
     created() {},
-    mounted() {},
+    mounted() {
+      this.init()
+
+    },
     updated() {},
     methods: {
 

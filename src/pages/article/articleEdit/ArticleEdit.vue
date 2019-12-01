@@ -18,7 +18,7 @@
         <!-- 一个组件上的v-model默认会利用名为value的prop和名为input的事件。 -->
         <tinymce
           v-model="articleDetail.content"
-          :height="500" />
+          :height="660" />
       </el-col>
 
       <el-col :lg="8">
@@ -41,19 +41,19 @@
             <el-input v-model="articleDetail.createDate" disabled></el-input>
           </el-form-item>
 
-          <el-form-item label="标题图片:">
+          <el-form-item label="标题图片:" prop="imageURL">
             <avatar-upload
+              v-model="articleDetail.imageURL"
               action="https://sm.ms/api/v2/upload"
               name="smfile"
               :round="false"
-              width="80px"
-              :image.sync="articleDetail.imageURL" />
+              width="80px" />
           </el-form-item>
 
           <el-form-item label="附件上传:">
             <drag-upload
-              action="https://jsonplaceholder.typicode.com/posts"
-              :fileList.sync="articleDetail.accessory" />
+              v-model="articleDetail.accessory"
+              action="https://jsonplaceholder.typicode.com/posts" />
           </el-form-item>
         </el-form>
       </el-col>
@@ -110,14 +110,13 @@
             required: true,
             message: '请选择文章类型',
             trigger: 'change'
+          }],
+          imageURL: [{
+            required: true,
+            message: '请上传标题图片',
           }]
         },
         submitLoading: false,
-      }
-    },
-    watch: {
-      $route(value) {
-        this.getDetail();
       }
     },
     created() {
@@ -126,7 +125,7 @@
     methods: {
       async getDetail() {
         if (this.articleId) {
-          const response = await api.article.getDetail({ id: this.articleId })
+          const response = await api.article.getDetail({ id: this.articleId });
           const data = response.data;
           this.articleDetail = {
             id: data.id,
@@ -180,7 +179,8 @@
     }
 
     .article-edit__form {
-      height: 606px;
+      box-sizing: border-box;
+      height: 660px;
       overflow-y: auto;
       padding: 1em;
       border: 1px solid #c5c5c5;

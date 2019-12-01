@@ -13,7 +13,7 @@
       class="avatar-uploader__icon"
       :class="loading ? 'el-icon-loading' : 'el-icon-plus' "
       :style="{lineHeight:this.width}"
-      v-if="loading || !image">
+      v-if="loading || !value">
     </i>
   </el-upload>
 </template>
@@ -21,6 +21,11 @@
 <script>
   export default {
     props: {
+      // 图片地址
+      value: {
+        type: String,
+        default: ''
+      },
       //上传地址
       action: {
         required: true,
@@ -31,11 +36,6 @@
       name: {
         type: String,
         default: 'file'
-      },
-      // 图片地址
-      image: {
-        type: String,
-        default: ''
       },
       // 图片是否为圆形
       round: {
@@ -61,7 +61,7 @@
     computed: {
       style() {
         return {
-          backgroundImage: `url(${this.image || '' })`,
+          backgroundImage: `url(${this.value || '' })`,
           width: this.width,
           height: this.width,
           borderRadius: this.round ? '50% ' : '6%'
@@ -87,7 +87,7 @@
       handleSuccess(res, file) {
         this.loading = false;
         if (res.success) {
-          this.$emit('update:image', res.data.url);
+          this.$emit('input', res.data.url);
         } else {
           this.$message.error(res.message || '上传失败');
         }

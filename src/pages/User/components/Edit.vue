@@ -31,7 +31,10 @@
       </el-form-item>
 
       <el-form-item label="头像:">
-        <avatar-upload action="https://sm.ms/api/v2/upload" name="smfile" :image.sync="userInfo.avatar" />
+        <avatar-upload
+          v-model="userInfo.avatar"
+          action="https://sm.ms/api/v2/upload"
+          name="smfile" />
       </el-form-item>
 
       <el-row>

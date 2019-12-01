@@ -13,7 +13,7 @@
         <!-- 路由页面 -->
         <transition name="page" mode="out-in">
           <keep-alive :include="cachePages">
-            <router-view />
+            <router-view :key="key" />
           </keep-alive>
         </transition>
       </div>
@@ -32,7 +32,12 @@
   export default {
     components: { HeaderBar, SideBar, NavTag, Setting },
     computed: {
-      ...mapGetters(['tagVisible', 'cachePages', ])
+      ...mapGetters(['tagVisible', 'cachePages', ]),
+      // 创建文章以及所有的编辑文章都是共用的ArticleEdit组件,所以对应的路由不能使用keep-alive缓存。
+      // 同时它们使用的也是动态路由，在这些路由之间切换时也需要响应路由参数的变化，当路由参数变化时需要重新渲染。
+      key() {
+        return this.$route.path;
+      }
     }
   }
 </script>
@@ -62,14 +67,19 @@
 
         .page {
 
-          &-enter,
-          &-leave {
+          &-enter {
             opacity: 0;
+            transform: translateX(-30px);
+          }
+
+          &-leave-to {
+            opacity: 0;
+            transform: translateX(30px);
           }
 
           &-enter-active,
           &-leave-active {
-            transition: opacity .5s ease;
+            transition: all .3s ease;
           }
         }
 

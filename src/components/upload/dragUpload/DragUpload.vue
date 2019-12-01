@@ -7,7 +7,7 @@
       :name="name"
       drag
       multiple
-      :file-list="fileList"
+      :file-list="value"
       :before-upload="beforeUpload"
       :before-remove="beforeRemove"
       :on-success="handleSuccess"
@@ -25,6 +25,13 @@
 <script>
   export default {
     props: {
+      // 文件列表
+      value: {
+        type: Array,
+        default () {
+          return [];
+        }
+      },
       //上传地址
       action: {
         required: true,
@@ -36,13 +43,7 @@
         type: String,
         default: 'file'
       },
-      // 文件列表
-      fileList: {
-        type: Array,
-        default () {
-          return [];
-        }
-      },
+
       // 文件的大小限制,单位为MB
       sizeLimit: {
         type: Number,
@@ -77,13 +78,13 @@
         this.loading = false;
         //根据实际开发情况处理响应
         if (true) {
-          this.$emit('update:fileList', fileList);
+          this.$emit('input', fileList);
         } else {
           this.$message.error(res.message || '上传失败');
         }
       },
       handleRemove(file, fileList) {
-        this.$emit('update:fileList', fileList);
+        this.$emit('input', fileList);
       },
       handlePreview(file) {
         window.open(file.url);

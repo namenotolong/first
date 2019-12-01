@@ -25,25 +25,25 @@
           type: 'visite',
           icon: 'view',
           name: '访问量',
-          number: '',
+          number: 0,
           backgroundColor: 'grid--red',
         }, {
           type: 'user',
           icon: 'user_filled',
           name: '用户数量',
-          number: '',
+          number: 0,
           backgroundColor: 'grid--blue',
         }, {
           type: 'goods',
           icon: 'goods',
           name: '商品数量',
-          number: '',
+          number: 0,
           backgroundColor: 'grid--green',
         }, {
           type: 'comment',
           icon: 'message',
           name: '评论数量',
-          number: '',
+          number: 0,
           backgroundColor: 'grid--yellow',
         }]
       }

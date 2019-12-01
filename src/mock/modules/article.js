@@ -70,9 +70,11 @@ export default {
   },
   getDetail(config) {
     const { id } = getURLParams(config.url);
+    // 刷新编辑页面时会重新Mock数据，根据之前的id找不到对应的文章
+    const detail = util.find(table, id) || table[0];
     return {
       code: 200,
-      data: util.find(table, id)
+      data: detail
     }
   },
   update(config) {
