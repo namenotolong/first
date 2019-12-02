@@ -162,10 +162,30 @@ export function getCommaNumber(value) {
   if (num) {
     result = num + result;
   }
-  return `${prefix}${result}${list[1] ? `.${list[1]}` : ''}`;
+  const listSecond = list[1] ? '.' + list[1] : '';
+  return `${prefix}${result}${listSecond}`;
 }
 
 
 // 判断数据类型
 export const getType = value => value ? value.constructor.name.toLowerCase() : value;
 
+
+// 加载第三方脚本
+export function loadScript(src, callback = (err, res) => { }) {
+  const existScript = document.getElementById(src);
+  if (existScript) {
+    callback(null, existScript);
+  } else {
+    const script = document.createElement('script');
+    script.src = src;
+    script.id = src;
+    document.body.appendChild(script);
+    script.onload = function () {
+      callback(null, script)
+    }
+    script.onerror = function () {
+      callback(new Error(`“${src}”加载失败`), script)
+    }
+  }
+}

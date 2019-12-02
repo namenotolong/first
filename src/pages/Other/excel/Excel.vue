@@ -1,5 +1,5 @@
 <template>
-  <el-tabs v-model="activeName">
+  <el-tabs v-model="activeName" type="border-card" >
     <el-tab-pane label="导出Excel" name="exportExcel">
       <ExportExcel />
     </el-tab-pane>

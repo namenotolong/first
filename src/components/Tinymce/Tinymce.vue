@@ -4,25 +4,9 @@
 </template>
 
 <script>
-  const tinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce@5.1.2/tinymce.min.js';
+  import { loadScript } from '@/utils/core';
 
-  const asyncLoad = (src, callback = (err, res) => {}) => {
-    const existScript = document.getElementById(src);
-    if (existScript) {
-      callback(null, existScript);
-    } else {
-      const script = document.createElement('script');
-      script.src = src;
-      script.id = src;
-      document.body.appendChild(script);
-      script.onload = function() {
-        callback(null, script)
-      }
-      script.onerror = function() {
-        callback(new Error(`“${src}”加载失败`), script)
-      }
-    }
-  }
+  const tinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce@5.1.2/tinymce.min.js';
 
   export default {
     props: {
@@ -79,7 +63,7 @@
     },
     methods: {
       init() {
-        asyncLoad(tinymceCDN, (err, res) => {
+        loadScript(tinymceCDN, (err, res) => {
           if (!err) {
             this.initTinymce();
           } else {

@@ -1,30 +1,40 @@
 <template>
-  <div class="a-map">
-    <el-tabs type="border-card">
-      <el-tab-pane label="标记点">
-        <map-maker></map-maker>
-      </el-tab-pane>
-      <el-tab-pane label="插件">
-        <map-plugin></map-plugin>
-      </el-tab-pane>
-      <el-tab-pane label="地图热点">
-        <map-hot-spot></map-hot-spot>
-      </el-tab-pane>
-    </el-tabs>
-  </div>
+  <el-tabs v-model="activeName" type="border-card">
+    <el-tab-pane label="标记点" name="maker">
+      <keep-alive>
+        <map-maker v-if="activeName === 'maker'" />
+      </keep-alive>
+
+    </el-tab-pane>
+    <el-tab-pane label="插件" name="plugin">
+      <keep-alive>
+        <map-plugin v-if="activeName === 'plugin'" />
+      </keep-alive>
+    </el-tab-pane>
+    <el-tab-pane label="地图热点" name="hotSpot">
+      <keep-alive>
+        <map-hot-spot v-if="activeName === 'hotSpot'" />
+      </keep-alive>
+    </el-tab-pane>
+  </el-tabs>
 </template>
 
 <script>
-  import MapMaker from "./components/MapMaker.vue";
-  import MapPlugin from "./components/MapPlugin.vue";
-  import MapHotSpot from "./components/MapHotSpot.vue";
+  import MapMaker from './components/MapMaker';
+  import MapPlugin from './components/MapPlugin';
+  import MapHotSpot from './components/MapHotSpot';
 
   export default {
-    name:'AMap',
+    name: 'AMap',
     components: {
       MapMaker,
       MapPlugin,
       MapHotSpot
+    },
+    data() {
+      return {
+        activeName: 'maker'
+      }
     }
   }
 </script>
