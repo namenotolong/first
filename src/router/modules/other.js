@@ -7,6 +7,7 @@ const DragDialog = () => import( /* webpackChunkName:'dragDialog' */ '@/pages/ot
 const Carousel = () => import( /* webpackChunkName:'carousel' */ '@/pages/other/carousel');
 const ComponentDemo = () => import( /* webpackChunkName:'componentDemo' */ '@/pages/other/componentDemo');
 const Copy = () => import( /* webpackChunkName:'copy' */ '@/pages/other/copy');
+const FileToBase64 = () => import( /* webpackChunkName:'fileToBase64' */ '@/pages/other/fileToBase64');
 
 const route = {
   name: 'Other',
@@ -17,13 +18,6 @@ const route = {
     icon: 'other'
   },
   children: [{
-    name: 'Print',
-    path: '/other/print',
-    component: Print,
-    meta: {
-      title: '打印',
-    }
-  }, {
     name: 'Excel',
     path: '/other/excel',
     component: Excel,
@@ -31,18 +25,18 @@ const route = {
       title: 'excel',
     }
   }, {
-    name: 'HtmlToCanvas',
-    path: '/other/htmlToCanvas',
-    component: HtmlToCanvas,
-    meta: {
-      title: 'htmlToCanvas',
-    }
-  }, {
     name: 'AMap',
     path: '/other/aMap',
     component: AMap,
     meta: {
       title: '地图',
+    }
+  }, {
+    name: 'Print',
+    path: '/other/print',
+    component: Print,
+    meta: {
+      title: '打印',
     }
   }, {
     name: 'DragDialog',
@@ -71,6 +65,20 @@ const route = {
     component: Copy,
     meta: {
       title: '快捷复制',
+    }
+  }, {
+    name: 'HtmlToCanvas',
+    path: '/other/htmlToCanvas',
+    component: HtmlToCanvas,
+    meta: {
+      title: 'htmlToCanvas',
+    }
+  }, {
+    name: 'FileToBase64',
+    path: '/other/fileToBase64',
+    component: FileToBase64,
+    meta: {
+      title: 'fileToBase64',
     }
   }]
 }

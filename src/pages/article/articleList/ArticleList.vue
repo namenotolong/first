@@ -19,33 +19,31 @@
       </div>
     </div>
 
-    <div class="article-list__search">
-      <el-form :inline="true" :model="queryCondition">
-        <el-form-item label="标题:">
-          <el-input v-model="queryCondition.name" placeholder="请输入文章标题关键字" clearable></el-input>
-        </el-form-item>
-        <el-form-item label="作者:">
-          <el-select
-            v-model="queryCondition.author"
-            placeholder="请输入作者姓名关键字"
-            filterable
-            remote
-            :remote-method="getRemoteUserList"
-            default-first-option
-            :loading="userLoading">
-            <el-option v-for="(item,index) in userListOptions" :key="item+index" :label="item" :value="item" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="类型:">
-          <el-select v-model="queryCondition.type" placeholder="请选择文章类型" filterable multiple clearable>
-            <el-option v-for="item in tableMng.getTable('article')" :key="item.id" :label="item.name" :value="item.id"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" icon="el-icon-search" @click="getArticleList">查询</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
+    <el-form :inline="true" :model="queryCondition">
+      <el-form-item label="标题:">
+        <el-input v-model="queryCondition.name" placeholder="请输入文章标题关键字" clearable></el-input>
+      </el-form-item>
+      <el-form-item label="作者:">
+        <el-select
+          v-model="queryCondition.author"
+          placeholder="请输入作者姓名关键字"
+          filterable
+          remote
+          :remote-method="getRemoteUserList"
+          default-first-option
+          :loading="userLoading">
+          <el-option v-for="(item,index) in userListOptions" :key="item+index" :label="item" :value="item" />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="类型:">
+        <el-select v-model="queryCondition.type" placeholder="请选择文章类型" filterable multiple clearable>
+          <el-option v-for="item in tableMng.getTable('article')" :key="item.id" :label="item.name" :value="item.id"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" icon="el-icon-search" @click="getArticleList">查询</el-button>
+      </el-form-item>
+    </el-form>
 
     <div class="article-list__table">
       <el-table

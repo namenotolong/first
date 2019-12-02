@@ -9,7 +9,6 @@
         <el-button type="primary" icon="el-icon-s-promotion" :loading="submitLoading" @click="handleSubmit">发布</el-button>
         <el-button type="info" icon="el-icon-circle-close" @click="handleClose">取消</el-button>
       </div>
-
     </div>
 
 

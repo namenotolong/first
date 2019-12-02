@@ -1,20 +1,22 @@
 <template>
   <div class="copy-dom">
-    <div class="content" ref="content">
-      <p>第一行内容111</p>
-      <p style="text-indent: 2em">第二行内容222</p>
-      <p>第三行内容333</p>
-    </div>
-
+    <div class="copy-dom__content" ref="copyContent" v-show="visible" v-html="text"></div>
     <el-button type="primary" @click="handleCopy">复制</el-button>
   </div>
 </template>
 
+
 <script>
   export default {
+    props: {
+      text: {
+        type: String,
+        default: ''
+      }
+    },
     methods: {
       handleCopy() {
-        const content = this.$refs.content;
+        const content = this.$refs.copyContent;
         const selection = window.getSelection();
         // 如果剪切板中已经有复制了的内容，需要清掉。
         if (selection.rangeCount > 0) selection.removeAllRanges();
@@ -32,10 +34,10 @@
 
 <style lang="scss" scoped>
   .copy-dom {
-    .content {
-      background-color: #fff;
-      font-size: 18px;
-      color: red;
+    .copy-dom__content {
+      border: 1px solid #d9d9d9;
+      margin-bottom: 1em;
+
     }
   }
 </style>

@@ -20,26 +20,24 @@
     </div>
 
     <!-- 查询 -->
-    <div class="user-manager__search">
-      <el-form :inline="true" :model="queryCondition">
-        <el-form-item label="姓名:">
-          <el-input v-model="queryCondition.name" placeholder="请输入用户姓名关键字" clearable></el-input>
-        </el-form-item>
-        <el-form-item label="性别:">
-          <el-select v-model="queryCondition.gender" placeholder="请选择性别" clearable>
-            <el-option v-for="item in tableMng.getTable('gender')" :key="item.id" :label="item.name" :value="item.id"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="角色:">
-          <el-select v-model="queryCondition.roles" placeholder="请选择角色" multiple clearable>
-            <el-option v-for="item in tableMng.getTable('role')" :key="item.id" :label="item.name" :value="item.id"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" icon="el-icon-search" @click="getUserList">查询</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
+    <el-form :inline="true" :model="queryCondition">
+      <el-form-item label="姓名:">
+        <el-input v-model="queryCondition.name" placeholder="请输入用户姓名关键字" clearable></el-input>
+      </el-form-item>
+      <el-form-item label="性别:">
+        <el-select v-model="queryCondition.gender" placeholder="请选择性别" clearable>
+          <el-option v-for="item in tableMng.getTable('gender')" :key="item.id" :label="item.name" :value="item.id"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="角色:">
+        <el-select v-model="queryCondition.roles" placeholder="请选择角色" multiple clearable>
+          <el-option v-for="item in tableMng.getTable('role')" :key="item.id" :label="item.name" :value="item.id"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" icon="el-icon-search" @click="getUserList">查询</el-button>
+      </el-form-item>
+    </el-form>
 
     <!-- 用户列表 -->
     <div class="user-manager__table">

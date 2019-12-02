@@ -16,13 +16,14 @@
 
 </template>
 <script>
-  import html2canvas from "html2canvas";
+  import html2canvas from 'html2canvas';
+
   export default {
-    name:'HtmlToCanvas',
+    name: 'HtmlToCanvas',
     data() {
       return {
-        imgURL: "https://goss.veer.com/creative/vcg/veer/800water/veer-305609193.jpg" + "?v=" + +new Date(), //保证每次都会从服务器请求图片，而不是从浏览器缓存中获取。
-        dataURL: "https://goss.veer.com/creative/vcg/veer/800water/veer-305609193.jpg"
+        imgURL: 'https://goss.veer.com/creative/vcg/veer/800water/veer-305609193.jpg' + '?v=' + +new Date(), //保证每次都会从服务器请求图片，而不是从浏览器缓存中获取。
+        dataURL: 'https://goss.veer.com/creative/vcg/veer/800water/veer-305609193.jpg'
       }
     },
     created() {
@@ -35,12 +36,12 @@
         img.src = this.imgURL;
         img.setAttribute('crossOrigin', 'anonymous'); //必须设置，不然生成的图片的base64是空的。
         img.onload = () => {
-          const canvas = document.createElement("canvas");
+          const canvas = document.createElement('canvas');
           canvas.width = 150; //需要设置 不然canvas默认的大小为300*150
           canvas.height = 150;
-          const ctx = canvas.getContext("2d");
+          const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, 150, 150);
-          const dataURL = canvas.toDataURL("image/png");
+          const dataURL = canvas.toDataURL('image/png');
           this.dataURL = dataURL;
         }
       },
@@ -49,8 +50,8 @@
           scale: 2,
         }).then(canvas => {
           const dataURL = canvas.toDataURL();
-          let link = document.createElement("a");
-          link.style.display = "none";
+          let link = document.createElement('a');
+          link.style.display = 'none';
           link.href = dataURL;
           link.download = '图片';
           document.body.appendChild(link);
@@ -61,6 +62,7 @@
     }
   }
 </script>
+
 <style lang="scss" scoped>
   .html2canvas {
     .source {
