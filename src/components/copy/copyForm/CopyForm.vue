@@ -4,7 +4,6 @@
     <!-- textarea和inpu不能禁用 -->
     <textarea
       ref="copyContent"
-      v-show="visible"
       :cols="cols"
       :rows="rows"
       :value="text"
@@ -42,6 +41,8 @@
         if (!this.isCopy) {
           e.target.blur();
         }
+
+
       },
       handleCopy() {
         this.isCopy = true;

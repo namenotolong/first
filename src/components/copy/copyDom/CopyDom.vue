@@ -1,6 +1,5 @@
 <template>
-  <div class="copy-dom">
-    <div class="copy-dom__content" ref="copyContent" v-show="visible" v-html="text"></div>
+  <div>
     <el-button type="primary" @click="handleCopy">复制</el-button>
   </div>
 </template>
@@ -8,15 +7,12 @@
 
 <script>
   export default {
-    props: {
-      text: {
-        type: String,
-        default: ''
-      }
-    },
+    props: ['elem'],
     methods: {
       handleCopy() {
-        const content = this.$refs.copyContent;
+        console.log(this.elem);
+        // const content = this.$refs.copyContent;
+        const content = this.elem;
         const selection = window.getSelection();
         // 如果剪切板中已经有复制了的内容，需要清掉。
         if (selection.rangeCount > 0) selection.removeAllRanges();
@@ -31,13 +27,3 @@
     },
   }
 </script>
-
-<style lang="scss" scoped>
-  .copy-dom {
-    .copy-dom__content {
-      border: 1px solid #d9d9d9;
-      margin-bottom: 1em;
-
-    }
-  }
-</style>

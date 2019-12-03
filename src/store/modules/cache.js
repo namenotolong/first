@@ -6,7 +6,13 @@ const cache = {
   },
   mutations: {
     SET_CACHE_PAGES(state, pages) {
-      state.cachePages = pages;
+      //开发环境不启用,防止热更新失效
+      if (process.env.NODE_ENV === 'development') {
+        state.cachePages = [];
+      } else {
+        state.cachePages = pages;
+      }
+
     }
   }
 }

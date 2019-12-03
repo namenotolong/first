@@ -3,7 +3,7 @@
     <div class="operation-wrap">
       <div class="operation">
         <el-button type="primary" @click="handleClear">清除</el-button>
-        <copy-dom :text="text" />
+        <el-button type="primary" @click="handleCopy">复制</el-button>
       </div>
     </div>
 
@@ -14,12 +14,10 @@
 </template>
 
 <script>
-  import CopyDom from '@/components/copy/copyDom';
+  // import { copyNode } from '@/utils/core';
+
   export default {
     name: 'FileToBase64',
-    components: {
-      CopyDom
-    },
     data() {
       return {
         haveFile: false,
@@ -40,7 +38,6 @@
             const result = e.target.result;
             this.$refs.content.insertAdjacentHTML('afterBegin', `<p>${result}</p>`);
             this.text = result;
-            console.log(result);
             this.haveFile = true;
           };
           reader.readAsDataURL(event.dataTransfer.files[0]);
@@ -51,6 +48,11 @@
         this.$refs.content.innerHTML = '';
         this.text = '';
         this.haveFile = false;
+      },
+      handleCopy() {
+        // if (copyNode(this.$refs.content)) {
+        //   this.$message.success('复制成功');
+        // }
       }
     },
   }
@@ -64,10 +66,10 @@
     background-color: #fff;
 
     .operation-wrap {
-      // height: 50px;
+      height: 50px;
 
       .operation {
-        // float: right;
+        float: right;
       }
     }
 

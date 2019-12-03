@@ -9,7 +9,6 @@ const easeIn = (t, b, c, d, s = 4) => {
 // 获取元素的滚动位置。
 const getScrolltPosition = (element) => {
   if (element === window) {
-    console.log(111);
     return window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
   } else {
     return element.scrollTop;

@@ -15,7 +15,7 @@ const route = {
     component: Blank,
     meta: {
       title: '空白页',
-      activePath: '/blank'
+      activePath: '/blank',
     },
   }]
 }
