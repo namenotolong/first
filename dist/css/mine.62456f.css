@@ -1,0 +1,13 @@
+.mine[data-v-45aa6208] {
+  width: 50%;
+  min-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+.mine .el-button[data-v-45aa6208] {
+    display: block;
+    margin: 0 auto;
+}
+
