@@ -1,13 +1,14 @@
 <template>
   <div>
-    <div ref="dom">
-      <p>第一行内容111</p>
-      <input type="text" value="3333gfgf">
-      <img src="https://s2.ax1x.com/2019/08/02/edRc1P.jpg" alt="">
-      <p style="text-indent: 2em">第二行内容222</p>
-      <p>第三行内容333</p>
-    </div>
-    <el-button v-copy="dom">复制</el-button>
+    <section>
+      <div class=" copy-directive__content red" ref="dom">
+        内容 内容 内容 内容 内容 内容
+      </div>
+      <p  v-copy="dom"> 地方</p>
+      <!-- <el-button v-copy="dom">点击复制红色内容</el-button> -->
+      <p>dd</p>
+    </section>
+
   </div>
 </template>
 
@@ -21,9 +22,7 @@
     },
     created() {},
     mounted() {
-      setTimeout(() => {
-        this.dom = this.$refs.dom;
-      }, 3000);
+      this.dom = this.$refs.dom;
 
     },
     updated() {},
