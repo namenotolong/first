@@ -7,7 +7,7 @@
       </div>
     </div>
 
-    <div class="empty" v-if="!haveFile">任意文件<br />拖到这里</div>
+    <div class="empty" v-if="!hasFile">任意文件<br />拖到这里</div>
     <div class="content" ref="content"></div>
   </div>
 </template>
@@ -17,7 +17,7 @@
     name: 'FileToBase64',
     data() {
       return {
-        haveFile: false,
+        hasFile: false,
         text: ''
       }
     },
@@ -36,7 +36,7 @@
             const result = e.target.result;
             this.$refs.content.insertAdjacentHTML('afterBegin', `<p>${result}</p>`);
             this.text = result;
-            this.haveFile = true;
+            this.hasFile = true;
           };
           reader.readAsDataURL(event.dataTransfer.files[0]);
         });
@@ -44,7 +44,7 @@
       handleClear() {
         this.$refs.content.innerText = '';
         this.text = '';
-        this.haveFile = false;
+        this.hasFile = false;
       }
     },
   }

@@ -1,16 +1,18 @@
 <template>
   <div class="copy-directive">
-    <section>
+    <main>
       <h3>1.复制元素节点</h3>
-      <div class=" copy-directive__content red" ref="content">
-        <p>我是红色的内容</p>
-        <p>我是红色的内容</p>
-        <p>我是红色的内容</p>
-        <p>我是红色的内容</p>
-        <p>我是红色的内容</p>
+      <div>
+        <div class=" copy-directive__content red" ref="content">
+          <p>我是红色的内容</p>
+          <p>我是红色的内容</p>
+          <p>我是红色的内容</p>
+          <p>我是红色的内容</p>
+          <p>我是红色的内容</p>
+        </div>
       </div>
       <el-button type="primary" v-copy="content">点击复制红色内容</el-button>
-    </section>
+    </main>
 
     <section>
       <h3>2.复制文本</h3>

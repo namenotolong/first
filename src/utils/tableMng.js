@@ -9,18 +9,21 @@ const TABLE_NAME_MAP = {
 }
 
 class TableMng {
+
+  baseTable = {}
+
   constructor(data) {
-    this.baseTbale = data;
+    this.baseTable = data;
     this.tableNameMap = TABLE_NAME_MAP;
   }
 
   // 初始化数据表
   initTable(data) {
     const baseTable = {
-      ...this.baseTbale,
+      ...this.baseTable,
       ...data
     };
-    this.baseTbale = baseTable;
+    this.baseTable = baseTable;
     sessionStorage.setItem('baseTable', window.JSON.stringify(baseTable));
   }
 
@@ -30,7 +33,7 @@ class TableMng {
    * @param {String} tableName 表名
   */
   getTable(tableName) {
-    const table = this.baseTbale[tableName];
+    const table = this.baseTable[tableName];
     if (table) {
       return table;
     } else {
@@ -83,7 +86,7 @@ const fixTable = {};
 
 // 为什么需要存一份到本地？
 // 用户在使用的时候可能会刷新页面，这个时候会去重新请求baseTable的数据，而数据有可能会在页面渲染完成之后才返回，这个时候页面中使用到了baseTable，就会出现表不存在的情况。
-const storageTable = JSON.parse(sessionStorage.getItem('baseTable'));
+const storageTable = JSON.parse(sessionStorage.getItem('baseTable') || JSON.stringify({})) ;
 
 const tableMng = new TableMng({ ...fixTable, ...storageTable });
 

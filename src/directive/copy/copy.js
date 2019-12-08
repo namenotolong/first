@@ -9,9 +9,9 @@ function copy(content) {
     // 如果剪切板中已经有复制了的内容，需要清掉。
     if (selection.rangeCount > 0) selection.removeAllRanges();
     const range = document.createRange();
-    range.selectNode(elem);
+    range.selectNodeContents(elem);
     selection.addRange(range);
-    document.execCommand("Copy");
+    document.execCommand('Copy');
     // 清除选中的内容,也可以使用 window.getSelection().removeAllRanges()
     range.collapse(false);
 
@@ -48,7 +48,10 @@ export default {
   inserted(el, binding) {
     const value = binding.value;
     el._conetnt = value;
-    el.addEventListener('click', () => copy(el._conetnt));
+    el.addEventListener('click', () => {
+      el.blur()
+      copy(el._conetnt)
+    });
   },
   update(el, binding) {
     const value = binding.value;

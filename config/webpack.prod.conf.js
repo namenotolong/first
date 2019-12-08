@@ -3,6 +3,7 @@ const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf.js');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const resolve = (dir) => {
   return path.resolve(process.cwd(), dir)
@@ -21,11 +22,16 @@ module.exports = merge(baseWebpackConfig, {
       filename: "css/[name].[contenthash:6].css",
       chunkFilename: "css/[name].[contenthash:6].css"
     }),
-    new CleanWebpackPlugin()
+
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin([{
+      from: resolve('static'),
+      to: 'static'
+    }])
   ],
   optimization: {
     runtimeChunk: {
-      name: "manifest"
+      name: 'manifest'
     },
     splitChunks: {
       chunks: 'all',
