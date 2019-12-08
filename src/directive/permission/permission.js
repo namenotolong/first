@@ -13,6 +13,5 @@ export default {
     } else {
       throw new Error(`需要传入像这样格式的指令 v-permission="['admin','editor']"`)
     }
-
   }
 }
