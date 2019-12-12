@@ -184,9 +184,9 @@
         link.href = window.URL.createObjectURL(blob);
         link.download = fileName + '.xlsx';
         link.click();
-        //延时释放
+        // 延时释放
         setTimeout(function() {
-          window.URL.revokeObjectURL(blob);
+          window.URL.revokeObjectURL(link.href);
         }, 100);
       },
       // 使用base64下载文件

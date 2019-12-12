@@ -22,7 +22,6 @@ module.exports = merge(baseWebpackConfig, {
       filename: "css/[name].[contenthash:6].css",
       chunkFilename: "css/[name].[contenthash:6].css"
     }),
-
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([{
       from: resolve('static'),

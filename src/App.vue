@@ -19,7 +19,7 @@
       this.initBaseTable();
     },
     methods: {
-      // 初始化基础数据表
+      //  初始化基础数据表
       async initBaseTable() {
         const response = await api.common.getBaseTable();
         tableMng.initTable(response.data);
