@@ -57,12 +57,11 @@
           });
         }
       },
-      getAvatar() {
-        api.account.getUserInfo({
+      async getAvatar() {
+        const response = await api.account.getUserInfo({
           username: sessionStorage.getItem('userId')
-        }).then(res => {
-          this.avatar = res.data.userInfo.avatar;
-        });
+        })
+        this.avatar = response.data.userInfo.avatar;
       }
     }
   };

@@ -38,7 +38,9 @@ const account = {
       })
     },
     // 通过token获取用户信息
+    // 实际开发token放在请求头的Authorization中
     GetUserInfo({ commit, state }) {
+      console.log(111);
       return new Promise((resolve, reject) => {
         api.account.getUserInfo({
           token: state.token
@@ -51,10 +53,7 @@ const account = {
         })
       })
     },
-    logout({
-      commit,
-      state
-    }) {
+    logout({ commit,state }) {
       return new Promise((resolve, reject) => {
         api.account.logout({
           token: state.token

@@ -1,6 +1,6 @@
 <template>
   <!-- 富文本编辑器 -->
-  <textarea type="textarea" :id="editorId" v-loading="!hasInit"></textarea>
+  <textarea :id="id" v-loading="!hasInit"></textarea>
 </template>
 
 <script>
@@ -31,7 +31,6 @@
     },
     data() {
       return {
-        editorId: this.id,
         hasInit: false,
         hasInput: false
       };
@@ -42,7 +41,7 @@
       // 为什么使用insertContent而不使用setContent？setContent之后光标会跑到内容最前方。
       value(newVal) {
         if (!this.hasInput && this.hasInit) {
-          tinymce.get(this.editorId).insertContent(newVal);
+          tinymce.get(this.id).insertContent(newVal);
         }
       }
     },
@@ -74,7 +73,7 @@
       initTinymce() {
         tinymce.init({
           // 挂载元素
-          selector: `#${this.editorId}`,
+          selector: `#${this.id}`,
           // 语言
           language: 'zh_CN',
           // 指定语言文件位置
@@ -88,7 +87,7 @@
           // 右键菜单
           contextmenu: 'copy paste link inserttable ',
           // 自动获得焦点
-          auto_focus: this.editorId,
+          auto_focus: this.id,
           // 带格式粘贴,比如从word文档中复制了一段内容来粘贴,则不会清除格式.
           paste_enable_default_filters: false,
           // 定义插入的时间格式
@@ -127,7 +126,7 @@
               base64 = 'data:image/gif;base64,' + base64;
             }
             const formData = new FormData();
-            formData.append('file', base64);
+            formData.append('file', file);
             formData.append('name', file.name);
             // 如果后端需要在文件服务中保存这个图片，就将图片传给后端
             // this.$axios({
@@ -145,8 +144,8 @@
       },
       destoryTinymce() {
         // 关闭当前页面时，deactivated钩子会在destroyed之前执行，此时editor实例已经被销毁了。
-        if (tinymce.get(this.editorId)) {
-          tinymce.get(this.editorId).destroy();
+        if (tinymce.get(this.id)) {
+          tinymce.get(this.id).destroy();
         }
       }
     }
