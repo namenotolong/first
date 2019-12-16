@@ -61,6 +61,8 @@ export function animate(element, properties, interval = 20, callback = () => { }
   }, interval);
 };
 
+
+
 // 用于需要在get请求中传递数组的情况
 export function paramsSerializer(params = {}) {
   const paramArr = [];
@@ -94,7 +96,7 @@ export function getURLParams(url) {
 
 // 深克隆
 export function deepClone(source) {
-  if (typeof source != 'object') {
+  if (typeof source !== 'object' || source === null) {
     return source;
   }
   const target = Array.isArray(source) ? [] : {};

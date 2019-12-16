@@ -6,7 +6,7 @@
       <theme-setting />
 
       <el-dropdown @command="handleCommand">
-        <img class="avatar" :src="avatar" alt />
+        <img class="avatar" :src="userInfo.avatar" alt />
         <el-dropdown-menu slot="dropdown">
           <router-link to="/mine">
             <el-dropdown-item>个人中心</el-dropdown-item>
@@ -19,10 +19,13 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import FullScreen from '@/components/fullScreen';
   import ThemeSetting from '@/components/setting/themeSetting';
   import api from '@/api';
   import { resetRouter } from '@/router';
+
+
 
   export default {
     components: {
@@ -35,12 +38,7 @@
       };
     },
     computed: {
-      sideCollapse() {
-        return this.$store.getters.sideCollapse;
-      }
-    },
-    created() {
-      this.getAvatar();
+      ...mapGetters(['sideCollapse', 'userInfo', ]),
     },
     methods: {
       //折叠侧边栏
@@ -52,16 +50,9 @@
         if (command === 'logout') {
           this.$store.dispatch('logout').then(() => {
             resetRouter();
-            sessionStorage.clear();
             this.$router.replace('/account/login');
           });
         }
-      },
-      async getAvatar() {
-        const response = await api.account.getUserInfo({
-          username: sessionStorage.getItem('userId')
-        })
-        this.avatar = response.data.userInfo.avatar;
       }
     }
   };

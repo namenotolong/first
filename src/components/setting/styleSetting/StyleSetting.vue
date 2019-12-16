@@ -26,14 +26,15 @@
       this.triggerStyle(this.style);
     },
     methods: {
-      triggerStyle(style) {
-        if (style === 'round') {
+      triggerStyle(value) {
+        const systemStyleElem = document.head.querySelector('#systemStyle');
+        if (value === 'round') {
+          if (systemStyleElem) return;
           const styleElem = document.createElement('style');
           styleElem.setAttribute('id', 'systemStyle');
           styleElem.appendChild(document.createTextNode(styleContent));
           document.head.appendChild(styleElem);
-        } else if (style === 'square') {
-          const systemStyleElem = document.head.querySelector('#systemStyle');
+        } else if (value === 'square') {
           if (systemStyleElem) {
             document.head.removeChild(systemStyleElem);
           }

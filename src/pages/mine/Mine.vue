@@ -29,7 +29,6 @@
           name="smfile" />
       </el-form-item>
 
-
       <el-row>
         <el-col :span="12">
           <el-form-item label="手机:" placeholder="请填写手机号" prop="mobilePhone">
@@ -61,14 +60,6 @@
     data() {
       return {
         tableMng,
-        userInfo: {
-          name: '',
-          roles: '',
-          gender: '',
-          avatar: '',
-          mobilePhone: '',
-          email: '',
-        },
         rules: {
           name: [{
             required: true,
@@ -103,14 +94,12 @@
         submitLoading: false
       }
     },
-    created() {
-      this.getUserInfo();
+    computed: {
+      userInfo() {
+        return this.$store.getters.userInfo;
+      }
     },
     methods: {
-      async getUserInfo() {
-        const response = await api.account.getUserInfo({ userId: sessionStorage.getItem('userId') });
-        this.userInfo = response.data.userInfo;
-      },
       handleSubmit() {
         this.submitLoading = true;
         this.$refs.userInfo.validate(valid => {
@@ -126,7 +115,7 @@
 <style lang="scss" scoped>
   .mine {
     width: 50%;
-    min-width: 400px;
+    min-width: 600px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;

@@ -1,6 +1,6 @@
 const getters = {
   token: state => state.account.token,
-  roles: state => state.account.roles,
+  userInfo: state => state.account.userInfo,
   routeMap: state => state.account.routeMap,
   cachePages: state => state.cache.cachePages,
   theme: state => state.setting.theme,

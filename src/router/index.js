@@ -85,8 +85,9 @@ const router = createRouter();
 
 
 // 从路由权限表中获取到角色可访问的路由名称
-const getRouteNames = (roles, permission) => {
+const getRouteNames = (roles) => {
   let routeNames = [];
+  const permission = config.permission;
   roles.forEach(role => routeNames = [...new Set([...routeNames, ...permission[role]])]);
   return routeNames;
 }
@@ -122,10 +123,10 @@ router.beforeEach((to, from, next) => {
     next('/account/login');
   } else {
     // 如果token存在(说明已登录)，但是角色不存在(说明没获取到用户信息)，这时应该获取用户信息
-    if (token && store.getters.roles.length === 0) {
+    if (token && !store.getters.userInfo.roles) {
       store.dispatch('GetUserInfo').then(res => {
         const roles = res.roles;
-        const routeNames = getRouteNames(roles, config.permission);
+        const routeNames = getRouteNames(roles);
         const acceptedRouteMap = filterRouteMap(routeNames, dynamicRouteMap);
         // 动态注册路由
         router.addRoutes(acceptedRouteMap);

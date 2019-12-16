@@ -1,14 +1,15 @@
 import Mock from 'mockjs';
 
 const loginInfo = Mock.mock({
-  token: "@lower(@guid)",
+  token: '@lower(@guid)',
 })
 
 const userInfo = Mock.mock({
-  name: "@cname",
+  id: '@lower(@guid)',
+  name: '@cname',
   gender: '@pick(["男", "女"])',
   avatar: 'https://s2.ax1x.com/2019/08/02/edRc1P.jpg',
-  email: "@email",
+  email: '@email',
   mobilePhone: /^1[345789]\d{9}$/,
   roles: ['admin']
 })
@@ -48,9 +49,7 @@ export default {
     }
     return {
       code: 200,
-      data: {
-        userInfo
-      }
+      data: userInfo
     }
   },
   getCaptcha(config) {
