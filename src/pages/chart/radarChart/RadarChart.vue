@@ -1,27 +1,24 @@
 <template>
   <div class="chart-wrap">
-    <div>
-      <p class="title">散点图</p>
-      <chart-base></chart-base>
-    </div>
+    <el-row :gutter="20">
+      <el-col :lg="12" :sm="24">
+        <p class="title">基础雷达图</p>
+        <chart-base :height="500" />
+      </el-col>
 
-    <div>
-      <p class="title">气泡图</p>
-      <chart-bubble></chart-bubble>
-    </div>
-
+    </el-row>
   </div>
 </template>
 
 <script>
   import ChartBase from './components/ChartBase';
-  import ChartBubble from './components/ChartBubble';
+
 
   export default {
-    name: 'PointChart',
+    name: 'RadarChart',
     components: {
       ChartBase,
-      ChartBubble,
+
     }
   }
 </script>

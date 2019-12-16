@@ -54,16 +54,16 @@
 </template>
 
 <script>
-  import ChartBase from "./components/ChartBase.vue";
-  import ChartCustom from "./components/ChartCustom.vue";
-  import ChartGroup1 from "./components/ChartGroup1.vue";
-  import ChartGroup2 from "./components/ChartGroup2.vue";
-  import ChartGuide from "./components/ChartGuide.vue";
-  import ChartWaterfall from "./components/ChartWaterfall.vue";
-  import ChartOverlay from "./components/ChartOverlay.vue";
+  import ChartBase from './components/ChartBase';
+  import ChartCustom from './components/ChartCustom';
+  import ChartGroup1 from './components/ChartGroup1';
+  import ChartGroup2 from './components/ChartGroup2';
+  import ChartGuide from './components/ChartGuide';
+  import ChartWaterfall from './components/ChartWaterfall';
+  import ChartOverlay from './components/ChartOverlay';
 
   export default {
-    name: "PillarChart",
+    name: 'PillarChart',
     components: {
       ChartBase,
       ChartCustom,
@@ -72,18 +72,6 @@
       ChartGuide,
       ChartWaterfall,
       ChartOverlay,
-    },
-    data() {
-      return {
-
-      }
-    },
-    mounted() {
-
-    },
-    methods: {
-
-
     }
   }
 </script>

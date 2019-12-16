@@ -3,7 +3,8 @@
 </template>
 
 <script>
-  import G2 from "@antv/g2";
+  import G2 from '@antv/g2';
+
   export default {
     props: {
       height: {
@@ -13,7 +14,7 @@
     },
     data() {
       return {
-        chartId: "chart" + +new Date() + ((Math.random() * 1000).toFixed(0) + ""),
+        chartId: 'chart' + +new Date() + ((Math.random() * 1000).toFixed(0) + ''),
         chartData: [{
           year: '1991',
           value: 15468

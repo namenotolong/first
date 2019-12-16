@@ -3,7 +3,8 @@
 </template>
 
 <script>
-  import G2 from "@antv/g2";
+  import G2 from '@antv/g2';
+
   export default {
     props: {
       height: {
@@ -13,27 +14,27 @@
     },
     data() {
       return {
-        chartId: "chart" + +new Date() + ((Math.random() * 1000).toFixed(0) + ""),
+        chartId: 'chart' + +new Date() + ((Math.random() * 1000).toFixed(0) + ''),
         chartData: [{
-          week: "星期一",
+          week: '星期一',
           value: 54
         }, {
-          week: "星期二",
+          week: '星期二',
           value: 48
         }, {
-          week: "星期三",
+          week: '星期三',
           value: 33
         }, {
-          week: "星期四",
+          week: '星期四',
           value: 67
         }, {
-          week: "星期五",
+          week: '星期五',
           value: 59
         }, {
-          week: "星期六",
+          week: '星期六',
           value: 97
         }, {
-          week: "星期天",
+          week: '星期天',
           value: 75
         }]
       }

@@ -11,7 +11,7 @@ const permission = {
 
 const config = {
   permission,
-  apiUrl: 'https://mock.api',
+  apiURL: 'https://mock.api',
   // 主题
   theme: '#373737',
   // 是否折叠侧边菜单

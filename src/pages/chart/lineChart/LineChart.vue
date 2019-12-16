@@ -42,14 +42,14 @@
 </template>
 
 <script>
-  import ChartBase from "./components/ChartBase.vue";
-  import ChartGradual from "./components/ChartGradual.vue";
-  import ChartLadder from "./components/ChartLadder.vue";
-  import ChartDouble from "./components/ChartDouble.vue";
-  import ChartTrend from "./components/ChartTrend.vue";
-  import ChartAverage from "./components/ChartAverage.vue";
+  import ChartBase from './components/ChartBase';
+  import ChartGradual from './components/ChartGradual';
+  import ChartLadder from './components/ChartLadder';
+  import ChartDouble from './components/ChartDouble';
+  import ChartTrend from './components/ChartTrend';
+  import ChartAverage from './components/ChartAverage';
   export default {
-    name: "LineChart",
+    name: 'LineChart',
     components: {
       ChartBase,
       ChartGradual,
@@ -57,18 +57,6 @@
       ChartDouble,
       ChartTrend,
       ChartAverage
-    },
-    data() {
-      return {
-
-      }
-    },
-    mounted() {
-
-    },
-    methods: {
-
-
     }
   }
 </script>

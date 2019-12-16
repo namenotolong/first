@@ -2,12 +2,12 @@
   <div class="form-base">
     <el-form ref="form" :model="formData" :rules="formRules" label-width="80px">
       <el-row :gutter="20">
-        <el-col :span="12">
+        <el-col :xs="24" :md="12">
           <el-form-item label="名称" prop="name">
             <el-input v-model="formData.name" placeholder="请输入活动名称" clearable></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :xs="24" :md="12">
           <el-form-item label="数量" prop="amount">
             <el-input v-model.number="formData.amount" placeholder="请输入数量" clearable></el-input>
           </el-form-item>
@@ -15,14 +15,14 @@
       </el-row>
 
       <el-row :gutter="20">
-        <el-col :span="12">
+        <el-col :xs="24" :md="12">
           <el-form-item label="区域" prop="region">
-            <el-select v-model="formData.region" placeholder="请选择活动区域" clearable >
+            <el-select v-model="formData.region" placeholder="请选择活动区域" clearable>
               <el-option v-for="item in regionList" :key="item.id" :label="item.name" :value="item.id"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :xs="24" :md="12">
           <el-form-item label="开始时间" prop="startTime">
             <el-date-picker v-model="formData.startTime" type="datetime" placeholder="请选择开始时间"></el-date-picker>
           </el-form-item>
@@ -30,12 +30,12 @@
       </el-row>
 
       <el-row :gutter="20">
-        <el-col :span="12">
+        <el-col :xs="24" :md="12">
           <el-form-item label="手机" prop="mobilePhone">
             <el-input v-model="formData.mobilePhone" placeholder="请输入主办方联系电话" clearable></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :xs="24" :md="12">
           <el-form-item label="邮箱" prop="email">
             <el-input v-model="formData.email" placeholder="请输入主办方联系邮箱" clearable></el-input>
           </el-form-item>

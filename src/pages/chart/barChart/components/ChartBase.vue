@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import G2 from "@antv/g2";
+  import G2 from '@antv/g2';
   import { DataSet } from '@antv/data-set';
 
   export default {
@@ -15,7 +15,7 @@
     },
     data() {
       return {
-        chartId: "chart" + +new Date() + ((Math.random() * 1000).toFixed(0) + ""),
+        chartId: 'chart' + +new Date() + ((Math.random() * 1000).toFixed(0) + ''),
         chartData: [{
           type: '汽车',
           value: 34

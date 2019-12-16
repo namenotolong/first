@@ -5,9 +5,9 @@
     <br>
     <div>
       当前角色为：
-      <span v-for="(role,index) in roles" :key="role">
+      <span v-for="(role,index) in userInfo.roles" :key="role">
         {{tableMng.getNameById('role',role)}}
-        <span v-if="index < roles.length-1">、</span>
+        <span v-if="index < userInfo.roles.length - 1">、</span>
       </span>
     </div>
     <br />
@@ -49,15 +49,15 @@
       };
     },
     computed: {
-      roles() {
-        return this.$store.state.account.roles;
+      userInfo() {
+        return this.$store.state.account.userInfo;
       },
       currentRoles: {
         get() {
-          return this.roles;
+          return this.userInfo.roles;
         },
-        set(val) {
-          this.$store.commit('SET_ROLES', val);
+        set(value) {
+          this.$store.commit('SET_USER_INFO', { ...this.userInfo, roles: value });
           this.key++; //重新渲染DOM
         }
       }

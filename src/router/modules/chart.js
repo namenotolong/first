@@ -5,6 +5,7 @@ const PillarChart = () => import( /* webpackChunkName:'pillarChart' */ '@/pages/
 const BarChart = () => import( /* webpackChunkName:'barChart' */ '@/pages/chart/barChart');
 const PieChart = () => import( /* webpackChunkName:'pieChart' */ '@/pages/chart/pieChart');
 const PointChart = () => import( /* webpackChunkName:'pointChart' */ '@/pages/chart/pointChart');
+const RadarChart = () => import( /* webpackChunkName:'radarChart' */ '@/pages/chart/radarChart');
 
 
 const route = {
@@ -56,6 +57,13 @@ const route = {
     component: PointChart,
     meta: {
       title: '点状图',
+    }
+  }, {
+    name: 'RadarChart',
+    path: '/chart/radarChart',
+    component: RadarChart,
+    meta: {
+      title: '雷达图',
     }
   }]
 }

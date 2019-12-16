@@ -10,10 +10,9 @@
 </template>
 
 <script>
-  import G2 from "@antv/g2";
-  import {
-    DataSet
-  } from '@antv/data-set';
+  import G2 from '@antv/g2';
+  import { DataSet } from '@antv/data-set';
+
   export default {
     props: {
       height: {
@@ -23,7 +22,7 @@
     },
     data() {
       return {
-        chartId: "chart" + +new Date() + ((Math.random() * 1000).toFixed(0) + ""),
+        chartId: 'chart' + +new Date() + ((Math.random() * 1000).toFixed(0) + ''),
         chartData: [{
           "country": "北美",
           "date": 1965,

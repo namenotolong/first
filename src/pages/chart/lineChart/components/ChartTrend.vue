@@ -3,7 +3,8 @@
 </template>
 
 <script>
-  import G2 from "@antv/g2";
+  import G2 from '@antv/g2';
+
   import {
     DataSet
   } from '@antv/data-set';
@@ -16,7 +17,7 @@
     },
     data() {
       return {
-        chartId: "chart" + +new Date() + ((Math.random() * 1000).toFixed(0) + ""),
+        chartId: 'chart' + +new Date() + ((Math.random() * 1000).toFixed(0) + ''),
         chartData: [{
           "Year": 2016,
           "Number of incidents": "13,488",
