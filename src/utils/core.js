@@ -104,6 +104,7 @@ export function deepClone(source) {
   return target;
 }
 
+
 // 获取元素相对于浏览器窗口边缘的的距离
 export function getOffset(elem) {
   function getLeft(o) {
@@ -122,6 +123,22 @@ export function getOffset(elem) {
   }
   return { left: getLeft(elem), top: getTop(elem) };
 }
+
+// 节流
+export function throttle(fn, interval = 300) {
+  let timer = null;
+  return function () {
+    const context = this;
+    const args = arguments;
+    if (timer) { return false; }
+    timer = setTimeout(() => {
+      clearTimeout(timer);
+      timer = null;
+      fn.apply(context, args)
+    }, interval);
+  };
+};
+
 
 
 

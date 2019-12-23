@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import { getOffset } from '@/utils/core';
+  import { getOffset, throttle } from '@/utils/core';
 
   const BAR_MAP = {
     vertical: {
@@ -57,6 +57,7 @@
         content: null,
         thumb: null,
         // 可视区大小
+        // rezise需要监听它的改变
         offsetSize: 0,
         // 内容真实大小
         scrollSize: 0,

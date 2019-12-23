@@ -4,6 +4,7 @@
     <div
       class="scrollbar__content"
       ref="content"
+      @resize="handleResize"
       @scroll="handleScroll"
       @wheel="handleWheel">
       <slot />
@@ -66,6 +67,9 @@
           this.content.scrollLeft = this.content.scrollLeft + event.deltaY;
           this.scroll = this.content.scrollLeft;
         }
+      },
+      handleResize(){
+        console.log(11);
       }
     }
   }
