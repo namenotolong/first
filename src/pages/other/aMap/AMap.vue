@@ -4,18 +4,20 @@
       <keep-alive>
         <map-maker v-if="activeName === 'maker'" />
       </keep-alive>
-
     </el-tab-pane>
+
     <el-tab-pane label="插件" name="plugin">
       <keep-alive>
         <map-plugin v-if="activeName === 'plugin'" />
       </keep-alive>
     </el-tab-pane>
+
     <el-tab-pane label="地图热点" name="hotSpot">
       <keep-alive>
         <map-hot-spot v-if="activeName === 'hotSpot'" />
       </keep-alive>
     </el-tab-pane>
+
   </el-tabs>
 </template>
 

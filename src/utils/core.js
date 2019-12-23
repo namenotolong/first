@@ -92,8 +92,6 @@ export function getURLParams(url) {
 
 
 
-
-
 // 深克隆
 export function deepClone(source) {
   if (typeof source !== 'object' || source === null) {
@@ -105,6 +103,26 @@ export function deepClone(source) {
   }
   return target;
 }
+
+// 获取元素相对于浏览器窗口边缘的的距离
+export function getOffset(elem) {
+  function getLeft(o) {
+    if (o == null) {
+      return 0;
+    } else {
+      return o.offsetLeft + getLeft(o.offsetParent) + (o.offsetParent ? o.offsetParent.clientLeft : 0);
+    }
+  }
+  function getTop(o) {
+    if (o == null) {
+      return 0;
+    } else {
+      return o.offsetTop + getTop(o.offsetParent) + (o.offsetParent ? o.offsetParent.clientTop : 0);
+    }
+  }
+  return { left: getLeft(elem), top: getTop(elem) };
+}
+
 
 
 // 计算模糊时间

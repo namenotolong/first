@@ -26,7 +26,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" :loading="loginLoading"  @click="handleLogin">登录</el-button>
+        <el-button type="primary" :loading="loginLoading" @click="handleLogin">登录</el-button>
       </el-form-item>
     </el-form>
 
@@ -77,7 +77,7 @@
               password: encryptByDES(this.loginForm.password, '123456781111')
             }
             this.$store.dispatch('Login', account).then(() => {
-              this.$router.replace('/dashboard');
+              this.$router.replace('/').catch(err => {});
               this.loginLoading = false;
             }).catch((error) => {
               this.$message.error('登录失败,请填写正确的信息！')

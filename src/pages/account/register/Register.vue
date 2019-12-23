@@ -167,7 +167,7 @@
               username: this.accountInfo.username,
               password: this.accountInfo.password
             }).then(() => {
-              this.$router.replace('/dashboard');
+              this.$router.replace('/');
               this.registerLoading = false;
             })
           } else {

@@ -12,7 +12,6 @@ const cache = {
       } else {
         state.cachePages = pages;
       }
-
     }
   }
 }
