@@ -125,20 +125,34 @@ export function getOffset(elem) {
 }
 
 // 节流
-export function throttle(fn, interval = 300) {
+export function throttle(fn, interval = 200) {
   let timer = null;
   return function () {
     const context = this;
     const args = arguments;
-    if (timer) { return false; }
-    timer = setTimeout(() => {
-      clearTimeout(timer);
-      timer = null;
-      fn.apply(context, args)
-    }, interval);
-  };
-};
+    if (!timer) {
+      timer = setTimeout(() => {
+        timer = null;
+        fn.apply(context, args)
+      }, interval)
+    }
+  }
+}
 
+// 防抖
+export function debounce(fn, interval = 200) {
+  let timer = null;
+  return function () {
+    const context = this;
+    const args = arguments;
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      fn.apply(context, args)
+    }, interval)
+  }
+}
 
 
 

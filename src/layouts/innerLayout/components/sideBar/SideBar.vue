@@ -1,32 +1,32 @@
 <template>
-  <div>
+  <div class="side-bar">
 
     <logo />
 
     <!-- 侧边导航菜单 -->
-    <div class="nav-menu">
-      <el-scrollbar>
-        <el-menu
-          :default-active="activePath"
-          :collapse="sideCollapse"
-          unique-opened
-          router
-          background-color="#545c64"
-          text-color="#fff">
-          <menu-item v-for="menu in menuList" :key="menu.path" :config="menu" />
-        </el-menu>
-      </el-scrollbar>
-    </div>
+    <scrollbar>
+      <el-menu
+        :default-active="activePath"
+        :collapse="sideCollapse"
+        :unique-opened="false"
+        router
+        background-color="#545c64"
+        text-color="#fff">
+        <menu-item v-for="menu in menuList" :key="menu.path" :config="menu" />
+      </el-menu>
+    </scrollbar>
 
   </div>
 </template>
 
 <script>
+  import Scrollbar from '@/components/scrollbar';
   import Logo from './Logo';
   import MenuItem from './MenuItem';
 
   export default {
     components: {
+      Scrollbar,
       Logo,
       MenuItem
     },
@@ -103,27 +103,17 @@
 </script>
 
 <style lang="scss" scoped>
-  .nav-menu {
-    height: calc(100% - 50px);
+  .side-bar {
+    .scrollbar-wrap {
+      height: calc(100% - 50px);
+    }
 
     .el-menu {
+      height: 100%;
       border-right: none;
 
       &:not(.el-menu--collapse) {
         width: 200px;
-      }
-    }
-  }
-</style>
-
-<style lang="scss">
-  .nav-menu {
-    .el-scrollbar {
-      height: 100%;
-      background-color: #545c64;
-
-      .el-scrollbar__wrap {
-        overflow-x: hidden;
       }
     }
   }
