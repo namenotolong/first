@@ -53,31 +53,31 @@
 ## 目录结构
 
 ```
-|-- config								webpack配置文件
+|-- config							webpack配置文件
 |-- dist								webpack构建目录
-|-- docs								文档
-|-- public							    html模板
+|-- docs							  文档
+|-- public							html模板
 |-- src									源码目录
 |	|-- api									接口
-|	|-- assets								静态资源文件，会被webpack解析为模块依赖
+|	|-- assets							静态资源文件，会被webpack解析为模块依赖
 |		|-- img									图片
 |		|-- fonts								字体
-|	|-- components                      	公共组件
-|	|-- directive                      	    全局公共指令
-|	|-- layout								页面布局
+|	|-- components          全局公共组件
+|	|-- directive           全局公共指令
+|	|-- layouts							基础布局
 |	|-- mock								模拟数据
 |	|-- pages								页面级组件
-|	|-- router							    路由管理	
-|	|-- store							    状态管理	
+|	|-- router							路由管理	
+|	|-- store							  状态管理	
 |	|-- utils								全局公用方法	
-|	|-- App.vue								根组件
-|	|-- main.js								入口文件，加载各种组件	
-|-- static								第三方纯静态资源，不被webpcak打包
-|-- .babelrc							babel-loader 配置
-|-- .editorconfig					    IDE配置
-|-- .gitignore							git提交时忽略的文件
-|--	package.json						项目基本信息
-|-- README.md							项目说明			
+|	|-- App.vue							根组件
+|	|-- main.js							入口文件，加载各种组件	
+|-- static							第三方纯静态资源，不被webpcak打包
+|-- .babelrc						babel-loader 配置
+|-- .editorconfig				IDE配置
+|-- .gitignore					git提交时忽略的文件
+|--	package.json				项目基本信息
+|-- README.md						项目说明			
 ```
 
 ##  项目截图
