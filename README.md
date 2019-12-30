@@ -8,7 +8,7 @@
 - Excel：js-xlsx
 - 图片生成：html2canvas
 - 富文本编辑器：Tinymce
-- 数据：axios
+- 数据：axios、Mock
 
 [线上地址](https://wluyao.github.io/vue-element-admin/dist/index.html)  
 
@@ -17,9 +17,11 @@
 - 登录/退出
 - 全屏浏览
 - 一键换肤
+- 系统风格
+- 元素大小
 - 个人中心
 - 侧边菜单
-- 标签快捷导航
+- 标签导航
 - 图表
   - 折线图
   - 面积图
@@ -28,6 +30,9 @@
   - 饼图
   - 散点图
 - 表单
+  - 基础表单
+  - 步骤表单
+  - 动态表单
 - 表格
 - Tab选项卡
 - 权限控制
@@ -36,6 +41,7 @@
   - 创建文章
   - 文章列表
 - pdf
+- office-online
 - 上传
   - 头像上传
   - 文件上传
@@ -44,11 +50,15 @@
   - 404
 - 其他功能
   - 返回顶部
+  - 滚动条
   - 打印
   - html2canvas
   - 拖拽Dialog
+  - SVG图标
   - 地图
-  - excel
+  - 导入/导出excel
+  - 快捷复制
+  - 文本溢出
 
 ## 目录结构
 
