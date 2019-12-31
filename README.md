@@ -10,7 +10,7 @@
 - 富文本编辑器：Tinymce
 - 数据：axios、Mock
 
-[线上地址](https://wluyao.github.io/vue-element-admin/dist/index.html)  
+[线上地址](https://wluyao.github.io/vue-element-manage/dist/index.html)  
 
 ## 功能
 
