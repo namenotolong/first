@@ -1,7 +1,7 @@
 <template>
-  <div class="table-title">
-    <span class="table-title__tag"></span>
-    <span class="table-title__name">{{name}}</span>
+  <div class="section-title">
+    <span class="section-title__tag"></span>
+    <span class="section-title__name">{{name}}</span>
   </div>
 </template>
 
@@ -17,11 +17,11 @@
 </script>
 
 <style lang="scss" scoped>
-  .table-title {
+  .section-title {
     display: inline-block;
     margin-right: 10px;
 
-    .table-title__tag {
+    .section-title__tag {
       display: inline-block;
       width: 6px;
       height: 18px;
@@ -30,7 +30,7 @@
       vertical-align: middle;
     }
 
-    .table-title__name {
+    .section-title__name {
       font-size: 18px;
       margin-left: 10px;
       vertical-align: middle;

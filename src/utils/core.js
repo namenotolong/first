@@ -125,7 +125,7 @@ export function getOffset(elem) {
 }
 
 // 节流
-export function throttle(fn, interval = 200) {
+export function throttle(fn, interval = 100) {
   let timer = null;
   return function () {
     const context = this;
@@ -140,7 +140,7 @@ export function throttle(fn, interval = 200) {
 }
 
 // 防抖
-export function debounce(fn, interval = 200) {
+export function debounce(fn, interval = 100) {
   let timer = null;
   return function () {
     const context = this;

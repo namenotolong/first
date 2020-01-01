@@ -23,7 +23,7 @@
     data() {
       return {
         fileLoading: false,
-        fileUrl: 'http://www.xdocin.com/xdoc?_key=fedii4dtyfhmvgryqyntfjavte&_func=down&_dir=pdfdemo.pdf',
+        fileUrl: 'http://www.xdocin.com/xdoc?_key=t7t7z6j54vezfdnwptijcmo63i&_func=down&_dir=math.pdf',
         totalPage: 0,
       }
     },

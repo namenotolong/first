@@ -17,7 +17,6 @@
 
 <script>
   export default {
-    name: 'Pagination',
     props: {
       total: {
         required: true,
@@ -80,6 +79,7 @@
     }
   };
 </script>
+
 <style lang="scss">
   .pagination {
     height: 32px;

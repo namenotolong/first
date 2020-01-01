@@ -104,8 +104,10 @@
 
 <style lang="scss" scoped>
   .side-bar {
+    background-color: #545c64;
+
     .scrollbar-wrap {
-      height: calc(100% - 50px);
+      height: calc(100% - 48px);
     }
 
     .el-menu {

@@ -21,7 +21,7 @@
      },
      data() {
        return {
-         fileURL: 'http://www.xdocin.com/demo/demo.docx'
+         fileURL: 'http://www.xdocin.com/xdoc?_key=t7t7z6j54vezfdnwptijcmo63i&_func=down&_dir=math.pdf'
        }
      }
    }

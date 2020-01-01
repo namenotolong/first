@@ -2,7 +2,7 @@
   <div
     class="scrollbar__track"
     ref="track"
-    @mousedown="handleBarMousedown">
+    @mousedown="handleTrackMousedown">
     <div
       class="scrollbar__thumb"
       ref="thumb"
@@ -12,8 +12,6 @@
 </template>
 
 <script>
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-
   const BAR_MAP = {
     vertical: {
       name: 'vertical',
@@ -54,23 +52,28 @@
         type: String,
         default: '#939393'
       },
+      // 内容滚动的距离
       scroll: {
+        type: Number,
+        default: 0
+      },
+      // 可视区大小
+      clientSize: {
+        type: Number,
+        default: 0
+      },
+      // 内容真实大小
+      scrollSize: {
         type: Number,
         default: 0
       },
     },
     data() {
       return {
-        // 要滚动的内容
-        content: null,
         // 滚动轨道
         track: null,
         // 滚动条
         thumb: null,
-        // 可视区大小
-        clientSize: 0,
-        // 内容真实大小
-        scrollSize: 0,
         // 滚动条长度
         thumbSize: 0,
         // 滚动速率
@@ -81,48 +84,31 @@
       }
     },
     watch: {
+      // 内容区滚动的时候带动滚动条移动
       scroll(value) {
-        // 通过滚轮滚动内容区的时候带动滚动条移动
-        this.setThumbPosition(value / this.speed);
-      }
+        this.setThumbPosition();
+      },
+      clientSize() {
+        this.handleUpdate();
+      },
+      scrollSize() {
+        this.handleUpdate();
+      },
     },
     mounted() {
-      this.initData();
+      this.track = this.$refs.track;
+      this.thumb = this.$refs.thumb;
       this.initTrackStyle();
       this.initThumbStyle();
-      this.setThumbSize();
-      this.setScrollSpeed();
-      // 为了监听offsetSize的变化
-      addResizeListener(this.$parent.$refs.content, this.handleUpdate);
-      // 为了监听scrollSize的变化
-      addResizeListener(this.$parent.$refs.resize, this.handleUpdate);
+      this.handleUpdate();
     },
     destroyed() {
       document.removeEventListener('mouseup', this.handleDocumentMouseup);
-      removeResizeListener(this.$parent.$refs.content, this.handleUpdate);
-      removeResizeListener(this.$parent.$refs.resize, this.handleUpdate);
     },
     methods: {
-      handleUpdate() {
-        const { content, speed, bar } = this;
-        this.clientSize = content[bar.clientSize];
-        this.scrollSize = this.content[this.bar.scrollSize];
-        this.setThumbSize();
-        this.setThumbPosition(content[bar.scroll] / speed);
-        this.setScrollSpeed();
-      },
-      // 初始化所要用到的数据
-      initData() {
-        this.content = this.$parent.$refs.content;
-        this.track = this.$refs.track;
-        this.thumb = this.$refs.thumb;
-        this.clientSize = this.content[this.bar.clientSize];
-        this.scrollSize = this.content[this.bar.scrollSize];
-      },
       // 初始化滚动轨道样式
       initTrackStyle() {
         const { track, size, vertical, bar } = this;
-        track.style[bar.position] = '0px';
         if (vertical) {
           track.style.width = size + 'px';
           track.style.right = '0px';
@@ -133,10 +119,9 @@
       },
       // 初始化滚动条样式
       initThumbStyle() {
-        const { thumb, color, size, vertical, bar } = this;
+        const { thumb, color, size, vertical } = this;
         thumb.style.backgroundColor = color;
         thumb.style.borderRadius = size / 2 + 'px';
-        thumb.style[bar.position] = '0px';
         if (vertical) {
           thumb.style.width = size + 'px';
         } else {
@@ -154,18 +139,24 @@
         this.thumb.style[bar.thumbSize] = this.thumbSize + 'px';
       },
       // 设置滚动条位置
-      setThumbPosition(position) {
-        this.thumb.style[this.bar.position] = position + 'px';
+      setThumbPosition() {
+        const { thumb, scroll, speed, bar } = this;
+        thumb.style[bar.position] = scroll / speed + 'px';
       },
       // 设置滚动速率
       setScrollSpeed() {
         const { scrollSize, clientSize, thumbSize } = this;
         this.speed = (scrollSize - clientSize) / (clientSize - thumbSize);
       },
-      // 控制滚动条和内容区的滚动
-      handleScroll(position) {
+      handleUpdate() {
+        this.setThumbSize();
+        this.setScrollSpeed();
+        this.setThumbPosition();
+      },
+      // 控制内容区的滚动
+      handleContentScroll(position) {
         let end = position;
-        const { thumb, content, clientSize, scroll, scrollSize, thumbSize, speed, bar } = this;
+        const { clientSize, thumbSize, speed, bar } = this;
         const max = clientSize - thumbSize;
         if (end < 0) {
           // 滚动条到达最顶部
@@ -174,8 +165,7 @@
           // 滚动条到达最底部
           end = max;
         }
-        this.setThumbPosition(end);
-        content[bar.scroll] = end * speed;
+        this.$emit('onManualScroll', end * speed, bar.scroll)
       },
       // 拖动滚动条进行滚动
       handleThumbMousedown(event) {
@@ -188,7 +178,7 @@
       },
       handleDocumentMousemove(event) {
         const position = event[this.bar.client] - this.record;
-        this.handleScroll(position);
+        this.handleContentScroll(position);
         // 防止拖动太快选中文字
         window.getSelection().removeAllRanges();
       },
@@ -196,11 +186,11 @@
         document.removeEventListener('mousemove', this.handleDocumentMousemove);
       },
       // 点击滚动轨道进行滚动
-      handleBarMousedown(event) {
+      handleTrackMousedown(event) {
         if (event.button === 2) { return; }
         // 浏览器原生滚动条是点一下，则滚动一定距离，这里直接滚动到点击的位置。
         const position = event[this.bar.client] - event.target.getBoundingClientRect()[this.bar.position] - this.thumbSize / 2;
-        this.handleScroll(position);
+        this.handleContentScroll(position);
       },
     },
   }

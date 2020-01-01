@@ -1,7 +1,7 @@
 <template>
   <!--上传头像 -->
   <el-upload
-    class="avatar-uploader"
+    class="avatar-upload"
     :style="style"
     :action="action"
     :name="name"
@@ -10,7 +10,7 @@
     :before-upload="beforeUpload"
     :on-success="handleSuccess">
     <i
-      class="avatar-uploader__icon"
+      class="avatar-upload__icon"
       :class="loading ? 'el-icon-loading' : 'el-icon-plus' "
       :style="{lineHeight:this.width}"
       v-if="loading || !value">
@@ -97,7 +97,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .avatar-uploader {
+  .avatar-upload {
     box-sizing: border-box;
     background-position: center;
     background-size: cover;
@@ -113,7 +113,7 @@
       border-radius: 50%;
     }
 
-    .avatar-uploader__icon {
+    .avatar-upload__icon {
       font-size: 28px;
       color: #8c939d;
       text-align: center;
@@ -122,7 +122,7 @@
 </style>
 
 <style lang="scss">
-  .avatar-uploader {
+  .avatar-upload {
     .el-upload {
       width: 100%;
       height: 100%;
