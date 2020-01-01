@@ -1,0 +1,13 @@
+.pdf-pagination[data-v-2db30f0f] {
+  height: 100%;
+}
+.pdf-pagination .el-pagination[data-v-2db30f0f] {
+    text-align: center;
+    margin: 1em 0;
+}
+.pdf-pagination .pdf-pagination__canvas[data-v-2db30f0f] {
+    min-height: 100%;
+    width: 800px;
+    margin: 0 auto;
+}
+

@@ -15,7 +15,7 @@
 
       <el-tab-pane label="滚动条" name="third">
         <keep-alive v-if="activeName === 'third'">
-          <!-- <Scrollbar /> -->
+          <Scrollbar />
         </keep-alive>
       </el-tab-pane>
 

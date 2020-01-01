@@ -1,6 +1,7 @@
 <template>
   <div class="file-to-base64" ref="page">
     <div class="operation-wrap">
+      <span>如果是特别大的文件，推荐使用谷歌或者火狐浏览器(火狐表现最好)，不然解析会比较慢，也有可能复制不上。</span>
       <div class="operation">
         <el-button type="primary" @click="handleClear">清除</el-button>
         <el-button type="primary" v-copy="text">复制</el-button>

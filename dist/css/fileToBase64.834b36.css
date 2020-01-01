@@ -1,0 +1,28 @@
+.file-to-base64[data-v-5a7de439] {
+  box-sizing: border-box;
+  min-height: 100%;
+  padding: 1em;
+  background-color: #fff;
+}
+.file-to-base64 .operation-wrap[data-v-5a7de439] {
+    height: 50px;
+}
+.file-to-base64 .operation-wrap .operation[data-v-5a7de439] {
+      float: right;
+}
+.file-to-base64 .empty[data-v-5a7de439] {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+    white-space: pre;
+    text-align: center;
+    color: gray;
+}
+.file-to-base64 .content[data-v-5a7de439] {
+    word-break: break-all;
+    font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+}
+

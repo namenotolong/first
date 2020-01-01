@@ -4,7 +4,7 @@
     <div
       class="scrollbar__content"
       ref="content"
-      @scroll="handleScroll"
+      @scroll="handleAutoScroll"
       @wheel="handleWheel">
       <div ref="resize">
         <slot />
@@ -16,7 +16,10 @@
       ref="vertical"
       :size="size"
       :color="color"
-      :scroll="scroll" />
+      :scroll="scrollTop"
+      :clientSize="clientHeight"
+      :scrollSize="scrollHeight"
+      @onManualScroll="handleManualScroll" />
 
     <!-- 水平滚动条 -->
     <Bar
@@ -24,7 +27,11 @@
       :vertical="false"
       :size="size"
       :color="color"
-      :scroll="verticalVisible ? 0 : scroll" />
+      :scroll="scrollLeft"
+      :clientSize="clientWidth"
+      :scrollSize="scrollWidth"
+      @onManualScroll="handleManualScroll" />
+
   </div>
 
 </template>
@@ -32,6 +39,7 @@
 <script>
   import Bar from './Bar';
   import getScrollbarWidth from './util';
+  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 
   export default {
     props: ['size', 'color'],
@@ -39,33 +47,67 @@
     data() {
       return {
         content: null,
-        // 内容滚动的距离
-        scroll: 0,
+        scrollTop: 0,
+        scrollLeft: 0,
+        clientHeight: 0,
+        clientWidth: 0,
+        scrollHeight: 0,
+        scrollWidth: 0,
         verticalVisible: true,
         horizontalVisible: true
       }
     },
     mounted() {
       this.content = this.$refs.content;
-      this.getVisible();
+      this.handleUpdate();
       this.setContentMargin();
+      // 没有节流是因为，设置的时间间隔过长会出现明显的卡顿，时间过短跟没节流没什么区别
+      // 为了监听offsetSize的变化
+      addResizeListener(this.$refs.content, this.handleUpdate);
+      // 为了监听scrollSize的变化
+      addResizeListener(this.$refs.resize, this.handleUpdate);
+    },
+    destroyed() {
+      removeResizeListener(this.$refs.content, this.handleUpdate);
+      removeResizeListener(this.$refs.resize, this.handleUpdate);
     },
     methods: {
+      getSize() {
+        const { scrollHeight, scrollWidth, clientHeight, clientWidth } = this.content;
+        this.clientWidth = clientWidth;
+        this.clientHeight = clientHeight;
+        this.scrollWidth = scrollWidth;
+        this.scrollHeight = scrollHeight;
+      },
+      getScroll() {
+        const { scrollTop, scrollLeft } = this.content;
+        this.scrollTop = scrollTop;
+        this.scrollLeft = scrollLeft
+      },
       // 获取滚动条显示/隐藏状态
       getVisible() {
-        const { scrollHeight, scrollWidth, offsetHeight, offsetWidth } = this.content;
-        // 这里不能使用clientWidth/clientHeight来判断，它们是不包含原生滚动条的宽度的。
-        this.verticalVisible = scrollHeight > offsetHeight;
-        this.horizontalVisible = scrollWidth > offsetWidth;
+        const { scrollHeight, scrollWidth, clientHeight, clientWidth } = this;
+        this.verticalVisible = scrollHeight > clientHeight;
+        this.horizontalVisible = scrollWidth > clientWidth;
       },
+      // 设置负的margin，隐藏原生滚动条
       setContentMargin() {
         const scrollbarWidth = getScrollbarWidth();
         this.content.style.marginRight = this.content.style.marginBottom = -scrollbarWidth + 'px';
       },
+      handleUpdate() {
+        this.getSize();
+        this.getScroll();
+        this.getVisible();
+      },
+      handleManualScroll(value, scroll) {
+        this.content[scroll] = value;
+        this[scroll] = value;
+      },
       // 垂直滚动监听scroll事件
-      handleScroll() {
+      handleAutoScroll() {
         if (this.verticalVisible) {
-          this.scroll = this.content.scrollTop;
+          this.scrollTop = this.content.scrollTop;
         }
       },
       // 只存在水平滚动条的时候，水平滚动监听wheel事件
@@ -81,7 +123,7 @@
             step = -40;
           }
           this.content.scrollLeft = this.content.scrollLeft + step;
-          this.scroll = this.content.scrollLeft;
+          this.scrollLeft = this.content.scrollLeft;
         }
       }
     }

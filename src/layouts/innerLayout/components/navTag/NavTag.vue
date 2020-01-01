@@ -16,11 +16,8 @@
 </template>
 
 <script>
-  // import ScrollBar from './ScrollBar';
   import Scrollbar from '@/components/scrollbar';
   import bus from '@/utils/bus';
-
-
 
   export default {
     components: {
@@ -87,6 +84,10 @@
 <style lang="scss" scoped>
   .scrollbar-wrap {
     height: 40px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.1),
+      0 2px 1px -1px rgba(0, 0, 0, 0.1);
+    z-index: 10;
   }
 
   .nav-tag {
@@ -94,11 +95,7 @@
     height: 40px;
     box-sizing: border-box;
     padding: 5px 10px;
-    background-color: #fff;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.1),
-      0 2px 1px -1px rgba(0, 0, 0, 0.1);
     white-space: nowrap;
-    z-index: 10;
 
 
     .nav-tag__item {

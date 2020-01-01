@@ -3,7 +3,7 @@ import { Message } from 'element-ui';
 
 // 复制一段内容到剪切板板
 // 参数content可以是一个字符串也可以是一个dom元素
-function copy(content) {
+const copy = (content) => {
   const copyNode = (elem) => {
     const selection = window.getSelection();
     // 如果剪切板中已经有复制了的内容，需要清掉。
@@ -34,6 +34,7 @@ function copy(content) {
     document.body.appendChild(wrap);
     copyNode(wrap);
     document.body.removeChild(wrap);
+
   } else {
     Message({
       type: 'warning',
