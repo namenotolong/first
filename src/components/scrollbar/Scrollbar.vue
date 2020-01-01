@@ -30,7 +30,6 @@
 </template>
 
 <script>
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import Bar from './Bar';
   import getScrollbarWidth from './util';
 
@@ -39,7 +38,6 @@
     components: { Bar },
     data() {
       return {
-        scrollbarWidth: getScrollbarWidth(),
         content: null,
         // 内容滚动的距离
         scroll: 0,
@@ -49,32 +47,20 @@
     },
     mounted() {
       this.content = this.$refs.content;
-      this.setContentStyle();
       this.getVisible();
-      this.calcContentSize();
-      // window.addEventListener('resize',this.calcContentSize)
-      // addResizeListener(this.content, this.calcContentSize);
+      this.setContentMargin();
     },
     methods: {
-      setContentStyle() {
-        this.content.style.marginRight = this.content.style.marginBottom = -this.scrollbarWidth + 'px';
-      },
       // 获取滚动条显示/隐藏状态
       getVisible() {
-        const { scrollHeight, scrollWidth, clientHeight, clientWidth } = this.content;
-        this.verticalVisible = scrollHeight > clientHeight;
-        this.horizontalVisible = scrollWidth > clientWidth;
+        const { scrollHeight, scrollWidth, offsetHeight, offsetWidth } = this.content;
+        // 这里不能使用clientWidth/clientHeight来判断，它们是不包含原生滚动条的宽度的。
+        this.verticalVisible = scrollHeight > offsetHeight;
+        this.horizontalVisible = scrollWidth > offsetWidth;
       },
-      //只存在竖直滚动条或横向滚动条时需要重新计算内容区的宽高
-      calcContentSize() {
-        console.log(111);
-        const { horizontalVisible, verticalVisible, scrollbarWidth, content } = this;
-        if (verticalVisible && !horizontalVisible) {
-          content.style.height = parseInt(getComputedStyle(content).height) - scrollbarWidth + 'px';
-        }
-        if (horizontalVisible && !verticalVisible) {
-          content.style.width = parseInt(getComputedStyle(content).width) - scrollbarWidth + 'px';
-        }
+      setContentMargin() {
+        const scrollbarWidth = getScrollbarWidth();
+        this.content.style.marginRight = this.content.style.marginBottom = -scrollbarWidth + 'px';
       },
       // 垂直滚动监听scroll事件
       handleScroll() {
@@ -82,7 +68,7 @@
           this.scroll = this.content.scrollTop;
         }
       },
-      // 水平滚动监听wheel事件
+      // 只存在水平滚动条的时候，水平滚动监听wheel事件
       handleWheel(evnt) {
         if (!this.verticalVisible && this.horizontalVisible) {
           // 阻止默认事件，不然当页面存在滚动条的时候，会滚动页面
@@ -90,9 +76,9 @@
           // webkit内核的event.deltaY是100，火狐是3，这里指定每次滚动40px；
           let step;
           if (event.deltaY > 0) {
-            step = 30;
+            step = 40;
           } else {
-            step = -30;
+            step = -40;
           }
           this.content.scrollLeft = this.content.scrollLeft + step;
           this.scroll = this.content.scrollLeft;
@@ -114,7 +100,8 @@
       left: 0px;
       right: 0px;
       bottom: 0px;
-      overflow: auto;
+      // 一定要设置成scoll，目的是不管存不存在滚动，都让原生滚动区显示，这样才方便同时设置负的margin-bottom和margin-right
+      overflow: scroll;
     }
   }
 </style>

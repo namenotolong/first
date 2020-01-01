@@ -42,6 +42,7 @@
       <Scrollbar>
         <div style="width:500px;white-space:nowrap ">
           <p>在12月21日《环球时报》年会夜话一“预测2020年的世界”环节，与会学者围绕。</p>
+          <p>调整浏览器窗口大小看看</p>
           <p v-for="item in 100" :key="item">{{item}}</p>
         </div>
       </Scrollbar>

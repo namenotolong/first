@@ -93,20 +93,21 @@
       this.setThumbSize();
       this.setScrollSpeed();
       // 为了监听offsetSize的变化
+      // 没有节流是因为，设置的时间间隔过长会出现明显的卡顿，时间过短跟没节流没什么区别
       addResizeListener(this.$parent.$refs.content, this.handleUpdate);
       // 为了监听scrollSize的变化
       addResizeListener(this.$parent.$refs.resize, this.handleUpdate);
     },
     destroyed() {
-      document.removeEventListener('mouseup', this.handleDocumentMouseup);
       removeResizeListener(this.$parent.$refs.content, this.handleUpdate);
       removeResizeListener(this.$parent.$refs.resize, this.handleUpdate);
+      document.removeEventListener('mouseup', this.handleDocumentMouseup);
     },
     methods: {
       handleUpdate() {
         const { content, speed, bar } = this;
         this.clientSize = content[bar.clientSize];
-        this.scrollSize = this.content[this.bar.scrollSize];
+        this.scrollSize = content[bar.scrollSize];
         this.setThumbSize();
         this.setThumbPosition(content[bar.scroll] / speed);
         this.setScrollSpeed();

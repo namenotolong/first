@@ -4,7 +4,7 @@
     <logo />
 
     <!-- 侧边导航菜单 -->
-    <scrollbar>
+    <!-- <scrollbar> -->
       <el-menu
         :default-active="activePath"
         :collapse="sideCollapse"
@@ -14,7 +14,7 @@
         text-color="#fff">
         <menu-item v-for="menu in menuList" :key="menu.path" :config="menu" />
       </el-menu>
-    </scrollbar>
+    <!-- </scrollbar> -->
 
   </div>
 </template>
@@ -105,7 +105,7 @@
 <style lang="scss" scoped>
   .side-bar {
     .scrollbar-wrap {
-      height: calc(100% - 50px);
+      height: calc(100% - 48px);
     }
 
     .el-menu {

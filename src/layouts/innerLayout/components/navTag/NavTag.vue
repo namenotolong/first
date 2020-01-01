@@ -1,6 +1,6 @@
 <template>
   <!-- 导航标签，同时负责缓存页面 -->
-  <scroll-bar>
+  <scrollbar>
     <div class="nav-tag">
       <div
         class="nav-tag__item"
@@ -12,16 +12,19 @@
         <i class="el-icon-circle-close close" @click="handleClose(index)"></i>
       </div>
     </div>
-  </scroll-bar>
+  </scrollbar>
 </template>
 
 <script>
-  import ScrollBar from './ScrollBar';
+  // import ScrollBar from './ScrollBar';
+  import Scrollbar from '@/components/scrollbar';
   import bus from '@/utils/bus';
+
+
 
   export default {
     components: {
-      ScrollBar
+      Scrollbar
     },
     data() {
       return {
@@ -42,7 +45,7 @@
       this.addTag(this.$route);
       bus.$on('closeTag', (path) => {
         const tagIndex = this.tagList.findIndex(tag => tag.path === path);
-       this.tagList.splice(tagIndex, 1);
+        this.tagList.splice(tagIndex, 1);
       });
     },
     methods: {
@@ -82,11 +85,21 @@
 </script>
 
 <style lang="scss" scoped>
+  .scrollbar-wrap {
+    height: 40px;
+  }
+
   .nav-tag {
     display: flex;
     height: 40px;
     box-sizing: border-box;
     padding: 5px 10px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.1),
+      0 2px 1px -1px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    z-index: 10;
+
 
     .nav-tag__item {
       padding: 5px 10px;
