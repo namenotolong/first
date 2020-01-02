@@ -17,10 +17,10 @@
       </el-form-item>
 
       <el-form-item>
-        <el-checkbox v-model="loginForm.rememberPwd">记住密码</el-checkbox>
+        <el-checkbox v-model="loginForm.rememberPwd">记住账号</el-checkbox>
         <div class="register">
           <router-link to="/account/forget">忘记密码?</router-link>
-          <span>没加入我们?</span>
+          <span>没有账号?</span>
           <router-link to="/account/register">立即注册</router-link>
         </div>
       </el-form-item>

@@ -1,16 +1,23 @@
 ## 项目简介
 
-    基于Vue+Element的通用后台管理系统。提供了一些典型的后台业务功能。
+    基于Vue+Element的通用后台管理系统。提供了一些典型的中后台业务功能。
 
 ## 技术依赖
+
 - 主体：Vue、ElementUI、webpack
 - 图表：Antv/G2
 - Excel：js-xlsx
+- pdf：pdf.js
 - 图片生成：html2canvas
 - 富文本编辑器：Tinymce
 - 数据：axios、Mock
+- 地图：高德
 
-[线上地址](https://wluyao.github.io/vue-element-manage/dist/index.html)  
+## 项目地址
+
+- [github](https://github.com/Wluyao/vue-element-manage)
+- [gitee](https://github.com/Wluyao/vue-element-manage)
+- [预览](https://wluyao.gitee.io/vue-element-manage)
 
 ## 功能
 
@@ -34,7 +41,7 @@
   - 步骤表单
   - 动态表单
 - 表格
-- Tab选项卡
+- Tab 选项卡
 - 权限控制
 - 用户管理
 - 文章管理
@@ -53,10 +60,10 @@
   - 滚动条
   - 打印
   - html2canvas
-  - 拖拽Dialog
-  - SVG图标
+  - 拖拽 Dialog
+  - SVG 图标
   - 地图
-  - 导入/导出excel
+  - 导入/导出 excel
   - 快捷复制
   - 文本溢出
 
@@ -77,28 +84,26 @@
 |	|-- layouts               基础布局
 |	|-- mock                  数据模拟
 |	|-- pages                 页面级组件
-|	|-- router                路由管理	
-|	|-- store                 状态管理	
-|	|-- utils                 全局公用方法	
+|	|-- router                路由管理
+|	|-- store                 状态管理
+|	|-- utils                 全局公用方法
 |	|-- App.vue               根组件
-|	|-- main.js               入口文件，加载各种组件	
-|-- static              第三方纯静态资源，不被webpcak打包
+|	|-- main.js               入口文件，加载各种组件
+|-- static              第三方纯静态资源，不会被webpack处理
 |-- .babelrc            babel-loader 配置
 |-- .editorconfig       IDE配置
 |-- .gitignore          git提交时忽略的文件
 |--	package.json        项目基本信息
-|-- README.md           项目说明			
+|-- README.md           项目说明
 ```
 
-##  项目截图
+## 项目截图
 
-![](https://s2.ax1x.com/2019/07/16/Zb3ukj.png)
+![](https://s2.ax1x.com/2020/01/02/lt7zse.png)
 
-![](https://s2.ax1x.com/2019/07/16/ZbJMhd.png)
+![](https://s2.ax1x.com/2020/01/02/lt7FvF.png)
 
-
-
-
+![](https://s2.ax1x.com/2020/01/02/ltHMon.png)
 
 ## 使用
 
@@ -113,6 +118,3 @@ npm run dev
 ```
 npm run build
 ```
-
-
-
