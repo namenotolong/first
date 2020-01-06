@@ -30,8 +30,8 @@
     methods: {
       async getList() {
         this.tabLoading = true;
-        const resposne = await api.tab.getList({ name: this.name });
-        this.tableData = resposne.data.tabList
+        const data = await api.tab.getList({ name: this.name });
+        this.tableData = data;
         this.tabLoading = false;
       }
     }

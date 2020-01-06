@@ -77,9 +77,9 @@
         const getMonthData = () => {
           return api.dashboard.getLineChartData({ type: 'month' });
         }
-        const [weekRes, monthRes] = await Promise.all([getWeekData(), getMonthData()]);
-        this.weekData = weekRes.data;
-        this.monthData = monthRes.data;
+        const [weekData, monthData] = await Promise.all([getWeekData(), getMonthData()]);
+        this.weekData = weekData;
+        this.monthData = monthData;
         callback();
       },
       // 为数据添加日期参数

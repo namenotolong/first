@@ -43,10 +43,9 @@
       this.getTask();
     },
     methods: {
-      getTask() {
-        api.dashboard.getTodoListData().then(res => {
-          this.taskData = res.data.todoListData;
-        })
+      async getTask() {
+        const data = await api.dashboard.getTodoListData();
+        this.taskData = data;
       },
       handleAdd() {
         this.$prompt('添加新的待办事项:', '', {
@@ -63,9 +62,9 @@
           })
         }).catch(() => {})
       },
-      handleEdit(index,row) {
+      handleEdit(index, row) {
         this.$prompt('修改待办事项', '', {
-          inputValue:row.content,
+          inputValue: row.content,
           inputPlaceholder: '请输入待办事项',
           inputValidator(value) {
             if (!value) {

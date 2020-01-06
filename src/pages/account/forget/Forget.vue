@@ -152,7 +152,7 @@
           }
         }, 1000);
 
-        const response = await api.account.getCaptcha({ phone: this.formData.phone });
+        await api.account.getCaptcha({ phone: this.formData.phone });
         this.$message.success(`验证码已发送至手机${ this.formData.phone }，请注意查收！`);
       },
       // 提交
@@ -161,7 +161,7 @@
         this.$refs.form.validate(async (valid) => {
           if (valid) {
             const formData = this.formData;
-            const response = await api.account.modifyPassword(this.formData);
+            await api.account.modifyPassword(this.formData);
             this.$message.success('修改成功,请使用新密码进行登录');
             this.$router.replace('/');
             this.submitLoading = false;

@@ -2,46 +2,18 @@ import service from '@/utils/service';
 import { paramsSerializer } from '@/utils/core';
 
 
-function getList(params) {
-  return service({
-    url: '/user/list',
-    method: 'get',
-    params,
-    paramsSerializer(params) {
-      return paramsSerializer(params);
-    }
-  })
-}
+// 获取用户列表
+export const getList = (data) => service.get('/user/list', data, {
+  paramsSerializer(params) {
+    return paramsSerializer(params);
+  }
+});
 
-function getDetail(params) {
-  return service({
-    url: '/user/detail',
-    method: 'get',
-    params
-  })
-}
+// 获取用户详情
+export const getDetail = (data) => service.get('/user/detail', data);
 
+// 新增/修改用户
+export const update = (data) => service.post('/user/update', data);
 
-function update(data) {
-  return service({
-    url: '/user/update',
-    method: 'post',
-    data
-  })
-}
-
-
-function remove(data) {
-  return service({
-    url: '/user/remove',
-    method: 'post',
-    data
-  })
-}
-
-export {
-  getList,
-  getDetail,
-  update,
-  remove
-}
+// 删除用户
+export const remove = (data) => service.post('/user/remove', data);

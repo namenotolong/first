@@ -148,16 +148,16 @@
       async getDetail() {
         if (!this.id) return;
         this.getDetailLoading = true;
-        const response = await api.user.getDetail({ id: this.id });
-        this.userInfo = { ...response.data };
-        this.userInfoBackup = { ...response.data };
+        const data = await api.user.getDetail({ id: this.id });
+        this.userInfo = { ...data };
+        this.userInfoBackup = { ...data };
         this.getDetailLoading = false;
       },
       handleSubmit() {
         this.$refs.form.validate(async (valid) => {
           if (valid) {
             this.submitLoading = true;
-            const rsponse = await api.user.update({ detail: this.userInfo });
+            await api.user.update({ detail: this.userInfo });
             this.submitLoading = false;
             this.handleClose();
             this.$emit('onSave');

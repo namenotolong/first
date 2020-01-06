@@ -65,9 +65,7 @@ export default {
     }
     return {
       code: 200,
-      data: {
-        tabList: data
-      }
+      data
     }
   }
 }

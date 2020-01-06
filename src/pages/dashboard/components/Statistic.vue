@@ -55,9 +55,9 @@
     },
     methods: {
       async getGridData() {
-        const response = await api.dashboard.getGridData();
+        const data = await api.dashboard.getGridData();
         this.grids.forEach((item, index) => {
-          item.number = Object.values(response.data)[index]
+          item.number = Object.values(data)[index]
         })
       }
     }

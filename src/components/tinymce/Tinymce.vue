@@ -1,6 +1,10 @@
 <template>
   <!-- 富文本编辑器 -->
-  <textarea :id="id" v-loading="!hasInit"></textarea>
+  <textarea
+    :id="id"
+    style="visibility:hidden"
+    v-loading="!hasInit">
+   </textarea>
 </template>
 
 <script>
@@ -106,7 +110,7 @@
             if (this.value) {
               editor.insertContent(this.value);
             };
-            editor.on('setContent keyup ', () => {
+            editor.on('setContent keyup', () => {
               this.hasInput = true;
               this.$emit('input', editor.getContent());
             });

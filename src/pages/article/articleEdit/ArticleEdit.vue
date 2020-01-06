@@ -124,8 +124,7 @@
     methods: {
       async getDetail() {
         if (this.articleId) {
-          const response = await api.article.getDetail({ id: this.articleId });
-          const data = response.data;
+          const data = await api.article.getDetail({ id: this.articleId });
           this.articleDetail = {
             id: data.id,
             name: data.name,
@@ -144,7 +143,7 @@
         this.$refs.form.validate(async (valid) => {
           if (valid) {
             this.submitLoading = true;
-            const response = await api.article.update({ detail: this.articleDetail });
+            await api.article.update({ detail: this.articleDetail });
             this.submitLoading = false;
             this.$message.success('发布成功');
             this.handleClose();

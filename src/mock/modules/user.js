@@ -4,7 +4,7 @@ import util from '../util';
 
 
 const userData = Mock.mock({
-  'table|127': [{
+  'list|127': [{
     id: '@lower(@guid)',
     name: '@cname',
     mobilePhone: /^1[345789]\d{9}$/,
@@ -19,7 +19,7 @@ const userData = Mock.mock({
   }]
 })
 
-const table = userData.table;
+const table = userData.list;
 
 
 export default {

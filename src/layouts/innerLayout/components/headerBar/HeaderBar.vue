@@ -22,7 +22,6 @@
   import { mapGetters } from 'vuex';
   import FullScreen from '@/components/fullScreen';
   import ThemeSetting from '@/components/setting/themeSetting';
-  import api from '@/api';
   import { resetRouter } from '@/router';
 
 

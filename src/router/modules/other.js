@@ -45,14 +45,16 @@ const route = {
     meta: {
       title: '拖拽Dialog',
     }
-  }, {
-    name: 'Carousel',
-    path: '/other/carousel',
-    component: Carousel,
-    meta: {
-      title: '轮播图',
-    }
-  }, {
+  },
+  //  {
+  //   name: 'Carousel',
+  //   path: '/other/carousel',
+  //   component: Carousel,
+  //   meta: {
+  //     title: '轮播图',
+  //   }
+  // },
+   {
     name: 'ComponentDemo',
     path: '/other/componentDemo',
     component: ComponentDemo,

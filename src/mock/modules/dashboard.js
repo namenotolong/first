@@ -24,7 +24,7 @@ const lineChartData = Mock.mock({
 })
 
 const todoListData = Mock.mock({
-  'todoListData|10': [{
+  'list|10': [{
     isCompleted: '@boolean(3,7,true)',
     'content|1-5': '待办事项 '
   }]
@@ -51,7 +51,7 @@ export default {
     }
     return {
       code: 200,
-      data: data
+      data
     }
   },
   getTodoListData() {
@@ -63,7 +63,7 @@ export default {
   getTodoListData() {
     return {
       code: 200,
-      data: todoListData
+      data: todoListData.list
     }
   }
 }

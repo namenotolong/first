@@ -1,56 +1,24 @@
 import service from '@/utils/service';
 
+
+
 // 登录
-export function login(data) {
-  return service({
-    url: '/account/login',
-    method: 'post',
-    data
-  })
-}
+export const login = (data) => service.post('/account/login', data);
+
 // 退出登录
-export function logout(data) {
-  return service({
-    url: '/account/logout',
-    method: 'post',
-    data
-  })
-}
+export const logout = (data) => service.post('/account/logout', data);
 
 // 获取用户信息
-export function getUserInfo(data) {
-  return service({
-    url: '/account/userInfo',
-    method: 'post',
-    data
-  })
-}
+export const getUserInfo = (data) => service.post('/account/userInfo', data);
 
 // 注册
-export function register(data) {
-  return service({
-    url: '/account/register',
-    method: 'post',
-    data
-  })
-}
+export const register = (data) => service.post('/account/register', data);
 
 // 获取验证码
-export function getCaptcha(data) {
-  return service({
-    url: '/account/captcha',
-    method: 'post',
-    data
-  })
-}
+export const getCaptcha = (data) => service.post('/account/captcha', data);
 
 //  修改密码
-export function modifyPassword(data) {
-  return service({
-    url: '/account/modifyPassword',
-    method: 'post',
-    data
-  })
-}
+export const modifyPassword = (data) => service.post('/account/modifyPassword', data);
+
 
 

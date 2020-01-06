@@ -3,7 +3,7 @@ import { getURLParams } from '@/utils/core';
 import util from '../util';
 
 const articleList = Mock.mock({
-  'table|213': [{
+  'list|213': [{
     id: '@lower(@guid)',
     name: '@ctitle',
     author: '@cname',
@@ -31,7 +31,7 @@ const articleList = Mock.mock({
 
 
 
-const table = articleList.table;
+const table = articleList.list;
 
 
 export default {
@@ -62,7 +62,7 @@ export default {
     return {
       code: 200,
       data: {
-        articleList: util.filterFieldByTable(result.slice(startIndex, endIndex), 'id', 'name', 'author', 'createDate', 'type', 'browseNum'),
+        list: util.filterFieldByTable(result.slice(startIndex, endIndex), 'id', 'name', 'author', 'createDate', 'type', 'browseNum'),
         total: result.length
       }
     }

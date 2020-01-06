@@ -29,11 +29,12 @@ const account = {
           username,
           password
         }).then(res => {
-          const token = res.data.loginInfo.token;
+          const token = res.token;
           sessionStorage.setItem('token', token);
           commit('SET_TOKEN', token);
           resolve();
         }).catch((error) => {
+          console.log(111);
           reject(error);
         })
       })
@@ -45,9 +46,8 @@ const account = {
         api.account.getUserInfo({
           token: state.token
         }).then(res => {
-          const userInfo = res.data;
-          commit('SET_USER_INFO', userInfo);
-          resolve(userInfo);
+          commit('SET_USER_INFO', res);
+          resolve(res);
         }).catch((error) => {
           reject(error);
         })

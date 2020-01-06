@@ -19,11 +19,11 @@
         </keep-alive>
       </el-tab-pane>
 
-      <el-tab-pane label="消息提示" name="forth">
+      <!-- <el-tab-pane label="消息提示" name="forth">
         <keep-alive v-if="activeName === 'forth'">
           <Reminder />
         </keep-alive>
-      </el-tab-pane>
+      </el-tab-pane> -->
     </el-tabs>
   </div>
 

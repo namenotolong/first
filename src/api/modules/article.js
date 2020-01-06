@@ -2,49 +2,20 @@ import service from '@/utils/service';
 import { paramsSerializer } from '@/utils/core';
 
 
+// 获取文章列表
+export const getList = (data) => service.get('/article/list', data, {
+  paramsSerializer(params) {
+    return paramsSerializer(params);
+  }
+})
 
-function getList(params) {
-  return service({
-    url: '/article/list',
-    method: 'get',
-    params,
-    paramsSerializer(params) {
-      return paramsSerializer(params);
-    }
-  })
-}
+// 获取文章详情
+export const getDetail = (data) => service.get('/article/detail', data);
 
-function getDetail(params) {
-  return service({
-    url: '/article/detail',
-    method: 'get',
-    params
-  })
-}
+// 新增/修改文章
+export const update = (data) => service.post('/article/update', data);
+
+// 删除文章
+export const remove = (data) => service.post('/article/remove', data);
 
 
-function update(data) {
-  return service({
-    url: '/article/update',
-    method: 'post',
-    data
-  })
-}
-
-
-function remove(data) {
-  return service({
-    url: '/article/remove',
-    method: 'post',
-    data
-  })
-}
-
-
-
-export {
-  getList,
-  getDetail,
-  update,
-  remove
-}

@@ -135,8 +135,8 @@
       //获取用户列表
       async getUserList() {
         this.tableLoading = true;
-        const response = await api.user.getList(this.queryCondition);
-        this.userList = response.data.list.map((item, index) => {
+        const data = await api.user.getList(this.queryCondition);
+        this.userList = data.list.map((item, index) => {
           return {
             id: item.id,
             index: (this.queryCondition.pageNumber - 1) * this.queryCondition.pageSize + index + 1,
@@ -148,7 +148,7 @@
             consume: item.consume
           }
         });
-        this.total = response.data.total;
+        this.total = data.total;
         this.tableLoading = false;
         const scrollElement = document.querySelector('.inner-layout__page');
         scroll(scrollElement, 0, 800);

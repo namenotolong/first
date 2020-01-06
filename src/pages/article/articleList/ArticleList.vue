@@ -125,11 +125,11 @@
       // 获取文章列表
       async getArticleList() {
         this.articleTableLoading = true;
-        const response = await api.article.getList({
+        const data = await api.article.getList({
           ...this.queryCondition,
           type: this.queryCondition.type.toString()
         })
-        this.articleList = response.data.articleList.map((item, index) => {
+        this.articleList = data.list.map((item, index) => {
           return {
             id: item.id,
             index: (this.queryCondition.pageNumber - 1) * this.queryCondition.pageSize + index + 1,
@@ -140,7 +140,7 @@
             browseNum: item.browseNum,
           }
         });
-        this.total = response.data.total;
+        this.total = data.total;
         this.articleTableLoading = false;
         const scrollElement = document.querySelector('.inner-layout__page');
         scroll(scrollElement, 0, 800);
@@ -177,8 +177,8 @@
       },
       async getRemoteUserList(keyword) {
         this.userLoading = true;
-        const response = await api.user.getList({ name: keyword });
-        this.userListOptions = response.data.list.map(item => item.name);
+        const data = await api.user.getList({ name: keyword });
+        this.userListOptions = data.list.map(item => item.name);
         this.userLoading = false;
       }
     }

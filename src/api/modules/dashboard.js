@@ -1,30 +1,11 @@
 import service from '@/utils/service';
 
-function getGridData(params) {
-    return service({
-        url: '/dashboard/grid',
-        method: 'get',
-        params
-    })
-}
 
-function getLineChartData(params) {
-    return service({
-        url: '/dashboard/lineChart',
-        method: 'get',
-        params
-    })
-}
 
-function getTodoListData(params) {
-    return service({
-        url: '/dashboard/todoList',
-        method: 'get',
-        params
-    })
-}
-export {
-    getGridData,
-    getLineChartData,
-    getTodoListData
-}
+export const getGridData = () => service.get('/dashboard/grid');
+
+export const getLineChartData = (data) => service.get('/dashboard/lineChart', data);
+
+export const getTodoListData = () => service.get('/dashboard/todoList');
+
+

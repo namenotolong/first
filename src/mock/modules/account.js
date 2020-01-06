@@ -27,9 +27,7 @@ export default {
     }
     return {
       code: 200,
-      data: {
-        loginInfo: loginInfo
-      }
+      data: loginInfo
     }
   },
   logout() {

@@ -34,7 +34,7 @@
           <el-button style="width:100%" type="primary" :loading="registerLoading" @click="handleRegister">注册</el-button>
         </el-col>
         <el-col :span="11" :offset="2">
-          <router-link  to="/account/login">使用已有账号登录</router-link>
+          <router-link to="/account/login">使用已有账号登录</router-link>
         </el-col>
       </el-form-item>
     </el-form>
@@ -154,14 +154,14 @@
           }
         }, 1000);
 
-        const response = await api.account.getCaptcha({ phone: this.accountInfo.phone });
+        await api.account.getCaptcha({ phone: this.accountInfo.phone });
         this.$message.success(`验证码已发送至手机${ this.accountInfo.phone }，请注意查收！`);
       },
       handleRegister() {
         this.registerLoading = true;
         this.$refs.form.validate(async (valid) => {
           if (valid) {
-            const response = await api.account.register(this.accountInfo);
+            await api.account.register(this.accountInfo);
             this.$message.success('注册成功！');
             this.$store.dispatch('Login', {
               username: this.accountInfo.username,

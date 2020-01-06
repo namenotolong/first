@@ -81,8 +81,8 @@
     methods: {
       async getTableData() {
         this.tableLoading = true;
-        const response = await api.user.getList(this.queryCondition);
-        this.tableData = response.data.list.map((item, index) => ({
+        const data = await api.user.getList(this.queryCondition);
+        this.tableData = data.list.map((item, index) => ({
           id: item.id,
           index: (this.queryCondition.pageNumber - 1) * this.queryCondition.pageSize +
             index + 1,
@@ -93,7 +93,7 @@
           registerDate: item.registerDate,
           consume: item.consume
         }))
-        this.total = response.data.total;
+        this.total = data.total;
         this.tableLoading = false;
         const scrollElement = document.querySelector('.inner-layout__page');
         scroll(scrollElement, 0, 800);
