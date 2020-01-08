@@ -1,0 +1,32 @@
+.content[data-v-481dfc6e] {
+  border: 1px solid #d9d9d9;
+  padding: 1em;
+  text-indent: 2em;
+  margin-bottom: 1em;
+}
+.copy-directive section[data-v-481dfc6e] {
+  margin-bottom: 1em;
+}
+.copy-directive .copy-directive__content[data-v-481dfc6e] {
+  padding: 1em;
+  text-align: center;
+  border: 1px solid #d9d9d9;
+  cursor: pointer;
+  margin-bottom: 1em;
+}
+.copy-directive .red[data-v-481dfc6e] {
+  color: #f56c6c;
+}
+
+.copy-comp .content[data-v-87053050] {
+  border: 1px solid #d9d9d9;
+  padding: 1em;
+  text-indent: 2em;
+  margin-bottom: 1em;
+}
+
+.copy-bug[data-v-5ab55215] {
+  padding: 1em;
+  border: 1px solid #d9d9d9;
+}
+

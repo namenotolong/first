@@ -3,7 +3,7 @@
     <main>
       <h3>1.复制元素节点</h3>
       <div>
-        <div class=" copy-directive__content red" ref="content">
+        <div class=" copy-directive__content red" ref="content" id="content">
           <p>我是红色的内容</p>
           <p>我是红色的内容</p>
           <p>我是红色的内容</p>

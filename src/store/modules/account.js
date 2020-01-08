@@ -34,7 +34,6 @@ const account = {
           commit('SET_TOKEN', token);
           resolve();
         }).catch((error) => {
-          console.log(111);
           reject(error);
         })
       })

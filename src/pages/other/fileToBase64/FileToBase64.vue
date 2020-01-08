@@ -35,7 +35,7 @@
           const reader = new FileReader();
           reader.onload = (e) => {
             const result = e.target.result;
-            this.$refs.content.insertAdjacentHTML('afterBegin', `<p>${result}</p>`);
+            this.$refs.content.insertAdjacentText('afterBegin', result);
             this.text = result;
             this.hasFile = true;
           };

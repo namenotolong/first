@@ -1,28 +1,39 @@
 import axios from 'axios';
 import { Message } from 'element-ui';
-import config from '@/config';
-
+import store from '@/store';
 
 class Service {
 
-  // 请求头
-  headers = {};
+  baseConfig = {
+    baseURL: '/ebsapi',
+    headers: {},
+    timeout: 8000
+  }
 
   // axios实例
-  instance = axios.create({
-    baseURL: config.apiURL,
-    headers: this.headers,
-    timeout: 8000
-  })
+  instance = null
 
   constructor() {
+    const token = store.getters.token;
+    if (token) {
+      this.setHeader({
+        Authorization: store.getters.tokenType + ' ' + token
+      })
+    } else {
+      this.initInstance();
+    }
+  }
+
+  initInstance() {
+    this.instance = axios.create(this.baseConfig);
     this.setReqInterceptors();
     this.setResnterceptors();
   }
 
   // 设置请求头
-  setheader = (headers) => {
-    this.headers = { ...this.headers, ...headers };
+  setHeader = (headers) => {
+    this.baseConfig.headers = { ...this.baseConfig.headers, ...headers };
+    this.initInstance();
   }
 
   // 请求拦截器
@@ -69,15 +80,31 @@ class Service {
   }
 
   // get请求
-  get = (url, data = {}, config = {}) => this.instance({ ...config, ...{ url, method: 'get', params: data } })
+  get = (url, data = {}, config = {}) => this.instance({ ...{ url, method: 'get', params: data }, ...config })
 
   // post请求
-  post = (url, data = {}, config = {}) => this.instance({ ...config, ...{ url, method: 'post', data } })
+  post = (url, data = {}, config = {}) => this.instance({ ...{ url, method: 'post', data }, ...config })
+
+
+  // 不经过统一的axios实例的get请求
+  postOnly = (url, data = {}, config = {}) => axios({
+    ...this.baseConfig,
+    ...{ url, method: 'post', data },
+    ...config
+  })
+
+  // 不经过统一的axios实例的post请求
+  getOnly = (url, data = {}, config = {}) => axios({
+    ...this.baseConfig,
+    ...{ url, method: 'get', params: data },
+    ...config
+  })
+
 
   // delete请求
-  deleteBody = (url, data = {}, config = {}) => this.instance({ ...config, ...{ url, method: 'delete', data } })
+  deleteBody = (url, data = {}, config = {}) => this.instance({ ...{ url, method: 'delete', data }, ...config })
 
-  deleteParam = (url, data = {}, config = {}) => this.instance({ ...config, ...{ url, method: 'delete', params: data } })
+  deleteParam = (url, data = {}, config = {}) => this.instance({ ...{ url, method: 'delete', params: data }, ...config })
 
 }
 
