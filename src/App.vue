@@ -1,7 +1,6 @@
 <template>
   <div>
     <router-view />
-
     <theme-setting style="display: none" />
   </div>
 </template>
@@ -21,8 +20,8 @@
     methods: {
       //  初始化基础数据表
       async initBaseTable() {
-        const data = await api.common.getBaseTable();
-        tableMng.initTable(data);
+        //const data = await api.common.getBaseTable();
+        tableMng.initTable();
       }
     },
   }

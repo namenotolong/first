@@ -21,6 +21,9 @@ import reloadRoute from './modules/reload';
 import tabRoute from './modules/tab';
 import tableRoute from './modules/table';
 import userRoute from './modules/user';
+import messageRoute from './modules/message';
+import topicRoute from './modules/topic';
+import kindRoute from './modules/kind';
 
 
 // 不需要角色权限控制的路由(所有有角色都可以访问)
@@ -35,21 +38,24 @@ const staticRouteMap = [{
   dashboardRoute,
   mineRoute,
   reloadRoute,
-  blankRoute,
+  //blankRoute,
 ]
 // 需要通过角色动态控制的路由表
 const dynamicRouteMap = [
-  chartRoute,
-  formRoute,
-  tableRoute,
-  permissionRoute,
-  tabRoute,
-  errorRoute,
+  //chartRoute,
+  //formRoute,
+  //tableRoute,
+  //permissionRoute,
+  //tabRoute,
+  //errorRoute,
   userRoute,
   articleRoute,
-  pdfRoute,
-  officeRoute,
-  otherRoute,
+  topicRoute,
+  messageRoute,
+  kindRoute,
+  //pdfRoute,
+  //officeRoute,
+  //otherRoute,
   {
     name: '404',
     path: '*',
@@ -123,10 +129,12 @@ router.beforeEach((to, from, next) => {
     next('/account/login');
   } else {
     // 如果token存在(说明已登录)，但是角色不存在(说明没获取到用户信息)，这时应该获取用户信息
-    if (token && !store.getters.userInfo.roles) {
+    if (token && !store.getters.userInfo.roleName) {
       store.dispatch('GetUserInfo').then(res => {
-        const roles = res.roles;
-        const routeNames = getRouteNames(roles);
+        const roles = res.roleName;
+        let temp = [];
+        temp.push(roles)
+        const routeNames = getRouteNames(temp);
         const acceptedRouteMap = filterRouteMap(routeNames, dynamicRouteMap);
         // 动态注册路由
         router.addRoutes(acceptedRouteMap);

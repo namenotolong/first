@@ -19,9 +19,7 @@
       <el-form-item>
         <el-checkbox v-model="loginForm.rememberPwd">记住账号</el-checkbox>
         <div class="register">
-          <router-link to="/account/forget">忘记密码?</router-link>
-          <span>没有账号?</span>
-          <router-link to="/account/register">立即注册</router-link>
+          <router-link to="/account/forget"><span class="route-color">忘记密码?</span></router-link>
         </div>
       </el-form-item>
 
@@ -34,14 +32,14 @@
 </template>
 
 <script>
-  import { encryptByDES } from '@/utils/crypto';
+  import { encrypt } from '@/utils/crypto';
 
   export default {
     data() {
       return {
         loginForm: {
-          username: 'admin',
-          password: '123456',
+          username: '',
+          password: '',
           rememberPwd: false
         },
         loginRules: {
@@ -54,11 +52,11 @@
             required: true,
             message: '请输入密码',
             trigger: 'blur'
-          }, {
+          }, /*{
             min: 6,
             message: '密码长度不能少于六位',
             trigger: 'blur'
-          }]
+          }*/]
         },
         passwordType: 'password',
         loginLoading: false
@@ -74,13 +72,12 @@
           if (valid) {
             const account = {
               username: this.loginForm.username,
-              password: encryptByDES(this.loginForm.password, '123456781111')
+              password: encrypt(this.loginForm.password)
             }
             this.$store.dispatch('Login', account).then(() => {
               this.$router.replace('/').catch(err => {});
               this.loginLoading = false;
             }).catch((error) => {
-              this.$message.error('登录失败,请填写正确的信息！')
               this.loginLoading = false;
             })
           } else {
@@ -94,6 +91,9 @@
 </script>
 
 <style lang="scss" scoped>
+  .route-color{
+    color: white
+  }
   .login {
     padding: 15px 20px;
     background-color: rgba(255, 255, 255, 0);

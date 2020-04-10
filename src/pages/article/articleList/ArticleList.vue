@@ -21,23 +21,19 @@
 
     <el-form :inline="true" :model="queryCondition">
       <el-form-item label="标题:">
-        <el-input v-model="queryCondition.name" placeholder="请输入文章标题关键字" clearable></el-input>
+        <el-input v-model="queryCondition.title" placeholder="请输入文章标题关键字" clearable></el-input>
       </el-form-item>
       <el-form-item label="作者:">
         <el-select
-          v-model="queryCondition.author"
+          clearable
+          v-model="queryCondition.name"
           placeholder="请输入作者姓名关键字"
           filterable
           remote
           :remote-method="getRemoteUserList"
           default-first-option
           :loading="userLoading">
-          <el-option v-for="(item,index) in userListOptions" :key="item+index" :label="item" :value="item" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="类型:">
-        <el-select v-model="queryCondition.type" placeholder="请选择文章类型" filterable multiple clearable>
-          <el-option v-for="item in tableMng.getTable('article')" :key="item.id" :label="item.name" :value="item.id"></el-option>
+          <el-option v-for="(item,index) in userListOptions" :key="index" :label="item" :value="item" />
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -56,11 +52,9 @@
         <el-table-column prop="index" label="序号" width="80px"></el-table-column>
         <el-table-column prop="name" label="标题"></el-table-column>
         <el-table-column prop="author" label="作者" width="120px"></el-table-column>
-        <el-table-column prop="type" label="类型" width="120px">
-          <template slot-scope="scope">
-            <span>{{tableMng.getNameById('article',scope.row.type)}}</span>
-          </template>
-        </el-table-column>
+        <el-table-column prop="topicCount" label="评论数" sortable width="100px"></el-table-column>
+        <el-table-column prop="storeCount" label="收藏数" sortable width="100px"></el-table-column>
+        <el-table-column prop="praiseCount" label="点赞数" sortable width="100px"></el-table-column>
         <el-table-column prop="browseNum" label="阅读数" sortable width="100px"></el-table-column>
         <el-table-column prop="createDate" label="创建时间" sortable width="180px"></el-table-column>
         <el-table-column label="操作" width="120px">
@@ -76,7 +70,7 @@
     </div>
     <pagination
       :total="total"
-      :page-number.sync="queryCondition.pageNumber"
+      :page-number.sync="queryCondition.pageNum"
       :page-size.sync="queryCondition.pageSize"
       @pagination="getArticleList" />
 
@@ -108,11 +102,10 @@
         articleList: [],
         articleTableLoading: false,
         queryCondition: {
+          title: '',
           name: '',
-          author: '',
-          type: [],
-          pageNumber: 1,
-          pageSize: 20
+          pageNum: 1,
+          pageSize: 20,
         },
         total: 0,
         selectedRows: [],
@@ -126,18 +119,20 @@
       async getArticleList() {
         this.articleTableLoading = true;
         const data = await api.article.getList({
-          ...this.queryCondition,
-          type: this.queryCondition.type.toString()
+          ...this.queryCondition
         })
+        console.log(data)
         this.articleList = data.list.map((item, index) => {
           return {
             id: item.id,
-            index: (this.queryCondition.pageNumber - 1) * this.queryCondition.pageSize + index + 1,
-            author: item.author,
-            createDate: item.createDate,
-            name: item.name,
-            type: item.type,
-            browseNum: item.browseNum,
+            index: (this.queryCondition.pageNum - 1) * this.queryCondition.pageSize + index + 1,
+            author: item.user.userName,
+            createDate: item.updateTime,
+            name: item.title,
+            browseNum: item.visitCount,
+            topicCount: item.topicCount,
+            praiseCount: item.praiseCount,
+            storeCount: item.storeCount,
           }
         });
         this.total = data.total;
@@ -178,7 +173,7 @@
       async getRemoteUserList(keyword) {
         this.userLoading = true;
         const data = await api.user.getList({ name: keyword });
-        this.userListOptions = data.list.map(item => item.name);
+        this.userListOptions = data.list.map(item => item.userName);
         this.userLoading = false;
       }
     }

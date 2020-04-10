@@ -2,7 +2,7 @@
   <div class="outer-layout">
     <div class="outer-layout__header">
       <svg-icon icon-name="logo" />
-      <span>后台管理系统</span>
+      <span>博客后台管理系统</span>
     </div>
 
     <div class="outer-layout__page">

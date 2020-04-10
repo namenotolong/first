@@ -11,8 +11,8 @@
         <el-button type="danger" icon="el-icon-minus" @click="handleDelete">批量删除</el-button>
         <export-excel
           file-name="用户数据表"
-          :header="['序号', '姓名', '手机', '性别', '角色', '创建时间', '累计消费额(元)']"
-          :filter-filed="['index', 'name', 'mobilePhone', 'gender', 'role', 'createDate', 'consume']"
+          :header="['序号', '姓名', '邮箱','学校','年龄', '状态','性别', '角色', '注册时间', '累计消费额(元)']"
+          :filter-filed="['index', 'name', 'email', 'gender', 'role', 'createDate', 'consume']"
           :data="userList">
           导出表格
         </export-excel>
@@ -21,8 +21,14 @@
 
     <!-- 查询 -->
     <el-form :inline="true" :model="queryCondition">
-      <el-form-item label="姓名:">
-        <el-input v-model="queryCondition.name" placeholder="请输入用户姓名关键字" clearable></el-input>
+      <el-form-item label="昵称:">
+        <el-input v-model="queryCondition.name" placeholder="请输入昵称关键字" clearable></el-input>
+      </el-form-item>
+      <el-form-item label="学校:">
+        <el-input v-model="queryCondition.school" placeholder="请输入学校关键字" clearable></el-input>
+      </el-form-item>
+      <el-form-item label="邮箱:">
+        <el-input v-model="queryCondition.email" placeholder="请输入邮箱关键字" clearable></el-input>
       </el-form-item>
       <el-form-item label="性别:">
         <el-select v-model="queryCondition.gender" placeholder="请选择性别" clearable>
@@ -32,6 +38,11 @@
       <el-form-item label="角色:">
         <el-select v-model="queryCondition.roles" placeholder="请选择角色" multiple clearable>
           <el-option v-for="item in tableMng.getTable('role')" :key="item.id" :label="item.name" :value="item.id"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="在线:">
+        <el-select v-model="queryCondition.online" placeholder="请选择状态" clearable>
+          <el-option v-for="item in tableMng.getTable('online')" :key="item.id" :label="item.name" :value="item.id"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -48,24 +59,27 @@
         v-loading="tableLoading"
         @selection-change="handleSelectedRows">
         <el-table-column type="selection" width="50px"></el-table-column>
-        <el-table-column prop="index" label="序号" width="80px"></el-table-column>
-        <el-table-column prop="name" label="姓名"></el-table-column>
-        <el-table-column prop="mobilePhone" label="手机" width="120px"></el-table-column>
-        <el-table-column prop="gender" label="性别" width="120px">
+        <el-table-column prop="index" label="序号" width="50px"></el-table-column>
+        <el-table-column prop="name" label="姓名" width="80px"></el-table-column>
+        <el-table-column prop="email" label="邮箱" width="180px"></el-table-column>
+        <el-table-column prop="school" label="学校" width="120px"></el-table-column>
+        <el-table-column prop="age" label="年龄" width="50px" ></el-table-column>
+        <el-table-column prop="online" label="状态" width="50px">
+          <template slot-scope="scope">
+            <span>{{tableMng.getNameById('online',scope.row.online)}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="gender" label="性别" width="50px">
           <template slot-scope="scope">
             <span>{{tableMng.getNameById('gender',scope.row.gender)}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="roles" label="角色">
+        <el-table-column prop="role" label="角色" width="80px">
           <template slot-scope="scope">
-            <span v-for="(role , index) in scope.row.roles" :key="role">
-              {{tableMng.getNameById('role',role)}}
-              <span v-if="scope.row.roles.length !== index + 1">,</span>
-            </span>
+            <span>{{tableMng.getNameById('role',scope.row.role)}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="createDate" label="创建时间" sortable></el-table-column>
-        <el-table-column prop="consume" label="累计消费额(元)" width="160px" sortable></el-table-column>
+        <el-table-column prop="createDate" label="注册时间" sortable></el-table-column>
         <el-table-column label="操作" width="120px">
           <template slot-scope="scope">
             <el-button type="text" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -120,7 +134,10 @@
           gender: '',
           roles: [],
           pageNumber: 1,
-          pageSize: 20
+          pageSize: 20,
+          school: '',
+          email: '',
+          online: '',
         },
         total: 0,
         selectedRows: [],
@@ -140,12 +157,17 @@
           return {
             id: item.id,
             index: (this.queryCondition.pageNumber - 1) * this.queryCondition.pageSize + index + 1,
-            name: item.name,
-            mobilePhone: item.mobilePhone,
+            name: item.userName,
+            email: item.email,
             gender: item.gender,
-            roles: item.roles,
+            work: item.work,
+            online: item.online,
+            address: item.address,
+            school: item.school,
+            picture: item.picture,
+            age: item.age,
+            role: item.role,
             createDate: this.$dayjs(item.createDate).format('YYYY-MM-DD HH:mm:ss'),
-            consume: item.consume
           }
         });
         this.total = data.total;
@@ -155,7 +177,7 @@
       },
       // 编辑/新增
       handleEdit(index, row) {
-        this.editId = row ? row.id : '';
+        this.editId = row ? row.id + '' : '';
         this.editVisible = true;
       },
       // 删除

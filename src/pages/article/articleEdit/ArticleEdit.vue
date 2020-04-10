@@ -22,37 +22,8 @@
 
       <el-col :lg="8">
         <el-form class="article-edit__form" ref="form" :model="articleDetail" :rules="formRules" label-width="90px">
-          <el-form-item label="文章标题:" prop="name">
-            <el-input v-model="articleDetail.name" placeholder="请输入文章标题" clearable></el-input>
-          </el-form-item>
-
-          <el-form-item label="文章类型:" prop="type">
-            <el-select v-model="articleDetail.type" placeholder="请选择文章类型" clearable>
-              <el-option v-for="item in tableMng.getTable('article')" :key="item.id" :label="item.name" :value="item.id"></el-option>
-            </el-select>
-          </el-form-item>
-
-          <el-form-item label="文章简介:">
-            <el-input v-model="articleDetail.brief" type="textarea" :rows="3" :maxlength="100" placeholder="请输入文章简介" clearable></el-input>
-          </el-form-item>
-
-          <el-form-item label="创建时间:" prop="createDate">
-            <el-input v-model="articleDetail.createDate" disabled></el-input>
-          </el-form-item>
-
-          <el-form-item label="标题图片:" prop="imageURL">
-            <avatar-upload
-              v-model="articleDetail.imageURL"
-              action="https://sm.ms/api/v2/upload"
-              name="smfile"
-              :round="false"
-              width="80px" />
-          </el-form-item>
-
-          <el-form-item label="附件上传:">
-            <drag-upload
-              v-model="articleDetail.accessory"
-              action="https://jsonplaceholder.typicode.com/posts" />
+          <el-form-item label="文章标题:" prop="title">
+            <el-input v-model="articleDetail.title" placeholder="请输入文章标题" clearable></el-input>
           </el-form-item>
         </el-form>
       </el-col>
@@ -69,17 +40,12 @@
   import DragUpload from '@/components/upload/dragUpload';
   import SectionTitle from '@/components/sectionTitle';
   import Tinymce from '@/components/tinymce';
-  import dayjs from 'dayjs';
 
   const defaultDetail = {
     id: '',
     name: '',
     type: '',
     content: '',
-    createDate: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-    imageURL: '',
-    brief: '',
-    accessory: []
   }
 
   export default {
@@ -96,7 +62,7 @@
         tableMng,
         articleDetail: { ...defaultDetail },
         formRules: {
-          name: [{
+          title: [{
             required: true,
             message: '请填写文章标题',
             trigger: 'blur'
@@ -105,15 +71,6 @@
             message: '标题不能超过20个字',
             trigger: 'blur'
           }],
-          type: [{
-            required: true,
-            message: '请选择文章类型',
-            trigger: 'change'
-          }],
-          imageURL: [{
-            required: true,
-            message: '请上传标题图片',
-          }]
         },
         submitLoading: false,
       }
@@ -127,13 +84,8 @@
           const data = await api.article.getDetail({ id: this.articleId });
           this.articleDetail = {
             id: data.id,
-            name: data.name,
-            createDate: this.$dayjs(data.createDate).format('YYYY-MM-DD HH:mm:ss'),
-            imageURL: data.imageURL,
-            type: data.type,
-            brief: data.brief,
+            title: data.title,
             content: data.content,
-            accessory: data.accessory
           };
         } else {
           this.articleDetail = { ...defaultDetail };
@@ -143,7 +95,9 @@
         this.$refs.form.validate(async (valid) => {
           if (valid) {
             this.submitLoading = true;
-            await api.article.update({ detail: this.articleDetail });
+            this.articleDetail.type = 1;
+            this.articleId ? this.articleDetail.ops = 1 : this.articleDetail.ops = 0;
+            await api.article.update(this.articleDetail);
             this.submitLoading = false;
             this.$message.success('发布成功');
             this.handleClose();

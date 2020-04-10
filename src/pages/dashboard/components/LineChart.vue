@@ -17,10 +17,10 @@
   import api from '@/api';
 
   const TYPE_NAME_MAP = {
-    visite: '访问量',
+    visit: '访问量',
     user: '用户数量',
-    goods: '商品数量',
-    comment: '评论数量'
+    article: '文章数量',
+    message: '消息数量'
   };
 
   export default {
@@ -28,7 +28,7 @@
     data() {
       return {
         chartName: '访问量',
-        chartType: 'visite',
+        chartType: 'visit',
         weekChart: {},
         monthChart: {},
         weekData: {},
@@ -137,7 +137,7 @@
 
     #weekChartContainer,
     #monthChartContainer {
-      height: 300px;
+      height: 400px;
       background-color: #fff;
     }
 

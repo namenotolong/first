@@ -9,13 +9,13 @@
         <el-input v-model="formData.password" type="password" placeholder="6~20位数字、字母、符号组合"></el-input>
       </el-form-item>
 
-      <el-form-item label="确认密码" prop="checkPassword">
+      <el-form-item label="确认" prop="checkPassword">
         <el-input v-model="formData.checkPassword" type="password" placeholder="请再次输入密码确认" @keyup.enter.native="submit"></el-input>
       </el-form-item>
 
 
-      <el-form-item label="手机号" prop="phone">
-        <el-input v-model="formData.phone" placeholder="请输入手机号"></el-input>
+      <el-form-item label="邮箱" prop="email">
+        <el-input v-model="formData.email" placeholder="请输入你的邮箱"></el-input>
       </el-form-item>
 
       <el-form-item label="验证码" prop="captcha">
@@ -50,6 +50,16 @@
 
   export default {
     data() {
+      let validateEmail = (rule, value, callback) => {
+        let reg = /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/
+        if (value === '') {
+          callback(new Error('请输入邮箱'));
+        } else if (!reg.test(value)) {
+          callback(new Error('邮箱格式不正确'));
+        } else {
+          callback();
+        }
+      };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入密码'));
@@ -73,19 +83,18 @@
       };
       return {
         formData: {
-          phone: '',
+          email: '',
           captcha: '',
           password: '',
           checkPassword: ''
         },
         rules: {
-          phone: [{
+          email: [{
             required: true,
-            message: '手机号码不能为空',
+            message: '邮箱不能为空',
             trigger: 'blur'
           }, {
-            pattern: /^1[345789]\d{9}$/,
-            message: '手机号码格式不正确',
+            validator: validateEmail,
             trigger: 'blur'
           }],
           captcha: [{
@@ -127,17 +136,14 @@
         this.captchaLoading = false;
         this.captchaButtonText = '获取验证码';
       },
-      // 校验手机号
-      validPhone(phone) {
-        if (!phone.match(/^1[345789]\d{9}$/)) {
-          this.$message.error('请填写正确的手机号！');
-          return false;
-        }
-        return true
+      // 校验邮箱
+      validPhone(email) {
+        let reg = /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/;
+        return reg.test(email);
       },
       // 获取验证码
       async getCaptcha() {
-        if (!this.validPhone(this.formData.phone)) return;
+        if (!this.validPhone(this.formData.email)) return;
 
         // 倒计时
         this.captchaLoading = true;
@@ -152,16 +158,28 @@
           }
         }, 1000);
 
-        await api.account.getCaptcha({ phone: this.formData.phone });
-        this.$message.success(`验证码已发送至手机${ this.formData.phone }，请注意查收！`);
+        await api.account.getCaptcha({ email: this.formData.email });
+        this.$message.success(`验证码已发送至邮箱${ this.formData.email }，请注意查收！`);
       },
       // 提交
       handleSubmit() {
         this.submitLoading = true;
         this.$refs.form.validate(async (valid) => {
           if (valid) {
-            const formData = this.formData;
-            await api.account.modifyPassword(this.formData);
+            if(this.captchaButtonText == '获取验证码') {
+              this.$message.error("请获取验证码！");
+              return;
+            }
+            const formData = {};
+            formData.code = this.formData.captcha;
+            formData.email = this.formData.email;
+            formData.password = this.formData.password;
+            try {
+              await api.account.modifyPassword(formData);
+            } catch (e) {
+              this.submitLoading = false;
+              return;
+            }
             this.$message.success('修改成功,请使用新密码进行登录');
             this.$router.replace('/');
             this.submitLoading = false;

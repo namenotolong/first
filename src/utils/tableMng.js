@@ -1,3 +1,94 @@
+// 性别
+const gender = [{
+  id: '0',
+  name: '男'
+}, {
+  id: '1',
+  name: '女'
+}]
+// 已读、未读
+const status = [{
+  id: '0',
+  name: '未读'
+}, {
+  id: '1',
+  name: '已读'
+}]
+// 消息类型
+const message = [{
+  id: '0',
+  name: '评论'
+}, {
+  id: '1',
+  name: '私信'
+},{
+  id : '2',
+  name : '关注'
+},{
+  id : '3',
+  name : '赞'
+}, {
+  id : '4',
+  name : '系统消息'
+}]
+const online = [{
+  id: '0',
+  name: '在线'
+}, {
+  id: '1',
+  name: '离线'
+}]
+// 角色
+const role = [{
+  id: '1',
+  name: '管理员',
+}, {
+  id: '0',
+  name: '用户',
+}, {
+  id: '2',
+  name: '编辑',
+}]
+
+// 地区
+const region = [{
+  id: '1',
+  name: '华南',
+}, {
+  id: '2',
+  name: '华北',
+}, {
+  id: '3',
+  name: '华东',
+}, {
+  id: '4',
+  name: '西南',
+}, {
+  id: '5',
+  name: '东北',
+}, {
+  id: '6',
+  name: '西北',
+}]
+
+
+// 文章类型
+const article = [{
+  id: '1',
+  name: '新闻'
+}, {
+  id: '2',
+  name: '财经'
+}, {
+  id: '3',
+  name: '体育'
+}, {
+  id: '4',
+  name: '娱乐'
+}, {
+  id: '5',
+  name: '游戏'
+}]
 /* 基础数据表管理 */
 
 // 表名。方便使用的时候查看
@@ -5,7 +96,8 @@ const TABLE_NAME_MAP = {
   gender: 'gender',
   role: 'role',
   region: 'region',
-  article: 'article'
+  article: 'article',
+  message: 'message'
 }
 
 class TableMng {
@@ -18,7 +110,8 @@ class TableMng {
   }
 
   // 初始化数据表
-  initTable(data) {
+  initTable() {
+    let data =  { gender, role, article, region, online, message, status };
     const baseTable = {
       ...this.baseTable,
       ...data
@@ -67,8 +160,14 @@ class TableMng {
   */
   getNameById(tableName, id) {
     const table = this.getTable(tableName);
-    const result = table.find(item => item.id === id);
+    const result = table.find(item => item.id == id);
     return result ? result.name : '';
+  }
+
+  getIdByName(tableName, name) {
+    const table = this.getTable(tableName);
+    const result = table.find(item => item.name == name);
+    return result ? result.id : 0;
   }
 
   // 格式化为前端需要的数据结构

@@ -22,11 +22,11 @@ const account = {
   actions: {
     // 登录获取token
     Login({ commit }, loginInfo) {
-      const username = loginInfo.username.trim();
+      const account = loginInfo.username.trim();
       const password = loginInfo.password;
       return new Promise((resolve, reject) => {
         api.account.login({
-          username,
+          account,
           password
         }).then(res => {
           const token = res.token;
@@ -42,9 +42,7 @@ const account = {
     // 实际开发token放在请求头的Authorization中
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
-        api.account.getUserInfo({
-          token: state.token
-        }).then(res => {
+        api.account.getUserInfo().then(res => {
           commit('SET_USER_INFO', res);
           resolve(res);
         }).catch((error) => {

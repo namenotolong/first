@@ -5,9 +5,11 @@
     :style="style"
     :action="action"
     :name="name"
+    :data="params"
     accept="image/jpeg,image/png"
     :show-file-list="false"
     :before-upload="beforeUpload"
+    :headers="headers"
     :on-success="handleSuccess">
     <i
       class="avatar-upload__icon"
@@ -37,6 +39,10 @@
         type: String,
         default: 'file'
       },
+      baseUrl: {
+        type: String,
+        default: ''
+      },
       // 图片是否为圆形
       round: {
         type: Boolean,
@@ -51,11 +57,17 @@
       width: {
         type: String,
         default: '120px'
+      },
+      //附带参数
+      params : {
+        type: Object,
+        default: {}
       }
     },
     data() {
       return {
-        loading: false
+        loading: false,
+        headers: {"authorization" : sessionStorage.getItem('token')}
       }
     },
     computed: {
@@ -87,7 +99,7 @@
       handleSuccess(res, file) {
         this.loading = false;
         if (res.success) {
-          this.$emit('input', res.data.url);
+          this.$emit('update-img', res.data);
         } else {
           this.$message.error(res.message || '上传失败');
         }

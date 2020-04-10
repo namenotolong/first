@@ -13,7 +13,7 @@ export const getList = (data) => service.get('/article/list', data, {
 export const getDetail = (data) => service.get('/article/detail', data);
 
 // 新增/修改文章
-export const update = (data) => service.post('/article/update', data);
+export const update = (data) => service.post('/article/publishOrModify', data);
 
 // 删除文章
 export const remove = (data) => service.post('/article/remove', data);

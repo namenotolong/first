@@ -9,7 +9,7 @@ import store from '@/store';
 import '@/assets/styles/app.scss';
 
 // mock数据
-import './mock';
+//import './mock';
 
 // 全局注册的组件和指令
 import '@/components';

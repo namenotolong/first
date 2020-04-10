@@ -5,23 +5,16 @@ import store from '@/store';
 class Service {
 
   baseConfig = {
-    baseURL: '/ebsapi',
+    baseURL: 'http://localhost:8081',
     headers: {},
-    timeout: 8000
+    //timeout: 8000
   }
 
   // axios实例
   instance = null
 
   constructor() {
-    const token = store.getters.token;
-    if (token) {
-      this.setHeader({
-        Authorization: store.getters.tokenType + ' ' + token
-      })
-    } else {
-      this.initInstance();
-    }
+    this.initInstance();
   }
 
   initInstance() {
@@ -40,6 +33,10 @@ class Service {
   setReqInterceptors = () => {
     this.instance.interceptors.request.use(
       config => {
+        let authorization = store.getters.token;
+        if(authorization) {
+          config.headers.authorization = authorization
+        }
         return config;
       },
       err => {
@@ -56,13 +53,23 @@ class Service {
   setResnterceptors = () => {
     this.instance.interceptors.response.use(
       res => {
-        const { code, data, msg } = res.data;
-        if (code === 200) {
+        const { code, data, message, success } = res.data;
+        if (success) {
           return data;
-        } else {
+        } else if (code == 333) {
+          console.log(res)
           Message({
             type: 'error',
-            message: msg || '获取数据失败',
+            message: message || '没有权限！',
+            showClose: true,
+          })
+          sessionStorage.clear();
+          return Promise.reject(res);
+        } else {
+          console.log(res)
+          Message({
+            type: 'error',
+            message: message,
             showClose: true,
           })
           return Promise.reject(res);

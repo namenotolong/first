@@ -6,11 +6,11 @@
       <theme-setting />
 
       <el-dropdown @command="handleCommand">
-        <img class="avatar" :src="userInfo.avatar" alt />
+        <img class="avatar" :src="baseUrl + userInfo.picture" alt />
         <el-dropdown-menu slot="dropdown">
-          <router-link to="/mine">
+          <!--<router-link to="/mine">
             <el-dropdown-item>个人中心</el-dropdown-item>
-          </router-link>
+          </router-link>-->
           <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -33,7 +33,8 @@
     },
     data() {
       return {
-        avatar: ''
+        picture: '',
+        baseUrl: 'http://zhsdsb.top:8081'
       };
     },
     computed: {
@@ -47,10 +48,13 @@
       // 退出登录
       handleCommand(command) {
         if (command === 'logout') {
-          this.$store.dispatch('logout').then(() => {
+          sessionStorage.clear();
+          resetRouter();
+          this.$router.replace('/account/login');
+          /*this.$store.dispatch('logout').then(() => {
             resetRouter();
             this.$router.replace('/account/login');
-          });
+          });*/
         }
       }
     }

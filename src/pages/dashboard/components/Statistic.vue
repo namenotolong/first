@@ -24,7 +24,7 @@
     data() {
       return {
         grids: [{
-          type: 'visite',
+          type: 'visit',
           icon: 'view',
           name: '访问量',
           number: 0,
@@ -36,15 +36,15 @@
           number: 0,
           backgroundColor: 'grid--blue',
         }, {
-          type: 'goods',
-          icon: 'goods',
-          name: '商品数量',
+          type: 'article',
+          icon: 'article',
+          name: '文章数量',
           number: 0,
           backgroundColor: 'grid--green',
         }, {
-          type: 'comment',
+          type: 'message',
           icon: 'message',
-          name: '评论数量',
+          name: '消息数量',
           number: 0,
           backgroundColor: 'grid--yellow',
         }]
@@ -57,7 +57,7 @@
       async getGridData() {
         const data = await api.dashboard.getGridData();
         this.grids.forEach((item, index) => {
-          item.number = Object.values(data)[index]
+          item.number = Object.values(data)[index];
         })
       }
     }

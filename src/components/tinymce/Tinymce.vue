@@ -2,7 +2,7 @@
   <!-- 富文本编辑器 -->
   <textarea
     :id="id"
-    style="visibility:hidden"
+    style=" visibility:hidden"
     v-loading="!hasInit">
    </textarea>
 </template>

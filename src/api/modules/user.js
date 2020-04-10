@@ -13,7 +13,9 @@ export const getList = (data) => service.get('/user/list', data, {
 export const getDetail = (data) => service.get('/user/detail', data);
 
 // 新增/修改用户
-export const update = (data) => service.post('/user/update', data);
+export const update = (data) => service.post('/user/updateOrInsert', data);
 
 // 删除用户
 export const remove = (data) => service.post('/user/remove', data);
+//验证账号唯一性
+export const unique = (data) => service.get('/user/checkAccountUnique', data);

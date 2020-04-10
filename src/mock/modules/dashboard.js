@@ -59,11 +59,5 @@ export default {
       code: 200,
       data: gridData
     }
-  },
-  getTodoListData() {
-    return {
-      code: 200,
-      data: todoListData.list
-    }
   }
 }
