@@ -11,8 +11,8 @@
         <el-button type="danger" icon="el-icon-minus" @click="handleDelete">批量删除</el-button>
         <export-excel
           file-name="用户数据表"
-          :header="['序号', '姓名', '邮箱','学校','年龄', '状态','性别', '角色', '注册时间', '累计消费额(元)']"
-          :filter-filed="['index', 'name', 'email', 'gender', 'role', 'createDate', 'consume']"
+          :header="['序号', '姓名', '邮箱','学校','年龄', '状态','性别', '角色', '注册时间']"
+          :filter-filed="['index', 'name', 'email','school','age','online', 'gender', 'role', 'createDate']"
           :data="userList">
           导出表格
         </export-excel>

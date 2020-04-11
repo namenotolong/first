@@ -5,7 +5,7 @@ import store from '@/store';
 class Service {
 
   baseConfig = {
-    baseURL: 'http://localhost:8081',
+    baseURL: 'http://zhsdsb.top:8081',
     headers: {},
     //timeout: 8000
   }

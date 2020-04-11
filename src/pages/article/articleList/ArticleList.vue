@@ -11,8 +11,8 @@
         <el-button type="danger" icon="el-icon-minus" @click="handleDelete">批量删除</el-button>
         <export-excel
           file-name="文章数据表"
-          :header="['序号', '作者', '创建时间', '标题', '类型', '阅读数']"
-          :filter-filed="['index', 'author', 'createDate', 'name', 'type', 'browseNum']"
+          :header="['序号', '标题','作者','评论数','收藏数','点赞数','阅读数', '创建时间']"
+          :filter-filed="['index', 'name','author','topicCount','storeCount','praiseCount','browseNum', 'createDate']"
           :data="articleList">
           导出表格
         </export-excel>
