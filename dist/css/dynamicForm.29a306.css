@@ -1,0 +1,65 @@
+.form-dynamic[data-v-35ee2c24] {
+  box-sizing: border-box;
+  width: 1000px;
+  padding: 20px 100px;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: #fff;
+}
+.form-dynamic .block-item[data-v-35ee2c24] {
+    position: relative;
+    box-sizing: border-box;
+    width: 800px;
+    border-left: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+    margin: 20px 0px;
+    padding: 0px 10px;
+    transition: all 1s;
+}
+.form-dynamic .block-enter[data-v-35ee2c24],
+  .form-dynamic .block-leave-to[data-v-35ee2c24] {
+    opacity: 0;
+    transform: translateY(30px);
+}
+.form-dynamic .block-leave-active[data-v-35ee2c24] {
+    position: absolute;
+}
+.form-dynamic .block-item--remove[data-v-35ee2c24] {
+    position: absolute;
+    top: 50%;
+    right: -61px;
+    transform: translate(0, -11px);
+    font-size: 28px;
+    color: #d95d5d;
+    cursor: pointer;
+}
+.form-dynamic .block-item--add[data-v-35ee2c24] {
+    margin: 0px -100px 20px -100px;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    background: url(../img/add-5fa6b7.jpg) no-repeat;
+    background-size: cover;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+.form-dynamic .block-item__index[data-v-35ee2c24] {
+    position: absolute;
+    left: -100px;
+    top: 50%;
+    transform: translate(0, -30px);
+    width: 100px;
+    height: 60px;
+    font-size: 50px;
+    font-weight: 500;
+    background: linear-gradient(to bottom right, red, blue);
+    color: transparent;
+    -webkit-background-clip: text;
+    text-align: center;
+}
+
+.form-dynamicm .el-form-item__label {
+  line-height: 20px;
+}
+

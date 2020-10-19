@@ -1,0 +1,76 @@
+.form-step__uploader .el-upload {
+  box-sizing: border-box;
+  width: 100px;
+  height: 100px;
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  padding-top: 30px;
+}
+.form-step__uploader .el-upload:hover {
+    border-color: var(--theme);
+}
+.form-step__uploader .el-upload .icon {
+    font-size: 24px;
+    color: #606266;
+}
+.form-step__uploader .el-upload .name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 10px;
+    font-size: 12px;
+}
+.form-step__uploader .el-upload .name.active {
+      color: #67c23a;
+}
+
+.form-steptwo .upload-list[data-v-7c000d78] {
+  display: flex;
+  justify-content: center;
+}
+.form-steptwo .upload-list li[data-v-7c000d78] {
+    margin: 0 10px;
+}
+.form-steptwo .button[data-v-7c000d78] {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.form-stepthree[data-v-6ff2e75e] {
+  text-align: center;
+}
+.form-stepthree .icon[data-v-6ff2e75e] {
+    font-size: 60px;
+    color: #67c23a;
+}
+.form-stepthree .title[data-v-6ff2e75e] {
+    font-size: 24px;
+    line-height: 50px;
+}
+.form-stepthree .remind[data-v-6ff2e75e] {
+    width: 440px;
+    padding: 1em;
+    margin: 0 auto;
+    border: 1px dotted #ccc;
+    line-height: 22px;
+    text-indent: 2em;
+    text-align: left;
+}
+.form-stepthree .button[data-v-6ff2e75e] {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.form-step[data-v-4d4b9f2d] {
+  width: 50%;
+  min-width: 500px;
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: #fff;
+}
+.form-step .el-steps[data-v-4d4b9f2d] {
+    margin-bottom: 20px;
+}
+

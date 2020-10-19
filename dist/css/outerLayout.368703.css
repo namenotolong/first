@@ -1,0 +1,20 @@
+.outer-layout[data-v-02e3ea21] {
+  min-height: 100vh;
+  background: url(../img/outer_bg-f009f9.jpg) no-repeat fixed center;
+  background-size: cover;
+}
+.outer-layout .outer-layout__header[data-v-02e3ea21] {
+    padding-top: 60px;
+    text-align: center;
+    font-size: 32px;
+    color: #fff;
+}
+.outer-layout .outer-layout__page[data-v-02e3ea21] {
+    width: 440px;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+.outer-layout .style-setting[data-v-02e3ea21] {
+    display: none;
+}
+

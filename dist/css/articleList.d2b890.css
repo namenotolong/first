@@ -1,0 +1,18 @@
+.article-list[data-v-9616135a] {
+  background-color: #fff;
+  padding: 1em;
+}
+.article-list .article-list__header[data-v-9616135a] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.article-list .article-list__header .title[data-v-9616135a],
+    .article-list .article-list__header .operation[data-v-9616135a] {
+      margin-bottom: 1em;
+}
+.article-list .article-list__table[data-v-9616135a] {
+    margin-bottom: 1em;
+}
+

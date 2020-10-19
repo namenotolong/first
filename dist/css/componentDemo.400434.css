@@ -1,0 +1,55 @@
+.text-ellipsis .text-ellipsis__multiple[data-v-fb1357be] {
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+}
+.text-ellipsis .text-ellipsis__single[data-v-fb1357be] {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.box[data-v-20c4d64f] {
+  width: 100px;
+}
+
+.fade-enter[data-v-4b6ae768],
+.fade-leave-to[data-v-4b6ae768] {
+  opacity: 0;
+}
+.fade-enter-active[data-v-4b6ae768],
+.fade-leave-active[data-v-4b6ae768] {
+  transition: opacity .5s;
+}
+.rocket[data-v-4b6ae768] {
+  position: fixed;
+  width: 31px;
+  height: 76px;
+  background: url(../img/rocket-078810.png) no-repeat -31px -15px;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+.scrollbar-demo .section[data-v-0b12c6ab] {
+  margin: 20px;
+  height: 200px;
+  width: 300px;
+  margin-bottom: 20px;
+  border: 1px solid #d9d9d9;
+  font-size: 12px;
+}
+.scrollbar-demo .rezise[data-v-0b12c6ab] {
+  width: 50%;
+}
+
+.component-demo[data-v-c7c9a7a6] {
+  min-height: 400px;
+  padding: 0 20px 20px;
+  background-color: #fff;
+}
+

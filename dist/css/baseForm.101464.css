@@ -1,0 +1,14 @@
+.form-base[data-v-3e77b08a] {
+  width: 70%;
+  min-width: 500px;
+  padding: 1em;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.form-base .inherit-line-height .el-form-item__label,
+.form-base .inherit-line-height .el-form-item__content {
+  line-height: inherit;
+}
+

@@ -40,7 +40,7 @@ const online = [{
 }]
 // 角色
 const role = [{
-  id: '1',
+  id: '3',
   name: '管理员',
 }, {
   id: '0',
@@ -48,6 +48,9 @@ const role = [{
 }, {
   id: '2',
   name: '编辑',
+},{
+  id: '1',
+  name: '游客',
 }]
 
 // 地区
